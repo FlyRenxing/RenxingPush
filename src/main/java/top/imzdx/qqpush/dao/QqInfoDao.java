@@ -1,0 +1,20 @@
+package top.imzdx.qqpush.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import top.imzdx.qqpush.model.po.QqInfo;
+
+import java.util.List;
+
+/**
+ * @author Renxing
+ */
+@Mapper
+public interface QqInfoDao {
+    @Select("SELECT * FROM qq_info")
+    List<QqInfo> findAll();
+
+    @Select("SELECT * FROM qq_info limit 1")
+    QqInfo getFirst();
+
+}
