@@ -5,6 +5,7 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.imzdx.qqpush.dao.MessageLogDao;
 import top.imzdx.qqpush.model.dto.Msg;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.MsgService;
@@ -19,15 +20,17 @@ import top.imzdx.qqpush.utils.QqMsgContentTools;
 public class QQMsgServiceImpl implements MsgService {
     @Autowired
     QqMsgContentTools qqMsgContentTools;
+    @Autowired
+    MessageLogDao messageLogDao;
 
     @Override
     public void sendMsg(User user, Msg msg) {
-        System.out.println(user);
         try {
             long qq = Long.parseLong(msg.getMeta().getData());
             Friend friend = Bot.findInstance(JSONObject.parseObject(user.getConfig()).getLong("qq_bot"))
                     .getFriend(qq);
             if (friend != null) {
+                saveMsgToDB(msg,user.getUid());
                 friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
                 return;
             }
@@ -35,5 +38,10 @@ public class QQMsgServiceImpl implements MsgService {
             throw new DefinitionException("收件号码不正确");
         }
         throw new DefinitionException("您没有添加指定机器人为好友");
+    }
+
+    @Override
+    public void saveMsgToDB(Msg msg, long uid) {
+        messageLogDao.InsertMessageLog(msg.getContent(),JSONObject.toJSONString(msg.getMeta()),uid);
     }
 }

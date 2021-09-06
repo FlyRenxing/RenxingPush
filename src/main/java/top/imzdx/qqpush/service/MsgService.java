@@ -9,4 +9,5 @@ import top.imzdx.qqpush.model.po.User;
  */
 public interface MsgService {
     void sendMsg(User user, Msg msg);
+    void saveMsgToDB(Msg msg,long uid);
 }
