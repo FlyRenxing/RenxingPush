@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    compile 'cn.hutool:hutool-all:5.7.11'
     implementation 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'net.mamoe:mirai-core:2.7.0'
