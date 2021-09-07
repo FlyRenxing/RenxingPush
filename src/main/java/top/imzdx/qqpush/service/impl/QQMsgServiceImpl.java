@@ -39,7 +39,7 @@ public class QQMsgServiceImpl implements MsgService {
         }catch (NullPointerException e){
             throw new DefinitionException("绑定的机器人已失效，请前往官网重新绑定机器人");
         }
-        throw new DefinitionException("您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。QQ:"+JSONObject.parseObject(user.getConfig()).getLong("qq_bot"));
+        throw new DefinitionException("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。QQ:" + JSONObject.parseObject(user.getConfig()).getLong("qq_bot"));
     }
 
     @Override
