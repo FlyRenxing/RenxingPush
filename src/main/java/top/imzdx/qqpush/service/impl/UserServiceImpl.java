@@ -20,13 +20,15 @@ public class UserServiceImpl implements UserService {
     QqInfoDao qqInfoDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    AuthTools authTools;
 
     @Override
     public boolean register(String name, String password) {
         User user = new User()
                 .setName(name)
                 .setPassword(password)
-                .setCipher(AuthTools.generateCipher())
+                .setCipher(authTools.generateCipher())
                 .setConfig(new JSONObject() {{
                     put("qq_bot", qqInfoDao.getFirst().getNumber());
                 }}.toJSONString());
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String refreshCipher(String userName) {
-        String newCipher = AuthTools.generateCipher();
+        String newCipher = authTools.generateCipher();
         User user = userDao.findUserByName(userName);
         user.setCipher(newCipher);
         if (userDao.updateUser(user) == 1) {
