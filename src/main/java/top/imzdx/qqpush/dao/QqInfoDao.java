@@ -1,7 +1,9 @@
 package top.imzdx.qqpush.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import top.imzdx.qqpush.model.po.QqInfo;
 
 import java.util.List;
@@ -17,4 +19,6 @@ public interface QqInfoDao {
     @Select("SELECT * FROM qq_info limit 1")
     QqInfo getFirst();
 
+    @Update("UPDATE `qqmsg`.`qq_info` SET `state` = #{state} WHERE `number` = #{number}")
+    int updateState(@Param("number") long number, @Param("state") long state);
 }

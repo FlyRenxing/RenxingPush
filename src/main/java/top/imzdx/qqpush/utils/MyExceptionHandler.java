@@ -18,12 +18,18 @@ public class MyExceptionHandler {
     @ExceptionHandler(value = DefinitionException.class)
     @ResponseBody
     public Result exceptionHandler(DefinitionException e) {
+        if (env.equals("dev")) {
+            e.printStackTrace();
+        }
         return Result.defineError(e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public Result BindExceptionHandler(MethodArgumentNotValidException e) {
+        if (env.equals("dev")) {
+            e.printStackTrace();
+        }
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         return Result.defineError(message);
     }
