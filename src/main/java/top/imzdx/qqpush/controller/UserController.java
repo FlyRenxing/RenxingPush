@@ -10,7 +10,6 @@ import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.DefinitionException;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -35,9 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result register(String name, String password) {
+    public Result register(HttpServletRequest request,String name, String password) {
+        if (userService.findUserByName(name) != null) {
+            throw new DefinitionException("该用户名已被注册，请更换后重试");
+        }
         if (userService.register(name, password)) {
-            return new Result("注册成功", userService.findUserByName(name));
+            User user = userService.findUserByName(name);
+            request.getSession().setAttribute("user", user);
+            return new Result("注册成功", user);
         }
         throw new DefinitionException("注册异常");
     }
