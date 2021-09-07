@@ -1,9 +1,6 @@
 package top.imzdx.qqpush.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import top.imzdx.qqpush.model.po.User;
 
 import java.util.List;
@@ -23,5 +20,9 @@ public interface UserDao {
     User findUserByCipher(String cipher);
 
     @Insert("INSERT INTO `qqmsg`.`user`(`name`, `password`, `config`, `cipher`) VALUES (#{user.name}, #{user.password}, #{user.config}, #{user.cipher})")
-    int InsertUser(@Param("user") User user);
+    int insertUser(@Param("user") User user);
+
+    @Update("update `qqmsg`.`user` SET `name` = #{user.name}, `password` = #{user.password},`admin` = #{user.admin}, `config`= #{user.config},`cipher`=#{user.cipher} WHERE `uid` = #{user.uid}")
+    int updateUser(@Param("user") User user);
+
 }

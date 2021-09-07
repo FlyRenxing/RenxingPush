@@ -8,6 +8,7 @@ import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
+import top.imzdx.qqpush.utils.DefinitionException;
 
 
 /**
@@ -29,11 +30,22 @@ public class UserServiceImpl implements UserService {
                 .setConfig(new JSONObject() {{
                     put("qq_bot", qqInfoDao.getFirst().getNumber());
                 }}.toJSONString());
-        int i = userDao.InsertUser(user);
+        int i = userDao.insertUser(user);
         if (i == 1) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String refreshCipher(String userName) {
+        String newCipher = AuthTools.generateCipher();
+        User user = userDao.findUserByName(userName);
+        user.setCipher(newCipher);
+        if (userDao.updateUser(user) == 1) {
+            return newCipher;
+        }
+        throw new DefinitionException("没有成功更新，请退出登录后重试");
     }
 
     @Override

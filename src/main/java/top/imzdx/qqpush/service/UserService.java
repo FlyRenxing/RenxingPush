@@ -9,5 +9,7 @@ import top.imzdx.qqpush.model.po.User;
 public interface UserService {
     boolean register(String name, String password);
 
+    String refreshCipher(String userName);
+
     User findUserByName(String name);
 }
