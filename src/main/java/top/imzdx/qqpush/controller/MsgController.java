@@ -2,7 +2,6 @@ package top.imzdx.qqpush.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.dto.Msg;
 import top.imzdx.qqpush.model.dto.Result;
@@ -16,6 +15,7 @@ import javax.validation.Valid;
  * @author Renxing
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/msg")
 public class MsgController {
     @Autowired
