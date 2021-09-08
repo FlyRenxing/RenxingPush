@@ -54,4 +54,14 @@ public class UserController {
         String cipher = userService.refreshCipher(user.getName());
         return new Result("密钥刷新成功", cipher);
     }
+
+    @GetMapping("/profile")
+    @LoginRequired
+    public Result getProfile(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            return new Result("ok", user);
+        }
+        throw new DefinitionException("当前未登录");
+    }
 }
