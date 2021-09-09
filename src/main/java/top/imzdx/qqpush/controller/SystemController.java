@@ -22,4 +22,9 @@ public class SystemController {
     public Result getQQBotPublicList() {
         return new Result("ok", systemService.getPublicQqBot());
     }
+
+    @GetMapping("note")
+    public Result getAllNote() {
+        return new Result("ok", systemService.getAllNote());
+    }
 }
