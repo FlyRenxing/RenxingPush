@@ -15,7 +15,6 @@ import javax.validation.Valid;
  * @author Renxing
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/msg")
 public class MsgController {
     @Autowired

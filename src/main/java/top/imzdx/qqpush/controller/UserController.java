@@ -1,7 +1,10 @@
 package top.imzdx.qqpush.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
@@ -15,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Renxing
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
     @Autowired
