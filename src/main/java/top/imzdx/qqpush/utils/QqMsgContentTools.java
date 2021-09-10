@@ -1,18 +1,13 @@
 package top.imzdx.qqpush.utils;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.dfa.WordTree;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Message;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -33,11 +28,24 @@ public class QqMsgContentTools {
         return chainBuilder.build();
     }
 
-    public void badWordDFA(String content) {
-        List<String> matchAll = badWord.matchAll(content, -1, false, false);
-        if (matchAll.size()!=0){
-            throw new DefinitionException("消息有敏感词，请检查后再试。提示："+matchAll.toString());
+    public QqMsgContentTools() {
+//        URL path = this.getClass().getResource("/static/敏感词.txt");
+        ClassPathResource classPathResource = new ClassPathResource("static/敏感词.txt");
+        try {
+            File file = classPathResource.getFile();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String s = null;
+            while ((s = br.readLine()) != null) {// 使用readLine方法，一次读一行
+                badWord.addWord(s);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
     }
 
     private void buildFace(String content, MessageChainBuilder chainBuilder) {
@@ -80,19 +88,10 @@ public class QqMsgContentTools {
         }
     }
 
-    public QqMsgContentTools() {
-        URL path = ResourceUtil.getResource("static/敏感词.txt");
-        File file = FileUtil.file(path);// Text文件
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));// 构造一个BufferedReader类来读取文件
-            String s = null;
-            while ((s = br.readLine()) != null) {// 使用readLine方法，一次读一行
-                badWord.addWord(s);
-            }
-            br.close();
-        } catch (IOException e) {
-            throw new DefinitionException("导入敏感词汇失败");
+    public void badWordDFA(String content) {
+        List<String> matchAll = badWord.matchAll(content, -1, false, false);
+        if (matchAll.size() != 0) {
+            throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll.toString());
         }
-
     }
 }

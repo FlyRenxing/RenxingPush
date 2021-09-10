@@ -54,6 +54,7 @@ public class UserController {
     public Result refreshCipher(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         String cipher = userService.refreshCipher(user.getName());
+        request.getSession().setAttribute("user", userService.findUserByName(user.getName()));
         return new Result("密钥刷新成功", cipher);
     }
 
@@ -65,5 +66,15 @@ public class UserController {
             return new Result("ok", user);
         }
         throw new DefinitionException("当前未登录");
+    }
+
+    @PostMapping("/qq_bot")
+    @LoginRequired
+    public Result updateQQBot(HttpServletRequest request, long number) {
+        User user = (User) request.getSession().getAttribute("user");
+        userService.setQQBot(user.getUid(), number);
+        user = userService.findUserByName(user.getName());
+        request.getSession().setAttribute("user", user);
+        return new Result("ok", user);
     }
 }

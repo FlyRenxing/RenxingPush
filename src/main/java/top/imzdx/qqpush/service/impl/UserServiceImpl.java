@@ -54,4 +54,14 @@ public class UserServiceImpl implements UserService {
     public User findUserByName(String name) {
         return userDao.findUserByName(name);
     }
+
+    @Override
+    public boolean setQQBot(long uid, long number) {
+        User user = userDao.findUserByUid(uid);
+        JSONObject config = JSONObject.parseObject(user.getConfig());
+        config.put("qq_bot", number);
+        user.setConfig(config.toJSONString());
+        userDao.updateUser(user);
+        return true;
+    }
 }

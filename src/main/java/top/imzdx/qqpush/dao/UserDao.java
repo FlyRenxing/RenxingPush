@@ -16,6 +16,9 @@ public interface UserDao {
     @Select("select * from user where name=#{name}")
     User findUserByName(String name);
 
+    @Select("select * from user where uid=#{uid}")
+    User findUserByUid(long uid);
+
     @Select("select * from user where cipher=#{cipher}")
     User findUserByCipher(String cipher);
 

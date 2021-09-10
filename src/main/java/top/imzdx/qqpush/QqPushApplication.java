@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import top.imzdx.qqpush.dao.QqInfoDao;
 import top.imzdx.qqpush.model.po.QqInfo;
 
+import java.io.File;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,7 +30,8 @@ public class QqPushApplication {
             try {
                 BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
                         new BotConfiguration() {{
-                            setProtocol(MiraiProtocol.ANDROID_WATCH);
+                            setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+//                            setProtocol(MiraiProtocol.ANDROID_WATCH);
                             fileBasedDeviceInfo();
                         }}).login();
                 qqInfoDao.updateState(item.getNumber(), 1);

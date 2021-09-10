@@ -12,4 +12,6 @@ public interface UserService {
     String refreshCipher(String userName);
 
     User findUserByName(String name);
+
+    boolean setQQBot(long uid, long number);
 }
