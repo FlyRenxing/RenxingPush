@@ -23,6 +23,7 @@ public class MsgController {
     UserDao userDao;
 
     @PostMapping("/send/{key}")
+    @GetMapping("/send/{key}")
     public Result send(@PathVariable("key") String cipher, @RequestBody @Valid Msg msg) {
         User user = userDao.findUserByCipher(cipher);
         if (user != null) {
