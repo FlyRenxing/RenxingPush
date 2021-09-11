@@ -21,4 +21,7 @@ public interface QqInfoDao {
 
     @Update("UPDATE `qqmsg`.`qq_info` SET `state` = #{state} WHERE `number` = #{number}")
     int updateState(@Param("number") long number, @Param("state") long state);
+
+    @Select("SELECT * FROM qq_info where number=#{number} limit 1")
+    QqInfo findInfoByNumber(long number);
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.dao.QqInfoDao;
 import top.imzdx.qqpush.dao.UserDao;
+import top.imzdx.qqpush.model.po.QqInfo;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
@@ -57,6 +58,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean setQQBot(long uid, long number) {
+        QqInfo qqInfo = qqInfoDao.findInfoByNumber(number);
+        if (qqInfo == null) {
+            throw new DefinitionException("所选机器人不在服务列表内，请更换机器人");
+        }
         User user = userDao.findUserByUid(uid);
         JSONObject config = JSONObject.parseObject(user.getConfig());
         config.put("qq_bot", number);

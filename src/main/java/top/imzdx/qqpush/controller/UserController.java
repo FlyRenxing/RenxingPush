@@ -1,5 +1,6 @@
 package top.imzdx.qqpush.controller;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,8 @@ import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.DefinitionException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author Renxing
@@ -26,7 +29,9 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
-    public Result login(HttpServletRequest request, String name, String password) {
+    public Result login(HttpServletRequest request,
+                        @Valid @NotEmpty(message = "用户名不能为空") String name,
+                        @Valid @NotEmpty(message = "用户名不能为空") String password) {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
@@ -37,7 +42,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result register(HttpServletRequest request, String name, String password) {
+    public Result register(HttpServletRequest request,
+                           @Valid @Length(min = 3, message = "用户名长度需大于3") String name,
+                           @Valid @NotEmpty(message = "密码不能为空") String password) {
         if (userService.findUserByName(name) != null) {
             throw new DefinitionException("该用户名已被注册，请更换后重试");
         }
@@ -70,7 +77,7 @@ public class UserController {
 
     @PostMapping("/qq_bot")
     @LoginRequired
-    public Result updateQQBot(HttpServletRequest request, long number) {
+    public Result updateQQBot(HttpServletRequest request, @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
         User user = (User) request.getSession().getAttribute("user");
         userService.setQQBot(user.getUid(), number);
         user = userService.findUserByName(user.getName());

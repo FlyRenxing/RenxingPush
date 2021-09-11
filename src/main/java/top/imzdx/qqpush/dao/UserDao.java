@@ -13,13 +13,13 @@ public interface UserDao {
     @Select("SELECT * FROM user")
     List<User> findAll();
 
-    @Select("select * from user where name=#{name}")
+    @Select("select * from user where name=#{name} limit 1")
     User findUserByName(String name);
 
-    @Select("select * from user where uid=#{uid}")
+    @Select("select * from user where uid=#{uid} limit 1")
     User findUserByUid(long uid);
 
-    @Select("select * from user where cipher=#{cipher}")
+    @Select("select * from user where cipher=#{cipher} limit 1")
     User findUserByCipher(String cipher);
 
     @Insert("INSERT INTO `qqmsg`.`user`(`name`, `password`, `config`, `cipher`) VALUES (#{user.name}, #{user.password}, #{user.config}, #{user.cipher})")
