@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping("/register")
     public Result register(HttpServletRequest request,
-                           @Valid @Length(min = 3, message = "用户名长度需大于3") String name,
+                           @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
                            @Valid @NotEmpty(message = "密码不能为空") String password) {
         if (userService.findUserByName(name) != null) {
             throw new DefinitionException("该用户名已被注册，请更换后重试");
