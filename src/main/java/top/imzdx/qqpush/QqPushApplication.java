@@ -2,6 +2,9 @@ package top.imzdx.qqpush;
 
 import cn.hutool.extra.spring.SpringUtil;
 import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.event.GlobalEventChannel;
+import net.mamoe.mirai.event.Listener;
+import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,8 +42,15 @@ public class QqPushApplication {
                 qqInfoDao.updateState(item.getNumber(), 0);
             }
         }
-
-
+        /**
+         * 修复当机器人账号设置为允许任何人添加好友时，
+         * mirai的联系人缓存机制会导致Bot.getFriends()抛出异常无法找到新添加的好友。
+         * 现使用好友监听功能，由机器人接管同意请求
+         */
+        Listener listener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, event -> {
+            event.accept();
+        });
+        listener.start();
     }
 
 }
