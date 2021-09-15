@@ -28,4 +28,10 @@ public interface UserDao {
     @Update("update `qqmsg`.`user` SET `name` = #{user.name}, `password` = #{user.password},`admin` = #{user.admin}, `config`= #{user.config},`cipher`=#{user.cipher} WHERE `uid` = #{user.uid}")
     int updateUser(@Param("user") User user);
 
+    @Select("SELECT COUNT(1) FROM message_log WHERE uid=#{uid} AND DATE_FORMAT( time, '%Y%m%d' ) = DATE_FORMAT( CURDATE() , '%Y%m%d' )")
+    int selectToDayUserUseCount(long uid);
+
+    @Select("SELECT COUNT(1) FROM message_log WHERE uid=#{uid} AND time >= DATE_SUB(now(), interval 3 SECOND)")
+    int selectThreeSecondUserUseCount(long uid);
+
 }

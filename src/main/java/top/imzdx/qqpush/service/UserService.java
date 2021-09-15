@@ -14,4 +14,6 @@ public interface UserService {
     User findUserByName(String name);
 
     boolean setQQBot(long uid, long number);
+
+    int selectToDayUserUseCount(long uid);
 }

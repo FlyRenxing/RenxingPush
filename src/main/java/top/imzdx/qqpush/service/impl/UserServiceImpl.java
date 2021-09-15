@@ -69,4 +69,11 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
         return true;
     }
+
+    @Override
+    public int selectToDayUserUseCount(long uid) {
+        return userDao.selectToDayUserUseCount(uid);
+    }
+
+
 }

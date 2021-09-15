@@ -6,6 +6,7 @@ import net.mamoe.mirai.contact.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.dao.MessageLogDao;
+import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.dto.Msg;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.MsgService;
@@ -22,15 +23,23 @@ public class QQMsgServiceImpl implements MsgService {
     QqMsgContentTools qqMsgContentTools;
     @Autowired
     MessageLogDao messageLogDao;
+    @Autowired
+    UserDao userDao;
 
     @Override
     public void sendMsg(User user, Msg msg) {
+        if (userDao.selectToDayUserUseCount(user.getUid()) >= 200) {
+            throw new DefinitionException("您当日消息已达到200条，请明日再试。");
+        }
+        if (userDao.selectThreeSecondUserUseCount(user.getUid()) >= 3) {
+            throw new DefinitionException("发送消息过于频繁，请三秒后再试。");
+        }
         try {
             long qq = Long.parseLong(msg.getMeta().getData());
             Friend friend = Bot.findInstance(JSONObject.parseObject(user.getConfig()).getLong("qq_bot"))
                     .getFriend(qq);
             if (friend != null) {
-                saveMsgToDB(msg,user.getUid());
+                saveMsgToDB(msg, user.getUid());
                 friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
                 return;
             }

@@ -103,4 +103,16 @@ public class UserController {
         request.getSession().setAttribute("user", user);
         return new Result("ok", user);
     }
+
+    @GetMapping("/ToDayUseCount")
+    @LoginRequired
+    @Operation(summary = "获取当日用户使用次数")
+    public Result<User> selectToDayUserUseCount(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            return new Result("ok", userService.selectToDayUserUseCount(user.getUid()));
+        }
+        throw new DefinitionException("当前未登录");
+    }
+
 }
