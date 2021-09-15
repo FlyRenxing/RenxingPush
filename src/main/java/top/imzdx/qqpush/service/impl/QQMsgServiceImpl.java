@@ -25,12 +25,18 @@ public class QQMsgServiceImpl implements MsgService {
 
     @Override
     public void sendMsg(User user, Msg msg) {
+        if (messageLogDao.SelectToDayUserUseCount(user.getUid()) >= 200) {
+            throw new DefinitionException("您当日消息已达到200条，请明日再试。");
+        }
+        if (messageLogDao.SelectThreeSecondUserUseCount(user.getUid()) >= 3) {
+            throw new DefinitionException("发送消息过于频繁，请三秒后再试。");
+        }
         try {
             long qq = Long.parseLong(msg.getMeta().getData());
             Friend friend = Bot.findInstance(JSONObject.parseObject(user.getConfig()).getLong("qq_bot"))
                     .getFriend(qq);
             if (friend != null) {
-                saveMsgToDB(msg,user.getUid());
+                saveMsgToDB(msg, user.getUid());
                 friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
                 return;
             }
