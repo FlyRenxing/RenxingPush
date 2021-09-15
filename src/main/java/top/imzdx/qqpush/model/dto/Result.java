@@ -1,5 +1,7 @@
 package top.imzdx.qqpush.model.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,18 +10,22 @@ import java.io.Serializable;
  * @author Renxing
  */
 @Data
-public class Result implements Serializable {
+@ApiModel(value = "结果类", description = "所有的最终反馈会被包装为此类")
+public class Result<T> implements Serializable {
+    @Schema(description = "结果标志，true为成功")
     private boolean flag;
+    @Schema(description = "结果消息，一般反馈给用户")
     private String msg;
-    private Object data;
+    @Schema(description = "结果数据，一般反馈给前端进行处理")
+    private T data;
 
-    public Result(String msg, Object data) {
+    public Result(String msg, T data) {
         this.flag = true;
         this.msg = msg;
         this.data = data;
     }
 
-    public Result(boolean b, String msg, Object data) {
+    public Result(boolean b, String msg, T data) {
         this.flag = b;
         this.msg = msg;
         this.data = data;
