@@ -1,11 +1,12 @@
 package top.imzdx.qqpush.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.v3.oas.annotations.Operation;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping("/user")
+@Api(tags = "用户管理")
 public class UserController {
     @Autowired
     UserDao userDao;
@@ -29,9 +31,14 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
+    @Operation(summary = "登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名"),
+            @ApiImplicitParam(name = "password", value = "密码")
+    })
     public Result login(HttpServletRequest request,
-                        @Valid @NotEmpty(message = "用户名不能为空") String name,
-                        @Valid @NotEmpty(message = "用户名不能为空") String password) {
+                        @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
+                        @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
@@ -42,9 +49,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result register(HttpServletRequest request,
-                           @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
-                           @Valid @NotEmpty(message = "密码不能为空") String password) {
+    @Operation(summary = "注册")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名"),
+            @ApiImplicitParam(name = "password", value = "密码")
+    })
+    public Result<User> register(HttpServletRequest request,
+                                 @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
+                                 @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password) {
         if (userService.findUserByName(name) != null) {
             throw new DefinitionException("该用户名已被注册，请更换后重试");
         }
@@ -58,7 +70,8 @@ public class UserController {
 
     @GetMapping("/refreshCipher")
     @LoginRequired
-    public Result refreshCipher(HttpServletRequest request) {
+    @Operation(summary = "重置个人密钥")
+    public Result<String> refreshCipher(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         String cipher = userService.refreshCipher(user.getName());
         request.getSession().setAttribute("user", userService.findUserByName(user.getName()));
@@ -67,7 +80,8 @@ public class UserController {
 
     @GetMapping("/profile")
     @LoginRequired
-    public Result getProfile(HttpServletRequest request) {
+    @Operation(summary = "获取个人资料")
+    public Result<User> getProfile(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
             return new Result("ok", user);
@@ -77,7 +91,12 @@ public class UserController {
 
     @PostMapping("/qq_bot")
     @LoginRequired
-    public Result updateQQBot(HttpServletRequest request, @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
+    @Operation(summary = "换绑QQ机器人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "number", value = "机器人号码")
+    })
+    public Result<User> updateQQBot(HttpServletRequest request,
+                                    @RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
         User user = (User) request.getSession().getAttribute("user");
         userService.setQQBot(user.getUid(), number);
         user = userService.findUserByName(user.getName());

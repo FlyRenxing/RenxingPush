@@ -9,6 +9,7 @@ import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import top.imzdx.qqpush.dao.QqInfoDao;
 import top.imzdx.qqpush.model.po.QqInfo;
 
@@ -16,6 +17,7 @@ import java.io.File;
 import java.util.List;
 
 @SpringBootApplication
+@EnableOpenApi
 public class QqPushApplication {
 
     public static void main(String[] args) {

@@ -1,5 +1,9 @@
 package top.imzdx.qqpush.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.dao.UserDao;
@@ -16,15 +20,21 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/msg")
+@Api(tags = "消息处理")
 public class MsgController {
     @Autowired
     MsgServiceContext msgServiceContext;
     @Autowired
     UserDao userDao;
 
-    @PostMapping("/send/{key}")
-    @GetMapping("/send/{key}")
-    public Result send(@PathVariable("key") String cipher, @RequestBody @Valid Msg msg) {
+    @PostMapping("/send/{cipher}")
+    @GetMapping("/send/{cipher}")
+    @Operation(summary = "发送消息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "cipher", value = "用户密钥"),
+            @ApiImplicitParam(name = "msg", value = "消息类")
+    })
+    public Result send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
         User user = userDao.findUserByCipher(cipher);
         if (user != null) {
             msgServiceContext.getMsgService(msg.getMeta().getType()).sendMsg(user, msg);
