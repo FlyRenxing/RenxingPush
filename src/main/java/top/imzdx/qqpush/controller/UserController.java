@@ -6,11 +6,13 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.DefinitionException;
 
@@ -29,6 +31,10 @@ public class UserController {
     UserDao userDao;
     @Autowired
     UserService userService;
+    @Autowired
+    SystemService systemService;
+    @Value("${geetest.open}")
+    boolean geetestOpen;
 
     @PostMapping("/login")
     @Operation(summary = "登录")
@@ -49,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    @Operation(summary = "注册")
+    @Operation(summary = "注册", description = "当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "用户名"),
             @ApiImplicitParam(name = "password", value = "密码")
@@ -57,6 +63,11 @@ public class UserController {
     public Result<User> register(HttpServletRequest request,
                                  @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
                                  @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password) {
+        if (geetestOpen) {
+            if (!systemService.checkCaptcha(request)) {
+                throw new DefinitionException("验证码错误");
+            }
+        }
         if (userService.findUserByName(name) != null) {
             throw new DefinitionException("该用户名已被注册，请更换后重试");
         }

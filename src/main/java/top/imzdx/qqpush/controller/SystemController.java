@@ -11,6 +11,7 @@ import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QqInfo;
 import top.imzdx.qqpush.service.SystemService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -34,4 +35,11 @@ public class SystemController {
     public Result<List<Note>> getAllNote() {
         return new Result("ok", systemService.getAllNote());
     }
+
+    @GetMapping("geetest")
+    @Operation(summary = "生成Geetest极验验证码")
+    public Result<String> generateCaptcha(HttpServletRequest request) {
+        return new Result<>("ok", systemService.generateCaptcha(request));
+    }
+
 }

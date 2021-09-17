@@ -37,9 +37,7 @@ public class MyExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result exceptionHandler(Exception e) {
-        if (env.equals("dev")) {
-            e.printStackTrace();
-        }
+        e.printStackTrace();
         return Result.otherError(e);
     }
 }
