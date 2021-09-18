@@ -10,6 +10,7 @@ import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QqInfo;
 import top.imzdx.qqpush.service.SystemService;
+import top.imzdx.qqpush.utils.QQConnection;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,6 +24,8 @@ import java.util.List;
 public class SystemController {
     @Autowired
     SystemService systemService;
+    @Autowired
+    QQConnection qqConnection;
 
     @GetMapping("qqbotlist")
     @Operation(summary = "获取机器人公开列表")
@@ -40,6 +43,12 @@ public class SystemController {
     @Operation(summary = "生成Geetest极验验证码")
     public Result<String> generateCaptcha(HttpServletRequest request) {
         return new Result<>("ok", systemService.generateCaptcha(request));
+    }
+
+    @GetMapping("qqUrl")
+    @Operation(summary = "获取QQ登录URL")
+    public Result<String> getQQUrl() {
+        return new Result<>("ok", qqConnection.getUrl());
     }
 
 }

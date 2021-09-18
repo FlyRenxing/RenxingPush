@@ -17,16 +17,27 @@ public class AuthTools {
     @Autowired
     UserDao userDao;
 
-    public String generateCipher() {
+    public static String generateRandomString(int digit) {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < digit; i++) {
+            int number = random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
+    }
+
+    public String generateCipher(int digit) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < digit; i++) {
             int number = random.nextInt(62);
             sb.append(str.charAt(number));
         }
         if (userDao.findUserByCipher(sb.toString()) != null) {
-            return generateCipher();
+            return generateCipher(digit);
         }
         return sb.toString();
     }

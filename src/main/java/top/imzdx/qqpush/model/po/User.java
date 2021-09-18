@@ -27,6 +27,9 @@ public class User implements Serializable {
     private String cipher;
     @Schema(description = "每日最大发送次数")
     private long dayMaxSendCount;
+    @JsonIgnore
+    @Schema(description = "qq登录接口的openid")
+    private String openid;
 
 
 }

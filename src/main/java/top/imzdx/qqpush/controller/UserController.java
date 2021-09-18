@@ -1,5 +1,6 @@
 package top.imzdx.qqpush.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -14,11 +15,15 @@ import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
+import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
+import top.imzdx.qqpush.utils.QQConnection;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.io.IOException;
 
 /**
  * @author Renxing
@@ -33,8 +38,12 @@ public class UserController {
     UserService userService;
     @Autowired
     SystemService systemService;
+    @Autowired
+    QQConnection qqConnection;
     @Value("${geetest.open}")
     boolean geetestOpen;
+    @Value("${qq.back-url}")
+    String qqBackUrl;
 
     @PostMapping("/login")
     @Operation(summary = "登录")
@@ -48,10 +57,58 @@ public class UserController {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
-            System.out.println(user);
             return new Result("登陆成功", user);
         }
         throw new DefinitionException("账号或密码错误");
+    }
+
+    @GetMapping("/qqLogin")
+    @CrossOrigin
+    @Operation(summary = "QQ登录回调")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "code", value = "QQ互联返回的code")
+    })
+    public Object qqLogin(HttpServletRequest request,
+                          HttpServletResponse response,
+                          @RequestParam("code") String code) {
+//        System.out.println("第二步：获取QQ互联返回的code=" + code);
+//        第三步 获取access token
+        String accessToken = qqConnection.getAccessToken(code);
+//        第四步 获取登陆后返回的 openid、appid 以JSON对象形式返回
+        JSONObject userInfo = qqConnection.getUserOpenID(accessToken);
+//        第五步获取用户有效(昵称、头像等）信息  以JSON对象形式返回
+        String oauth_consumer_key = userInfo.getString("client_id");
+        String openid = userInfo.getString("openid");
+        JSONObject userRealInfo = qqConnection.getUserInfo(accessToken, oauth_consumer_key, openid);
+
+        User user = userService.findUserByOpenid(openid);
+        if (user != null) {
+            request.getSession().setAttribute("user", user);
+            try {
+                response.sendRedirect(qqBackUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new Result("登陆成功", user);
+        } else {
+            String userName = userRealInfo.getString("nickname");
+            String randomString = AuthTools.generateRandomString(6);
+            do {
+                userName = userName + "_" + randomString;
+            } while (userService.findUserByName(userName) != null);
+
+            if (userService.register(userName, randomString, openid)) {
+                User newUser = userService.findUserByName(userName);
+                request.getSession().setAttribute("user", newUser);
+                try {
+                    response.sendRedirect(qqBackUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return new Result("注册成功", newUser);
+            }
+        }
+        throw new DefinitionException("QQ互联认证失败");
     }
 
     @PostMapping("/register")

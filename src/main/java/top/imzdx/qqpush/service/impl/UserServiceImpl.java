@@ -26,13 +26,15 @@ public class UserServiceImpl implements UserService {
     AuthTools authTools;
     @Value("${app.user.default.day-max-send-count}")
     long dayMaxSendCount;
+    @Value("${app.user.default.cipher-digit}")
+    int digit;
 
     @Override
     public boolean register(String name, String password) {
         User user = new User()
                 .setName(name)
                 .setPassword(password)
-                .setCipher(authTools.generateCipher())
+                .setCipher(authTools.generateCipher(digit))
                 .setDayMaxSendCount(dayMaxSendCount)
                 .setConfig(new JSONObject() {{
                     put("qq_bot", qqInfoDao.getFirst().getNumber());
@@ -45,8 +47,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean register(String name, String password, String openid) {
+        User user = new User()
+                .setName(name)
+                .setPassword(password)
+                .setCipher(authTools.generateCipher(digit))
+                .setDayMaxSendCount(dayMaxSendCount)
+                .setOpenid(openid)
+                .setConfig(new JSONObject() {{
+                    put("qq_bot", qqInfoDao.getFirst().getNumber());
+                }}.toJSONString());
+        int i = userDao.insertUser(user);
+        if (i == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String refreshCipher(String userName) {
-        String newCipher = authTools.generateCipher();
+        String newCipher = authTools.generateCipher(digit);
         User user = userDao.findUserByName(userName);
         user.setCipher(newCipher);
         if (userDao.updateUser(user) == 1) {
@@ -58,6 +78,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByName(String name) {
         return userDao.findUserByName(name);
+    }
+
+    @Override
+    public User findUserByOpenid(String openid) {
+        return userDao.findUserByOpenid(openid);
     }
 
     @Override
