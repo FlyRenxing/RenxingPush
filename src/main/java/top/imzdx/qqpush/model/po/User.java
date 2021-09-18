@@ -25,6 +25,8 @@ public class User implements Serializable {
     private String config;
     @Schema(description = "用户密钥")
     private String cipher;
+    @Schema(description = "每日最大发送次数")
+    private long dayMaxSendCount;
 
 
 }

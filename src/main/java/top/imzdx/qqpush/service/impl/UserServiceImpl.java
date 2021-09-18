@@ -2,6 +2,7 @@ package top.imzdx.qqpush.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.dao.QqInfoDao;
 import top.imzdx.qqpush.dao.UserDao;
@@ -23,6 +24,8 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     @Autowired
     AuthTools authTools;
+    @Value("${app.user.default.day-max-send-count}")
+    long dayMaxSendCount;
 
     @Override
     public boolean register(String name, String password) {
@@ -30,6 +33,7 @@ public class UserServiceImpl implements UserService {
                 .setName(name)
                 .setPassword(password)
                 .setCipher(authTools.generateCipher())
+                .setDayMaxSendCount(dayMaxSendCount)
                 .setConfig(new JSONObject() {{
                     put("qq_bot", qqInfoDao.getFirst().getNumber());
                 }}.toJSONString());
