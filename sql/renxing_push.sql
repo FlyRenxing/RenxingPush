@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 13/09/2021 17:39:08
+ Date: 18/09/2021 14:16:52
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `message_log`
     INDEX `FK_uid` (`uid`) USING BTREE,
     CONSTRAINT `FK_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 17
+  AUTO_INCREMENT = 60
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = Dynamic;
@@ -76,15 +76,16 @@ CREATE TABLE `qq_info`
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`
 (
-    `uid`      int                                                          NOT NULL AUTO_INCREMENT,
-    `name`     varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `admin`    int                                                          NOT NULL DEFAULT 0,
-    `config`   json                                                         NOT NULL,
-    `cipher`   varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `uid`                int                                                          NOT NULL AUTO_INCREMENT,
+    `name`               varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `password`           varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `admin`              int                                                          NOT NULL DEFAULT 0,
+    `config`             json                                                         NOT NULL,
+    `cipher`             varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `day_max_send_count` int                                                          NOT NULL,
     PRIMARY KEY (`uid`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 8
+  AUTO_INCREMENT = 9
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = Dynamic;

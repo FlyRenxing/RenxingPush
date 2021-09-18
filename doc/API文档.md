@@ -15,17 +15,18 @@
 
 - [任性推服务端文档](#任性推服务端文档)
 - [消息处理](#消息处理)
-	- [发送消息](#发送消息)
+    - [发送消息](#发送消息)
 - [用户管理](#用户管理)
-	- [获取当日用户使用次数](#获取当日用户使用次数)
-	- [登录](#登录)
-	- [获取个人资料](#获取个人资料)
-	- [换绑QQ机器人](#换绑qq机器人)
-	- [重置个人密钥](#重置个人密钥)
-	- [注册](#注册)
+    - [获取当日用户使用次数](#获取当日用户使用次数)
+    - [登录](#登录)
+    - [获取个人资料](#获取个人资料)
+    - [换绑QQ机器人](#换绑qq机器人)
+    - [重置个人密钥](#重置个人密钥)
+    - [注册](#注册)
 - [系统类](#系统类)
-	- [获取所有公告](#获取所有公告)
-	- [获取机器人公开列表](#获取机器人公开列表)
+    - [生成Geetest极验验证码](#生成Geetest极验验证码)
+    - [获取所有公告](#获取所有公告)
+    - [获取机器人公开列表](#获取机器人公开列表)
 
 
 
@@ -272,6 +273,7 @@
 |&emsp;&emsp;admin|是否为管理默认0否|integer(int64)||
 |&emsp;&emsp;cipher|用户密钥|string||
 |&emsp;&emsp;config|用户配置|string||
+|&emsp;&emsp;dayMaxSendCount|每日最大发送次数|integer(int64)||
 |&emsp;&emsp;name|用户名|string||
 |&emsp;&emsp;uid|用户ID|integer(int64)||
 |flag|结果标志，true为成功|boolean||
@@ -285,6 +287,7 @@
 		"admin": 0,
 		"cipher": "",
 		"config": "",
+		"dayMaxSendCount": 0,
 		"name": "",
 		"uid": 0
 	},
@@ -341,6 +344,7 @@
 |&emsp;&emsp;admin|是否为管理默认0否|integer(int64)||
 |&emsp;&emsp;cipher|用户密钥|string||
 |&emsp;&emsp;config|用户配置|string||
+|&emsp;&emsp;dayMaxSendCount|每日最大发送次数|integer(int64)||
 |&emsp;&emsp;name|用户名|string||
 |&emsp;&emsp;uid|用户ID|integer(int64)||
 |flag|结果标志，true为成功|boolean||
@@ -354,6 +358,7 @@
 		"admin": 0,
 		"cipher": "",
 		"config": "",
+		"dayMaxSendCount": 0,
 		"name": "",
 		"uid": 0
 	},
@@ -433,7 +438,8 @@
 **响应数据类型**:`*/*`
 
 
-**接口描述**:
+**接口描述**:<p>当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数</p>
+
 
 
 **请求参数**:
@@ -466,6 +472,7 @@
 |&emsp;&emsp;admin|是否为管理默认0否|integer(int64)||
 |&emsp;&emsp;cipher|用户密钥|string||
 |&emsp;&emsp;config|用户配置|string||
+|&emsp;&emsp;dayMaxSendCount|每日最大发送次数|integer(int64)||
 |&emsp;&emsp;name|用户名|string||
 |&emsp;&emsp;uid|用户ID|integer(int64)||
 |flag|结果标志，true为成功|boolean||
@@ -479,6 +486,7 @@
 		"admin": 0,
 		"cipher": "",
 		"config": "",
+		"dayMaxSendCount": 0,
 		"name": "",
 		"uid": 0
 	},
@@ -489,6 +497,61 @@
 
 
 # 系统类
+
+
+## 生成Geetest极验验证码
+
+
+**接口地址**:`/sys/geetest`
+
+
+**请求方式**:`GET`
+
+
+**请求数据类型**:`application/x-www-form-urlencoded`
+
+
+**响应数据类型**:`*/*`
+
+
+**接口描述**:
+
+
+**请求参数**:
+
+
+暂无
+
+
+**响应状态**:
+
+
+| 状态码 | 说明 | schema |
+| -------- | -------- | ----- | 
+|200|OK|结果类«string»|
+|401|Unauthorized||
+|403|Forbidden||
+|404|Not Found||
+
+
+**响应参数**:
+
+
+| 参数名称 | 参数说明 | 类型 | schema |
+| -------- | -------- | ----- |----- | 
+|data|结果数据，一般反馈给前端进行处理|string||
+|flag|结果标志，true为成功|boolean||
+|msg|结果消息，一般反馈给用户|string||
+
+
+**响应示例**:
+```javascript
+{
+	"data": "",
+	"flag": false,
+	"msg": ""
+}
+```
 
 
 ## 获取所有公告
