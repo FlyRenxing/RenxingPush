@@ -10,8 +10,12 @@ import java.util.Map;
  */
 @Service
 public class MsgServiceContext {
-    @Autowired
     Map<String, MsgService> msgServiceMap;
+
+    @Autowired
+    public MsgServiceContext(Map<String, MsgService> msgServiceMap) {
+        this.msgServiceMap = msgServiceMap;
+    }
 
     public MsgService getMsgService(String type) {
         return msgServiceMap.get(type);

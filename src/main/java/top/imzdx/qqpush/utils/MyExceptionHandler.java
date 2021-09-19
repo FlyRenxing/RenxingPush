@@ -12,13 +12,16 @@ import top.imzdx.qqpush.model.dto.Result;
  */
 @ControllerAdvice
 public class MyExceptionHandler {
-    @Value("${spring.profiles.active}")
     String env;
+
+    public MyExceptionHandler(@Value("${spring.profiles.active}") String env) {
+        this.env = env;
+    }
 
     @ExceptionHandler(value = DefinitionException.class)
     @ResponseBody
     public Result exceptionHandler(DefinitionException e) {
-        if (env.equals("dev")) {
+        if ("dev".equals(env)) {
             e.printStackTrace();
         }
         return Result.defineError(e.getMessage());
@@ -27,7 +30,7 @@ public class MyExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public Result BindExceptionHandler(MethodArgumentNotValidException e) {
-        if (env.equals("dev")) {
+        if ("dev".equals(env)) {
             e.printStackTrace();
         }
         String message = e.getBindingResult().getFieldError().getDefaultMessage();

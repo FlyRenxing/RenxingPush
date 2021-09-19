@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -191,7 +192,7 @@ public class GeetestLib {
 
 			gtlog("GET_URL:" + getUrl + param);
 			String result_str = readContentFromGet(getUrl + param);
-			if (result_str == "fail") {
+			if (result_str.equals("fail")) {
 
 				gtlog("gtServer register challenge failed");
 				return 0;
@@ -255,27 +256,27 @@ public class GeetestLib {
 	 * @param challenge
 	 * @return
 	 */
-	private boolean resquestIsLegal(String challenge, String validate, String seccode) {
+	private boolean requestNotLegal(String challenge, String validate, String seccode) {
 
 		if (objIsEmpty(challenge)) {
 
-			return false;
+			return true;
 
 		}
 
 		if (objIsEmpty(validate)) {
 
-			return false;
+			return true;
 
 		}
 
 		if (objIsEmpty(seccode)) {
 
-			return false;
+			return true;
 
 		}
 
-		return true;
+		return false;
 	}
 
 
@@ -288,13 +289,9 @@ public class GeetestLib {
 	 * @return 验证结果, 1表示验证成功0表示验证失败
 	 */
 	public int enhencedValidateRequest(String challenge, String validate, String seccode, HashMap<String, String> data) throws UnsupportedEncodingException {
-
-		if (!resquestIsLegal(challenge, validate, seccode)) {
-
+		if (requestNotLegal(challenge, validate, seccode)) {
 			return 0;
-
 		}
-
 		gtlog("request legitimate");
 
 		String userId = data.get("user_id");
@@ -304,7 +301,6 @@ public class GeetestLib {
 		String postUrl = this.apiUrl + this.validateUrl;
 		String param = String.format(
 				"challenge=%s&validate=%s&seccode=%s&json_format=%s", challenge, validate, seccode, this.json_format);
-
 		if (userId != null) {
 			param = param + "&user_id=" + URLEncoder.encode(userId, "utf-8");
 		}
@@ -314,62 +310,35 @@ public class GeetestLib {
 		if (ipAddress != null) {
 			param = param + "&ip_address=" + URLEncoder.encode(ipAddress, "utf-8");
 		}
-
 		gtlog("param:" + param);
-
 		String response = "";
 		try {
-
 			if (validate.length() <= 0) {
-
 				return 0;
-
 			}
-
 			if (!checkResultByPrivate(challenge, validate)) {
-
 				return 0;
-
 			}
-
 			gtlog("checkResultByPrivate");
-
 			response = readContentFromPost(postUrl, param);
-
 			gtlog("response: " + response);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
-
 		String return_seccode = "";
-
 		try {
-
 			JSONObject return_map = new JSONObject(response);
 			return_seccode = return_map.getString("seccode");
 			gtlog("md5: " + md5Encode(return_seccode));
-
 			if (return_seccode.equals(md5Encode(seccode))) {
-
 				return 1;
-
 			} else {
-
 				return 0;
-
 			}
-
 		} catch (JSONException e) {
-
-
 			gtlog("json load error");
 			return 0;
-
 		}
-
 	}
 
 	/**
@@ -384,7 +353,7 @@ public class GeetestLib {
 
 		gtlog("in failback validate");
 
-		if (!resquestIsLegal(challenge, validate, seccode)) {
+		if (requestNotLegal(challenge, validate, seccode)) {
 			return 0;
 		}
 		gtlog("request legitimate");
@@ -429,13 +398,13 @@ public class GeetestLib {
 
 		if (connection.getResponseCode() == 200) {
 			// 发送数据到服务器并使用Reader读取返回的数据
-			StringBuffer sBuffer = new StringBuffer();
+			StringBuilder sBuffer = new StringBuilder();
 
 			InputStream inStream = null;
 			byte[] buf = new byte[1024];
 			inStream = connection.getInputStream();
 			for (int n; (n = inStream.read(buf)) != -1; ) {
-				sBuffer.append(new String(buf, 0, n, "UTF-8"));
+				sBuffer.append(new String(buf, 0, n, StandardCharsets.UTF_8));
 			}
 			inStream.close();
 			connection.disconnect();// 断开连接
@@ -471,20 +440,20 @@ public class GeetestLib {
 		// 建立与服务器的连接，并未发送数据
 		connection.connect();
 
-		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
+		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.UTF_8);
 		outputStreamWriter.write(data);
 		outputStreamWriter.flush();
 		outputStreamWriter.close();
 
 		if (connection.getResponseCode() == 200) {
 			// 发送数据到服务器并使用Reader读取返回的数据
-			StringBuffer sBuffer = new StringBuffer();
+			StringBuilder sBuffer = new StringBuilder();
 
 			InputStream inStream = null;
 			byte[] buf = new byte[1024];
 			inStream = connection.getInputStream();
 			for (int n; (n = inStream.read(buf)) != -1; ) {
-				sBuffer.append(new String(buf, 0, n, "UTF-8"));
+				sBuffer.append(new String(buf, 0, n, StandardCharsets.UTF_8));
 			}
 			inStream.close();
 			connection.disconnect();// 断开连接
@@ -508,15 +477,17 @@ public class GeetestLib {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(plainText.getBytes());
-			byte b[] = md.digest();
+			byte[] b = md.digest();
 			int i;
-			StringBuffer buf = new StringBuffer("");
-			for (int offset = 0; offset < b.length; offset++) {
-				i = b[offset];
-				if (i < 0)
+			StringBuilder buf = new StringBuilder("");
+			for (byte value : b) {
+				i = value;
+				if (i < 0) {
 					i += 256;
-				if (i < 16)
+				}
+				if (i < 16) {
 					buf.append("0");
+				}
 				buf.append(Integer.toHexString(i));
 			}
 

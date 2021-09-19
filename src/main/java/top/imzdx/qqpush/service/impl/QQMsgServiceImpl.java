@@ -19,13 +19,16 @@ import top.imzdx.qqpush.utils.QqMsgContentTools;
  */
 @Service("qq")
 public class QQMsgServiceImpl implements MsgService {
-    @Autowired
     QqMsgContentTools qqMsgContentTools;
-    @Autowired
     MessageLogDao messageLogDao;
-    @Autowired
     UserDao userDao;
 
+    @Autowired
+    public QQMsgServiceImpl(QqMsgContentTools qqMsgContentTools, MessageLogDao messageLogDao, UserDao userDao) {
+        this.qqMsgContentTools = qqMsgContentTools;
+        this.messageLogDao = messageLogDao;
+        this.userDao = userDao;
+    }
 
     @Override
     public void sendMsg(User user, Msg msg) {

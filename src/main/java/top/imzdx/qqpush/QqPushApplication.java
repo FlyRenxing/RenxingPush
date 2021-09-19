@@ -49,9 +49,7 @@ public class QqPushApplication {
          * mirai的联系人缓存机制会导致Bot.getFriends()抛出异常无法找到新添加的好友。
          * 现使用好友监听功能，由机器人接管同意请求
          */
-        Listener listener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, event -> {
-            event.accept();
-        });
+        Listener<NewFriendRequestEvent> listener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         listener.start();
     }
 

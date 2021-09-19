@@ -32,18 +32,22 @@ import java.io.IOException;
 @RequestMapping("/user")
 @Api(tags = "用户管理")
 public class UserController {
-    @Autowired
     UserDao userDao;
-    @Autowired
     UserService userService;
-    @Autowired
     SystemService systemService;
-    @Autowired
     QQConnection qqConnection;
-    @Value("${geetest.open}")
     boolean geetestOpen;
-    @Value("${qq.back-url}")
     String qqBackUrl;
+
+    @Autowired
+    public UserController(UserDao userDao, UserService userService, SystemService systemService, QQConnection qqConnection, @Value("${geetest.open}") boolean geetestOpen, @Value("${qq.back-url}") String qqBackUrl) {
+        this.userDao = userDao;
+        this.userService = userService;
+        this.systemService = systemService;
+        this.qqConnection = qqConnection;
+        this.geetestOpen = geetestOpen;
+        this.qqBackUrl = qqBackUrl;
+    }
 
     @PostMapping("/login")
     @Operation(summary = "登录")
@@ -71,7 +75,6 @@ public class UserController {
     public Object qqLogin(HttpServletRequest request,
                           HttpServletResponse response,
                           @RequestParam("code") String code) {
-//        System.out.println("第二步：获取QQ互联返回的code=" + code);
 //        第三步 获取access token
         String accessToken = qqConnection.getAccessToken(code);
 //        第四步 获取登陆后返回的 openid、appid 以JSON对象形式返回

@@ -14,47 +14,38 @@ import java.util.Random;
  */
 @Component
 public class AuthTools {
-    @Autowired
     UserDao userDao;
+
+    @Autowired
+    public AuthTools(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public static String generateRandomString(int digit) {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < digit; i++) {
             int number = random.nextInt(62);
             sb.append(str.charAt(number));
-        }
-        return sb.toString();
-    }
-
-    public String generateCipher(int digit) {
-        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < digit; i++) {
-            int number = random.nextInt(62);
-            sb.append(str.charAt(number));
-        }
-        if (userDao.findUserByCipher(sb.toString()) != null) {
-            return generateCipher(digit);
         }
         return sb.toString();
     }
 
     public static String getIpAddr(HttpServletRequest request) {
+        final String UNKNOWN = "unknown";
         String ipAddress = null;
         try {
             ipAddress = request.getHeader("x-forwarded-for");
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            if (ipAddress == null || ipAddress.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getHeader("Proxy-Client-IP");
             }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            if (ipAddress == null || ipAddress.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getHeader("WL-Proxy-Client-IP");
             }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            if (ipAddress == null || ipAddress.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getRemoteAddr();
-                if (ipAddress.equals("127.0.0.1")) {
+                if ("127.0.0.1".equals(ipAddress)) {
                     // 根据网卡取本机配置的IP
                     try {
                         ipAddress = InetAddress.getLocalHost().getHostAddress();
@@ -77,6 +68,20 @@ public class AuthTools {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public String generateCipher(int digit) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < digit; i++) {
+            int number = random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        if (userDao.findUserByCipher(sb.toString()) != null) {
+            return generateCipher(digit);
+        }
+        return sb.toString();
     }
 
 }

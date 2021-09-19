@@ -7,7 +7,10 @@ import net.mamoe.mirai.message.data.MessageChainBuilder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -29,18 +32,16 @@ public class QqMsgContentTools {
     }
 
     public QqMsgContentTools() {
-//        URL path = this.getClass().getResource("/static/敏感词.txt");
         ClassPathResource classPathResource = new ClassPathResource("static/敏感词.txt");
         try {
             File file = classPathResource.getFile();
             BufferedReader br = new BufferedReader(new FileReader(file));
             String s = null;
-            while ((s = br.readLine()) != null) {// 使用readLine方法，一次读一行
+            // 使用readLine方法，一次读一行
+            while ((s = br.readLine()) != null) {
                 badWord.addWord(s);
             }
             br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +72,7 @@ public class QqMsgContentTools {
         while (i < split.length) {
             String s = split[i];
             //下一段文字为表情时会多出空字符串，故忽略他
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 chainBuilder.append(s);
             }
             if (faceList.size() != 0) {
@@ -91,7 +92,7 @@ public class QqMsgContentTools {
     public void badWordDFA(String content) {
         List<String> matchAll = badWord.matchAll(content, -1, false, false);
         if (matchAll.size() != 0) {
-            throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll.toString());
+            throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll);
         }
     }
 }

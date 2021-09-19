@@ -18,16 +18,22 @@ import top.imzdx.qqpush.utils.DefinitionException;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
     QqInfoDao qqInfoDao;
-    @Autowired
     UserDao userDao;
-    @Autowired
     AuthTools authTools;
-    @Value("${app.user.default.day-max-send-count}")
     long dayMaxSendCount;
-    @Value("${app.user.default.cipher-digit}")
     int digit;
+
+    @Autowired
+    public UserServiceImpl(QqInfoDao qqInfoDao, UserDao userDao, AuthTools authTools,
+                           @Value("${app.user.default.day-max-send-count}") long dayMaxSendCount,
+                           @Value("${app.user.default.cipher-digit}") int digit) {
+        this.qqInfoDao = qqInfoDao;
+        this.userDao = userDao;
+        this.authTools = authTools;
+        this.dayMaxSendCount = dayMaxSendCount;
+        this.digit = digit;
+    }
 
     @Override
     public boolean register(String name, String password) {

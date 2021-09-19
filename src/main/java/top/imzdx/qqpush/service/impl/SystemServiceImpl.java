@@ -22,12 +22,16 @@ import java.util.List;
  */
 @Service
 public class SystemServiceImpl implements SystemService {
-    @Autowired
     QqInfoDao qqInfoDao;
-    @Autowired
     NoteDao noteDao;
-    @Autowired
     GeetestConfig geetestConfig;
+
+    @Autowired
+    public SystemServiceImpl(QqInfoDao qqInfoDao, NoteDao noteDao, GeetestConfig geetestConfig) {
+        this.qqInfoDao = qqInfoDao;
+        this.noteDao = noteDao;
+        this.geetestConfig = geetestConfig;
+    }
 
     @Override
     public List<QqInfo> getPublicQqBot() {

@@ -22,10 +22,14 @@ import java.util.List;
 @RequestMapping("/sys")
 @Api(tags = "系统类")
 public class SystemController {
-    @Autowired
     SystemService systemService;
-    @Autowired
     QQConnection qqConnection;
+
+    @Autowired
+    public SystemController(SystemService systemService, QQConnection qqConnection) {
+        this.systemService = systemService;
+        this.qqConnection = qqConnection;
+    }
 
     @GetMapping("qqbotlist")
     @Operation(summary = "获取机器人公开列表")

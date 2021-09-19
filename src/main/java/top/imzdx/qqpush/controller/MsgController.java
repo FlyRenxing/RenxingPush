@@ -22,10 +22,14 @@ import javax.validation.Valid;
 @RequestMapping("/msg")
 @Api(tags = "消息处理")
 public class MsgController {
-    @Autowired
     MsgServiceContext msgServiceContext;
-    @Autowired
     UserDao userDao;
+
+    @Autowired
+    public MsgController(MsgServiceContext msgServiceContext, UserDao userDao) {
+        this.msgServiceContext = msgServiceContext;
+        this.userDao = userDao;
+    }
 
     @PostMapping("/send/{cipher}")
     @GetMapping("/send/{cipher}")
@@ -34,11 +38,11 @@ public class MsgController {
             @ApiImplicitParam(name = "cipher", value = "用户密钥"),
             @ApiImplicitParam(name = "msg", value = "消息类")
     })
-    public Result send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
+    public Result<Void> send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
         User user = userDao.findUserByCipher(cipher);
         if (user != null) {
             msgServiceContext.getMsgService(msg.getMeta().getType()).sendMsg(user, msg);
-            return new Result("ok", null);
+            return new Result<>("ok", null);
         }
         throw new DefinitionException("Key错误");
     }

@@ -22,7 +22,6 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(adminInterceptor()).addPathPatterns("/**");
     }
 
-
     @Bean
     public LoginInterceptor loginInterceptor() {
         return new LoginInterceptor();

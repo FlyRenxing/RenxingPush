@@ -15,19 +15,21 @@ import java.io.IOException;
 
 @Component
 public class QQConnection {
-    @Value("${qq.QQAPPID}")
-    private String QQAppID;
-    @Value("${qq.QQAPPKEY}")
-    private String QQAppKEY;
-    @Value("${qq.redirect_uri}")
-    private String redirect_uri;
+    String QQAppID;
+    String QQAppKEY;
+    String redirect_uri;
 
+    public QQConnection(@Value("${qq.QQAPPID}") String QQAppID,
+                        @Value("${qq.QQAPPKEY}") String QQAppKEY,
+                        @Value("${qq.redirect_uri}") String redirect_uri) {
+        this.QQAppID = QQAppID;
+        this.QQAppKEY = QQAppKEY;
+        this.redirect_uri = redirect_uri;
+    }
 //    第一步：获取 QQ登录按钮url 几乎等于手动拼接 无太大意义
 
     public String getUrl() {
-        String url = "https://graph.qq.com/oauth2.0/authorize?display=pc&response_type=code&client_id=" + QQAppID + "&redirect_uri=" + redirect_uri;
-//        System.out.println("第一步：获取QQ登录按钮的url=" + url);
-        return url;
+        return "https://graph.qq.com/oauth2.0/authorize?display=pc&response_type=code&client_id=" + QQAppID + "&redirect_uri=" + redirect_uri;
     }
 
     /*
@@ -43,9 +45,7 @@ public class QQConnection {
         try (Response response = client.newCall(request).execute()) {
             assert response.body() != null;
             String responseString = response.body().string();
-//            System.out.println(responseString);
             accessTaken = responseString.split("=")[1].split("&")[0];
-//            System.out.println("第三步：获取QQ互联返回的accessTaken=" + accessTaken);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,7 +67,6 @@ public class QQConnection {
             assert response.body() != null;
             String UserInfoString = response.body().string().split(" ")[1];
             userInfo = JSONObject.parseObject(UserInfoString);
-//            System.out.println("第四步：获取QQ互联返回的openid和分配给应用的appid：" + userInfo);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +88,6 @@ public class QQConnection {
             assert response.body() != null;
             String UserRealInfoString = response.body().string();
             userRealInfo = JSONObject.parseObject(UserRealInfoString);
-//            System.out.println("第五步：获取QQ互联返回的用户有效信息：" + userRealInfo);
         } catch (IOException e) {
             e.printStackTrace();
         }
