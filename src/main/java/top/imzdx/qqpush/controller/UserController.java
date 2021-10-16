@@ -61,7 +61,7 @@ public class UserController {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
-            return new Result("登陆成功", user);
+            return new Result<User>("登陆成功", user);
         }
         throw new DefinitionException("账号或密码错误");
     }
@@ -108,7 +108,7 @@ public class UserController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return new Result("注册成功", newUser);
+                return new Result<User>("注册成功", newUser);
             }
         }
         throw new DefinitionException("QQ互联认证失败");
@@ -134,7 +134,7 @@ public class UserController {
         if (userService.register(name, password)) {
             User user = userService.findUserByName(name);
             request.getSession().setAttribute("user", user);
-            return new Result("注册成功", user);
+            return new Result<User>("注册成功", user);
         }
         throw new DefinitionException("注册异常");
     }
@@ -146,7 +146,7 @@ public class UserController {
         User user = (User) request.getSession().getAttribute("user");
         String cipher = userService.refreshCipher(user.getName());
         request.getSession().setAttribute("user", userService.findUserByName(user.getName()));
-        return new Result("密钥刷新成功", cipher);
+        return new Result<String>("密钥刷新成功", cipher);
     }
 
     @GetMapping("/profile")
@@ -155,7 +155,7 @@ public class UserController {
     public Result<User> getProfile(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            return new Result("ok", user);
+            return new Result<User>("ok", user);
         }
         throw new DefinitionException("当前未登录");
     }
@@ -172,7 +172,7 @@ public class UserController {
         userService.setQQBot(user.getUid(), number);
         user = userService.findUserByName(user.getName());
         request.getSession().setAttribute("user", user);
-        return new Result("ok", user);
+        return new Result<User>("ok", user);
     }
 
     @GetMapping("/ToDayUseCount")
@@ -181,7 +181,7 @@ public class UserController {
     public Result<Integer> selectToDayUserUseCount(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            return new Result("ok", userService.selectToDayUserUseCount(user.getUid()));
+            return new Result<Integer>("ok", userService.selectToDayUserUseCount(user.getUid()));
         }
         throw new DefinitionException("当前未登录");
     }
