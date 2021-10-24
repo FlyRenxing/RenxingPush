@@ -1,5 +1,7 @@
 package top.imzdx.qqpush.utils;
 
+import cn.hutool.core.codec.Base64Decoder;
+import cn.hutool.core.io.file.FileReader;
 import cn.hutool.dfa.WordTree;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Message;
@@ -7,9 +9,7 @@ import net.mamoe.mirai.message.data.MessageChainBuilder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,20 +33,17 @@ public class QqMsgContentTools {
 
     public QqMsgContentTools() {
         ClassPathResource classPathResource = new ClassPathResource("static/敏感词.txt");
+        File file = null;
         try {
-            File file = classPathResource.getFile();
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String s = null;
-            // 使用readLine方法，一次读一行
-            while ((s = br.readLine()) != null) {
-                badWord.addWord(s);
-            }
-            br.close();
+            file = classPathResource.getFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        FileReader fileReader = new FileReader(file);
+        List<String> list = fileReader.readLines();
+        for (String s : list) {
+            badWord.addWord(Base64Decoder.decodeStr(s));
+        }
     }
 
     private void buildFace(String content, MessageChainBuilder chainBuilder) {
