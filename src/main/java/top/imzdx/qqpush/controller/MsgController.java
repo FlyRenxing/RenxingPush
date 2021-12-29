@@ -35,8 +35,8 @@ public class MsgController {
     @GetMapping("/send/{cipher}")
     @Operation(summary = "发送消息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cipher", value = "用户密钥"),
-            @ApiImplicitParam(name = "msg", value = "消息类")
+            @ApiImplicitParam(name = "cipher", value = "用户密钥", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "msg", value = "消息类", dataTypeClass = String.class)
     })
     public Result<Void> send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
         User user = userDao.findUserByCipher(cipher);

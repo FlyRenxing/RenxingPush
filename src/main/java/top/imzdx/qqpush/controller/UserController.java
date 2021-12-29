@@ -52,12 +52,12 @@ public class UserController {
     @PostMapping("/login")
     @Operation(summary = "登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户名"),
-            @ApiImplicitParam(name = "password", value = "密码")
+            @ApiImplicitParam(name = "name", value = "用户名", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
     })
-    public Result login(HttpServletRequest request,
-                        @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
-                        @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
+    public Result<User> login(HttpServletRequest request,
+                              @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
+                              @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
@@ -70,7 +70,7 @@ public class UserController {
     @CrossOrigin
     @Operation(summary = "QQ登录回调")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "code", value = "QQ互联返回的code")
+            @ApiImplicitParam(name = "code", value = "QQ互联返回的code", dataTypeClass = String.class)
     })
     public Object qqLogin(HttpServletRequest request,
                           HttpServletResponse response,
@@ -117,8 +117,8 @@ public class UserController {
     @PostMapping("/register")
     @Operation(summary = "注册", description = "当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户名"),
-            @ApiImplicitParam(name = "password", value = "密码")
+            @ApiImplicitParam(name = "name", value = "用户名", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
     })
     public Result<User> register(HttpServletRequest request,
                                  @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
@@ -164,7 +164,7 @@ public class UserController {
     @LoginRequired
     @Operation(summary = "换绑QQ机器人")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "number", value = "机器人号码")
+            @ApiImplicitParam(name = "number", value = "机器人号码", dataTypeClass = Integer.class)
     })
     public Result<User> updateQQBot(HttpServletRequest request,
                                     @RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {

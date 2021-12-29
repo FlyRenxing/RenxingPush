@@ -20,7 +20,7 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(value = DefinitionException.class)
     @ResponseBody
-    public Result exceptionHandler(DefinitionException e) {
+    public Result<Void> exceptionHandler(DefinitionException e) {
         if ("dev".equals(env)) {
             e.printStackTrace();
         }
@@ -29,7 +29,7 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public Result BindExceptionHandler(MethodArgumentNotValidException e) {
+    public Result<Void> BindExceptionHandler(MethodArgumentNotValidException e) {
         if ("dev".equals(env)) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result exceptionHandler(Exception e) {
+    public Result<Void> exceptionHandler(Exception e) {
         e.printStackTrace();
         return Result.otherError(e);
     }
