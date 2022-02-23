@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface MessageLogDao {
-    @Insert("INSERT INTO `qqmsg`.`message_log`(`content`, `meta`, `uid`) VALUES (#{content}, #{meta}, #{uid})")
+    @Insert("INSERT INTO `message_log`(`content`, `meta`, `uid`) VALUES (#{content}, #{meta}, #{uid})")
     int InsertMessageLog(@Param("content") String content, @Param("meta") String meta, @Param("uid") long uid);
 }
