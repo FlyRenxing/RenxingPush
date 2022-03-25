@@ -5,19 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>top.imzdx</groupId>
     <artifactId>qqpush</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.3</version>
     <packaging>jar</packaging>
     <properties>
-        <mirai-core-jvm.version>2.9.2</mirai-core-jvm.version>
-        <spring.version>2.6.1</spring.version>
-        <cn.hutool.version>5.7.20</cn.hutool.version>
-        <mysql.jdbc.version>8.0.26</mysql.jdbc.version>
-        <validator.version>7.0.1.Final</validator.version>
+        <mirai-core-jvm.version>2.10.0</mirai-core-jvm.version>
+        <spring.version>2.6.4</spring.version>
+        <cn.hutool.version>5.7.22</cn.hutool.version>
+        <mysql.jdbc.version>8.0.28</mysql.jdbc.version>
+        <validator.version>7.0.3.Final</validator.version>
         <lombok.version>1.18.22</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
-        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.6.0</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
+        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.6.10</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
         <fastjson.version>1.2.79</fastjson.version>
-        <mybatis.version>2.2.1</mybatis.version>
+        <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>2.0.2</jakarta.validation.version>
     </properties>
     <dependencies>
