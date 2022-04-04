@@ -39,7 +39,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
+      with:
+        java-version: '17.0.2'
+        distribution: 'temurin'
+        cache: maven
+      
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
