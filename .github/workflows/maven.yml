@@ -26,5 +26,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - uses: actions/upload-artifact@v3
       with:
-        name: my-artifact
+        name: RenxingPush-JAR
         path: ./target/*.jar
