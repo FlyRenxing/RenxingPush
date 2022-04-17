@@ -22,7 +22,7 @@
 
 1. 导入sql目录下的数据文件
 2. 注册个QQ小号，添加到数据库里
-3. 通过修改`application.properties` 配置数据库相关信息，Maven编译或使用预编译发布版本运行。
+3. 通过修改`application.yml` 配置数据库相关信息，Maven编译或使用预编译发布版本运行。
 4. 查看Controller包或阅读 [文档（可能不是最新）](/doc/API文档.md) 进行使用
    1. 注册接口 post /user/register
    2. 查看数据库内你刚刚注册账号的`cipher`
