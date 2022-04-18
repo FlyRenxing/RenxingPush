@@ -20,13 +20,17 @@
 
 ## 如何使用
 
+**注意：本项目要求最低JDK版本为17**
+
 1. 导入sql目录下的数据文件
 2. 注册个QQ小号，添加到数据库里
-3. 通过修改`application.yml` 配置数据库相关信息，Maven编译或使用预编译发布版本运行。
+3. 通过修改`application.yml` 配置数据库相关信息，通过Maven自行编译或使用预编译发布版本运行(Releases页版本可能不是最新，最新预编译版本可在[Actions](https://github.com/FlyRenxing/RenxingPush/actions)中的`Java CI with Maven`工作流程中的`Artifacts`工件列表内下载)。
 4. 查看Controller包或阅读 [文档（可能不是最新）](/doc/API文档.md) 进行使用
    1. 注册接口 post /user/register
    2. 查看数据库内你刚刚注册账号的`cipher`
    3. 发送消息接口post /msg/send/`你的cipher`
+
+若登录出现问题请参阅 [mirai登录文档](https://docs.mirai.mamoe.net/Bots.html#_2-%E7%99%BB%E5%BD%95)
 
 ## 声明
 
