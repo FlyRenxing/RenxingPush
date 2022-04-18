@@ -29,6 +29,7 @@ jobs:
       
     - name: Move sql and settings
       run: |
+        mkdir ./out
         mv ./target/*.jar ./out
         mv ./sql/*.sql ./out
         mv ./src/main/resources/*.yml ./out
@@ -36,5 +37,5 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: RenxingPush-JAR
-        path: ./out/*
+        path: ./out/
           
