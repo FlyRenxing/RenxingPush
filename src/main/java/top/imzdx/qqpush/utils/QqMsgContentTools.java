@@ -7,10 +7,12 @@ import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Message;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,19 +33,11 @@ public class QqMsgContentTools {
         return chainBuilder.build();
     }
 
-    public QqMsgContentTools() {
-        ClassPathResource classPathResource = new ClassPathResource("static/敏感词.txt");
-        File file = null;
-        try {
-            file = classPathResource.getFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FileReader fileReader = new FileReader(file);
-        List<String> list = fileReader.readLines();
-        for (String s : list) {
-            badWord.addWord(Base64Decoder.decodeStr(s));
-        }
+    public QqMsgContentTools() throws IOException {
+
+        Resource resource = new ClassPathResource("static/badWord.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+        br.lines().forEach(s -> badWord.addWord(Base64Decoder.decodeStr(s)));
     }
 
     private void buildFace(String content, MessageChainBuilder chainBuilder) {
@@ -92,4 +86,5 @@ public class QqMsgContentTools {
             throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll);
         }
     }
+
 }
