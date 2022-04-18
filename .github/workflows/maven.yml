@@ -29,9 +29,9 @@ jobs:
       
     - name: Move sql and settings
       run: |
-        mv ./target/*.jar ./out/*.jar
-        mv ./sql/*.sql ./out/*.sql
-        mv ./src/main/resources/*.yml ./out/*.yml
+        mv ./target/*.jar ./out
+        mv ./sql/*.sql ./out
+        mv ./src/main/resources/*.yml ./out
       
     - uses: actions/upload-artifact@v3
       with:
