@@ -27,4 +27,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: RenxingPush-JAR
-        path: ./target/*.jar
+        path: |
+          ./target/*.jar
+          ./sql/renxing_push.sql
+          ./src/main/resources/application.yml
