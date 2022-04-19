@@ -181,13 +181,13 @@ public class GeetestLib {
 			String param = "gt=" + this.captchaId + "&json_format=" + this.json_format;
 
 			if (userId != null) {
-				param = param + "&user_id=" + URLEncoder.encode(userId, "utf-8");
+				param = param + "&user_id=" + URLEncoder.encode(userId, StandardCharsets.UTF_8);
 			}
 			if (clientType != null) {
-				param = param + "&client_type=" + URLEncoder.encode(clientType, "utf-8");
+				param = param + "&client_type=" + URLEncoder.encode(clientType, StandardCharsets.UTF_8);
 			}
 			if (ipAddress != null) {
-				param = param + "&ip_address=" + URLEncoder.encode(ipAddress, "utf-8");
+				param = param + "&ip_address=" + URLEncoder.encode(ipAddress, StandardCharsets.UTF_8);
 			}
 
 			gtlog("GET_URL:" + getUrl + param);
@@ -302,13 +302,13 @@ public class GeetestLib {
 		String param = String.format(
 				"challenge=%s&validate=%s&seccode=%s&json_format=%s", challenge, validate, seccode, this.json_format);
 		if (userId != null) {
-			param = param + "&user_id=" + URLEncoder.encode(userId, "utf-8");
+			param = param + "&user_id=" + URLEncoder.encode(userId, StandardCharsets.UTF_8);
 		}
 		if (clientType != null) {
-			param = param + "&client_type=" + URLEncoder.encode(clientType, "utf-8");
+			param = param + "&client_type=" + URLEncoder.encode(clientType, StandardCharsets.UTF_8);
 		}
 		if (ipAddress != null) {
-			param = param + "&ip_address=" + URLEncoder.encode(ipAddress, "utf-8");
+			param = param + "&ip_address=" + URLEncoder.encode(ipAddress, StandardCharsets.UTF_8);
 		}
 		gtlog("param:" + param);
 		String response = "";

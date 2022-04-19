@@ -34,25 +34,25 @@ public class SystemController {
     @GetMapping("qqbotlist")
     @Operation(summary = "获取机器人公开列表")
     public Result<List<QqInfo>> getQQBotPublicList() {
-        return new Result<List<QqInfo>>("ok", systemService.getPublicQqBot());
+        return new Result<>("ok", systemService.getPublicQqBot());
     }
 
     @GetMapping("note")
     @Operation(summary = "获取所有公告")
     public Result<List<Note>> getAllNote() {
-        return new Result<List<Note>>("ok", systemService.getAllNote());
+        return new Result<>("ok", systemService.getAllNote());
     }
 
     @GetMapping("geetest")
     @Operation(summary = "生成Geetest极验验证码")
     public Result<String> generateCaptcha(HttpServletRequest request) {
-        return new Result<String>("ok", systemService.generateCaptcha(request));
+        return new Result<>("ok", systemService.generateCaptcha(request));
     }
 
     @GetMapping("qqUrl")
     @Operation(summary = "获取QQ登录URL")
     public Result<String> getQQUrl() {
-        return new Result<String>("ok", qqConnection.getUrl());
+        return new Result<>("ok", qqConnection.getUrl());
     }
 
 }

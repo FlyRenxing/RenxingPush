@@ -20,11 +20,10 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 如果不是映射到方法直接通过
-        if (!(handler instanceof HandlerMethod)) {
+        if (!(handler instanceof HandlerMethod handlerMethod)) {
             return true;
         }
         // ①:START 方法注解级拦截器
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         // 判断接口是否需要登录
         AdminRequired methodAnnotation = method.getAnnotation(AdminRequired.class);

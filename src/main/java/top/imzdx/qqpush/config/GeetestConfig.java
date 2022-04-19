@@ -12,8 +12,8 @@ public class GeetestConfig {
     @SuppressWarnings("FieldCanBeLocal")
     private final boolean newfailback = true;
     // 填入自己的captcha_id和private_key
-    private String geetest_id;
-    private String geetest_key;
+    private final String geetest_id;
+    private final String geetest_key;
 
     public GeetestConfig(@Value("${geetest.id}") String geetest_id, @Value("${geetest.key}") String geetest_key) {
         this.geetest_id = geetest_id;

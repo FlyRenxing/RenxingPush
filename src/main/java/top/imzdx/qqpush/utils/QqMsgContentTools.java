@@ -1,7 +1,6 @@
 package top.imzdx.qqpush.utils;
 
 import cn.hutool.core.codec.Base64Decoder;
-import cn.hutool.core.io.file.FileReader;
 import cn.hutool.dfa.WordTree;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Message;
@@ -9,10 +8,10 @@ import net.mamoe.mirai.message.data.MessageChainBuilder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
-import java.io.*;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

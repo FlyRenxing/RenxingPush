@@ -37,8 +37,8 @@ public class Result<T> implements Serializable {
      * @param e
      * @return
      */
-    public static Result<Void> defineError(String e) {
-        return new Result(false, e, null);
+    public static Result<String> defineError(String e) {
+        return new Result<>(false, e, null);
     }
 
     /**
@@ -47,7 +47,7 @@ public class Result<T> implements Serializable {
      * @param e
      * @return
      */
-    public static Result<Void> otherError(Exception e) {
-        return new Result(false, "未知异常！信息：" + e.getMessage(), null);
+    public static Result<String> otherError(Exception e) {
+        return new Result<>(false, "未知异常！信息：" + e.getMessage(), null);
     }
 }

@@ -34,7 +34,7 @@ public class AuthTools {
 
     public static String getIpAddr(HttpServletRequest request) {
         final String UNKNOWN = "unknown";
-        String ipAddress = null;
+        String ipAddress;
         try {
             ipAddress = request.getHeader("x-forwarded-for");
             if (ipAddress == null || ipAddress.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddress)) {
