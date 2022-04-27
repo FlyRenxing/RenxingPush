@@ -7,11 +7,6 @@ geetest:
   id: 43dd89d811fac495147fac164b7bc35e
   key: e6e7c653f658073aaff9bdebe7d7097b
   open: false
-#mybatis:
-#  configuration:
-#    map-underscore-to-camel-case: true
-#  mapper-locations: classpath:mappers/*xml
-#  type-aliases-package: top.imzdx.qqmsg.model.po
 qq:
   QQAPPID: 101970969
   QQAPPKEY: 22f8858b98c5b71d49aaa0ce761d172c
@@ -26,14 +21,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
     password: renxing
-    url: jdbc:mysql://localhost:3306/renxing_push2?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/renxing_push?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: renxing
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  profiles:
-    active: dev
+  #  因为暂时禁用了Swagger所以可以取消该注释
+  #  mvc:
+  #    pathmatch:
+  #      matching-strategy: ant_path_matcher
+  config:
+    activate:
+      on-profile: dev
