@@ -4,22 +4,19 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.interceptor.AdminRequired;
-import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
-import top.imzdx.qqpush.model.po.QqInfo;
-import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
-import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QQConnection;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -42,7 +39,7 @@ public class SystemController {
 
     @GetMapping("qqbotlist")
     @Operation(summary = "获取机器人公开列表")
-    public Result<List<QqInfo>> getQQBotPublicList() {
+    public Result<List<QQInfo>> getQQBotPublicList() {
         return new Result<>("ok", systemService.getPublicQqBot());
     }
 
@@ -70,7 +67,7 @@ public class SystemController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "qqGroupWhitelist", value = "一条白名单", dataTypeClass = QQGroupWhitelist.class)
     })
-    public Result<Boolean> insertQQGroupWhitelist(@RequestBody QQGroupWhitelist qqGroupWhitelist) {
+    public Result<QQGroupWhitelist> insertQQGroupWhitelist(@RequestBody QQGroupWhitelist qqGroupWhitelist) {
         if (userService.findUserById(qqGroupWhitelist.getUserId()) == null) {
             throw new DefinitionException("用户不存在");
         }

@@ -4,16 +4,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.dto.Msg;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.MsgServiceContext;
 import top.imzdx.qqpush.utils.DefinitionException;
 
-import jakarta.validation.Valid;
+import java.util.Optional;
 
 
 /**
@@ -40,9 +41,9 @@ public class MsgController {
             @ApiImplicitParam(name = "msg", value = "消息类", dataTypeClass = String.class)
     })
     public Result<Void> send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
-        User user = userDao.findUserByCipher(cipher);
-        if (user != null) {
-            msgServiceContext.getMsgService(msg.getMeta().getType()).sendMsg(user, msg);
+        Optional<User> user = userDao.findByCipher(cipher);
+        if (user.isPresent()) {
+            msgServiceContext.getMsgService(msg.getMeta().getType()).sendMsg(user.get(), msg);
             return new Result<>("ok", null);
         }
         throw new DefinitionException("Key错误");

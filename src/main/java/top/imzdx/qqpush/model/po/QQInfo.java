@@ -3,10 +3,20 @@ package top.imzdx.qqpush.model.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import lombok.experimental.Accessors;
 
-@Data
-public class QqInfo {
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor // 自动所有参数的构造方法方法
+@NoArgsConstructor // 自动无参的构造方法方法
+@Builder
+@Accessors(chain = true)
+public class QQInfo {
+    @Id
     @Schema(description = "QQ号")
     private Long number;
     @JsonIgnore
@@ -15,9 +25,8 @@ public class QqInfo {
     @Schema(description = "QQ昵称")
     private String name;
     @Schema(description = "在线状态")
-    private Long state;
+    private Integer state;
     @Schema(description = "备注")
     private String remarks;
-
 
 }

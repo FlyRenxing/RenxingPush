@@ -5,14 +5,16 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.imzdx.qqpush.dao.MessageLogDao;
-import top.imzdx.qqpush.dao.QQGroupWhitelistDao;
-import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.dto.Msg;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.MessageLogDao;
+import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
+import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QqMsgContentTools;
+
+import java.util.Optional;
 
 
 /**
@@ -49,11 +51,11 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
     }
 
     private void testAuthority(User user, Long qqGroup) {
-        QQGroupWhitelist group = qqGroupWhitelistDao.findGroupByNumber(qqGroup);
-        if (group == null) {
+        Optional<QQGroupWhitelist> optional = qqGroupWhitelistDao.findById(qqGroup);
+        if (optional.isEmpty()) {
             throw new DefinitionException("该群不在白名单中");
         }
-        if (!user.getUid().equals(group.getUserId())) {
+        if (!user.getUid().equals(optional.get().getUserId())) {
             throw new DefinitionException("您没有权限发送消息");
         }
     }

@@ -1,13 +1,13 @@
 package top.imzdx.qqpush.utils;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.UserDao;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Objects;
@@ -74,6 +74,18 @@ public class AuthTools {
         }
     }
 
+    public static User getUser() {
+        Long uid = (Long) getHttpServletRequest().getSession().getAttribute("uid");
+        if (uid == null) {
+            throw new DefinitionException("当前未登录");
+        }
+        return userDao.findById(uid).orElseThrow((() -> new DefinitionException("账户不存在")));
+    }
+
+    public static HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
     public String generateCipher(int digit) {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
@@ -82,22 +94,9 @@ public class AuthTools {
             int number = random.nextInt(62);
             sb.append(str.charAt(number));
         }
-        if (userDao.findUserByCipher(sb.toString()) != null) {
+        if (userDao.findByCipher(sb.toString()).isPresent()) {
             return generateCipher(digit);
         }
         return sb.toString();
-    }
-
-    public static HttpServletRequest getHttpServletRequest() {
-        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-    }
-
-
-    public static User getUser() {
-        Long uid = (Long) getHttpServletRequest().getSession().getAttribute("uid");
-        if (uid == null) {
-            throw new DefinitionException("当前未登录");
-        }
-        return userDao.findUserById(uid);
     }
 }

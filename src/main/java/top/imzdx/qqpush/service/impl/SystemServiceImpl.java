@@ -1,20 +1,20 @@
 package top.imzdx.qqpush.service.impl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.config.GeetestConfig;
-import top.imzdx.qqpush.dao.NoteDao;
-import top.imzdx.qqpush.dao.QQGroupWhitelistDao;
-import top.imzdx.qqpush.dao.QQInfoDao;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
-import top.imzdx.qqpush.model.po.QqInfo;
+import top.imzdx.qqpush.model.po.QQInfo;
+import top.imzdx.qqpush.repository.NoteDao;
+import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
+import top.imzdx.qqpush.repository.QQInfoDao;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.GeetestLib;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +38,13 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
-    public List<QqInfo> getPublicQqBot() {
+    public List<QQInfo> getPublicQqBot() {
         return qqInfoDao.findAll();
     }
 
     @Override
     public List<Note> getAllNote() {
-        return noteDao.findAllNote();
+        return noteDao.findAll();
     }
 
     @Override
@@ -89,8 +89,8 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
-    public Boolean insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist) {
-        return qqGroupWhitelistDao.insert(qqGroupWhitelist);
+    public QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist) {
+        return qqGroupWhitelistDao.save(qqGroupWhitelist);
     }
 
     public HashMap<String, String> getCaptchaParams(HttpServletRequest request) {

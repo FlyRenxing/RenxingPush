@@ -19,7 +19,7 @@ public interface UserService {
 
     User findUserByOpenid(String openid);
 
-    boolean setQQBot(long uid, long number);
+    boolean setQQBot(User user, long number);
 
     int selectToDayUserUseCount(long uid);
 

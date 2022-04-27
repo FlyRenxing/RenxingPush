@@ -11,8 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import top.imzdx.qqpush.dao.QQInfoDao;
-import top.imzdx.qqpush.model.po.QqInfo;
+import top.imzdx.qqpush.model.po.QQInfo;
+import top.imzdx.qqpush.repository.QQInfoDao;
 
 import java.io.File;
 import java.util.List;
@@ -26,9 +26,9 @@ public class AppRunner implements ApplicationRunner {
         ApplicationContext appContext = SpringUtil.getApplicationContext();
         QQInfoDao qqInfoDao = (QQInfoDao) appContext.getBean("QQInfoDao");
         //所有账号登陆
-        List<QqInfo> qqInfoList = qqInfoDao.findAll();
-        for (QqInfo item :
-                qqInfoList) {
+        List<QQInfo> QQInfoList = qqInfoDao.findAll();
+        for (QQInfo item :
+                QQInfoList) {
             try {
                 BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
                         new BotConfiguration() {{
@@ -36,10 +36,11 @@ public class AppRunner implements ApplicationRunner {
 //                            setProtocol(MiraiProtocol.ANDROID_WATCH);
                             fileBasedDeviceInfo();
                         }}).login();
-                qqInfoDao.updateState(item.getNumber(), 1);
+                item.setState(1);
             } catch (Exception e) {
-                qqInfoDao.updateState(item.getNumber(), 0);
+                item.setState(0);
             }
+            qqInfoDao.save(item);
         }
         /**
          * 修复当机器人账号设置为允许任何人添加好友时，

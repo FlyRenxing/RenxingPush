@@ -5,10 +5,11 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.imzdx.qqpush.dao.MessageLogDao;
-import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.dto.Msg;
+import top.imzdx.qqpush.model.po.MessageLog;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.MessageLogDao;
+import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.MsgService;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QqMsgContentTools;
@@ -52,15 +53,19 @@ public class QQMsgServiceImpl implements MsgService {
 
     @Override
     public void saveMsgToDB(Msg msg, long uid) {
-        messageLogDao.InsertMessageLog(msg.getContent(), JSONObject.toJSONString(msg.getMeta()), uid);
+        MessageLog messageLog = new MessageLog()
+                .setContent(msg.getContent())
+                .setMeta(JSONObject.toJSONString(msg.getMeta()))
+                .setUid(uid);
+        messageLogDao.save(messageLog);
     }
 
     void riskControl(User user) {
         long dayMaxSendCount = user.getDayMaxSendCount();
-        if (userDao.selectToDayUserUseCount(user.getUid()) >= dayMaxSendCount) {
+        if (userDao.getTodayUseCount(user.getUid()) >= dayMaxSendCount) {
             throw new DefinitionException("您当日消息已达到" + dayMaxSendCount + "条，请明日再试。");
         }
-        if (userDao.selectThreeSecondUserUseCount(user.getUid()) >= 3) {
+        if (userDao.getLastThreeSecondUseCount(user.getUid()) >= 3) {
             throw new DefinitionException("发送消息过于频繁，请三秒后再试。");
         }
     }

@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import top.imzdx.qqpush.dao.QQInfoDao;
-import top.imzdx.qqpush.dao.UserDao;
-import top.imzdx.qqpush.model.po.QqInfo;
+import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.QQInfoDao;
+import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
@@ -43,13 +43,10 @@ public class UserServiceImpl implements UserService {
                 .setCipher(authTools.generateCipher(digit))
                 .setDayMaxSendCount(dayMaxSendCount)
                 .setConfig(new JSONObject() {{
-                    put("qq_bot", qqInfoDao.getFirst().getNumber());
+                    put("qq_bot", qqInfoDao.findFirstBy().orElse(new QQInfo().setNumber(0L)).getNumber());
                 }}.toJSONString());
-        int i = userDao.insertUser(user);
-        if (i == 1) {
-            return true;
-        }
-        return false;
+        userDao.save(user);
+        return true;
     }
 
     @Override
@@ -61,58 +58,49 @@ public class UserServiceImpl implements UserService {
                 .setDayMaxSendCount(dayMaxSendCount)
                 .setOpenid(openid)
                 .setConfig(new JSONObject() {{
-                    put("qq_bot", qqInfoDao.getFirst().getNumber());
+                    put("qq_bot", qqInfoDao.findFirstBy().orElse(new QQInfo().setNumber(0L)).getNumber());
                 }}.toJSONString());
-        int i = userDao.insertUser(user);
-        if (i == 1) {
-            return true;
-        }
-        return false;
+        userDao.save(user);
+        return true;
     }
 
     @Override
     public String refreshCipher(String userName) {
         String newCipher = authTools.generateCipher(digit);
-        User user = userDao.findUserByName(userName);
+        User user = userDao.findByName(userName).orElseThrow(() -> new DefinitionException("用户不存在"));
         user.setCipher(newCipher);
-        if (userDao.updateUser(user) == 1) {
-            return newCipher;
-        }
-        throw new DefinitionException("没有成功更新，请退出登录后重试");
+        userDao.save(user);
+        return newCipher;
     }
 
     @Override
     public User findUserByName(String name) {
-        return userDao.findUserByName(name);
+        return userDao.findByName(name).orElseThrow(() -> new DefinitionException("用户不存在"));
     }
 
     @Override
     public User findUserById(Long id) {
-        return userDao.findUserById(id);
+        return userDao.findById(id).orElseThrow(() -> new DefinitionException("用户不存在"));
     }
 
     @Override
     public User findUserByOpenid(String openid) {
-        return userDao.findUserByOpenid(openid);
+        return userDao.findByOpenid(openid).orElseThrow(() -> new DefinitionException("用户不存在"));
     }
 
     @Override
-    public boolean setQQBot(long uid, long number) {
-        QqInfo qqInfo = qqInfoDao.findInfoByNumber(number);
-        if (qqInfo == null) {
-            throw new DefinitionException("所选机器人不在服务列表内，请更换机器人");
-        }
-        User user = userDao.findUserByUid(uid);
+    public boolean setQQBot(User user, long number) {
+        QQInfo qqInfo = qqInfoDao.findByNumber(number).orElseThrow(() -> new DefinitionException("所选机器人不在服务列表内，请更换机器人"));
         JSONObject config = JSONObject.parseObject(user.getConfig());
         config.put("qq_bot", number);
         user.setConfig(config.toJSONString());
-        userDao.updateUser(user);
+        userDao.save(user);
         return true;
     }
 
     @Override
     public int selectToDayUserUseCount(long uid) {
-        return userDao.selectToDayUserUseCount(uid);
+        return userDao.getTodayUseCount(uid);
     }
 
 

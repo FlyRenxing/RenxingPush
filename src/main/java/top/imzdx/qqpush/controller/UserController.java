@@ -5,24 +5,24 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.User;
+import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QQConnection;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import java.io.IOException;
 
 /**
@@ -169,7 +169,7 @@ public class UserController {
     public Result<User> updateQQBot(HttpServletRequest request,
                                     @RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
         User user = AuthTools.getUser();
-        userService.setQQBot(user.getUid(), number);
+        userService.setQQBot(user, number);
         user = userService.findUserByName(user.getName());
         request.getSession().setAttribute("user", user);
         return new Result<>("ok", user);

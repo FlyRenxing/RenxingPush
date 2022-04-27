@@ -2,12 +2,11 @@ package top.imzdx.qqpush.model.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -23,4 +22,5 @@ public class Msg implements Serializable {
     @Valid
     @Schema(description = "消息元数据")
     private MsgMeta meta;
+
 }

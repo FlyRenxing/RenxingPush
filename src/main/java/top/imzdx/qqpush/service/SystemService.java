@@ -1,10 +1,10 @@
 package top.imzdx.qqpush.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
-import top.imzdx.qqpush.model.po.QqInfo;
+import top.imzdx.qqpush.model.po.QQInfo;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface SystemService {
 
-    List<QqInfo> getPublicQqBot();
+    List<QQInfo> getPublicQqBot();
 
     List<Note> getAllNote();
 
@@ -20,5 +20,5 @@ public interface SystemService {
 
     boolean checkCaptcha(HttpServletRequest request);
 
-    Boolean insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist);
+    QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist);
 }
