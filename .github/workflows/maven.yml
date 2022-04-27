@@ -36,5 +36,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: RenxingPush-JAR
-        path: ./out/
+          path: ./out/
 
