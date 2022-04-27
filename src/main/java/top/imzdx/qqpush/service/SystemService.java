@@ -1,6 +1,7 @@
 package top.imzdx.qqpush.service;
 
 import top.imzdx.qqpush.model.po.Note;
+import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.QqInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,4 +19,6 @@ public interface SystemService {
     String generateCaptcha(HttpServletRequest request);
 
     boolean checkCaptcha(HttpServletRequest request);
+
+    Boolean insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist);
 }

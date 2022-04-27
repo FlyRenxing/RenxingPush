@@ -4,13 +4,14 @@ import cn.hutool.extra.spring.SpringUtil;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
+import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import top.imzdx.qqpush.dao.QqInfoDao;
+import top.imzdx.qqpush.dao.QQInfoDao;
 import top.imzdx.qqpush.model.po.QqInfo;
 
 import java.io.File;
@@ -21,9 +22,9 @@ import java.util.List;
  */
 @Component
 public class AppRunner implements ApplicationRunner {
-    public static void botLogin() {
+    public static void qqInit() {
         ApplicationContext appContext = SpringUtil.getApplicationContext();
-        QqInfoDao qqInfoDao = (QqInfoDao) appContext.getBean("qqInfoDao");
+        QQInfoDao qqInfoDao = (QQInfoDao) appContext.getBean("QQInfoDao");
         //所有账号登陆
         List<QqInfo> qqInfoList = qqInfoDao.findAll();
         for (QqInfo item :
@@ -45,12 +46,15 @@ public class AppRunner implements ApplicationRunner {
          * mirai的联系人缓存机制会导致Bot.getFriends()抛出异常无法找到新添加的好友。
          * 现使用好友监听功能，由机器人接管同意请求
          */
-        Listener<NewFriendRequestEvent> listener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
-        listener.start();
+        Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
+        qqListener.start();
+
+        Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, BotInvitedJoinGroupRequestEvent::accept);
+        qqGroupListener.start();
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        botLogin();
+        qqInit();
     }
 }

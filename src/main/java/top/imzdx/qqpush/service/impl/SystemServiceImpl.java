@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.config.GeetestConfig;
 import top.imzdx.qqpush.dao.NoteDao;
-import top.imzdx.qqpush.dao.QqInfoDao;
+import top.imzdx.qqpush.dao.QQGroupWhitelistDao;
+import top.imzdx.qqpush.dao.QQInfoDao;
 import top.imzdx.qqpush.model.po.Note;
+import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.QqInfo;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.utils.AuthTools;
@@ -22,13 +24,15 @@ import java.util.List;
  */
 @Service
 public class SystemServiceImpl implements SystemService {
-    QqInfoDao qqInfoDao;
+    QQInfoDao qqInfoDao;
+    QQGroupWhitelistDao qqGroupWhitelistDao;
     NoteDao noteDao;
     GeetestConfig geetestConfig;
 
     @Autowired
-    public SystemServiceImpl(QqInfoDao qqInfoDao, NoteDao noteDao, GeetestConfig geetestConfig) {
+    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, NoteDao noteDao, GeetestConfig geetestConfig) {
         this.qqInfoDao = qqInfoDao;
+        this.qqGroupWhitelistDao = qqGroupWhitelistDao;
         this.noteDao = noteDao;
         this.geetestConfig = geetestConfig;
     }
@@ -82,6 +86,11 @@ public class SystemServiceImpl implements SystemService {
         } else {
             throw new DefinitionException("行为验证失败，请检查使用环境");
         }
+    }
+
+    @Override
+    public Boolean insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist) {
+        return qqGroupWhitelistDao.insert(qqGroupWhitelist);
     }
 
     public HashMap<String, String> getCaptchaParams(HttpServletRequest request) {

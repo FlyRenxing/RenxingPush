@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import top.imzdx.qqpush.dao.QqInfoDao;
+import top.imzdx.qqpush.dao.QQInfoDao;
 import top.imzdx.qqpush.dao.UserDao;
 import top.imzdx.qqpush.model.po.QqInfo;
 import top.imzdx.qqpush.model.po.User;
@@ -18,14 +18,14 @@ import top.imzdx.qqpush.utils.DefinitionException;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    QqInfoDao qqInfoDao;
+    QQInfoDao qqInfoDao;
     UserDao userDao;
     AuthTools authTools;
     long dayMaxSendCount;
     int digit;
 
     @Autowired
-    public UserServiceImpl(QqInfoDao qqInfoDao, UserDao userDao, AuthTools authTools,
+    public UserServiceImpl(QQInfoDao qqInfoDao, UserDao userDao, AuthTools authTools,
                            @Value("${app.user.default.day-max-send-count}") long dayMaxSendCount,
                            @Value("${app.user.default.cipher-digit}") int digit) {
         this.qqInfoDao = qqInfoDao;
@@ -84,6 +84,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByName(String name) {
         return userDao.findUserByName(name);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userDao.findUserById(id);
     }
 
     @Override

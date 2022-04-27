@@ -1,15 +1,22 @@
 package top.imzdx.qqpush.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import top.imzdx.qqpush.interceptor.AdminRequired;
+import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.Note;
+import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.QqInfo;
+import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.SystemService;
+import top.imzdx.qqpush.service.UserService;
+import top.imzdx.qqpush.utils.AuthTools;
+import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QQConnection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +30,13 @@ import java.util.List;
 @Api(tags = "系统类")
 public class SystemController {
     SystemService systemService;
+    UserService userService;
     QQConnection qqConnection;
 
     @Autowired
-    public SystemController(SystemService systemService, QQConnection qqConnection) {
+    public SystemController(SystemService systemService,UserService userService, QQConnection qqConnection) {
         this.systemService = systemService;
+        this.userService = userService;
         this.qqConnection = qqConnection;
     }
 
@@ -53,6 +62,19 @@ public class SystemController {
     @Operation(summary = "获取QQ登录URL")
     public Result<String> getQQUrl() {
         return new Result<>("ok", qqConnection.getUrl());
+    }
+
+    @PostMapping("qqGroupWhitelist")
+    @AdminRequired
+    @Operation(summary = "添加QQ群白名单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "qqGroupWhitelist", value = "一条白名单", dataTypeClass = QQGroupWhitelist.class)
+    })
+    public Result<Boolean> insertQQGroupWhitelist(@RequestBody QQGroupWhitelist qqGroupWhitelist) {
+        if (userService.findUserById(qqGroupWhitelist.getUserId()) == null) {
+            throw new DefinitionException("用户不存在");
+        }
+        return new Result<>("ok", systemService.insertQQGroupWhitelist(qqGroupWhitelist));
     }
 
 }

@@ -13,7 +13,8 @@ import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.service.MsgServiceContext;
 import top.imzdx.qqpush.utils.DefinitionException;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
+
 
 /**
  * @author Renxing

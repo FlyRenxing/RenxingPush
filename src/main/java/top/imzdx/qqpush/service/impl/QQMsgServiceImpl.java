@@ -55,7 +55,7 @@ public class QQMsgServiceImpl implements MsgService {
         messageLogDao.InsertMessageLog(msg.getContent(), JSONObject.toJSONString(msg.getMeta()), uid);
     }
 
-    private void riskControl(User user) {
+    void riskControl(User user) {
         long dayMaxSendCount = user.getDayMaxSendCount();
         if (userDao.selectToDayUserUseCount(user.getUid()) >= dayMaxSendCount) {
             throw new DefinitionException("您当日消息已达到" + dayMaxSendCount + "条，请明日再试。");

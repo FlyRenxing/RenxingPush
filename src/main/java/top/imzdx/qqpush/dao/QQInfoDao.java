@@ -12,7 +12,7 @@ import java.util.List;
  * @author Renxing
  */
 @Mapper
-public interface QqInfoDao {
+public interface QQInfoDao {
     @Select("SELECT * FROM qq_info")
     List<QqInfo> findAll();
 
