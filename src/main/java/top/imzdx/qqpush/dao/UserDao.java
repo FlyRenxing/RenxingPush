@@ -13,6 +13,9 @@ public interface UserDao {
     @Select("SELECT * FROM user")
     List<User> findAll();
 
+    @Select("select * from user where uid=#{uid} limit 1")
+    User findUserById(Long uid);
+
     @Select("select * from user where name=#{name} limit 1")
     User findUserByName(String name);
 

@@ -31,8 +31,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (methodAnnotation != null) {
             // 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
             HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            if (user != null) {
+            Long uid = (Long) session.getAttribute("uid");
+            if (uid != null) {
                 return true;
             } else {
                 throw new DefinitionException("当前未登录");

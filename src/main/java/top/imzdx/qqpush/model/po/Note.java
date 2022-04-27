@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Note {
   @Schema(description = "公告ID")
-  private long id;
+  private Long id;
   @Schema(description = "公告内容")
   private String main;
   @Schema(description = "公告在前端显示的颜色")

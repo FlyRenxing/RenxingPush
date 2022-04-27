@@ -60,7 +60,7 @@ public class UserController {
                               @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
         User user = userService.findUserByName(name);
         if (user != null && user.getPassword().equals(password)) {
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("uid", user.getUid());
             return new Result<>("登陆成功", user);
         }
         throw new DefinitionException("账号或密码错误");
@@ -73,8 +73,8 @@ public class UserController {
             @ApiImplicitParam(name = "code", value = "QQ互联返回的code", dataTypeClass = String.class)
     })
     public Result<User> qqLogin(HttpServletRequest request,
-                          HttpServletResponse response,
-                          @RequestParam("code") String code) {
+                                HttpServletResponse response,
+                                @RequestParam("code") String code) {
 //        第三步 获取access token
         String accessToken = qqConnection.getAccessToken(code);
 //        第四步 获取登陆后返回的 openid、appid 以JSON对象形式返回
@@ -86,7 +86,7 @@ public class UserController {
 
         User user = userService.findUserByOpenid(openid);
         if (user != null) {
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("uid", user.getUid());
             try {
                 response.sendRedirect(qqBackUrl);
             } catch (IOException e) {
@@ -102,7 +102,7 @@ public class UserController {
 
             if (userService.register(userName, randomString, openid)) {
                 User newUser = userService.findUserByName(userName);
-                request.getSession().setAttribute("user", newUser);
+                request.getSession().setAttribute("uid", newUser.getUid());
                 try {
                     response.sendRedirect(qqBackUrl);
                 } catch (IOException e) {
@@ -133,7 +133,7 @@ public class UserController {
         }
         if (userService.register(name, password)) {
             User user = userService.findUserByName(name);
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("uid", user.getUid());
             return new Result<>("注册成功", user);
         }
         throw new DefinitionException("注册异常");
@@ -143,7 +143,7 @@ public class UserController {
     @LoginRequired
     @Operation(summary = "重置个人密钥")
     public Result<String> refreshCipher(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = AuthTools.getUser();
         String cipher = userService.refreshCipher(user.getName());
         request.getSession().setAttribute("user", userService.findUserByName(user.getName()));
         return new Result<>("密钥刷新成功", cipher);
@@ -153,7 +153,7 @@ public class UserController {
     @LoginRequired
     @Operation(summary = "获取个人资料")
     public Result<User> getProfile(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = AuthTools.getUser();
         if (user != null) {
             return new Result<>("ok", user);
         }
@@ -168,7 +168,7 @@ public class UserController {
     })
     public Result<User> updateQQBot(HttpServletRequest request,
                                     @RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = AuthTools.getUser();
         userService.setQQBot(user.getUid(), number);
         user = userService.findUserByName(user.getName());
         request.getSession().setAttribute("user", user);
@@ -179,11 +179,8 @@ public class UserController {
     @LoginRequired
     @Operation(summary = "获取当日用户使用次数")
     public Result<Integer> selectToDayUserUseCount(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
-            return new Result<>("ok", userService.selectToDayUserUseCount(user.getUid()));
-        }
-        throw new DefinitionException("当前未登录");
+        User user = AuthTools.getUser();
+        return new Result<>("ok", userService.selectToDayUserUseCount(user.getUid()));
     }
 
 }

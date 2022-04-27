@@ -2,11 +2,15 @@ package top.imzdx.qqpush.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import top.imzdx.qqpush.dao.UserDao;
+import top.imzdx.qqpush.model.po.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -14,11 +18,11 @@ import java.util.Random;
  */
 @Component
 public class AuthTools {
-    UserDao userDao;
+    static UserDao userDao;
 
     @Autowired
     public AuthTools(UserDao userDao) {
-        this.userDao = userDao;
+        AuthTools.userDao = userDao;
     }
 
     public static String generateRandomString(int digit) {
@@ -84,4 +88,16 @@ public class AuthTools {
         return sb.toString();
     }
 
+    public static HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
+
+    public static User getUser() {
+        Long uid = (Long) getHttpServletRequest().getSession().getAttribute("uid");
+        if (uid == null) {
+            throw new DefinitionException("当前未登录");
+        }
+        return userDao.findUserById(uid);
+    }
 }

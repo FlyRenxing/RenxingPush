@@ -8,14 +8,14 @@ import lombok.Data;
 @Data
 public class QqInfo {
     @Schema(description = "QQ号")
-    private long number;
+    private Long number;
     @JsonIgnore
     @Schema(description = "密码")
     private String pwd;
     @Schema(description = "QQ昵称")
     private String name;
     @Schema(description = "在线状态")
-    private long state;
+    private Long state;
     @Schema(description = "备注")
     private String remarks;
 
