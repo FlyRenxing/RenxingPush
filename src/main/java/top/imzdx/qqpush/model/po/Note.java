@@ -1,6 +1,5 @@
 package top.imzdx.qqpush.model.po;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,13 +15,23 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class Note {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
-  @Schema(description = "公告ID")
-  private Long id;
-  @Schema(description = "公告内容")
-  private String main;
-  @Schema(description = "公告在前端显示的颜色")
-  private String color;
+    /**
+     * 公告ID
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
+    private Long id;
+    /**
+     * 公告内容
+     *
+     * @mock 这是公告内容
+     */
+    private String main;
+    /**
+     * 公告在前端显示的颜色
+     *
+     * @mock #ff0000
+     */
+    private String color;
 
 }

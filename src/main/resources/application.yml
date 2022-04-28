@@ -27,10 +27,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  #  因为暂时禁用了Swagger所以可以取消该注释
-  #  mvc:
-  #    pathmatch:
-  #      matching-strategy: ant_path_matcher
   config:
     activate:
       on-profile: dev

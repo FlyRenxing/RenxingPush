@@ -1,10 +1,6 @@
 package top.imzdx.qqpush.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -26,11 +22,12 @@ import top.imzdx.qqpush.utils.QQConnection;
 import java.io.IOException;
 
 /**
+ * 用户相关
+ *
  * @author Renxing
  */
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户管理")
 public class UserController {
     UserDao userDao;
     UserService userService;
@@ -49,12 +46,15 @@ public class UserController {
         this.qqBackUrl = qqBackUrl;
     }
 
+    /**
+     * 用户管理
+     *
+     * @param request  请求
+     * @param name     用户名
+     * @param password 密码
+     * @return
+     */
     @PostMapping("/login")
-    @Operation(summary = "登录")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户名", dataTypeClass = String.class),
-            @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
-    })
     public Result<User> login(HttpServletRequest request,
                               @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
                               @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
@@ -66,12 +66,16 @@ public class UserController {
         throw new DefinitionException("账号或密码错误");
     }
 
+    /**
+     * QQ登录回调
+     *
+     * @param request  请求
+     * @param response 相应
+     * @param code     qq互联返回的code
+     * @return
+     */
     @GetMapping("/qqLogin")
     @CrossOrigin
-    @Operation(summary = "QQ登录回调")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "code", value = "QQ互联返回的code", dataTypeClass = String.class)
-    })
     public Result<User> qqLogin(HttpServletRequest request,
                                 HttpServletResponse response,
                                 @RequestParam("code") String code) {
@@ -114,12 +118,16 @@ public class UserController {
         throw new DefinitionException("QQ互联认证失败");
     }
 
+    /**
+     * 注册
+     *
+     * @param request  请求
+     * @param name     用户名
+     * @param password 密码
+     * @return
+     * @apiNote 当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数
+     */
     @PostMapping("/register")
-    @Operation(summary = "注册", description = "当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户名", dataTypeClass = String.class),
-            @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
-    })
     public Result<User> register(HttpServletRequest request,
                                  @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
                                  @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password) {
@@ -139,20 +147,27 @@ public class UserController {
         throw new DefinitionException("注册异常");
     }
 
+    /**
+     * 重置个人密钥
+     *
+     * @return
+     */
     @GetMapping("/refreshCipher")
     @LoginRequired
-    @Operation(summary = "重置个人密钥")
-    public Result<String> refreshCipher(HttpServletRequest request) {
+    public Result<String> refreshCipher() {
         User user = AuthTools.getUser();
         String cipher = userService.refreshCipher(user.getName());
-        request.getSession().setAttribute("user", userService.findUserByName(user.getName()));
         return new Result<>("密钥刷新成功", cipher);
     }
 
+    /**
+     * 获取个人资料
+     *
+     * @return
+     */
     @GetMapping("/profile")
     @LoginRequired
-    @Operation(summary = "获取个人资料")
-    public Result<User> getProfile(HttpServletRequest request) {
+    public Result<User> getProfile() {
         User user = AuthTools.getUser();
         if (user != null) {
             return new Result<>("ok", user);
@@ -160,25 +175,29 @@ public class UserController {
         throw new DefinitionException("当前未登录");
     }
 
+    /**
+     * 换绑QQ机器人
+     *
+     * @param number 机器人号码
+     * @return
+     */
     @PostMapping("/qq_bot")
     @LoginRequired
-    @Operation(summary = "换绑QQ机器人")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "number", value = "机器人号码", dataTypeClass = Integer.class)
-    })
-    public Result<User> updateQQBot(HttpServletRequest request,
-                                    @RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
+    public Result<User> updateQQBot(@RequestParam @Valid @Length(min = 6, message = "机器人号码长度需大于6") long number) {
         User user = AuthTools.getUser();
         userService.setQQBot(user, number);
         user = userService.findUserByName(user.getName());
-        request.getSession().setAttribute("user", user);
         return new Result<>("ok", user);
     }
 
+    /**
+     * 获取当日用户使用次数
+     *
+     * @return
+     */
     @GetMapping("/ToDayUseCount")
     @LoginRequired
-    @Operation(summary = "获取当日用户使用次数")
-    public Result<Integer> selectToDayUserUseCount(HttpServletRequest request) {
+    public Result<Integer> selectToDayUserUseCount() {
         User user = AuthTools.getUser();
         return new Result<>("ok", userService.selectToDayUserUseCount(user.getUid()));
     }

@@ -1,6 +1,5 @@
 package top.imzdx.qqpush.model.po;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,20 +19,34 @@ import java.time.LocalDateTime;
 @Builder
 @Accessors(chain = true)
 public class MessageLog {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
-  @Schema(description = "消息ID")
-  private Long id;
-  @Schema(description = "消息内容")
-  private String content;
-  @Schema(description = "消息元数据")
-  private String meta;
-  @Schema(description = "消息对应的用户ID")
-  private Long uid;
-  @CreatedDate
-  @LastModifiedDate
-  @Schema(description = "时间")
-  private LocalDateTime time;
+    /**
+     * 消息ID
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
+    private Long id;
+    /**
+     * 消息内容
+     *
+     * @mock 这是消息内容
+     */
+    private String content;
+    /**
+     * 消息元数据
+     *
+     * @mock {"type": "qq","data": "1277489864"}
+     */
+    private String meta;
+    /**
+     * 消息对应的用户ID
+     */
+    private Long uid;
+    /**
+     * 时间
+     */
+    @CreatedDate
+    @LastModifiedDate
+    private LocalDateTime time;
 
 
 }

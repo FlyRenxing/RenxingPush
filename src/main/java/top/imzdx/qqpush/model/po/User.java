@@ -2,7 +2,6 @@ package top.imzdx.qqpush.model.po;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,25 +19,55 @@ import java.io.Serializable;
 @Builder
 @Accessors(chain = true)
 public class User implements Serializable {
+    /**
+     * 用户ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
-    @Schema(description = "用户ID")
     private Long uid;
-    @Schema(description = "用户名")
+    /**
+     * 用户名
+     *
+     * @mock 这是用户名
+     */
     private String name;
+    /**
+     * 用户密码
+     *
+     * @mock this_id_password
+     */
     @JsonIgnore
-    @Schema(description = "密码")
     private String password;
-    @Schema(description = "是否为管理默认0否")
+    /**
+     * 是否为管理默认0否1是
+     *
+     * @mock 0
+     */
     private Long admin;
-    @Schema(description = "用户配置")
+    /**
+     * 用户配置
+     *
+     * @mock 还没想好这里怎么用=.=
+     */
     private String config;
-    @Schema(description = "用户密钥")
+    /**
+     * 用户密钥
+     *
+     * @mock CH32p41OXu
+     */
     private String cipher;
-    @Schema(description = "每日最大发送次数")
+    /**
+     * 每日最大发送次数
+     *
+     * @mock 200
+     */
     private Long dayMaxSendCount;
+    /**
+     * qq登录接口的openid
+     *
+     * @mock 558B72975E9AB93FCEDE5C0500C9730F
+     */
     @JsonIgnore
-    @Schema(description = "qq登录接口的openid")
     private String openid;
 
 
