@@ -1,6 +1,5 @@
 package top.imzdx.qqpush.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -16,8 +15,6 @@ import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QqMsgContentTools;
-
-import java.util.Optional;
 
 
 /**
@@ -53,15 +50,12 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
         } catch (JsonProcessingException e) {
             throw new DefinitionException("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
-        throw new DefinitionException("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。机器人QQ:" + JSONObject.parseObject(user.getConfig()).getLong("qq_bot"));
+        throw new DefinitionException("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：" + user.getConfig());
     }
 
     private void testAuthority(User user, Long qqGroup) {
-        Optional<QQGroupWhitelist> optional = qqGroupWhitelistDao.findById(qqGroup);
-        if (optional.isEmpty()) {
-            throw new DefinitionException("该群不在白名单中");
-        }
-        if (!user.getUid().equals(optional.get().getUserId())) {
+        QQGroupWhitelist qqGroupWhitelist = qqGroupWhitelistDao.findByNumber(qqGroup).orElseThrow(() -> new DefinitionException("该群不在白名单中"));
+        if (!user.getUid().equals(qqGroupWhitelist.getUserId())) {
             throw new DefinitionException("您没有权限发送消息");
         }
     }

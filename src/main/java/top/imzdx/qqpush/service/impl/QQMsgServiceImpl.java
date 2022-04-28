@@ -1,6 +1,5 @@
 package top.imzdx.qqpush.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -53,15 +52,21 @@ public class QQMsgServiceImpl implements MsgService {
         } catch (JsonProcessingException e) {
             throw new DefinitionException("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
-        throw new DefinitionException("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。QQ:" + JSONObject.parseObject(user.getConfig()).getLong("qq_bot"));
+        throw new DefinitionException("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。");
     }
 
     @Override
     public void saveMsgToDB(Msg msg, long uid) {
-        MessageLog messageLog = new MessageLog()
-                .setContent(msg.getContent())
-                .setMeta(JSONObject.toJSONString(msg.getMeta()))
-                .setUid(uid);
+        ObjectMapper mapper = new ObjectMapper();
+        MessageLog messageLog = null;
+        try {
+            messageLog = new MessageLog()
+                    .setContent(msg.getContent())
+                    .setMeta(mapper.writeValueAsString(msg.getMeta()))
+                    .setUid(uid);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         messageLogDao.save(messageLog);
     }
 

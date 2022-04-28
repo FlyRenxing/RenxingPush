@@ -1,6 +1,7 @@
 package top.imzdx.qqpush.utils;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -55,18 +56,18 @@ public class QQConnection {
     /*
     第四步：根据得到的access token 获取用户的 openID 和 oauth_consumer_key：申请QQ登录成功后，分配给应用的openid(对当前网站应用唯一，可用于检测是否为同一用户的凭证）
      */
-    public JSONObject getUserOpenID(String accessToken) {
-        JSONObject userInfo = new JSONObject();
+    public ObjectNode getUserOpenID(String accessToken) {
         String urlProvideByQQConnection = "https://graph.qq.com/oauth2.0/me";
         String requestUrl = urlProvideByQQConnection + "?access_token=" + accessToken;
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .build();
+        ObjectNode userInfo = null;
         try (Response response = client.newCall(request).execute()) {
             assert response.body() != null;
             String UserInfoString = response.body().string().split(" ")[1];
-            userInfo = JSONObject.parseObject(UserInfoString);
+            userInfo = new ObjectMapper().readValue(UserInfoString, ObjectNode.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,8 +77,8 @@ public class QQConnection {
     /*
     第五步：根据 access_token、oauth_consumer_key(上一步返回的client_id）、openid 获取用户有效信息 (昵称、头像等） 返回json对象
      */
-    public JSONObject getUserInfo(String access_token, String oauth_consumer_key, String openid) {
-        JSONObject userRealInfo = new JSONObject();
+    public ObjectNode getUserInfo(String access_token, String oauth_consumer_key, String openid) {
+        ObjectNode userRealInfo = null;
         String urlProvideByQQConnection = "https://graph.qq.com/user/get_user_info?";
         String requestUrl = urlProvideByQQConnection + "access_token=" + access_token + "&oauth_consumer_key=" + oauth_consumer_key + "&openid=" + openid;
         OkHttpClient client = new OkHttpClient();
@@ -87,7 +88,7 @@ public class QQConnection {
         try (Response response = client.newCall(request).execute()) {
             assert response.body() != null;
             String UserRealInfoString = response.body().string();
-            userRealInfo = JSONObject.parseObject(UserRealInfoString);
+            userRealInfo = new ObjectMapper().readValue(UserRealInfoString, ObjectNode.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package top.imzdx.qqpush.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -49,10 +49,10 @@ public class UserController {
     /**
      * 用户管理
      *
-     * @param request  请求
      * @param name     用户名
      * @param password 密码
      * @return
+     * @ignoreParams request  请求
      */
     @PostMapping("/login")
     public Result<User> login(HttpServletRequest request,
@@ -69,10 +69,10 @@ public class UserController {
     /**
      * QQ登录回调
      *
-     * @param request  请求
-     * @param response 相应
-     * @param code     qq互联返回的code
+     * @param code qq互联返回的code
      * @return
+     * @ignoreParams request  请求
+     * @ignoreParams response 相应
      */
     @GetMapping("/qqLogin")
     @CrossOrigin
@@ -82,11 +82,11 @@ public class UserController {
 //        第三步 获取access token
         String accessToken = qqConnection.getAccessToken(code);
 //        第四步 获取登陆后返回的 openid、appid 以JSON对象形式返回
-        JSONObject userInfo = qqConnection.getUserOpenID(accessToken);
+        ObjectNode userInfo = qqConnection.getUserOpenID(accessToken);
 //        第五步获取用户有效(昵称、头像等）信息  以JSON对象形式返回
-        String oauth_consumer_key = userInfo.getString("client_id");
-        String openid = userInfo.getString("openid");
-        JSONObject userRealInfo = qqConnection.getUserInfo(accessToken, oauth_consumer_key, openid);
+        String oauth_consumer_key = userInfo.get("client_id").asText();
+        String openid = userInfo.get("openid").asText();
+        ObjectNode userRealInfo = qqConnection.getUserInfo(accessToken, oauth_consumer_key, openid);
 
         User user = userService.findUserByOpenid(openid);
         if (user != null) {
@@ -98,7 +98,7 @@ public class UserController {
             }
             return new Result<>("登陆成功", user);
         } else {
-            String userName = userRealInfo.getString("nickname");
+            String userName = userRealInfo.get("nickname").asText();
             String randomString = AuthTools.generateRandomString(6);
             do {
                 userName = userName + "_" + randomString;
@@ -121,7 +121,7 @@ public class UserController {
     /**
      * 注册
      *
-     * @param request  请求
+     * @ignoreParams request  请求
      * @param name     用户名
      * @param password 密码
      * @return

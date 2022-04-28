@@ -58,8 +58,8 @@ public class SystemController {
     /**
      * 生成Geetest极验验证码
      *
-     * @param request
      * @return
+     * @ignoreParams request
      */
     @GetMapping("geetest")
     public Result<String> generateCaptcha(HttpServletRequest request) {
