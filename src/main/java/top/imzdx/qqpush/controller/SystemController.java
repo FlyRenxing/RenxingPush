@@ -58,7 +58,6 @@ public class SystemController {
     /**
      * 生成Geetest极验验证码
      *
-     * @param request
      * @return
      */
     @GetMapping("geetest")

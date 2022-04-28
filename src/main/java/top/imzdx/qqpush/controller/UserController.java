@@ -49,7 +49,6 @@ public class UserController {
     /**
      * 用户管理
      *
-     * @param request  请求
      * @param name     用户名
      * @param password 密码
      * @return
@@ -69,8 +68,6 @@ public class UserController {
     /**
      * QQ登录回调
      *
-     * @param request  请求
-     * @param response 相应
      * @param code     qq互联返回的code
      * @return
      */
@@ -121,7 +118,6 @@ public class UserController {
     /**
      * 注册
      *
-     * @param request  请求
      * @param name     用户名
      * @param password 密码
      * @return

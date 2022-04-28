@@ -134,6 +134,9 @@
                 <version>2.4.3</version>
                 <configuration>
                     <configFile>./src/main/resources/smart-doc.json</configFile>
+                    <!--                    <excludes>cn.hutool:hutool-all</excludes>-->
+                    <!--                    <excludes>net.bytebuddy:byte-buddy</excludes>-->
+                    <!--                    <excludes>org.springframework.data:spring-data-jpa</excludes>-->
                 </configuration>
                 <executions>
                     <execution>
