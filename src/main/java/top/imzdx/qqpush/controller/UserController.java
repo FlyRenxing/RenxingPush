@@ -72,7 +72,7 @@ public class UserController {
      * @param code qq互联返回的code
      * @return
      * @ignoreParams request  请求
-     * @ignoreParams response 相应
+     * @ignoreParams response 响应
      */
     @GetMapping("/qqLogin")
     @CrossOrigin
