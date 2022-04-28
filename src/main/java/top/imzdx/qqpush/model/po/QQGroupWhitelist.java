@@ -1,14 +1,12 @@
 package top.imzdx.qqpush.model.po;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 @Entity
+@Table(name = "qq_group_whitelist")
 @Getter
 @Setter
 @AllArgsConstructor // 自动所有参数的构造方法方法
