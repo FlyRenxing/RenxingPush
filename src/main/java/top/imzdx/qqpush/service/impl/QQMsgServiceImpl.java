@@ -1,6 +1,9 @@
 package top.imzdx.qqpush.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +39,8 @@ public class QQMsgServiceImpl implements MsgService {
         riskControl(user);
         try {
             long qq = Long.parseLong(msg.getMeta().getData());
-            Friend friend = Bot.findInstance(JSONObject.parseObject(user.getConfig()).getLong("qq_bot"))
-                    .getFriend(qq);
+            ObjectNode node = new ObjectMapper().readValue(user.getConfig(), ObjectNode.class);
+            Friend friend = Bot.findInstance(node.get("qq_bot").asLong()).getFriend(qq);
             if (friend != null) {
                 saveMsgToDB(msg, user.getUid());
                 friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
@@ -47,6 +50,8 @@ public class QQMsgServiceImpl implements MsgService {
             throw new DefinitionException("收件号码不正确");
         } catch (NullPointerException e) {
             throw new DefinitionException("绑定的机器人已失效，请前往官网重新绑定机器人");
+        } catch (JsonProcessingException e) {
+            throw new DefinitionException("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
         throw new DefinitionException("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。QQ:" + JSONObject.parseObject(user.getConfig()).getLong("qq_bot"));
     }

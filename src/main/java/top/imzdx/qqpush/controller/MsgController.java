@@ -38,7 +38,6 @@ public class MsgController {
      * @return 推送结果
      */
     @PostMapping("/send/{cipher}")
-    @GetMapping("/send/{cipher}")
     public Result<Void> send(@PathVariable("cipher") String cipher, @RequestBody @Valid Msg msg) {
         Optional<User> user = userDao.findByCipher(cipher);
         if (user.isPresent()) {
