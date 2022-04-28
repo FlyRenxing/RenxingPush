@@ -19,14 +19,14 @@ spring:
     name: renxing-push
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
     name: defaultDataSource
-    password: renxing
     url: jdbc:mysql://localhost:3306/renxing_push?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: renxing
+    password: renxing
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    activate:
-      on-profile: dev
+  profiles:
+    active: dev
