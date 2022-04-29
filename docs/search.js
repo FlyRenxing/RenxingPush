@@ -99,7 +99,6 @@ api[0].list[2].list.push({
     desc: '获取当日用户使用次数',
 });
 document.onkeydown = keyDownSearch;
-
 function keyDownSearch(e) {
     const theEvent = e;
     const code = theEvent.keyCode || theEvent.which || theEvent.charCode;

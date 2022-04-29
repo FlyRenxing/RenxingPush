@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-04-30 02:08:56|2022-04-30 02:08:56|auto|@12774|Created by smart-doc
+v2022-04-30 02:34:29|2022-04-30 02:34:29|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -34,7 +34,6 @@ meta|object|消息元数据|false|-
 └─data|string|消息元数据，与type对应，qq：QQ号，qq_group：QQ群号|true|-
 
 **Request-example:**
-
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /msg/send/CH32p41OXu --data '{
   "content": "这是一条消息",
@@ -44,28 +43,24 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /msg/send/CH3
   }
 }'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "wjxxwn"
+  "msg": "返回的消息"
 }
 ```
 
 ## 系统类
-
 ### 获取机器人公开列表
-
 **URL:** /sys/qqbotlist
 
 **Type:** GET
@@ -77,17 +72,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取机器人公开列表
 
 **Request-example:**
-
 ```
 curl -X GET -i /sys/qqbotlist
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|array|结果数据，一般反馈给前端进行处理|-
 └─number|int64|QQ号|-
 └─name|string|QQ昵称|-
@@ -95,11 +88,10 @@ data|array|结果数据，一般反馈给前端进行处理|-
 └─remarks|string|备注|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "wd7c63",
+  "msg": "返回的消息",
   "data": [
     {
       "number": 1277489864,
@@ -112,7 +104,6 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取所有公告
-
 **URL:** /sys/note
 
 **Type:** GET
@@ -124,31 +115,28 @@ data|array|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取所有公告
 
 **Request-example:**
-
 ```
 curl -X GET -i /sys/note
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|array|结果数据，一般反馈给前端进行处理|-
 └─id|int64|公告ID|-
 └─main|string|公告内容|-
 └─color|string|公告在前端显示的颜色|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "gmaplm",
+  "msg": "返回的消息",
   "data": [
     {
-      "id": 198,
+      "id": 481,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -157,7 +145,6 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 生成Geetest极验验证码
-
 **URL:** /sys/geetest
 
 **Type:** GET
@@ -169,17 +156,15 @@ data|array|结果数据，一般反馈给前端进行处理|-
 **Description:** 生成Geetest极验验证码
 
 **Request-example:**
-
 ```
 curl -X GET -i /sys/geetest
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
@@ -187,13 +172,12 @@ data|string|结果数据，一般反馈给前端进行处理|-
 ```
 {
   "flag": true,
-  "msg": "gk4x19",
-  "data": "at4v9f"
+  "msg": "返回的消息",
+  "data": "s6ym5g"
 }
 ```
 
 ### 获取QQ登录URL
-
 **URL:** /sys/qqUrl
 
 **Type:** GET
@@ -205,17 +189,15 @@ data|string|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取QQ登录URL
 
 **Request-example:**
-
 ```
 curl -X GET -i /sys/qqUrl
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
@@ -223,13 +205,12 @@ data|string|结果数据，一般反馈给前端进行处理|-
 ```
 {
   "flag": true,
-  "msg": "7dau88",
-  "data": "zy9ub1"
+  "msg": "返回的消息",
+  "data": "ipzlpw"
 }
 ```
 
 ### 添加QQ群白名单
-
 **URL:** /sys/qqGroupWhitelist
 
 **Type:** POST
@@ -249,44 +230,39 @@ number|int64|群号码|false|-
 userId|int64|绑定站内用户ID|false|-
 
 **Request-example:**
-
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /sys/qqGroupWhitelist --data '{
-  "id": 451,
+  "id": 921,
   "number": 807374699,
-  "userId": 15
+  "userId": 804
 }'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─id|int64|id(添加时不传)|-
 └─number|int64|群号码|-
 └─userId|int64|绑定站内用户ID|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "icpo47",
+  "msg": "返回的消息",
   "data": {
-    "id": 460,
+    "id": 641,
     "number": 807374699,
-    "userId": 33
+    "userId": 728
   }
 }
 ```
 
 ## 用户相关
-
 ### 用户管理
-
 **URL:** /user/login
 
 **Type:** POST
@@ -305,17 +281,15 @@ name|string|    用户名|true|-
 password|string|密码|true|-
 
 **Request-example:**
-
 ```
-curl -X POST -i /user/login --data 'name=minerva.franecki&password=ps8o15'
+curl -X POST -i /user/login --data 'name=nelson.kessler&password=0jq0sf'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
@@ -325,13 +299,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "ix07up",
+  "msg": "返回的消息",
   "data": {
-    "uid": 8,
+    "uid": 212,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -342,7 +315,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 注册
-
 **URL:** /user/register
 
 **Type:** POST
@@ -361,17 +333,15 @@ name|string|    用户名|true|-
 password|string|密码|true|-
 
 **Request-example:**
-
 ```
-curl -X POST -i /user/register --data 'name=minerva.franecki&password=wswrld'
+curl -X POST -i /user/register --data 'name=nelson.kessler&password=7wqm2w'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
@@ -381,13 +351,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "k9jjt9",
+  "msg": "返回的消息",
   "data": {
-    "uid": 322,
+    "uid": 157,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -398,7 +367,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 重置个人密钥
-
 **URL:** /user/refreshCipher
 
 **Type:** GET
@@ -410,17 +378,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
 **Description:** 重置个人密钥
 
 **Request-example:**
-
 ```
 curl -X GET -i /user/refreshCipher
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
@@ -428,13 +394,12 @@ data|string|结果数据，一般反馈给前端进行处理|-
 ```
 {
   "flag": true,
-  "msg": "8n9tm9",
-  "data": "wkfrsp"
+  "msg": "返回的消息",
+  "data": "yo30ib"
 }
 ```
 
 ### 获取个人资料
-
 **URL:** /user/profile
 
 **Type:** GET
@@ -446,17 +411,15 @@ data|string|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取个人资料
 
 **Request-example:**
-
 ```
 curl -X GET -i /user/profile
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
@@ -466,13 +429,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "yf6cxl",
+  "msg": "返回的消息",
   "data": {
-    "uid": 829,
+    "uid": 609,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -483,7 +445,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 换绑QQ机器人
-
 **URL:** /user/qq_bot
 
 **Type:** POST
@@ -501,17 +462,15 @@ Parameter | Type|Description|Required|Since
 number|int64|机器人号码|true|-
 
 **Request-example:**
-
 ```
-curl -X POST -i /user/qq_bot --data 'number=969'
+curl -X POST -i /user/qq_bot --data 'number=905'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
@@ -521,13 +480,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
-  "msg": "yl7q9b",
+  "msg": "返回的消息",
   "data": {
-    "uid": 782,
+    "uid": 798,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -538,7 +496,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取当日用户使用次数
-
 **URL:** /user/ToDayUseCount
 
 **Type:** GET
@@ -550,17 +507,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取当日用户使用次数
 
 **Request-example:**
-
 ```
 curl -X GET -i /user/ToDayUseCount
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
 ---|---|---|---
 flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|返回的消息|-
+msg|string|结果消息，一般反馈给用户|-
 data|int32|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
@@ -568,8 +523,8 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 ```
 {
   "flag": true,
-  "msg": "g6rq2u",
-  "data": 51
+  "msg": "返回的消息",
+  "data": 905
 }
 ```
 
