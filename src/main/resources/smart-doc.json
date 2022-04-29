@@ -1,8 +1,8 @@
 {
-  "outPath": "./src/main/resources/static/docs",
+  "outPath": "./docs",
   "allInOne": true,
   "style": "xt256",
-  "createDebugPage": true,
+  "createDebugPage": false,
   "md5EncryptedHtmlName": false,
   "projectName": "任性推-Docs",
   "coverOld": true

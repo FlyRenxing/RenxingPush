@@ -28,7 +28,7 @@
 3. 修改`application.yml`。
 4. 注册个QQ小号，添加到数据库里。
 5. 运行。
-6. 阅读 [API文档](/src/main/resources/static/docs/AllInOne.md) 或查看Controller包进行使用
+6. 阅读 [API文档](https://flyrenxing.github.io/RenxingPush/) 或查看Controller包进行使用
    1. 注册接口 post /user/register
    2. 查看数据库内你刚刚注册账号的`cipher`
    3. 发送消息接口post /msg/send/`你的cipher`

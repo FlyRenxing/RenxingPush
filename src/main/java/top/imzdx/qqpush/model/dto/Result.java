@@ -17,7 +17,7 @@ public class Result<T> implements Serializable {
      */
     private boolean flag;
     /**
-     * 结果消息，一般反馈给用户
+     * 结果消息，一般反馈给用户|返回的消息
      */
     private String msg;
     /**
