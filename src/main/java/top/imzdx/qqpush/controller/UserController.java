@@ -52,7 +52,7 @@ public class UserController {
      * @param name     用户名
      * @param password 密码
      * @return
-     * @ignoreParams request  请求
+     * @ignoreParams request
      */
     @PostMapping("/login")
     public Result<User> login(HttpServletRequest request,
@@ -71,8 +71,9 @@ public class UserController {
      *
      * @param code qq互联返回的code
      * @return
-     * @ignoreParams request  请求
-     * @ignoreParams response 响应
+     * @ignore
+     * @ignoreParams request
+     * @ignoreParams response
      */
     @GetMapping("/qqLogin")
     @CrossOrigin
@@ -121,7 +122,7 @@ public class UserController {
     /**
      * 注册
      *
-     * @ignoreParams request  请求
+     * @ignoreParams request
      * @param name     用户名
      * @param password 密码
      * @return
