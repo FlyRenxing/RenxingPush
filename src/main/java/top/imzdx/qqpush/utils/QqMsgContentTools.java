@@ -4,6 +4,7 @@ import cn.hutool.core.codec.Base64Decoder;
 import cn.hutool.dfa.WordTree;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Message;
+import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -26,12 +27,11 @@ public class QqMsgContentTools {
 
     public Message buildMessage(String content) {
         badWordDFA(content);
-        //TODO 加入图片的消息链构建功能
+        MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
-        buildFace(content, chainBuilder);
+        chain.listIterator().forEachRemaining(chainBuilder::append);
         return chainBuilder.build();
     }
-
     public QqMsgContentTools() throws IOException {
 
         Resource resource = new ClassPathResource("static/badWord.txt");
@@ -80,8 +80,12 @@ public class QqMsgContentTools {
     }
 
     public void badWordDFA(String content) {
+        boolean isNumber = true;
         List<String> matchAll = badWord.matchAll(content, -1, false, false);
-        if (matchAll.size() != 0) {
+        for (String s : matchAll) {
+            isNumber &= s.matches("\\d*");
+        }
+        if (matchAll.size() != 0 && !isNumber) {
             throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll);
         }
     }
