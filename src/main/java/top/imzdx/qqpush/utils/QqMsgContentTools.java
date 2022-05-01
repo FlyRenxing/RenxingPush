@@ -3,9 +3,7 @@ package top.imzdx.qqpush.utils;
 import cn.hutool.core.codec.Base64Decoder;
 import cn.hutool.dfa.WordTree;
 import net.mamoe.mirai.message.code.MiraiCode;
-import net.mamoe.mirai.message.data.Message;
-import net.mamoe.mirai.message.data.MessageChain;
-import net.mamoe.mirai.message.data.MessageChainBuilder;
+import net.mamoe.mirai.message.data.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -29,9 +27,16 @@ public class QqMsgContentTools {
         badWordDFA(content);
         MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
-        chain.listIterator().forEachRemaining(chainBuilder::append);
+        chain.listIterator().forEachRemaining((o) -> {
+            if (o instanceof LightApp || o instanceof SimpleServiceMessage || o instanceof FileMessage || o instanceof Image) {
+                throw new DefinitionException("消息内容包含禁止的消息类型");
+            } else {
+                chainBuilder.add(o);
+            }
+        });
         return chainBuilder.build();
     }
+
     public QqMsgContentTools() throws IOException {
 
         Resource resource = new ClassPathResource("static/badWord.txt");
