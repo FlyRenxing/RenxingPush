@@ -7,6 +7,7 @@ import net.mamoe.mirai.message.data.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.model.po.MessageLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,13 +24,13 @@ import java.util.regex.Pattern;
 public class QqMsgContentTools {
     WordTree badWord = new WordTree();
 
-    public Message buildMessage(String content) {
+    public Message buildMessage(String content, MessageLog messageLog) {
         badWordDFA(content);
         MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
         chain.listIterator().forEachRemaining((o) -> {
             if (o instanceof LightApp || o instanceof SimpleServiceMessage || o instanceof FileMessage || o instanceof Image) {
-                throw new DefinitionException("消息内容包含禁止的消息类型");
+                messageLog.fail("消息内容包含禁止的mirai消息类型");
             } else {
                 chainBuilder.add(o);
             }

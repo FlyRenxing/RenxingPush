@@ -1,11 +1,14 @@
 package top.imzdx.qqpush.model.po;
 
+import cn.hutool.extra.spring.SpringUtil;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import top.imzdx.qqpush.repository.MessageLogDao;
+import top.imzdx.qqpush.utils.DefinitionException;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +21,9 @@ import java.time.LocalDateTime;
 @Builder
 @Accessors(chain = true)
 public class MessageLog {
+    public static final boolean STATUS_FAIL = false;
+    public static final boolean STATUS_SUCCESS = true;
+
     /**
      * 消息ID
      */
@@ -41,11 +47,26 @@ public class MessageLog {
      */
     private Long uid;
     /**
+     * 消息状态
+     */
+    private boolean status = STATUS_SUCCESS;
+    /**
+     * 反馈消息
+     */
+    private String feedback;
+    /**
      * 时间
      */
     @CreatedDate
     @LastModifiedDate
     private LocalDateTime time;
 
+    public void fail(String feedback) {
+        this.status = STATUS_FAIL;
+        this.feedback = feedback;
+        MessageLogDao messageLogDao = SpringUtil.getBean(MessageLogDao.class);
+        messageLogDao.save(this);
+        throw new DefinitionException(feedback);
+    }
 
 }

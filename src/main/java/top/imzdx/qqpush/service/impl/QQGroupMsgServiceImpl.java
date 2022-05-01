@@ -8,6 +8,7 @@ import net.mamoe.mirai.contact.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.model.dto.Msg;
+import top.imzdx.qqpush.model.po.MessageLog;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.MessageLogDao;
@@ -34,23 +35,23 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
     public void sendMsg(User user, Msg msg) {
         riskControl(user);
         testAuthority(user, Long.valueOf(msg.getMeta().getData()));
+        MessageLog messageLog = saveMsgToDB(msg, user.getUid());
         try {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
             ObjectNode node = new ObjectMapper().readValue(user.getConfig(), ObjectNode.class);
             Group group = Bot.findInstance(node.get("qq_bot").asLong()).getGroup(qqGroup);
             if (group != null) {
-                saveMsgToDB(msg, user.getUid());
-                group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
+                group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog));
                 return;
             }
         } catch (NumberFormatException e) {
-            throw new DefinitionException("收信群号码不正确");
+            messageLog.fail("收信群号码不正确");
         } catch (NullPointerException e) {
-            throw new DefinitionException("绑定的机器人已失效，请前往官网重新绑定机器人");
+            messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
         } catch (JsonProcessingException e) {
-            throw new DefinitionException("用户机器人账户配置异常，请前往官网重新选择可用机器人");
+            messageLog.fail("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
-        throw new DefinitionException("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：" + user.getConfig());
+        messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：\" + user.getConfig()");
     }
 
     private void testAuthority(User user, Long qqGroup) {

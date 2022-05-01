@@ -36,38 +36,40 @@ public class QQMsgServiceImpl implements MsgService {
     @Override
     public void sendMsg(User user, Msg msg) {
         riskControl(user);
+        MessageLog messageLog = saveMsgToDB(msg, user.getUid());
         try {
             long qq = Long.parseLong(msg.getMeta().getData());
             ObjectNode node = new ObjectMapper().readValue(user.getConfig(), ObjectNode.class);
             Friend friend = Bot.findInstance(node.get("qq_bot").asLong()).getFriend(qq);
             if (friend != null) {
-                saveMsgToDB(msg, user.getUid());
-                friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent()));
+                friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog));
                 return;
             }
         } catch (NumberFormatException e) {
-            throw new DefinitionException("收件号码不正确");
+            messageLog.fail("收件号码不正确");
         } catch (NullPointerException e) {
-            throw new DefinitionException("绑定的机器人已失效，请前往官网重新绑定机器人");
+            messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
         } catch (JsonProcessingException e) {
-            throw new DefinitionException("用户机器人账户配置异常，请前往官网重新选择可用机器人");
+            messageLog.fail("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
-        throw new DefinitionException("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友。");
+        messageLog.fail("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友");
+
     }
 
     @Override
-    public void saveMsgToDB(Msg msg, long uid) {
+    public MessageLog saveMsgToDB(Msg msg, long uid) {
         ObjectMapper mapper = new ObjectMapper();
         MessageLog messageLog = null;
         try {
             messageLog = new MessageLog()
                     .setContent(msg.getContent())
                     .setMeta(mapper.writeValueAsString(msg.getMeta()))
-                    .setUid(uid);
+                    .setUid(uid)
+                    .setStatus(MessageLog.STATUS_SUCCESS);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        messageLogDao.save(messageLog);
+        return messageLogDao.save(messageLog);
     }
 
     void riskControl(User user) {

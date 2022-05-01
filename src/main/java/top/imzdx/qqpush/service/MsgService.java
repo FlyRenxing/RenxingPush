@@ -2,6 +2,7 @@ package top.imzdx.qqpush.service;
 
 
 import top.imzdx.qqpush.model.dto.Msg;
+import top.imzdx.qqpush.model.po.MessageLog;
 import top.imzdx.qqpush.model.po.User;
 
 /**
@@ -9,5 +10,6 @@ import top.imzdx.qqpush.model.po.User;
  */
 public interface MsgService {
     void sendMsg(User user, Msg msg);
-    void saveMsgToDB(Msg msg,long uid);
+
+    MessageLog saveMsgToDB(Msg msg, long uid);
 }
