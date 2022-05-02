@@ -25,7 +25,7 @@
 1. 自行编译或下载预编译发布版本。ps：Releases页版本可能不是最新，最新预编译版本可在[Actions](https://github.com/FlyRenxing/RenxingPush/actions)
    中的`Java CI with Maven`工作流程中的`Artifacts`工件列表内下载。
 2. 创建Mysql数据库。
-3. 修改`application.yml`。
+3. 重命名`application.yml.example`为`application.yml`，并修改数据库信息部分。
 4. 注册个QQ小号，添加到数据库里。
 5. 运行。
 6. 阅读 [API文档](https://flyrenxing.github.io/RenxingPush/) 或查看Controller包进行使用

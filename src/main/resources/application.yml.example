@@ -3,15 +3,17 @@ app:
     default:
       cipher-digit: 10
       day-max-send-count: 200
+#geetest相关，可不填
 geetest:
-  id: 43dd89d811fac495147fac164b7bc35e
-  key: e6e7c653f658073aaff9bdebe7d7097b
+  id: 1
+  key: 1
   open: false
+#通过qq互联登录相关，可不填
 qq:
-  QQAPPID: 101970969
-  QQAPPKEY: 22f8858b98c5b71d49aaa0ce761d172c
-  back-url: https://push.imzdx.top/#/control
-  redirect_uri: https%3A%2F%2Fpush.imzdx.top%2Fapi%2Fuser%2FqqLogin
+  QQAPPID: 1
+  QQAPPKEY: 1
+  back-url: https://localhost/#/control
+  redirect_uri: https%3A%2F%2Flocalhost%2Fapi%2Fuser%2FqqLogin
 server:
   port: 8000
 spring:
@@ -28,5 +30,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  profiles:
-    active: dev
+  config:
+    activate:
+      on-profile:
+        - dev
