@@ -1,13 +1,12 @@
 package top.imzdx.qqpush.model.po;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 
@@ -46,10 +45,10 @@ public class User implements Serializable {
     private Long admin;
     /**
      * 用户配置
-     *
-     * @mock 还没想好这里怎么用=.=
      */
-    private String config;
+    @Type(type = "com.vladmihalcea.hibernate.type.json.JsonType")
+    @Column(name = "config", columnDefinition = "json")
+    private UserConfig config;
     /**
      * 用户密钥
      *
@@ -70,5 +69,19 @@ public class User implements Serializable {
     @JsonIgnore
     private String openid;
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Accessors(chain = true)
+    public static class UserConfig {
+        /**
+         * 绑定的机器人QQ号
+         *
+         * @mock 2816669521
+         */
+        @Id
+        @JsonAlias("qq_bot")
+        private Long qqBot;
+    }
 
 }

@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-05-02 19:50:56|2022-05-02 19:50:56|auto|@12774|Created by smart-doc
+v2022-05-02 22:42:28|2022-05-02 22:42:28|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -61,7 +61,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 
 ## 系统类
 ### 获取机器人公开列表
-
 **URL:** http://{{server}}/sys/qqbotlist
 
 **Type:** GET
@@ -105,7 +104,6 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取所有公告
-
 **URL:** http://{{server}}/sys/note
 
 **Type:** GET
@@ -138,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 577,
+      "id": 191,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -147,7 +145,6 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 生成Geetest极验验证码
-
 **URL:** http://{{server}}/sys/geetest
 
 **Type:** GET
@@ -175,12 +172,11 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "o630le"
+  "data": "cm2y2m"
 }
 ```
 
 ### 获取QQ登录URL
-
 **URL:** http://{{server}}/sys/qqUrl
 
 **Type:** GET
@@ -208,12 +204,11 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "ed877d"
+  "data": "bc36ip"
 }
 ```
 
 ### 添加QQ群白名单
-
 **URL:** http://{{server}}/sys/qqGroupWhitelist
 
 **Type:** POST
@@ -233,12 +228,11 @@ number|int64|群号码|false|-
 userId|int64|绑定站内用户ID|false|-
 
 **Request-example:**
-
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
-  "id": 776,
+  "id": 326,
   "number": 807374699,
-  "userId": 860
+  "userId": 179
 }'
 ```
 **Response-fields:**
@@ -258,16 +252,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 713,
+    "id": 231,
     "number": 807374699,
-    "userId": 396
+    "userId": 115
   }
 }
 ```
 
 ## 用户相关
 ### 用户管理
-
 **URL:** http://{{server}}/user/login
 
 **Type:** POST
@@ -287,7 +280,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/login --data 'name=boyd.oberbrunner&password=sobo04'
+curl -X POST -i http://{{server}}/user/login --data 'name=duane.rempel&password=cg6a05'
 ```
 **Response-fields:**
 
@@ -299,20 +292,24 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
 └─admin|int64|是否为管理默认0否1是|-
-└─config|string|用户配置|-
+└─config|object|用户配置|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 785,
+    "uid": 520,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -320,7 +317,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 注册
-
 **URL:** http://{{server}}/user/register
 
 **Type:** POST
@@ -340,7 +336,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=boyd.oberbrunner&password=3wlcaq'
+curl -X POST -i http://{{server}}/user/register --data 'name=duane.rempel&password=8mjd67'
 ```
 **Response-fields:**
 
@@ -352,20 +348,24 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
 └─admin|int64|是否为管理默认0否1是|-
-└─config|string|用户配置|-
+└─config|object|用户配置|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 816,
+    "uid": 13,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -373,7 +373,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 重置个人密钥
-
 **URL:** http://{{server}}/user/refreshCipher
 
 **Type:** GET
@@ -401,12 +400,11 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "889m3v"
+  "data": "nqdbkm"
 }
 ```
 
 ### 获取个人资料
-
 **URL:** http://{{server}}/user/profile
 
 **Type:** GET
@@ -431,20 +429,24 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
 └─admin|int64|是否为管理默认0否1是|-
-└─config|string|用户配置|-
+└─config|object|用户配置|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 621,
+    "uid": 733,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -452,7 +454,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 换绑QQ机器人
-
 **URL:** http://{{server}}/user/qq_bot
 
 **Type:** POST
@@ -471,7 +472,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=11'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=359'
 ```
 **Response-fields:**
 
@@ -483,20 +484,24 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
 └─admin|int64|是否为管理默认0否1是|-
-└─config|string|用户配置|-
+└─config|object|用户配置|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 358,
+    "uid": 603,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -504,7 +509,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取当日用户使用次数
-
 **URL:** http://{{server}}/user/ToDayUseCount
 
 **Type:** GET
@@ -532,7 +536,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 373
+  "data": 490
 }
 ```
 

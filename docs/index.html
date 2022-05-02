@@ -6,7 +6,7 @@
     <meta content="smart-doc" name="generator">
     <title>任性推-Docs</title>
     <link href="font.css" rel="stylesheet">
-    <link href="AllInOne.css?v=1651492256010" rel="stylesheet"/>
+    <link href="AllInOne.css?v=1651502548639" rel="stylesheet"/>
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/styles/vs2015.min.css" rel="stylesheet">
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #1E1E1E
@@ -106,8 +106,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-05-02 19:50:56</p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-05-02 19:50:56</p>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-05-02 22:42:28</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-05-02 22:42:28</p>
                     </td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">auto</p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">@12774</p></td>
@@ -508,7 +508,7 @@
   "msg": "返回的消息",
   "data": [
     {
-      "id": 241,
+      "id": 528,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -589,7 +589,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "0djl7m"
+  "data": "y79g83"
 }</code></pre>
                     </div>
                 </div>
@@ -666,7 +666,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "l2ybvg"
+  "data": "v61qo3"
 }</code></pre>
                     </div>
                 </div>
@@ -741,9 +741,9 @@
                 <div class="listingblock">
                     <div class="content">
                         <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
-  "id": 478,
+  "id": 702,
   "number": 807374699,
-  "userId": 767
+  "userId": 754
 }'</code></pre>
                     </div>
                 </div>
@@ -820,9 +820,9 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 617,
+    "id": 721,
     "number": 807374699,
-    "userId": 906
+    "userId": 743
   }
 }</code></pre>
                     </div>
@@ -893,7 +893,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/login --data 'name=boyd.oberbrunner&password=ilfhd3'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/login --data 'name=duane.rempel&password=zdsjtj'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -963,9 +963,18 @@
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
                             用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -993,10 +1002,12 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 989,
+    "uid": 485,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -1064,7 +1075,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/register --data 'name=boyd.oberbrunner&password=1md8zm'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/register --data 'name=duane.rempel&password=ha54eq'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1134,9 +1145,18 @@
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
                             用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -1164,10 +1184,12 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 197,
+    "uid": 548,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -1248,7 +1270,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "jd25d5"
+  "data": "3ilf8m"
 }</code></pre>
                     </div>
                 </div>
@@ -1344,9 +1366,18 @@
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
                             用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -1374,10 +1405,12 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 415,
+    "uid": 421,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -1435,7 +1468,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qq_bot --data 'number=977'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qq_bot --data 'number=968'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1505,9 +1538,18 @@
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
                             用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -1535,10 +1577,12 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 794,
+    "uid": 541,
     "name": "这是用户名",
     "admin": 0,
-    "config": "还没想好这里怎么用=.=",
+    "config": {
+      "qqBot": 2816669521
+    },
     "cipher": "CH32p41OXu",
     "dayMaxSendCount": 200
   }
@@ -1619,14 +1663,14 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": 46
+  "data": 618
 }</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-05-02 19:50:56</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-05-02 22:42:28</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">Gitee</a>or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">Github</a></span>
@@ -1635,7 +1679,7 @@
                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABlUlEQVRIS+2UvUvDQBiH398Rly4udnARwUXs4qAIOigI4iL30dTZ2T9AcNPVvUsXF7uYttdScNDFRRAnB11cFFwKxcXBJTQnJ6lEbRI/CIiY9e6e5/e+9+ZAGX/ImE9/QKCU2jfGbGTQqq4xZgtSyisiKmQgIAAVCCFWAGxnIOhqrdd/xyUrpRZsP40xSwA6AI57vd5eq9W6T6s8tQIppSKi+gDQNREprfVNkiRRwDlfY4xZ+FAIuSOi8Qjw0nEc5XnebZwkViClXA2T5+xhY8xus9ncEUJMAziITN5FEARuXLsGCoQQywBs8uEovJ+Scz7FGDuMSM4cx3E9z+u8r+SDQEq5SEQ1IhoZBE+QnBKRq7V+iEreCDjn84wxCx9NgidITnK5nFutVh/7e14FSqnZIAhqAMY+A4+TADjyfb/Ubref7J4XQXhxNvnEV+AJlbTy+XypUqn4KBaLBZuciCa/A0+opN5oNFz7FpUBbP4EHicxxsyAcz7HGDvvz3nar5+2Ho5wOQwsU5+KNGDa+r8grUP0DBLjtRtNKEliAAAAAElFTkSuQmCC"><span
             id="upText">Top</span></div>
 </div>
-<script src="search.js?v=1651492256010"></script>
+<script src="search.js?v=1651502548639"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

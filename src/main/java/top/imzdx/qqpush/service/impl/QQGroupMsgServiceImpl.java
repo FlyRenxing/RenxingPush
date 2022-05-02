@@ -1,8 +1,5 @@
 package top.imzdx.qqpush.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Group;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +34,7 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
         testAuthority(user, Long.valueOf(msg.getMeta().getData()), messageLog);
         try {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
-            ObjectNode node = new ObjectMapper().readValue(user.getConfig(), ObjectNode.class);
-            Group group = Bot.findInstance(node.get("qq_bot").asLong()).getGroup(qqGroup);
+            Group group = Bot.findInstance(user.getConfig().getQqBot()).getGroup(qqGroup);
             if (group != null) {
                 group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog));
                 return;
@@ -47,8 +43,6 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
             throw messageLog.fail("收信群号码不正确");
         } catch (NullPointerException e) {
             throw messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
-        } catch (JsonProcessingException e) {
-            throw messageLog.fail("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
         throw messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：" + user.getConfig());
     }
