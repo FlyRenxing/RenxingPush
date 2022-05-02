@@ -61,12 +61,12 @@ public class MessageLog {
     @LastModifiedDate
     private LocalDateTime time;
 
-    public void fail(String feedback) {
+    public DefinitionException fail(String feedback) {
         this.status = STATUS_FAIL;
         this.feedback = feedback;
         MessageLogDao messageLogDao = SpringUtil.getBean(MessageLogDao.class);
         messageLogDao.save(this);
-        throw new DefinitionException(feedback);
+        return new DefinitionException(feedback);
     }
 
 }

@@ -14,7 +14,6 @@ import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.MessageLogDao;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.UserDao;
-import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QqMsgContentTools;
 
 
@@ -33,9 +32,9 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
 
     @Override
     public void sendMsg(User user, Msg msg) {
-        riskControl(user);
-        testAuthority(user, Long.valueOf(msg.getMeta().getData()));
         MessageLog messageLog = saveMsgToDB(msg, user.getUid());
+        riskControl(user, messageLog);
+        testAuthority(user, Long.valueOf(msg.getMeta().getData()), messageLog);
         try {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
             ObjectNode node = new ObjectMapper().readValue(user.getConfig(), ObjectNode.class);
@@ -45,19 +44,19 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
                 return;
             }
         } catch (NumberFormatException e) {
-            messageLog.fail("收信群号码不正确");
+            throw messageLog.fail("收信群号码不正确");
         } catch (NullPointerException e) {
-            messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
+            throw messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
         } catch (JsonProcessingException e) {
-            messageLog.fail("用户机器人账户配置异常，请前往官网重新选择可用机器人");
+            throw messageLog.fail("用户机器人账户配置异常，请前往官网重新选择可用机器人");
         }
-        messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：\" + user.getConfig()");
+        throw messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：" + user.getConfig());
     }
 
-    private void testAuthority(User user, Long qqGroup) {
-        QQGroupWhitelist qqGroupWhitelist = qqGroupWhitelistDao.findByNumber(qqGroup).orElseThrow(() -> new DefinitionException("该群不在白名单中"));
+    private void testAuthority(User user, Long qqGroup, MessageLog messageLog) {
+        QQGroupWhitelist qqGroupWhitelist = qqGroupWhitelistDao.findByNumber(qqGroup).orElseThrow(() -> messageLog.fail("该群不在白名单中"));
         if (!user.getUid().equals(qqGroupWhitelist.getUserId())) {
-            throw new DefinitionException("您没有权限发送消息");
+            throw messageLog.fail("您没有权限发送群消息");
         }
     }
 }

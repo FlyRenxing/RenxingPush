@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-04-30 02:34:29|2022-04-30 02:34:29|auto|@12774|Created by smart-doc
+v2022-05-02 18:34:46|2022-05-02 18:34:46|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 481,
+      "id": 838,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -168,12 +168,11 @@ msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "s6ym5g"
+  "data": "0ur0di"
 }
 ```
 
@@ -201,12 +200,11 @@ msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "ipzlpw"
+  "data": "3xh0p5"
 }
 ```
 
@@ -232,9 +230,9 @@ userId|int64|绑定站内用户ID|false|-
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /sys/qqGroupWhitelist --data '{
-  "id": 921,
+  "id": 726,
   "number": 807374699,
-  "userId": 804
+  "userId": 977
 }'
 ```
 **Response-fields:**
@@ -254,9 +252,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 641,
+    "id": 77,
     "number": 807374699,
-    "userId": 728
+    "userId": 89
   }
 }
 ```
@@ -282,7 +280,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/login --data 'name=nelson.kessler&password=0jq0sf'
+curl -X POST -i /user/login --data 'name=stephen.satterfield&password=rri1vh'
 ```
 **Response-fields:**
 
@@ -304,7 +302,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 212,
+    "uid": 548,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -334,7 +332,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/register --data 'name=nelson.kessler&password=7wqm2w'
+curl -X POST -i /user/register --data 'name=stephen.satterfield&password=xd9d7o'
 ```
 **Response-fields:**
 
@@ -356,7 +354,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 157,
+    "uid": 41,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -390,12 +388,11 @@ msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "yo30ib"
+  "data": "uc69xx"
 }
 ```
 
@@ -434,7 +431,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 609,
+    "uid": 674,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -463,7 +460,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/qq_bot --data 'number=905'
+curl -X POST -i /user/qq_bot --data 'number=677'
 ```
 **Response-fields:**
 
@@ -485,7 +482,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 798,
+    "uid": 667,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -519,12 +516,11 @@ msg|string|结果消息，一般反馈给用户|-
 data|int32|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 905
+  "data": 323
 }
 ```
 
