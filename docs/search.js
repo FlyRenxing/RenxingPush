@@ -15,7 +15,7 @@ api[0].list.push({
 api[0].list[0].list.push({
     order: '1',
     deprecated: 'false',
-    url: '/msg/send/{cipher}',
+    url: 'http://{{server}}/msg/send/{cipher}',
     desc: '推送消息',
 });
 api[0].list.push({
@@ -28,31 +28,31 @@ api[0].list.push({
 api[0].list[1].list.push({
     order: '1',
     deprecated: 'false',
-    url: '/sys/qqbotlist',
+    url: 'http://{{server}}/sys/qqbotlist',
     desc: '获取机器人公开列表',
 });
 api[0].list[1].list.push({
     order: '2',
     deprecated: 'false',
-    url: '/sys/note',
+    url: 'http://{{server}}/sys/note',
     desc: '获取所有公告',
 });
 api[0].list[1].list.push({
     order: '3',
     deprecated: 'false',
-    url: '/sys/geetest',
+    url: 'http://{{server}}/sys/geetest',
     desc: '生成Geetest极验验证码',
 });
 api[0].list[1].list.push({
     order: '4',
     deprecated: 'false',
-    url: '/sys/qqUrl',
+    url: 'http://{{server}}/sys/qqUrl',
     desc: '获取QQ登录URL',
 });
 api[0].list[1].list.push({
     order: '5',
     deprecated: 'false',
-    url: '/sys/qqGroupWhitelist',
+    url: 'http://{{server}}/sys/qqGroupWhitelist',
     desc: '添加QQ群白名单',
 });
 api[0].list.push({
@@ -65,37 +65,37 @@ api[0].list.push({
 api[0].list[2].list.push({
     order: '1',
     deprecated: 'false',
-    url: '/user/login',
+    url: 'http://{{server}}/user/login',
     desc: '用户管理',
 });
 api[0].list[2].list.push({
     order: '2',
     deprecated: 'false',
-    url: '/user/register',
+    url: 'http://{{server}}/user/register',
     desc: '注册',
 });
 api[0].list[2].list.push({
     order: '3',
     deprecated: 'false',
-    url: '/user/refreshCipher',
+    url: 'http://{{server}}/user/refreshCipher',
     desc: '重置个人密钥',
 });
 api[0].list[2].list.push({
     order: '4',
     deprecated: 'false',
-    url: '/user/profile',
+    url: 'http://{{server}}/user/profile',
     desc: '获取个人资料',
 });
 api[0].list[2].list.push({
     order: '5',
     deprecated: 'false',
-    url: '/user/qq_bot',
+    url: 'http://{{server}}/user/qq_bot',
     desc: '换绑QQ机器人',
 });
 api[0].list[2].list.push({
     order: '6',
     deprecated: 'false',
-    url: '/user/ToDayUseCount',
+    url: 'http://{{server}}/user/ToDayUseCount',
     desc: '获取当日用户使用次数',
 });
 document.onkeydown = keyDownSearch;

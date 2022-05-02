@@ -2,13 +2,13 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-05-02 18:34:46|2022-05-02 18:34:46|auto|@12774|Created by smart-doc
+v2022-05-02 19:50:56|2022-05-02 19:50:56|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
 ### 推送消息
 
-**URL:** /msg/send/{cipher}
+**URL:** http://{{server}}/msg/send/{cipher}
 
 **Type:** POST
 
@@ -35,7 +35,7 @@ meta|object|消息元数据|false|-
 
 **Request-example:**
 ```
-curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /msg/send/CH32p41OXu --data '{
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/msg/send/CH32p41OXu --data '{
   "content": "这是一条消息",
   "meta": {
     "type": "qq",
@@ -61,7 +61,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
 
 ## 系统类
 ### 获取机器人公开列表
-**URL:** /sys/qqbotlist
+
+**URL:** http://{{server}}/sys/qqbotlist
 
 **Type:** GET
 
@@ -73,7 +74,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /sys/qqbotlist
+curl -X GET -i http://{{server}}/sys/qqbotlist
 ```
 **Response-fields:**
 
@@ -104,7 +105,8 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取所有公告
-**URL:** /sys/note
+
+**URL:** http://{{server}}/sys/note
 
 **Type:** GET
 
@@ -116,7 +118,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /sys/note
+curl -X GET -i http://{{server}}/sys/note
 ```
 **Response-fields:**
 
@@ -136,7 +138,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 838,
+      "id": 577,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -145,7 +147,8 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 生成Geetest极验验证码
-**URL:** /sys/geetest
+
+**URL:** http://{{server}}/sys/geetest
 
 **Type:** GET
 
@@ -157,7 +160,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /sys/geetest
+curl -X GET -i http://{{server}}/sys/geetest
 ```
 **Response-fields:**
 
@@ -172,12 +175,13 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "0ur0di"
+  "data": "o630le"
 }
 ```
 
 ### 获取QQ登录URL
-**URL:** /sys/qqUrl
+
+**URL:** http://{{server}}/sys/qqUrl
 
 **Type:** GET
 
@@ -189,7 +193,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /sys/qqUrl
+curl -X GET -i http://{{server}}/sys/qqUrl
 ```
 **Response-fields:**
 
@@ -204,12 +208,13 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "3xh0p5"
+  "data": "ed877d"
 }
 ```
 
 ### 添加QQ群白名单
-**URL:** /sys/qqGroupWhitelist
+
+**URL:** http://{{server}}/sys/qqGroupWhitelist
 
 **Type:** POST
 
@@ -228,11 +233,12 @@ number|int64|群号码|false|-
 userId|int64|绑定站内用户ID|false|-
 
 **Request-example:**
+
 ```
-curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /sys/qqGroupWhitelist --data '{
-  "id": 726,
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
+  "id": 776,
   "number": 807374699,
-  "userId": 977
+  "userId": 860
 }'
 ```
 **Response-fields:**
@@ -252,16 +258,17 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 77,
+    "id": 713,
     "number": 807374699,
-    "userId": 89
+    "userId": 396
   }
 }
 ```
 
 ## 用户相关
 ### 用户管理
-**URL:** /user/login
+
+**URL:** http://{{server}}/user/login
 
 **Type:** POST
 
@@ -280,7 +287,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/login --data 'name=stephen.satterfield&password=rri1vh'
+curl -X POST -i http://{{server}}/user/login --data 'name=boyd.oberbrunner&password=sobo04'
 ```
 **Response-fields:**
 
@@ -302,7 +309,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 548,
+    "uid": 785,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -313,7 +320,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 注册
-**URL:** /user/register
+
+**URL:** http://{{server}}/user/register
 
 **Type:** POST
 
@@ -332,7 +340,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/register --data 'name=stephen.satterfield&password=xd9d7o'
+curl -X POST -i http://{{server}}/user/register --data 'name=boyd.oberbrunner&password=3wlcaq'
 ```
 **Response-fields:**
 
@@ -354,7 +362,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 41,
+    "uid": 816,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -365,7 +373,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 重置个人密钥
-**URL:** /user/refreshCipher
+
+**URL:** http://{{server}}/user/refreshCipher
 
 **Type:** GET
 
@@ -377,7 +386,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /user/refreshCipher
+curl -X GET -i http://{{server}}/user/refreshCipher
 ```
 **Response-fields:**
 
@@ -392,12 +401,13 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "uc69xx"
+  "data": "889m3v"
 }
 ```
 
 ### 获取个人资料
-**URL:** /user/profile
+
+**URL:** http://{{server}}/user/profile
 
 **Type:** GET
 
@@ -409,7 +419,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /user/profile
+curl -X GET -i http://{{server}}/user/profile
 ```
 **Response-fields:**
 
@@ -431,7 +441,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 674,
+    "uid": 621,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -442,7 +452,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 换绑QQ机器人
-**URL:** /user/qq_bot
+
+**URL:** http://{{server}}/user/qq_bot
 
 **Type:** POST
 
@@ -460,7 +471,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i /user/qq_bot --data 'number=677'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=11'
 ```
 **Response-fields:**
 
@@ -482,7 +493,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 667,
+    "uid": 358,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -493,7 +504,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取当日用户使用次数
-**URL:** /user/ToDayUseCount
+
+**URL:** http://{{server}}/user/ToDayUseCount
 
 **Type:** GET
 
@@ -505,7 +517,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
 
 **Request-example:**
 ```
-curl -X GET -i /user/ToDayUseCount
+curl -X GET -i http://{{server}}/user/ToDayUseCount
 ```
 **Response-fields:**
 
@@ -520,7 +532,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 323
+  "data": 373
 }
 ```
 

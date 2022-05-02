@@ -6,7 +6,7 @@
     <meta content="smart-doc" name="generator">
     <title>任性推-Docs</title>
     <link href="font.css" rel="stylesheet">
-    <link href="AllInOne.css?v=1651487686468" rel="stylesheet"/>
+    <link href="AllInOne.css?v=1651492256010" rel="stylesheet"/>
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/styles/vs2015.min.css" rel="stylesheet">
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #1E1E1E
@@ -106,8 +106,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-05-02 18:34:46</p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-05-02 18:34:46</p>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-05-02 19:50:56</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-05-02 19:50:56</p>
                     </td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">auto</p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">@12774</p></td>
@@ -126,9 +126,9 @@
                     class="anchor" href="#_1_1_1_推送消息"></a><a class="link"
                                                               href="#_1_1_1_推送消息">1.1.推送消息</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/msg/send/{cipher}"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/msg/send/{cipher}"
                      id="0ab1e8ed5a7e235377406f0c2cc74d92-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/msg/send/{cipher}">/msg/send/{cipher}</a>
+                                                                                          href="http://{{server}}/msg/send/{cipher}">http://{{server}}/msg/send/{cipher}</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="POST" id="0ab1e8ed5a7e235377406f0c2cc74d92-method"><p>
@@ -227,7 +227,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /msg/send/CH32p41OXu --data '{
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/msg/send/CH32p41OXu --data '{
   "content": "这是一条消息",
   "meta": {
     "type": "qq",
@@ -299,9 +299,9 @@
                     class="anchor" href="#_1_2_1_获取机器人公开列表"></a><a class="link"
                                                                    href="#_1_2_1_获取机器人公开列表">2.1.获取机器人公开列表</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/sys/qqbotlist"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/qqbotlist"
                      id="53a5e5b5b87adcb6e2f43cfad75fc2fa-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/sys/qqbotlist">/sys/qqbotlist</a>
+                                                                                          href="http://{{server}}/sys/qqbotlist">http://{{server}}/sys/qqbotlist</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="53a5e5b5b87adcb6e2f43cfad75fc2fa-method"><p>
@@ -315,7 +315,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /sys/qqbotlist</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/sys/qqbotlist</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -415,9 +415,9 @@
                     class="anchor" href="#_1_2_2_获取所有公告"></a><a class="link"
                                                                 href="#_1_2_2_获取所有公告">2.2.获取所有公告</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/sys/note"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/note"
                      id="35912a3f073224c914a1a9e969b7cf85-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/sys/note">/sys/note</a>
+                                                                                          href="http://{{server}}/sys/note">http://{{server}}/sys/note</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="35912a3f073224c914a1a9e969b7cf85-method"><p>
@@ -431,7 +431,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /sys/note</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/sys/note</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -508,7 +508,7 @@
   "msg": "返回的消息",
   "data": [
     {
-      "id": 729,
+      "id": 241,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -522,9 +522,9 @@
                     class="anchor" href="#_1_2_3_生成Geetest极验验证码"></a><a class="link"
                                                                         href="#_1_2_3_生成Geetest极验验证码">2.3.生成Geetest极验验证码</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/sys/geetest"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/geetest"
                      id="491ff5f93b40cdd3d8a1da3d817aad9e-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/sys/geetest">/sys/geetest</a>
+                                                                                          href="http://{{server}}/sys/geetest">http://{{server}}/sys/geetest</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="491ff5f93b40cdd3d8a1da3d817aad9e-method"><p>
@@ -538,7 +538,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /sys/geetest</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/sys/geetest</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -589,7 +589,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "wx93xi"
+  "data": "0djl7m"
 }</code></pre>
                     </div>
                 </div>
@@ -599,9 +599,9 @@
                     class="anchor" href="#_1_2_4_获取QQ登录URL"></a><a class="link"
                                                                    href="#_1_2_4_获取QQ登录URL">2.4.获取QQ登录URL</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/sys/qqUrl"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/qqUrl"
                      id="9e15f7667e825b455b158feb2f7c57c7-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/sys/qqUrl">/sys/qqUrl</a>
+                                                                                          href="http://{{server}}/sys/qqUrl">http://{{server}}/sys/qqUrl</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="9e15f7667e825b455b158feb2f7c57c7-method"><p>
@@ -615,7 +615,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /sys/qqUrl</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/sys/qqUrl</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -666,7 +666,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "k4e3vp"
+  "data": "l2ybvg"
 }</code></pre>
                     </div>
                 </div>
@@ -676,9 +676,10 @@
                     class="anchor" href="#_1_2_5_添加QQ群白名单"></a><a class="link"
                                                                   href="#_1_2_5_添加QQ群白名单">2.5.添加QQ群白名单</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/sys/qqGroupWhitelist"
+                <div class="paragraph" data-download="false" data-page=""
+                     data-url="http://{{server}}/sys/qqGroupWhitelist"
                      id="449db58bc155973db4080fde7038f657-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/sys/qqGroupWhitelist">/sys/qqGroupWhitelist</a>
+                                                                                          href="http://{{server}}/sys/qqGroupWhitelist">http://{{server}}/sys/qqGroupWhitelist</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="POST" id="449db58bc155973db4080fde7038f657-method"><p>
@@ -739,10 +740,10 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /sys/qqGroupWhitelist --data '{
-  "id": 540,
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
+  "id": 478,
   "number": 807374699,
-  "userId": 206
+  "userId": 767
 }'</code></pre>
                     </div>
                 </div>
@@ -819,9 +820,9 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 497,
+    "id": 617,
     "number": 807374699,
-    "userId": 357
+    "userId": 906
   }
 }</code></pre>
                     </div>
@@ -838,9 +839,9 @@
                     class="anchor" href="#_1_3_1_用户管理"></a><a class="link"
                                                               href="#_1_3_1_用户管理">3.1.用户管理</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/login"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/login"
                      id="2259f37638ffcba9bd4ebc6a2508c292-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/login">/user/login</a>
+                                                                                          href="http://{{server}}/user/login">http://{{server}}/user/login</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="POST" id="2259f37638ffcba9bd4ebc6a2508c292-method"><p>
@@ -892,7 +893,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i /user/login --data 'name=stephen.satterfield&password=c4zc66'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/login --data 'name=boyd.oberbrunner&password=ilfhd3'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -992,7 +993,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 113,
+    "uid": 989,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -1008,9 +1009,9 @@
                     class="anchor" href="#_1_3_2_注册"></a><a class="link"
                                                             href="#_1_3_2_注册">3.2.注册</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/register"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/register"
                      id="37f48c17ac7a0504b3fdb4a476277087-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/register">/user/register</a>
+                                                                                          href="http://{{server}}/user/register">http://{{server}}/user/register</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="POST" id="37f48c17ac7a0504b3fdb4a476277087-method"><p>
@@ -1063,7 +1064,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i /user/register --data 'name=stephen.satterfield&password=drfh4p'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/register --data 'name=boyd.oberbrunner&password=1md8zm'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1163,7 +1164,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 312,
+    "uid": 197,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -1179,9 +1180,10 @@
                     class="anchor" href="#_1_3_3_重置个人密钥"></a><a class="link"
                                                                 href="#_1_3_3_重置个人密钥">3.3.重置个人密钥</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/refreshCipher"
+                <div class="paragraph" data-download="false" data-page=""
+                     data-url="http://{{server}}/user/refreshCipher"
                      id="99074882b8f3b1d4baa5a0380ed31194-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/refreshCipher">/user/refreshCipher</a>
+                                                                                          href="http://{{server}}/user/refreshCipher">http://{{server}}/user/refreshCipher</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="99074882b8f3b1d4baa5a0380ed31194-method"><p>
@@ -1195,7 +1197,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /user/refreshCipher</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/user/refreshCipher</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1246,7 +1248,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "e2lfbo"
+  "data": "jd25d5"
 }</code></pre>
                     </div>
                 </div>
@@ -1256,9 +1258,9 @@
                     class="anchor" href="#_1_3_4_获取个人资料"></a><a class="link"
                                                                 href="#_1_3_4_获取个人资料">3.4.获取个人资料</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/profile"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/profile"
                      id="0930563ce7d2f31229b0e75ff1c0c078-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/profile">/user/profile</a>
+                                                                                          href="http://{{server}}/user/profile">http://{{server}}/user/profile</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="0930563ce7d2f31229b0e75ff1c0c078-method"><p>
@@ -1272,7 +1274,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /user/profile</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/user/profile</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1372,7 +1374,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 42,
+    "uid": 415,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -1388,9 +1390,9 @@
                     class="anchor" href="#_1_3_5_换绑QQ机器人"></a><a class="link"
                                                                  href="#_1_3_5_换绑QQ机器人">3.5.换绑QQ机器人</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/qq_bot"
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/qq_bot"
                      id="f66c25828fc895be3e139284e76c7428-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/qq_bot">/user/qq_bot</a>
+                                                                                          href="http://{{server}}/user/qq_bot">http://{{server}}/user/qq_bot</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="POST" id="f66c25828fc895be3e139284e76c7428-method"><p>
@@ -1433,7 +1435,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i /user/qq_bot --data 'number=588'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qq_bot --data 'number=977'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1533,7 +1535,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 528,
+    "uid": 794,
     "name": "这是用户名",
     "admin": 0,
     "config": "还没想好这里怎么用=.=",
@@ -1549,9 +1551,10 @@
                     class="anchor" href="#_1_3_6_获取当日用户使用次数"></a><a class="link"
                                                                     href="#_1_3_6_获取当日用户使用次数">3.6.获取当日用户使用次数</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="/user/ToDayUseCount"
+                <div class="paragraph" data-download="false" data-page=""
+                     data-url="http://{{server}}/user/ToDayUseCount"
                      id="0bfe7d5a08256bf39cb2c391afa64151-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="/user/ToDayUseCount">/user/ToDayUseCount</a>
+                                                                                          href="http://{{server}}/user/ToDayUseCount">http://{{server}}/user/ToDayUseCount</a>
                 </p>
                 </div>
                 <div class="paragraph" data-method="GET" id="0bfe7d5a08256bf39cb2c391afa64151-method"><p>
@@ -1565,7 +1568,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /user/ToDayUseCount</code></pre>
+                        <pre><code class="bash">curl -X GET -i http://{{server}}/user/ToDayUseCount</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1616,14 +1619,14 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": 594
+  "data": 46
 }</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-05-02 18:34:46</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-05-02 19:50:56</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">Gitee</a>or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">Github</a></span>
@@ -1632,7 +1635,7 @@
                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABlUlEQVRIS+2UvUvDQBiH398Rly4udnARwUXs4qAIOigI4iL30dTZ2T9AcNPVvUsXF7uYttdScNDFRRAnB11cFFwKxcXBJTQnJ6lEbRI/CIiY9e6e5/e+9+ZAGX/ImE9/QKCU2jfGbGTQqq4xZgtSyisiKmQgIAAVCCFWAGxnIOhqrdd/xyUrpRZsP40xSwA6AI57vd5eq9W6T6s8tQIppSKi+gDQNREprfVNkiRRwDlfY4xZ+FAIuSOi8Qjw0nEc5XnebZwkViClXA2T5+xhY8xus9ncEUJMAziITN5FEARuXLsGCoQQywBs8uEovJ+Scz7FGDuMSM4cx3E9z+u8r+SDQEq5SEQ1IhoZBE+QnBKRq7V+iEreCDjn84wxCx9NgidITnK5nFutVh/7e14FSqnZIAhqAMY+A4+TADjyfb/Ubref7J4XQXhxNvnEV+AJlbTy+XypUqn4KBaLBZuciCa/A0+opN5oNFz7FpUBbP4EHicxxsyAcz7HGDvvz3nar5+2Ho5wOQwsU5+KNGDa+r8grUP0DBLjtRtNKEliAAAAAElFTkSuQmCC"><span
             id="upText">Top</span></div>
 </div>
-<script src="search.js?v=1651487686468"></script>
+<script src="search.js?v=1651492256010"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {
