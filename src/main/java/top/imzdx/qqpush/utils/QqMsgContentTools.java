@@ -30,7 +30,7 @@ public class QqMsgContentTools {
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
         chain.listIterator().forEachRemaining((o) -> {
             if (o instanceof LightApp || o instanceof SimpleServiceMessage || o instanceof FileMessage || o instanceof Image) {
-                messageLog.fail("消息内容包含禁止的mirai消息类型");
+                throw messageLog.fail("消息内容包含禁止的mirai消息类型");
             } else {
                 chainBuilder.add(o);
             }
