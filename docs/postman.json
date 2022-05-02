@@ -1,0 +1,407 @@
+{
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "e5b4352e-51ae-4bd4-890b-38d3ebcefde7",
+    "name": "任性推-Docs"
+  },
+  "item": [
+    {
+      "name": "消息处理",
+      "item": [
+        {
+          "name": "推送消息",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"这是一条消息\",\n  \"meta\": {\n    \"type\": \"qq\",\n    \"data\": \"1277489864\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/msg/send/CH32p41OXu",
+              "protocol": "http",
+              "path": [
+                "msg",
+                "send",
+                ":cipher"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "cipher",
+                  "value": "CH32p41OXu",
+                  "description": "个人密钥"
+                }
+              ]
+            },
+            "description": "推送消息",
+            "header": []
+          },
+          "description": "推送消息"
+        }
+      ]
+    },
+    {
+      "name": "系统类",
+      "item": [
+        {
+          "name": "获取机器人公开列表",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/sys/qqbotlist",
+              "protocol": "http",
+              "path": [
+                "sys",
+                "qqbotlist"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取机器人公开列表",
+            "header": []
+          },
+          "description": "获取机器人公开列表"
+        },
+        {
+          "name": "获取所有公告",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/sys/note",
+              "protocol": "http",
+              "path": [
+                "sys",
+                "note"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取所有公告",
+            "header": []
+          },
+          "description": "获取所有公告"
+        },
+        {
+          "name": "生成Geetest极验验证码",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/sys/geetest",
+              "protocol": "http",
+              "path": [
+                "sys",
+                "geetest"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "生成Geetest极验验证码",
+            "header": []
+          },
+          "description": "生成Geetest极验验证码"
+        },
+        {
+          "name": "获取QQ登录URL",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/sys/qqUrl",
+              "protocol": "http",
+              "path": [
+                "sys",
+                "qqUrl"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取QQ登录URL",
+            "header": []
+          },
+          "description": "获取QQ登录URL"
+        },
+        {
+          "name": "添加QQ群白名单",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 878,\n  \"number\": 807374699,\n  \"userId\": 295\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/sys/qqGroupWhitelist",
+              "protocol": "http",
+              "path": [
+                "sys",
+                "qqGroupWhitelist"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "添加QQ群白名单",
+            "header": []
+          },
+          "description": "添加QQ群白名单"
+        }
+      ]
+    },
+    {
+      "name": "用户相关",
+      "item": [
+        {
+          "name": "用户管理",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "type": "string",
+                  "description": "    用户名",
+                  "value": "boyd.oberbrunner"
+                },
+                {
+                  "key": "password",
+                  "type": "string",
+                  "description": "密码",
+                  "value": "vtmd0x"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/user/login",
+              "protocol": "http",
+              "path": [
+                "user",
+                "login"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "用户管理",
+            "header": []
+          },
+          "description": "用户管理"
+        },
+        {
+          "name": "注册",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "type": "string",
+                  "description": "    用户名",
+                  "value": "boyd.oberbrunner"
+                },
+                {
+                  "key": "password",
+                  "type": "string",
+                  "description": "密码",
+                  "value": "38aovo"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/user/register",
+              "protocol": "http",
+              "path": [
+                "user",
+                "register"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "注册",
+            "header": []
+          },
+          "description": "当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数"
+        },
+        {
+          "name": "重置个人密钥",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/refreshCipher",
+              "protocol": "http",
+              "path": [
+                "user",
+                "refreshCipher"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "重置个人密钥",
+            "header": []
+          },
+          "description": "重置个人密钥"
+        },
+        {
+          "name": "获取个人资料",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/profile",
+              "protocol": "http",
+              "path": [
+                "user",
+                "profile"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取个人资料",
+            "header": []
+          },
+          "description": "获取个人资料"
+        },
+        {
+          "name": "换绑QQ机器人",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "number",
+                  "type": "int64",
+                  "description": "机器人号码",
+                  "value": "379"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/user/qq_bot",
+              "protocol": "http",
+              "path": [
+                "user",
+                "qq_bot"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "换绑QQ机器人",
+            "header": []
+          },
+          "description": "换绑QQ机器人"
+        },
+        {
+          "name": "获取当日用户使用次数",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/ToDayUseCount",
+              "protocol": "http",
+              "path": [
+                "user",
+                "ToDayUseCount"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取当日用户使用次数",
+            "header": []
+          },
+          "description": "获取当日用户使用次数"
+        }
+      ]
+    }
+  ]
+}
