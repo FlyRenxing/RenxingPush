@@ -66,14 +66,16 @@ POST，Content-Type：application/json。不懂？不懂百度学去
           这是一个撇嘴表情。更多表情ID [点击这里](https://github.com/richardchien/coolq-http-api/wiki/表情-CQ-码-ID-表)查看(不全)
         - 注意：如果使用了不存在的表情ID，那么本次推送的整条消息将不会被发送出去
 
-- **群@用法：** @个人` [mirai:at:$target]`、 @全体` [mirai:atall]`
-   - 例：msg=你好[mirai:at:1277489864]，我@了你。
-   - 注意：如果你@的QQ号不在群内或者非管理员使用了@全体，那么本次推送的整条消息将不会被发送出去，@语法仅在推送群消息时有效。
+- **群@用法：** @个人 `[mirai:at:$target]`、 @全体 `[mirai:atall]`
+    - 例：msg=你好[mirai:at:1277489864]，我@了你。
+    - 注意：如果你@的QQ号不在群内或者非管理员使用了@全体，那么本次推送的整条消息将不会被发送出去，@语法仅在推送群消息时有效。
+
+- **图片用法：**`[mirai:image:可访问的图片url地址]`
+    - 例：content="你好，这是百度的logo图片[mirai:image:https://baidu.com/tupian.png]"
+    - 注意：图片格式包括[gif,png,bmp,jpg]
 
 #### 以下接口未完善
 
-- **图片用法：**`@image=可访问的图片url地址@`
-   - 例：`content="你好，这是百度的logo图片@image=https://baidu.com/tupian.png@"`
 - **JSON卡片：** 将参数名`content`改为`json`，参数值是json格式的文本，然后向接口地址发送POST请求即可。如果同时提交了msg和json两个参数，任性推只会发送msg
 - **XML卡片：** 将参数名`content`改为`xml`，参数值是xml格式的文本，然后向接口地址发送POST请求即可。如果同时提交了msg和xml两个参数，任性推只会发送msg
 

@@ -36,7 +36,7 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
             Group group = Bot.findInstance(user.getConfig().getQqBot()).getGroup(qqGroup);
             if (group != null) {
-                group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog));
+                group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog, group));
                 return;
             }
         } catch (NumberFormatException e) {

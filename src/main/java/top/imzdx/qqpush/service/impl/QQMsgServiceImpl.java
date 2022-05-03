@@ -39,7 +39,7 @@ public class QQMsgServiceImpl implements MsgService {
             long qq = Long.parseLong(msg.getMeta().getData());
             Friend friend = Bot.findInstance(user.getConfig().getQqBot()).getFriend(qq);
             if (friend != null) {
-                friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog));
+                friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog, friend));
                 return;
             }
         } catch (NumberFormatException e) {
