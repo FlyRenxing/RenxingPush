@@ -1,8 +1,14 @@
 app:
+  system:
+    debug: true
   user:
     default:
       cipher-digit: 10
       day-max-send-count: 200
+#阿里云相关，如图像识别
+aliyun:
+  accessKeyId: 123
+  accessKeySecret: 123
 #geetest相关，可不填
 geetest:
   id: 1
@@ -30,7 +36,3 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    activate:
-      on-profile:
-        - dev

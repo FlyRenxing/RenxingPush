@@ -12,7 +12,7 @@ import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.MessageLogDao;
 import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.MsgService;
-import top.imzdx.qqpush.utils.QqMsgContentTools;
+import top.imzdx.qqpush.utils.MsgContentTools;
 
 
 /**
@@ -20,13 +20,13 @@ import top.imzdx.qqpush.utils.QqMsgContentTools;
  */
 @Service("qq")
 public class QQMsgServiceImpl implements MsgService {
-    QqMsgContentTools qqMsgContentTools;
+    MsgContentTools msgContentTools;
     MessageLogDao messageLogDao;
     UserDao userDao;
 
     @Autowired
-    public QQMsgServiceImpl(QqMsgContentTools qqMsgContentTools, MessageLogDao messageLogDao, UserDao userDao) {
-        this.qqMsgContentTools = qqMsgContentTools;
+    public QQMsgServiceImpl(MsgContentTools msgContentTools, MessageLogDao messageLogDao, UserDao userDao) {
+        this.msgContentTools = msgContentTools;
         this.messageLogDao = messageLogDao;
         this.userDao = userDao;
     }
@@ -39,7 +39,7 @@ public class QQMsgServiceImpl implements MsgService {
             long qq = Long.parseLong(msg.getMeta().getData());
             Friend friend = Bot.findInstance(user.getConfig().getQqBot()).getFriend(qq);
             if (friend != null) {
-                friend.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog, friend));
+                friend.sendMessage(msgContentTools.buildQQMessage(msg.getContent(), messageLog, friend));
                 return;
             }
         } catch (NumberFormatException e) {

@@ -11,7 +11,7 @@ import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.MessageLogDao;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.UserDao;
-import top.imzdx.qqpush.utils.QqMsgContentTools;
+import top.imzdx.qqpush.utils.MsgContentTools;
 
 
 /**
@@ -22,8 +22,8 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
     QQGroupWhitelistDao qqGroupWhitelistDao;
 
     @Autowired
-    public QQGroupMsgServiceImpl(QqMsgContentTools qqMsgContentTools, MessageLogDao messageLogDao, UserDao userDao, QQGroupWhitelistDao qqGroupWhitelistDao) {
-        super(qqMsgContentTools, messageLogDao, userDao);
+    public QQGroupMsgServiceImpl(MsgContentTools msgContentTools, MessageLogDao messageLogDao, UserDao userDao, QQGroupWhitelistDao qqGroupWhitelistDao) {
+        super(msgContentTools, messageLogDao, userDao);
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
     }
 
@@ -36,7 +36,7 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
             Group group = Bot.findInstance(user.getConfig().getQqBot()).getGroup(qqGroup);
             if (group != null) {
-                group.sendMessage(qqMsgContentTools.buildMessage(msg.getContent(), messageLog, group));
+                group.sendMessage(msgContentTools.buildQQMessage(msg.getContent(), messageLog, group));
                 return;
             }
         } catch (NumberFormatException e) {
