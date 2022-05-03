@@ -49,14 +49,14 @@ public class MsgContentTools {
         br.lines().forEach(s -> badWord.addWord(Base64Decoder.decodeStr(s)));
     }
 
-    public void badWordDFA(String content) {
+    public void badWordDFA(String content, MessageLog messageLog) {
         boolean isNumber = true;
         List<String> matchAll = badWord.matchAll(content, -1, false, false);
         for (String s : matchAll) {
             isNumber &= s.matches("\\d*");
         }
         if (matchAll.size() != 0 && !isNumber) {
-            throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll);
+            throw messageLog.fail("消息有敏感词，请检查后再试。提示：" + matchAll);
         }
     }
 
@@ -135,7 +135,7 @@ public class MsgContentTools {
     }
 
     public Message buildQQMessage(String content, MessageLog messageLog, Contact contact) {
-        badWordDFA(content);
+        badWordDFA(content, messageLog);
         MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
         for (int i = 0; i < chain.size(); i++) {

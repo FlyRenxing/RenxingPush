@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-05-02 22:42:28|2022-05-02 22:42:28|auto|@12774|Created by smart-doc
+v2022-05-04 00:42:53|2022-05-04 00:42:53|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 191,
+      "id": 100,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -172,7 +172,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "cm2y2m"
+  "data": "91m6k7"
 }
 ```
 
@@ -204,7 +204,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "bc36ip"
+  "data": "xwdsai"
 }
 ```
 
@@ -230,9 +230,9 @@ userId|int64|绑定站内用户ID|false|-
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
-  "id": 326,
+  "id": 344,
   "number": 807374699,
-  "userId": 179
+  "userId": 461
 }'
 ```
 **Response-fields:**
@@ -252,9 +252,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 231,
+    "id": 874,
     "number": 807374699,
-    "userId": 115
+    "userId": 751
   }
 }
 ```
@@ -280,7 +280,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/login --data 'name=duane.rempel&password=cg6a05'
+curl -X POST -i http://{{server}}/user/login --data 'name=neville.walter&password=s18497'
 ```
 **Response-fields:**
 
@@ -298,13 +298,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 520,
+    "uid": 268,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -336,7 +335,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=duane.rempel&password=8mjd67'
+curl -X POST -i http://{{server}}/user/register --data 'name=neville.walter&password=oaf0kf'
 ```
 **Response-fields:**
 
@@ -354,13 +353,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 13,
+    "uid": 358,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -400,7 +398,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "nqdbkm"
+  "data": "nf8uf8"
 }
 ```
 
@@ -435,13 +433,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 733,
+    "uid": 520,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -472,7 +469,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=359'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=148'
 ```
 **Response-fields:**
 
@@ -490,13 +487,12 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─dayMaxSendCount|int64|每日最大发送次数|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 603,
+    "uid": 607,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -536,7 +532,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 490
+  "data": 855
 }
 ```
 

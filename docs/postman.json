@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "b0e8e743-4b23-4dd9-a96c-babe72caeae1",
+    "_postman_id": "988faaa7-10bb-4bac-ae69-e25b720bb4c0",
     "name": "任性推-Docs"
   },
   "item": [
@@ -173,7 +173,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 127,\n  \"number\": 807374699,\n  \"userId\": 926\n}",
+              "raw": "{\n  \"id\": 246,\n  \"number\": 807374699,\n  \"userId\": 88\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -214,13 +214,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "duane.rempel"
+                  "value": "neville.walter"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "1u70ko"
+                  "value": "7679oy"
                 }
               ]
             },
@@ -253,13 +253,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "duane.rempel"
+                  "value": "neville.walter"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "0ijtf8"
+                  "value": "uy1650"
                 }
               ]
             },
@@ -350,7 +350,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "179"
+                  "value": "837"
                 }
               ]
             },
