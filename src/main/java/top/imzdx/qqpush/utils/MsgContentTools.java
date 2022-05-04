@@ -2,7 +2,6 @@ package top.imzdx.qqpush.utils;
 
 import cn.hutool.core.codec.Base64Decoder;
 import cn.hutool.dfa.WordTree;
-import cn.hutool.http.HttpUtil;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.*;
@@ -49,7 +48,7 @@ public class MsgContentTools {
     }
 
     public Message buildQQMessage(String content, MessageLog messageLog, Contact contact) {
-//        badWordDFA(content, messageLog);
+        badWordDFA(content, messageLog);
         MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
         for (int i = 0; i < chain.size(); i++) {
@@ -63,14 +62,7 @@ public class MsgContentTools {
                     if (matcher.find(0)) {
                         try {
                             String imageUrl = matcher.group(1);
-                            byte[] bytes = getBytesByUrl(imageUrl);
-                            ByteArrayResource resource = new ByteArrayResource(bytes) {
-                                @Override
-                                public String getFilename() {
-                                    return "image.jpg";
-                                }
-                            };
-                            imageTools.checkImage(resource);
+                            ByteArrayResource resource = imageTools.getImage(imageUrl);
                             chainBuilder.add(ExternalResource.uploadAsImage(resource.getInputStream(), contact));
                         } catch (DefinitionException e) {
                             throw messageLog.fail(e.getMessage());
@@ -90,8 +82,5 @@ public class MsgContentTools {
         return chainBuilder.build();
     }
 
-    private byte[] getBytesByUrl(String url) {
-        return HttpUtil.downloadBytes(url);
-    }
 
 }
