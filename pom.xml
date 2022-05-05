@@ -16,7 +16,7 @@
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.10.2</mirai-core-jvm.version>
+        <mirai-core-jvm.version>2.10.1</mirai-core-jvm.version>
         <cn.hutool.version>5.7.22</cn.hutool.version>
         <mysql.jdbc.version>8.0.29</mysql.jdbc.version>
         <validator.version>7.0.4.Final</validator.version>
