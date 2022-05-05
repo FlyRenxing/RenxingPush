@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.config.AppConfig;
 
 import java.io.IOException;
 
@@ -20,12 +20,10 @@ public class QQConnection {
     String QQAppKEY;
     String redirect_uri;
 
-    public QQConnection(@Value("${qq.QQAPPID}") String QQAppID,
-                        @Value("${qq.QQAPPKEY}") String QQAppKEY,
-                        @Value("${qq.redirect_uri}") String redirect_uri) {
-        this.QQAppID = QQAppID;
-        this.QQAppKEY = QQAppKEY;
-        this.redirect_uri = redirect_uri;
+    public QQConnection(AppConfig appConfig) {
+        this.QQAppID = appConfig.getQq().getAppID();
+        this.QQAppKEY = appConfig.getQq().getAppKey();
+        this.redirect_uri = appConfig.getQq().getRedirectUri();
     }
 //    第一步：获取 QQ登录按钮url 几乎等于手动拼接 无太大意义
 

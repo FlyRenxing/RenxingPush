@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "988faaa7-10bb-4bac-ae69-e25b720bb4c0",
+    "_postman_id": "e4a24b12-188d-4704-adeb-01ec6ea4794b",
     "name": "任性推-Docs"
   },
   "item": [
@@ -173,7 +173,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 246,\n  \"number\": 807374699,\n  \"userId\": 88\n}",
+              "raw": "{\n  \"id\": 890,\n  \"number\": 807374699,\n  \"userId\": 638\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -214,13 +214,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "neville.walter"
+                  "value": "osvaldo.kuphal"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "7679oy"
+                  "value": "x9f1dz"
                 }
               ]
             },
@@ -253,13 +253,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "neville.walter"
+                  "value": "osvaldo.kuphal"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "uy1650"
+                  "value": "dwjegw"
                 }
               ]
             },
@@ -350,7 +350,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "837"
+                  "value": "232"
                 }
               ]
             },

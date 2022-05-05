@@ -7,8 +7,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.User;
@@ -37,13 +37,13 @@ public class UserController {
     String qqBackUrl;
 
     @Autowired
-    public UserController(UserDao userDao, UserService userService, SystemService systemService, QQConnection qqConnection, @Value("${geetest.open}") boolean geetestOpen, @Value("${qq.back-url}") String qqBackUrl) {
+    public UserController(UserDao userDao, UserService userService, SystemService systemService, QQConnection qqConnection, AppConfig appConfig) {
         this.userDao = userDao;
         this.userService = userService;
         this.systemService = systemService;
         this.qqConnection = qqConnection;
-        this.geetestOpen = geetestOpen;
-        this.qqBackUrl = qqBackUrl;
+        this.geetestOpen = appConfig.getGeetest().isEnabled();
+        this.qqBackUrl = appConfig.getQq().getBackUrl();
     }
 
     /**
