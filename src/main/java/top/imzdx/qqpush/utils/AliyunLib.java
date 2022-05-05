@@ -12,8 +12,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.config.AppConfig;
 
 import java.io.IOException;
 import java.util.*;
@@ -24,10 +24,9 @@ public class AliyunLib {
     private final String accessKeySecret;
 
     @Autowired
-    public AliyunLib(@Value("${aliyun.accessKeyId}") String accessKeyId,
-                     @Value("${aliyun.accessKeySecret}") String accessKeySecret) {
-        this.accessKeyId = accessKeyId;
-        this.accessKeySecret = accessKeySecret;
+    public AliyunLib(AppConfig appConfig) {
+        this.accessKeyId = appConfig.getAliyun().getAccessKeyId();
+        this.accessKeySecret = appConfig.getAliyun().getAccessKeySecret();
     }
 
     public void checkImage(String url) {

@@ -16,9 +16,9 @@
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.10.1</mirai-core-jvm.version>
+        <mirai-core-jvm.version>2.10.2</mirai-core-jvm.version>
         <cn.hutool.version>5.7.22</cn.hutool.version>
-        <mysql.jdbc.version>8.0.28</mysql.jdbc.version>
+        <mysql.jdbc.version>8.0.29</mysql.jdbc.version>
         <validator.version>7.0.4.Final</validator.version>
         <lombok.version>1.18.24</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
@@ -53,6 +53,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.vladmihalcea</groupId>

@@ -11,6 +11,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.MessageLog;
 
 import java.io.BufferedReader;
@@ -27,28 +28,49 @@ import java.util.regex.Pattern;
 public class MsgContentTools {
     ImageTools imageTools;
     WordTree badWord = new WordTree();
+    BaiduLib baiduLib;
+    boolean checkTextEnable;
+    String checkTextUseType;
 
     @Autowired
-    public MsgContentTools(ImageTools imageTools) throws IOException {
+    public MsgContentTools(ImageTools imageTools, BaiduLib baiduLib, AppConfig appConfig) throws IOException {
         this.imageTools = imageTools;
+        this.baiduLib = baiduLib;
+        this.checkTextEnable = appConfig.getSystem().getCheck().getText().isEnabled();
+        this.checkTextUseType = appConfig.getSystem().getCheck().getText().getUseType();
+
         Resource resource = new ClassPathResource("static/badWord.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()));
         br.lines().forEach(s -> badWord.addWord(Base64Decoder.decodeStr(s)));
     }
 
-    public void badWordDFA(String content, MessageLog messageLog) {
+    public void checkText(String content, MessageLog messageLog) {
+        if (!checkTextEnable) return;
+        try {
+            switch (checkTextUseType) {
+                case "baidu" -> baiduLib.textCensorUserDefined(content);
+                case "private" -> badWordDFA(content);
+            }
+        } catch (DefinitionException e) {
+            throw messageLog.fail("内容审核失败。提示：" + e.getMessage());
+        }
+    }
+
+    public void badWordDFA(String content) {
         boolean isNumber = true;
         List<String> matchAll = badWord.matchAll(content, -1, false, false);
         for (String s : matchAll) {
+            s = s.replace(" ", "").replace(" ", "");
             isNumber &= s.matches("\\d*");
         }
         if (matchAll.size() != 0 && !isNumber) {
-            throw messageLog.fail("消息有敏感词，请检查后再试。提示：" + matchAll);
+            throw new DefinitionException("消息有敏感词，请检查后再试。提示：" + matchAll);
         }
     }
 
     public Message buildQQMessage(String content, MessageLog messageLog, Contact contact) {
-        badWordDFA(content, messageLog);
+        checkText(content, messageLog);
+
         MessageChain chain = MiraiCode.deserializeMiraiCode(content);
         MessageChainBuilder chainBuilder = new MessageChainBuilder();
         for (int i = 0; i < chain.size(); i++) {

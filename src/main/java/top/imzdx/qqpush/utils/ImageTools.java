@@ -9,9 +9,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.config.AppConfig;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,16 +31,14 @@ public class ImageTools {
     private final boolean enableCheck;
     private final String useType;
     private final String imagePrivateCloudUrl;
-    private AliyunLib aliyunLib;
+    private final AliyunLib aliyunLib;
 
     @Autowired
-    public ImageTools(@Value("${app.system.checkImage.enabled}") boolean enableCheck,
-                      @Value("${app.system.checkImage.useType}") String useType,
-                      @Value("${app.system.checkImage.imagePrivateCloudUrl}") String imagePrivateCloudUrl,
+    public ImageTools(AppConfig appConfig,
                       AliyunLib aliyunLib) {
-        this.enableCheck = enableCheck;
-        this.useType = useType;
-        this.imagePrivateCloudUrl = imagePrivateCloudUrl;
+        this.enableCheck = appConfig.getSystem().getCheck().getImage().isEnabled();
+        this.useType = appConfig.getSystem().getCheck().getImage().getUseType();
+        this.imagePrivateCloudUrl = appConfig.getSystem().getCheck().getImage().getPrivateCloudUrl();
         this.aliyunLib = aliyunLib;
     }
 

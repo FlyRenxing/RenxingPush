@@ -1,8 +1,8 @@
 package top.imzdx.qqpush.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.QQInfoDao;
@@ -25,13 +25,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl(QQInfoDao qqInfoDao, UserDao userDao, AuthTools authTools,
-                           @Value("${app.user.default.day-max-send-count}") long dayMaxSendCount,
-                           @Value("${app.user.default.cipher-digit}") int digit) {
+                           AppConfig appConfig) {
         this.qqInfoDao = qqInfoDao;
         this.userDao = userDao;
         this.authTools = authTools;
-        this.dayMaxSendCount = dayMaxSendCount;
-        this.digit = digit;
+        this.dayMaxSendCount = appConfig.getUser().getDefaultSetting().getDayMaxSendCount();
+        this.digit = appConfig.getUser().getDefaultSetting().getCipherDigit();
     }
 
     @Override

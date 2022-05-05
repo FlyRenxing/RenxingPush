@@ -5,8 +5,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import top.imzdx.qqpush.config.AppConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,8 @@ public class BaiduLib {
     private final AipContentCensor client;
 
     @Autowired
-    public BaiduLib(@Value("${baidu.AppID}") String APP_ID,
-                    @Value("${baidu.APIKey}") String API_KEY,
-                    @Value("${baidu.SecretKey}") String SECRET_KEY) {
-        client = new AipContentCensor(APP_ID, API_KEY, SECRET_KEY);
+    public BaiduLib(AppConfig appConfig) {
+        client = new AipContentCensor(appConfig.getBaidu().getAppID(), appConfig.getBaidu().getAPIKey(), appConfig.getBaidu().getSecretKey());
         // 可选：设置网络连接参数
         client.setConnectionTimeoutInMillis(2000);
         client.setSocketTimeoutInMillis(60000);

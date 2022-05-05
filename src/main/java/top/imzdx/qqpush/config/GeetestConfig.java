@@ -1,6 +1,6 @@
 package top.imzdx.qqpush.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,9 +15,10 @@ public class GeetestConfig {
     private final String geetest_id;
     private final String geetest_key;
 
-    public GeetestConfig(@Value("${geetest.id}") String geetest_id, @Value("${geetest.key}") String geetest_key) {
-        this.geetest_id = geetest_id;
-        this.geetest_key = geetest_key;
+    @Autowired
+    public GeetestConfig(AppConfig appConfig) {
+        this.geetest_id = appConfig.getGeetest().getId();
+        this.geetest_key = appConfig.getGeetest().getKey();
     }
 
     public final String getGeetest_id() {

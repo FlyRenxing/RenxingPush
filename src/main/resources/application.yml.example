@@ -1,25 +1,40 @@
 app:
   system:
     debug: true
+    check:
+      text:
+        enabled: false
+        # 可用private - 私有、baidu - 百度云
+        use-type: private
+      image:
+        enabled: false
+        # 可用private - 私有、aliyun - 阿里云
+        use-type: private
+        private-cloud-url: https://nsfw.imzdx.top/classify-many
   user:
-    default:
+    default-setting:
+      # 生成cipher的长度
       cipher-digit: 10
+      # 每日最大发送次数
       day-max-send-count: 200
-#阿里云相关，如图像识别
-aliyun:
-  accessKeyId: 123
-  accessKeySecret: 123
-#geetest相关，可不填
-geetest:
-  id: 1
-  key: 1
-  open: false
-#通过qq互联登录相关，可不填
-qq:
-  QQAPPID: 1
-  QQAPPKEY: 1
-  back-url: https://localhost/#/control
-  redirect_uri: https%3A%2F%2Flocalhost%2Fapi%2Fuser%2FqqLogin
+  #下列配置项可根据实际情况自行修改或随便填写
+  baidu:
+    AppID: 123
+    APIKey: 123
+    SecretKey: 123
+  aliyun:
+    accessKeyId: 123
+    accessKeySecret: 123
+  geetest:
+    id: 123
+    key: 123
+    enabled: false
+  #用于使用qq互联注册/登录站内账户
+  qq:
+    APPID: 123
+    AppKey: 123
+    back-url: 123
+    redirect-uri: 123
 server:
   port: 8000
 spring:
