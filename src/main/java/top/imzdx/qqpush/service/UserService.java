@@ -1,15 +1,19 @@
 package top.imzdx.qqpush.service;
 
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import top.imzdx.qqpush.model.po.User;
 
 /**
  * @author Renxing
  */
 public interface UserService {
-    boolean register(String name, String password);
+    User login(String username, String password);
 
-    boolean register(String name, String password, String openid);
+    User register(String username, String password);
+
+    boolean register(String username, String password, String openid);
 
     String refreshCipher(String userName);
 
@@ -17,10 +21,9 @@ public interface UserService {
 
     User findUserById(Long id);
 
-    User findUserByOpenid(String openid);
-
     boolean setQQBot(User user, long number);
 
     int selectToDayUserUseCount(long uid);
 
+    User qqLogin(HttpServletRequest request, HttpServletResponse response, String code);
 }

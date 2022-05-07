@@ -42,7 +42,7 @@ public class User implements Serializable {
      *
      * @mock 0
      */
-    private Long admin;
+    private Integer admin = 0;
     /**
      * 用户配置
      */

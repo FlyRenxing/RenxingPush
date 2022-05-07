@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.UserDao;
 
@@ -19,10 +20,13 @@ import java.util.Random;
 @Component
 public class AuthTools {
     static UserDao userDao;
+    AppConfig appConfig;
+
 
     @Autowired
-    public AuthTools(UserDao userDao) {
+    public AuthTools(UserDao userDao, AppConfig appConfig) {
         AuthTools.userDao = userDao;
+        this.appConfig = appConfig;
     }
 
     public static String generateRandomString(int digit) {
@@ -74,6 +78,10 @@ public class AuthTools {
         }
     }
 
+    public static void login(long uid) {
+        getHttpServletRequest().getSession().setAttribute("uid", uid);
+    }
+
     public static User getUser() {
         Long uid = (Long) getHttpServletRequest().getSession().getAttribute("uid");
         if (uid == null) {
@@ -86,7 +94,8 @@ public class AuthTools {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
-    public String generateCipher(int digit) {
+    public String generateCipher() {
+        int digit = appConfig.getUser().getDefaultSetting().getCipherDigit();
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -95,7 +104,7 @@ public class AuthTools {
             sb.append(str.charAt(number));
         }
         if (userDao.findByCipher(sb.toString()).isPresent()) {
-            return generateCipher(digit);
+            return generateCipher();
         }
         return sb.toString();
     }

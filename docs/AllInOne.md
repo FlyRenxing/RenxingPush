@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-05-05 20:04:43|2022-05-05 20:04:43|auto|@12774|Created by smart-doc
+v2022-05-07 10:30:51|2022-05-07 10:30:51|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 692,
+      "id": 943,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -172,7 +172,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "94zgwk"
+  "data": "7ad90g"
 }
 ```
 
@@ -204,7 +204,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "jt4731"
+  "data": "rl3d9v"
 }
 ```
 
@@ -230,9 +230,9 @@ userId|int64|绑定站内用户ID|false|-
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
-  "id": 855,
+  "id": 713,
   "number": 807374699,
-  "userId": 647
+  "userId": 209
 }'
 ```
 **Response-fields:**
@@ -252,9 +252,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 2,
+    "id": 957,
     "number": 807374699,
-    "userId": 288
+    "userId": 383
   }
 }
 ```
@@ -280,7 +280,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/login --data 'name=osvaldo.kuphal&password=y41ogh'
+curl -X POST -i http://{{server}}/user/login --data 'name=carri.moen&password=3itgan'
 ```
 **Response-fields:**
 
@@ -291,7 +291,7 @@ msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
-└─admin|int64|是否为管理默认0否1是|-
+└─admin|int32|是否为管理默认0否1是|-
 └─config|object|用户配置|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
@@ -303,7 +303,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 631,
+    "uid": 633,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -335,7 +335,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=osvaldo.kuphal&password=ofdasv'
+curl -X POST -i http://{{server}}/user/register --data 'name=carri.moen&password=hombxj'
 ```
 **Response-fields:**
 
@@ -346,7 +346,7 @@ msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
-└─admin|int64|是否为管理默认0否1是|-
+└─admin|int32|是否为管理默认0否1是|-
 └─config|object|用户配置|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
@@ -358,7 +358,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 53,
+    "uid": 6,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -398,7 +398,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "9qbnos"
+  "data": "ayt7id"
 }
 ```
 
@@ -426,7 +426,7 @@ msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
-└─admin|int64|是否为管理默认0否1是|-
+└─admin|int32|是否为管理默认0否1是|-
 └─config|object|用户配置|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
@@ -438,7 +438,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 169,
+    "uid": 338,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -469,7 +469,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=927'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=853'
 ```
 **Response-fields:**
 
@@ -480,7 +480,7 @@ msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─uid|int64|用户ID|-
 └─name|string|用户名|-
-└─admin|int64|是否为管理默认0否1是|-
+└─admin|int32|是否为管理默认0否1是|-
 └─config|object|用户配置|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot|int64|绑定的机器人QQ号|-
 └─cipher|string|用户密钥|-
@@ -492,7 +492,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 595,
+    "uid": 450,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -532,7 +532,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 439
+  "data": 766
 }
 ```
 

@@ -1,6 +1,5 @@
 package top.imzdx.qqpush.controller;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -17,9 +16,6 @@ import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
-import top.imzdx.qqpush.utils.QQConnection;
-
-import java.io.IOException;
 
 /**
  * 用户相关
@@ -32,18 +28,16 @@ public class UserController {
     UserDao userDao;
     UserService userService;
     SystemService systemService;
-    QQConnection qqConnection;
+
     boolean geetestOpen;
-    String qqBackUrl;
+
 
     @Autowired
-    public UserController(UserDao userDao, UserService userService, SystemService systemService, QQConnection qqConnection, AppConfig appConfig) {
+    public UserController(UserDao userDao, UserService userService, SystemService systemService, AppConfig appConfig) {
         this.userDao = userDao;
         this.userService = userService;
         this.systemService = systemService;
-        this.qqConnection = qqConnection;
         this.geetestOpen = appConfig.getGeetest().isEnabled();
-        this.qqBackUrl = appConfig.getQq().getBackUrl();
     }
 
     /**
@@ -55,15 +49,9 @@ public class UserController {
      * @ignoreParams request
      */
     @PostMapping("/login")
-    public Result<User> login(HttpServletRequest request,
-                              @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
+    public Result<User> login(@RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
                               @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
-        User user = userService.findUserByName(name);
-        if (user != null && user.getPassword().equals(password)) {
-            request.getSession().setAttribute("uid", user.getUid());
-            return new Result<>("登陆成功", user);
-        }
-        throw new DefinitionException("账号或密码错误");
+        return new Result<>("登陆成功", userService.login(name, password));
     }
 
     /**
@@ -80,52 +68,16 @@ public class UserController {
     public Result<User> qqLogin(HttpServletRequest request,
                                 HttpServletResponse response,
                                 @RequestParam("code") String code) {
-//        第三步 获取access token
-        String accessToken = qqConnection.getAccessToken(code);
-//        第四步 获取登陆后返回的 openid、appid 以JSON对象形式返回
-        ObjectNode userInfo = qqConnection.getUserOpenID(accessToken);
-//        第五步获取用户有效(昵称、头像等）信息  以JSON对象形式返回
-        String oauth_consumer_key = userInfo.get("client_id").asText();
-        String openid = userInfo.get("openid").asText();
-        ObjectNode userRealInfo = qqConnection.getUserInfo(accessToken, oauth_consumer_key, openid);
-
-        User user = userService.findUserByOpenid(openid);
-        if (user != null) {
-            request.getSession().setAttribute("uid", user.getUid());
-            try {
-                response.sendRedirect(qqBackUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return new Result<>("登陆成功", user);
-        } else {
-            String userName = userRealInfo.get("nickname").asText();
-            String randomString = AuthTools.generateRandomString(6);
-            do {
-                userName = userName + "_" + randomString;
-            } while (userService.findUserByName(userName) != null);
-
-            if (userService.register(userName, randomString, openid)) {
-                User newUser = userService.findUserByName(userName);
-                request.getSession().setAttribute("uid", newUser.getUid());
-                try {
-                    response.sendRedirect(qqBackUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return new Result<>("注册成功", newUser);
-            }
-        }
-        throw new DefinitionException("QQ互联认证失败");
+        return new Result<>("登陆成功", userService.qqLogin(request, response, code));
     }
 
     /**
      * 注册
      *
-     * @ignoreParams request
      * @param name     用户名
      * @param password 密码
      * @return
+     * @ignoreParams request
      * @apiNote 当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数
      */
     @PostMapping("/register")
@@ -137,15 +89,9 @@ public class UserController {
                 throw new DefinitionException("验证码错误");
             }
         }
-        if (userService.findUserByName(name) != null) {
-            throw new DefinitionException("该用户名已被注册，请更换后重试");
-        }
-        if (userService.register(name, password)) {
-            User user = userService.findUserByName(name);
-            request.getSession().setAttribute("uid", user.getUid());
-            return new Result<>("注册成功", user);
-        }
-        throw new DefinitionException("注册异常");
+        User user = userService.register(name, password);
+        AuthTools.login(user.getUid());
+        return new Result<>("注册成功", user);
     }
 
     /**
