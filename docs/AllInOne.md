@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-05-07 10:30:51|2022-05-07 10:30:51|auto|@12774|Created by smart-doc
+v2022-06-20 16:53:37|2022-06-20 16:53:37|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 943,
+      "id": 756,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -172,7 +172,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "7ad90g"
+  "data": "5ftfyt"
 }
 ```
 
@@ -204,7 +204,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "rl3d9v"
+  "data": "munr89"
 }
 ```
 
@@ -230,9 +230,9 @@ userId|int64|绑定站内用户ID|false|-
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/sys/qqGroupWhitelist --data '{
-  "id": 713,
+  "id": 15,
   "number": 807374699,
-  "userId": 209
+  "userId": 17
 }'
 ```
 **Response-fields:**
@@ -252,9 +252,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 957,
+    "id": 74,
     "number": 807374699,
-    "userId": 383
+    "userId": 578
   }
 }
 ```
@@ -280,7 +280,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/login --data 'name=carri.moen&password=3itgan'
+curl -X POST -i http://{{server}}/user/login --data 'name=gus.abernathy&password=5v19fz'
 ```
 **Response-fields:**
 
@@ -303,7 +303,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 633,
+    "uid": 233,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -335,7 +335,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=carri.moen&password=hombxj'
+curl -X POST -i http://{{server}}/user/register --data 'name=gus.abernathy&password=it83uv'
 ```
 **Response-fields:**
 
@@ -358,7 +358,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 6,
+    "uid": 605,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -398,7 +398,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "ayt7id"
+  "data": "xq1xpd"
 }
 ```
 
@@ -438,7 +438,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 338,
+    "uid": 354,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -469,7 +469,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=853'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=74'
 ```
 **Response-fields:**
 
@@ -492,7 +492,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 450,
+    "uid": 341,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -532,7 +532,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 766
+  "data": 415
 }
 ```
 

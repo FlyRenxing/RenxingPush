@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "5aaeeea0-e45d-4316-87c8-381e56cd7c76",
+    "_postman_id": "a004c7b0-0ce2-44c6-9497-7c0b2a436600",
     "name": "任性推-Docs"
   },
   "item": [
@@ -173,7 +173,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 89,\n  \"number\": 807374699,\n  \"userId\": 371\n}",
+              "raw": "{\n  \"id\": 372,\n  \"number\": 807374699,\n  \"userId\": 769\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -214,13 +214,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "carri.moen"
+                  "value": "gus.abernathy"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "galpct"
+                  "value": "k9v7io"
                 }
               ]
             },
@@ -253,13 +253,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "carri.moen"
+                  "value": "gus.abernathy"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "rws6bd"
+                  "value": "05dip3"
                 }
               ]
             },
@@ -350,7 +350,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "290"
+                  "value": "307"
                 }
               ]
             },
