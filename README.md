@@ -86,7 +86,7 @@ POST，Content-Type：application/json。不懂？不懂百度学去
 - [ ] QQ机器人JSON消息
 - [ ] QQ机器人XML消息
 - [ ] 触发关键词回调功能
-  - 在群里或者私聊中，机器人接收到的聊天消息包含您设置的聊天关键词，则机器人会向您设置的触发关键词回调URL发送一个POST请求，您可以在接收到该POST请求后做任何业务逻辑。聊天关键词和触发关键词回调URL可以在[管理台](https://qmsg.zendee.cn/user)机器人管理面板设置。
+  - 在群里或者私聊中，机器人接收到的聊天消息包含您设置的聊天关键词，则机器人会向您设置的触发关键词回调URL发送一个POST请求，您可以在接收到该POST请求后做任何业务逻辑。聊天关键词和触发关键词回调URL可以在控制台机器人管理面板设置。
     - **请求方式：**POST，Content-Type=application/x-www-form-urlencoded
     - **参数列表：**
 
