@@ -67,7 +67,7 @@ POST，Content-Type：application/json。不懂？不懂百度学去
         - 注意：如果使用了不存在的表情ID，那么本次推送的整条消息将不会被发送出去
 
 - **群@用法：** @个人 `[mirai:at:$target]`、 @全体 `[mirai:atall]`
-    - 例：msg=你好[mirai:at:1277489864]，我@了你。
+    - 例：content=你好[mirai:at:1277489864]，我@了你。
     - 注意：如果你@的QQ号不在群内或者非管理员使用了@全体，那么本次推送的整条消息将不会被发送出去，@语法仅在推送群消息时有效。
 
 - **图片用法：**`[mirai:image:可访问的图片url地址]`
@@ -76,8 +76,8 @@ POST，Content-Type：application/json。不懂？不懂百度学去
 
 #### 以下接口未完善
 
-- **JSON卡片：** 将参数名`content`改为`json`，参数值是json格式的文本，然后向接口地址发送POST请求即可。如果同时提交了msg和json两个参数，任性推只会发送msg
-- **XML卡片：** 将参数名`content`改为`xml`，参数值是xml格式的文本，然后向接口地址发送POST请求即可。如果同时提交了msg和xml两个参数，任性推只会发送msg
+- **JSON卡片：** 将参数名`content`改为`json`，参数值是json格式的文本，然后向接口地址发送POST请求即可。如果同时提交了content和json两个参数，任性推只会发送content
+- **XML卡片：** 将参数名`content`改为`xml`，参数值是xml格式的文本，然后向接口地址发送POST请求即可。如果同时提交了content和xml两个参数，任性推只会发送content
 
 **消息内容参数优先级：content > json > xml**
 
