@@ -46,6 +46,13 @@ public class MessageCallback {
      */
     private String sender;
     /**
+     * 所在群组
+     *
+     * @mock 1277489864
+     */
+    @Transient
+    private String group;
+    /**
      * 是否回应
      */
     private Boolean reply;

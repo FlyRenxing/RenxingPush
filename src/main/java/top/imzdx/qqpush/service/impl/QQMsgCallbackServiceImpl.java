@@ -29,6 +29,9 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
                     .setAppType(TYPE_QQ)
                     .setSender(String.valueOf(event.getSender().getId()))
                     .setKeyword(chain.contentToString());
+            if (event instanceof GroupMessageEvent groupMessageEvent) {
+                messageCallback.setGroup(String.valueOf(groupMessageEvent.getGroup().getId()));
+            }
             messageCallback = findMessageCallback(messageCallback);
             if (messageCallback != null) {
                 MessageCallbackLog messageCallbackLog = new MessageCallbackLog()
