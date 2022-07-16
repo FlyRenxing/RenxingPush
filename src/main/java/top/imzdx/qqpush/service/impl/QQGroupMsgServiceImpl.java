@@ -13,6 +13,8 @@ import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.utils.MsgContentTools;
 
+import java.util.List;
+
 
 /**
  * @author Renxing
@@ -48,9 +50,14 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
     }
 
     private void testAuthority(User user, Long qqGroup, MessageLog messageLog) {
-        QQGroupWhitelist qqGroupWhitelist = qqGroupWhitelistDao.findByNumber(qqGroup).orElseThrow(() -> messageLog.fail("该群不在白名单中"));
-        if (!user.getUid().equals(qqGroupWhitelist.getUserId())) {
-            throw messageLog.fail("您没有权限发送群消息");
+        List<QQGroupWhitelist> qqGroupWhitelist = qqGroupWhitelistDao.findByNumber(qqGroup);
+        if (qqGroupWhitelist.isEmpty()) {
+            throw messageLog.fail("该群不在白名单中");
         }
+        qqGroupWhitelist.forEach(qqGroupWhitelist1 -> {
+            if (!qqGroupWhitelist1.getUserId().equals(user.getUid())) {
+                throw messageLog.fail("您没有权限发送该群消息");
+            }
+        });
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * @author Renxing
@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface QQGroupWhitelistDao extends JpaRepository<QQGroupWhitelist, Long> {
 
-    Optional<QQGroupWhitelist> findByNumber(Long qqGroup);
+    List<QQGroupWhitelist> findByNumber(Long qqGroup);
 }
