@@ -12,7 +12,7 @@ import top.imzdx.qqpush.repository.MessageCallbackLogDao;
 import java.util.HashSet;
 
 public abstract class MsgCallbackService {
-    private final HashSet<String> senderSet = new HashSet<>();
+    private static final HashSet<String> senderSet = new HashSet<>();
     MessageCallbackDao messageCallbackDao;
     MessageCallbackLogDao messageCallbackLogDao;
 
@@ -57,8 +57,8 @@ public abstract class MsgCallbackService {
         return null;
     }
 
-    public void addMessageCallback(MessageCallback messageCallback) {
-        messageCallbackDao.save(messageCallback);
+    public MessageCallback addMessageCallback(MessageCallback messageCallback) {
         senderSet.add(messageCallback.getSender());
+        return messageCallbackDao.save(messageCallback);
     }
 }

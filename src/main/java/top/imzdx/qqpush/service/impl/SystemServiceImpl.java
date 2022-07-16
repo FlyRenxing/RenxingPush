@@ -11,6 +11,7 @@ import top.imzdx.qqpush.repository.MessageCallbackDao;
 import top.imzdx.qqpush.repository.NoteDao;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.QQInfoDao;
+import top.imzdx.qqpush.service.MsgCallbackService;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
@@ -28,16 +29,18 @@ public class SystemServiceImpl implements SystemService {
     QQInfoDao qqInfoDao;
     QQGroupWhitelistDao qqGroupWhitelistDao;
     MessageCallbackDao messageCallbackDao;
+    MsgCallbackService msgCallbackService;
     NoteDao noteDao;
     GeetestConfig geetestConfig;
 
     AppConfig appConfig;
 
     @Autowired
-    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, MessageCallbackDao messageCallbackDao, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
+    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, MessageCallbackDao messageCallbackDao, MsgCallbackService msgCallbackService, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
         this.qqInfoDao = qqInfoDao;
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
         this.messageCallbackDao = messageCallbackDao;
+        this.msgCallbackService = msgCallbackService;
         this.noteDao = noteDao;
         this.geetestConfig = geetestConfig;
         this.appConfig = appConfig;
@@ -134,7 +137,8 @@ public class SystemServiceImpl implements SystemService {
     public MessageCallback insertMessageCallback(MessageCallback messageCallback) {
         User user = AuthTools.getUser();
         messageCallback.setUid(user.getUid());
-        return messageCallbackDao.save(messageCallback);
+
+        return msgCallbackService.addMessageCallback(messageCallback);
     }
 
     @Override

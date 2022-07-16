@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "2027dc43-b0c4-49c2-8404-e88a8d721d32",
+    "_postman_id": "67354c9f-fe98-497e-96cc-dfc30a3d588b",
     "name": "任性推-Docs"
   },
   "item": [
@@ -183,7 +183,7 @@
                   "key": "uid",
                   "type": "text",
                   "description": "用户ID",
-                  "value": "706"
+                  "value": "195"
                 },
                 {
                   "key": "name",
@@ -252,13 +252,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "blair.huel"
+                  "value": "ramona.abernathy"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "2p6xia"
+                  "value": "pdb2tv"
                 }
               ]
             },
@@ -349,7 +349,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "66"
+                  "value": "244"
                 }
               ]
             },
@@ -411,7 +411,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "169"
+                  "value": "820"
                 }
               ]
             },
@@ -474,7 +474,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/35",
+              "raw": "http://::server/user/qqGroupWhitelist/748",
               "protocol": "http",
               "path": [
                 "user",
@@ -488,7 +488,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "975",
+                  "value": "85",
                   "description": "白名单id"
                 }
               ]
@@ -504,7 +504,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 377,\n  \"uid\": 496,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 465,\n  \"uid\": 447,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -570,7 +570,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/794",
+              "raw": "http://::server/user/messageCallback/678",
               "protocol": "http",
               "path": [
                 "user",
@@ -584,7 +584,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "466",
+                  "value": "103",
                   "description": "消息回调id"
                 }
               ]
