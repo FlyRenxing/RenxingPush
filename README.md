@@ -74,25 +74,29 @@ POST，Content-Type：application/json。不懂？不懂百度学去
   - 例：content="你好，这是百度的logo图片[mirai:image:https://baidu.com/tupian.png]"
   - 注意：图片格式包括[gif,png,bmp,jpg]
 
-#### 以下接口未完善
+### 触发关键词回调功能
 
-- **JSON卡片：** 将参数名`content`改为`json`，参数值是json格式的文本，然后向接口地址发送POST请求即可。如果同时提交了content和json两个参数，任性推只会发送content
-- **XML卡片：** 将参数名`content`改为`xml`，参数值是xml格式的文本，然后向接口地址发送POST请求即可。如果同时提交了content和xml两个参数，任性推只会发送content
+在群里或者私聊中，机器人接收到的聊天消息包含您设置的聊天关键词，则机器人会向您设置的触发关键词回调URL发送一个POST请求， 您可以在接收到该POST请求后做任何业务逻辑。聊天关键词和触发关键词回调URL可以在控制台设置。
 
-**消息内容参数优先级：content > json > xml**
+**注意：请将回调页的HTTP状态码设置为200，否则将视为回调失败，机器人会进行3次重试操作**
 
-## ToDo
+请求方式：POST，Content-Type=application/json
 
-- [ ] QQ机器人JSON消息
-- [ ] QQ机器人XML消息
-- [ ] 触发关键词回调功能
-  - 在群里或者私聊中，机器人接收到的聊天消息包含您设置的聊天关键词，则机器人会向您设置的触发关键词回调URL发送一个POST请求，您可以在接收到该POST请求后做任何业务逻辑。聊天关键词和触发关键词回调URL可以在控制台机器人管理面板设置。
-    - **请求方式：**POST，Content-Type=application/x-www-form-urlencoded
-    - **参数列表：**
+Body：
 
-    - **msg：**包含聊天关键词的消息内容(纯文本,即使消息中包含图片表情等非文本内容)
-    - **qq：**发送消息的QQ号
-    - **group：**消息所在的群号，如果是私聊消息，则该参数为空或null
+```json
+{
+  "id": "触发关键词ID",
+  "uid": "站内所属用户ID",
+  "appType": "app类型，如：qq",
+  "keyword": "包含关键词的完整消息",
+  "callbackURL": "回调URL",
+  "sender": "发送人号码",
+  "group": "触发消息如在群内则为群号码，否则为空",
+  "reply": "控制台设置的是否回复",
+  "response": "如reply为true，则response为回复内容"
+}
+```
 
 ## 声明
 

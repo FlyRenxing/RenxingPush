@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "a004c7b0-0ce2-44c6-9497-7c0b2a436600",
+    "_postman_id": "2027dc43-b0c4-49c2-8404-e88a8d721d32",
     "name": "任性推-Docs"
   },
   "item": [
@@ -166,37 +166,6 @@
             "header": []
           },
           "description": "获取QQ登录URL"
-        },
-        {
-          "name": "添加QQ群白名单",
-          "request": {
-            "method": "POST",
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": 372,\n  \"number\": 807374699,\n  \"userId\": 769\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://::server/sys/qqGroupWhitelist",
-              "protocol": "http",
-              "path": [
-                "sys",
-                "qqGroupWhitelist"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "description": "添加QQ群白名单",
-            "header": []
-          },
-          "description": "添加QQ群白名单"
         }
       ]
     },
@@ -211,16 +180,46 @@
               "mode": "formdata",
               "formdata": [
                 {
+                  "key": "uid",
+                  "type": "text",
+                  "description": "用户ID",
+                  "value": "706"
+                },
+                {
                   "key": "name",
-                  "type": "string",
-                  "description": "    用户名",
-                  "value": "gus.abernathy"
+                  "type": "text",
+                  "description": "用户名",
+                  "value": "这是用户名"
                 },
                 {
                   "key": "password",
-                  "type": "string",
-                  "description": "密码",
-                  "value": "k9v7io"
+                  "type": "text",
+                  "description": "用户密码",
+                  "value": "this_id_password"
+                },
+                {
+                  "key": "admin",
+                  "type": "text",
+                  "description": "是否为管理默认0否1是",
+                  "value": "0"
+                },
+                {
+                  "key": "cipher",
+                  "type": "text",
+                  "description": "用户密钥",
+                  "value": "CH32p41OXu"
+                },
+                {
+                  "key": "dayMaxSendCount",
+                  "type": "text",
+                  "description": "每日最大发送次数",
+                  "value": "200"
+                },
+                {
+                  "key": "openid",
+                  "type": "text",
+                  "description": "qq登录接口的openid",
+                  "value": "558B72975E9AB93FCEDE5C0500C9730F"
                 }
               ]
             },
@@ -253,13 +252,13 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "gus.abernathy"
+                  "value": "blair.huel"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "05dip3"
+                  "value": "2p6xia"
                 }
               ]
             },
@@ -350,7 +349,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "307"
+                  "value": "66"
                 }
               ]
             },
@@ -400,6 +399,200 @@
             "header": []
           },
           "description": "获取当日用户使用次数"
+        },
+        {
+          "name": "添加QQ群白名单",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "number",
+                  "type": "int64",
+                  "description": "群号码",
+                  "value": "169"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/user/qqGroupWhitelist",
+              "protocol": "http",
+              "path": [
+                "user",
+                "qqGroupWhitelist"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "添加QQ群白名单",
+            "header": []
+          },
+          "description": "添加QQ群白名单"
+        },
+        {
+          "name": "获取QQ群白名单列表",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/qqGroupWhitelist",
+              "protocol": "http",
+              "path": [
+                "user",
+                "qqGroupWhitelist"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取QQ群白名单列表",
+            "header": []
+          },
+          "description": "获取QQ群白名单列表"
+        },
+        {
+          "name": "删除QQ群白名单",
+          "request": {
+            "method": "DELETE",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/qqGroupWhitelist/35",
+              "protocol": "http",
+              "path": [
+                "user",
+                "qqGroupWhitelist",
+                ":id"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "975",
+                  "description": "白名单id"
+                }
+              ]
+            },
+            "description": "删除QQ群白名单",
+            "header": []
+          },
+          "description": "删除QQ群白名单"
+        },
+        {
+          "name": "添加消息回调",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 377,\n  \"uid\": 496,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/messageCallback",
+              "protocol": "http",
+              "path": [
+                "user",
+                "messageCallback"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "添加消息回调",
+            "header": []
+          },
+          "description": "添加消息回调"
+        },
+        {
+          "name": "获取消息回调列表",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/messageCallback",
+              "protocol": "http",
+              "path": [
+                "user",
+                "messageCallback"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "获取消息回调列表",
+            "header": []
+          },
+          "description": "获取消息回调列表"
+        },
+        {
+          "name": "删除消息回调",
+          "request": {
+            "method": "DELETE",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/messageCallback/794",
+              "protocol": "http",
+              "path": [
+                "user",
+                "messageCallback",
+                ":id"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "466",
+                  "description": "消息回调id"
+                }
+              ]
+            },
+            "description": "删除消息回调",
+            "header": []
+          },
+          "description": "删除消息回调"
         }
       ]
     }

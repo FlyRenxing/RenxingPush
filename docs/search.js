@@ -49,12 +49,6 @@ api[0].list[1].list.push({
     url: 'http://{{server}}/sys/qqUrl',
     desc: '获取QQ登录URL',
 });
-api[0].list[1].list.push({
-    order: '5',
-    deprecated: 'false',
-    url: 'http://{{server}}/sys/qqGroupWhitelist',
-    desc: '添加QQ群白名单',
-});
 api[0].list.push({
     alias: 'UserController',
     order: '3',
@@ -98,7 +92,44 @@ api[0].list[2].list.push({
     url: 'http://{{server}}/user/ToDayUseCount',
     desc: '获取当日用户使用次数',
 });
+api[0].list[2].list.push({
+    order: '7',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/qqGroupWhitelist',
+    desc: '添加QQ群白名单',
+});
+api[0].list[2].list.push({
+    order: '8',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/qqGroupWhitelist',
+    desc: '获取QQ群白名单列表',
+});
+api[0].list[2].list.push({
+    order: '9',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/qqGroupWhitelist/{id}',
+    desc: '删除QQ群白名单',
+});
+api[0].list[2].list.push({
+    order: '10',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/messageCallback',
+    desc: '添加消息回调',
+});
+api[0].list[2].list.push({
+    order: '11',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/messageCallback',
+    desc: '获取消息回调列表',
+});
+api[0].list[2].list.push({
+    order: '12',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/messageCallback/{id}',
+    desc: '删除消息回调',
+});
 document.onkeydown = keyDownSearch;
+
 function keyDownSearch(e) {
     const theEvent = e;
     const code = theEvent.keyCode || theEvent.which || theEvent.charCode;
