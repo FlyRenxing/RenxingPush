@@ -43,15 +43,14 @@ public class UserController {
     /**
      * 用户管理
      *
-     * @param name     用户名
-     * @param password 密码
+     * @param user 用户，包含用户名密码
      * @return
      * @ignoreParams request
      */
     @PostMapping("/login")
-    public Result<User> login(@RequestParam @Valid @NotEmpty(message = "用户名不能为空") String name,
-                              @RequestParam @Valid @NotEmpty(message = "用户名不能为空") String password) {
-        return new Result<>("登陆成功", userService.login(name, password));
+    public Result<User> login(
+            @RequestBody @Valid User user) {
+        return new Result<>("登陆成功", userService.login(user.getName(), user.getPassword()));
     }
 
     /**

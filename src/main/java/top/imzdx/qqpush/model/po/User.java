@@ -3,6 +3,7 @@ package top.imzdx.qqpush.model.po;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -35,7 +36,7 @@ public class User implements Serializable {
      *
      * @mock this_id_password
      */
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     /**
      * 是否为管理默认0否1是
