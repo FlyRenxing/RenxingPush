@@ -5,6 +5,7 @@ import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
+import net.mamoe.mirai.event.events.BotJoinGroupEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.boot.ApplicationArguments;
@@ -52,6 +53,7 @@ public class AppRunner implements ApplicationRunner {
         Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         qqListener.start();
         QQGroupWhitelistDao qqGroupWhitelistDao = (QQGroupWhitelistDao) appContext.getBean("QQGroupWhitelistDao");
+        //邀请加群监听
         Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, event -> {
             if (!qqGroupWhitelistDao.findByNumber(event.getGroupId()).isEmpty()) {
                 String groupName = event.getGroupName();
@@ -66,6 +68,17 @@ public class AppRunner implements ApplicationRunner {
             }
         });
         qqGroupListener.start();
+        //小群自动同意时的更新群名
+        Listener<BotJoinGroupEvent> botJoinGroupEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotJoinGroupEvent.class, event -> {
+            if (!qqGroupWhitelistDao.findByNumber(event.getGroupId()).isEmpty()) {
+                String groupName = event.getGroup().getName();
+                qqGroupWhitelistDao.findByNumber(event.getGroupId()).forEach(item -> {
+                    item.setGroupName(groupName);
+                    qqGroupWhitelistDao.save(item);
+                });
+            }
+        });
+        botJoinGroupEventListener.start();
     }
 
     @Override
