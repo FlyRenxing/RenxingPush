@@ -2,6 +2,7 @@ package top.imzdx.qqpush.service;
 
 import org.springframework.data.domain.Example;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import top.imzdx.qqpush.model.po.MessageCallback;
@@ -41,11 +42,15 @@ public abstract class MsgCallbackService {
 
     public String callback(MessageCallback messageCallback) {
         int tryCount = 0;
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        //10s
+        requestFactory.setConnectTimeout(10 * 1000);
+        requestFactory.setReadTimeout(10 * 1000);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<MessageCallback> httpEntity = new HttpEntity<>(messageCallback, headers);
         while (tryCount < 3) {
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<MessageCallback> httpEntity = new HttpEntity<>(messageCallback, headers);
             try {
                 ResponseEntity<String> response = restTemplate.exchange(messageCallback.getCallbackURL(), HttpMethod.POST, httpEntity, String.class);
                 //解析返回的数据

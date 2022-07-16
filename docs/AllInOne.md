@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-07-17 01:15:17|2022-07-17 01:15:17|auto|@12774|Created by smart-doc
+v2022-07-17 01:30:44|2022-07-17 01:30:44|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 95,
+      "id": 248,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -172,7 +172,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "qnrb6b"
+  "data": "5ejrt2"
 }
 ```
 
@@ -204,7 +204,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "sa3b76"
+  "data": "dlvgup"
 }
 ```
 
@@ -258,7 +258,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 57,
+    "uid": 520,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -290,7 +290,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=klara.lockman&password=cfd61m'
+curl -X POST -i http://{{server}}/user/register --data 'name=caleb.schumm&password=3sk1lc'
 ```
 **Response-fields:**
 
@@ -313,7 +313,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 955,
+    "uid": 364,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -353,7 +353,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "uczl3c"
+  "data": "zpwrlt"
 }
 ```
 
@@ -393,7 +393,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 884,
+    "uid": 566,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -424,7 +424,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=965'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=575'
 ```
 **Response-fields:**
 
@@ -447,7 +447,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 394,
+    "uid": 173,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -487,7 +487,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 967
+  "data": 956
 }
 ```
 
@@ -510,7 +510,7 @@ number|int64|群号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=212'
+curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=737'
 ```
 **Response-fields:**
 
@@ -531,10 +531,10 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 969,
-    "groupName": "klara.lockman",
+    "id": 122,
+    "groupName": "caleb.schumm",
     "number": 807374699,
-    "userId": 540
+    "userId": 608
   }
 }
 ```
@@ -574,10 +574,10 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 106,
-      "groupName": "klara.lockman",
+      "id": 22,
+      "groupName": "caleb.schumm",
       "number": 807374699,
-      "userId": 942
+      "userId": 130
     }
   ]
 }
@@ -602,7 +602,7 @@ id|int64|白名单id|true|-
 
 **Request-example:**
 ```
-curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/384
+curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/320
 ```
 **Response-fields:**
 
@@ -650,8 +650,8 @@ response|string|回应语|false|-
 
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/messageCallback --data '{
-  "id": 694,
-  "uid": 505,
+  "id": 327,
+  "uid": 344,
   "appType": "qq",
   "keyword": "keyword",
   "callbackURL": "https://www.baidu.com/callback",
@@ -685,8 +685,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 707,
-    "uid": 779,
+    "id": 470,
+    "uid": 408,
     "appType": "qq",
     "keyword": "keyword",
     "callbackURL": "https://www.baidu.com/callback",
@@ -738,8 +738,8 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 20,
-      "uid": 599,
+      "id": 772,
+      "uid": 533,
       "appType": "qq",
       "keyword": "keyword",
       "callbackURL": "https://www.baidu.com/callback",
@@ -771,7 +771,7 @@ id|int64|消息回调id|true|-
 
 **Request-example:**
 ```
-curl -X DELETE -i http://{{server}}/user/messageCallback/726
+curl -X DELETE -i http://{{server}}/user/messageCallback/912
 ```
 **Response-fields:**
 
