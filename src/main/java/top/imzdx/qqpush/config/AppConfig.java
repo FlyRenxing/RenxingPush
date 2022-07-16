@@ -21,6 +21,7 @@ public class AppConfig {
 
     @Data
     public static class System {
+        private boolean openQqgroupWhitelistApply;
         private boolean debug;
         private Check check;
 

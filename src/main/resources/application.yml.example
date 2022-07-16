@@ -1,6 +1,7 @@
 app:
   system:
     debug: true
+    open-qqgroup-whitelist-apply: true
     check:
       text:
         enabled: false

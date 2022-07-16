@@ -2,7 +2,9 @@ package top.imzdx.qqpush.service.impl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.config.GeetestConfig;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
@@ -29,12 +31,15 @@ public class SystemServiceImpl implements SystemService {
     NoteDao noteDao;
     GeetestConfig geetestConfig;
 
+    AppConfig appConfig;
+
     @Autowired
-    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, NoteDao noteDao, GeetestConfig geetestConfig) {
+    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
         this.qqInfoDao = qqInfoDao;
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
         this.noteDao = noteDao;
         this.geetestConfig = geetestConfig;
+        this.appConfig = appConfig;
     }
 
     @Override
@@ -90,6 +95,13 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist) {
+        var isAdmin = AuthTools.getUser().getAdmin() != 0;
+        if (!isAdmin && !appConfig.getSystem().isOpenQqgroupWhitelistApply()) {
+            throw new DefinitionException("您没有权限进行此操作");
+        }
+        qqGroupWhitelistDao.findOne(Example.of(qqGroupWhitelist)).ifPresent(qqGroupWhitelist1 -> {
+            throw new DefinitionException("您已有该群的权限");
+        });
         return qqGroupWhitelistDao.save(qqGroupWhitelist);
     }
 
