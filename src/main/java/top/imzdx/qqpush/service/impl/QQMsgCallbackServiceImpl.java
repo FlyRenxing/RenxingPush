@@ -41,11 +41,17 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
                 messageCallbackLog.setFeedback(feedback);
                 if (feedback != null) {
                     if (event instanceof FriendMessageEvent friendMessageEvent) {
-                        if (messageCallback.getReply())
+                        if (messageCallback.getReply()) {
+                            friendMessageEvent.getSender().sendMessage(messageCallback.getResponse());
+                        } else {
                             friendMessageEvent.getSender().sendMessage(feedback);
+                        }
                     } else if (event instanceof GroupMessageEvent groupMessageEvent) {
-                        if (messageCallback.getReply())
+                        if (messageCallback.getReply()) {
+                            groupMessageEvent.getGroup().sendMessage(messageCallback.getResponse());
+                        } else {
                             groupMessageEvent.getGroup().sendMessage(feedback);
+                        }
                     }
                     saveMessageCallbackLog(messageCallbackLog);
                 } else {

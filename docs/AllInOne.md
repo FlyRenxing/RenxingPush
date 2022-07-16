@@ -2,7 +2,7 @@
 
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-07-16 23:36:06|2022-07-16 23:36:06|auto|@12774|Created by smart-doc
+v2022-07-17 01:15:17|2022-07-17 01:15:17|auto|@12774|Created by smart-doc
 
 ## 消息处理
 
@@ -136,7 +136,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 582,
+      "id": 95,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -172,7 +172,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "vgi4e6"
+  "data": "qnrb6b"
 }
 ```
 
@@ -204,7 +204,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "k0hav0"
+  "data": "sa3b76"
 }
 ```
 
@@ -258,7 +258,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 11,
+    "uid": 57,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -290,7 +290,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=blair.huel&password=euyfmp'
+curl -X POST -i http://{{server}}/user/register --data 'name=klara.lockman&password=cfd61m'
 ```
 **Response-fields:**
 
@@ -313,7 +313,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 377,
+    "uid": 955,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -353,7 +353,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "rvlrat"
+  "data": "uczl3c"
 }
 ```
 
@@ -393,7 +393,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 784,
+    "uid": 884,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -424,7 +424,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=224'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=965'
 ```
 **Response-fields:**
 
@@ -447,7 +447,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 816,
+    "uid": 394,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -483,17 +483,15 @@ msg|string|结果消息，一般反馈给用户|-
 data|int32|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 855
+  "data": 967
 }
 ```
 
 ### 添加QQ群白名单
-
 **URL:** http://{{server}}/user/qqGroupWhitelist
 
 **Type:** POST
@@ -511,11 +509,9 @@ Parameter | Type|Description|Required|Since
 number|int64|群号码|true|-
 
 **Request-example:**
-
 ```
-curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=936'
+curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=212'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -535,16 +531,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 546,
-    "groupName": "blair.huel",
+    "id": 969,
+    "groupName": "klara.lockman",
     "number": 807374699,
-    "userId": 75
+    "userId": 540
   }
 }
 ```
 
 ### 获取QQ群白名单列表
-
 **URL:** http://{{server}}/user/qqGroupWhitelist
 
 **Type:** GET
@@ -556,11 +551,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取QQ群白名单列表
 
 **Request-example:**
-
 ```
 curl -X GET -i http://{{server}}/user/qqGroupWhitelist
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -581,17 +574,16 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 305,
-      "groupName": "blair.huel",
+      "id": 106,
+      "groupName": "klara.lockman",
       "number": 807374699,
-      "userId": 158
+      "userId": 942
     }
   ]
 }
 ```
 
 ### 删除QQ群白名单
-
 **URL:** http://{{server}}/user/qqGroupWhitelist/{id}
 
 **Type:** DELETE
@@ -609,11 +601,9 @@ Parameter | Type|Description|Required|Since
 id|int64|白名单id|true|-
 
 **Request-example:**
-
 ```
-curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/856
+curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/384
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -623,7 +613,6 @@ msg|string|结果消息，一般反馈给用户|-
 data|boolean|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
@@ -633,7 +622,6 @@ data|boolean|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 添加消息回调
-
 **URL:** http://{{server}}/user/messageCallback
 
 **Type:** POST
@@ -662,8 +650,8 @@ response|string|回应语|false|-
 
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/messageCallback --data '{
-  "id": 914,
-  "uid": 881,
+  "id": 694,
+  "uid": 505,
   "appType": "qq",
   "keyword": "keyword",
   "callbackURL": "https://www.baidu.com/callback",
@@ -673,7 +661,6 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{serv
   "response": "回调成功了"
 }'
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -698,8 +685,8 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 567,
-    "uid": 659,
+    "id": 707,
+    "uid": 779,
     "appType": "qq",
     "keyword": "keyword",
     "callbackURL": "https://www.baidu.com/callback",
@@ -712,7 +699,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 获取消息回调列表
-
 **URL:** http://{{server}}/user/messageCallback
 
 **Type:** GET
@@ -724,11 +710,9 @@ data|object|结果数据，一般反馈给前端进行处理|-
 **Description:** 获取消息回调列表
 
 **Request-example:**
-
 ```
 curl -X GET -i http://{{server}}/user/messageCallback
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -754,8 +738,8 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 875,
-      "uid": 97,
+      "id": 20,
+      "uid": 599,
       "appType": "qq",
       "keyword": "keyword",
       "callbackURL": "https://www.baidu.com/callback",
@@ -769,7 +753,6 @@ data|array|结果数据，一般反馈给前端进行处理|-
 ```
 
 ### 删除消息回调
-
 **URL:** http://{{server}}/user/messageCallback/{id}
 
 **Type:** DELETE
@@ -787,11 +770,9 @@ Parameter | Type|Description|Required|Since
 id|int64|消息回调id|true|-
 
 **Request-example:**
-
 ```
-curl -X DELETE -i http://{{server}}/user/messageCallback/636
+curl -X DELETE -i http://{{server}}/user/messageCallback/726
 ```
-
 **Response-fields:**
 
 Field | Type|Description|Since
@@ -801,7 +782,6 @@ msg|string|结果消息，一般反馈给用户|-
 data|boolean|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,

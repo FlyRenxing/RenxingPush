@@ -129,7 +129,6 @@ api[0].list[2].list.push({
     desc: '删除消息回调',
 });
 document.onkeydown = keyDownSearch;
-
 function keyDownSearch(e) {
     const theEvent = e;
     const code = theEvent.keyCode || theEvent.which || theEvent.charCode;
