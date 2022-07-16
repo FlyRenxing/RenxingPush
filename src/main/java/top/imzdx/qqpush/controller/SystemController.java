@@ -3,17 +3,13 @@ package top.imzdx.qqpush.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
 import top.imzdx.qqpush.model.po.Note;
-import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
-import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.QQConnection;
 
 import java.util.List;
@@ -77,21 +73,6 @@ public class SystemController {
     @GetMapping("qqUrl")
     public Result<String> getQQUrl() {
         return new Result<>("ok", qqConnection.getUrl());
-    }
-
-    /**
-     * 添加QQ群白名单
-     *
-     * @param number 群号码
-     * @return
-     */
-    @PostMapping("qqGroupWhitelist")
-    @LoginRequired
-    public Result<QQGroupWhitelist> insertQQGroupWhitelist(Long number) {
-        QQGroupWhitelist qqGroupWhitelist = new QQGroupWhitelist();
-        qqGroupWhitelist.setNumber(number);
-        qqGroupWhitelist.setUserId(AuthTools.getUser().getUid());
-        return new Result<>("ok", systemService.insertQQGroupWhitelist(qqGroupWhitelist));
     }
 
 }

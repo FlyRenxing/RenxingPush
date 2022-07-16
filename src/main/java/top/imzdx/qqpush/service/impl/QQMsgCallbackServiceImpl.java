@@ -14,7 +14,6 @@ import top.imzdx.qqpush.repository.MessageCallbackDao;
 import top.imzdx.qqpush.repository.MessageCallbackLogDao;
 import top.imzdx.qqpush.service.MsgCallbackService;
 
-import static top.imzdx.qqpush.model.po.MessageCallbackLog.FEEDBACK_OK;
 import static top.imzdx.qqpush.model.po.MessageCallbackLog.TYPE_QQ;
 
 @Service
@@ -40,13 +39,13 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
                         .setUid(messageCallback.getUid());
                 String feedback = callback(messageCallback);
                 messageCallbackLog.setFeedback(feedback);
-                if (feedback != null && feedback.equals(FEEDBACK_OK)) {
+                if (feedback != null) {
                     if (event instanceof FriendMessageEvent friendMessageEvent) {
                         if (messageCallback.getReply())
-                            friendMessageEvent.getSender().sendMessage(messageCallback.getResponse());
+                            friendMessageEvent.getSender().sendMessage(feedback);
                     } else if (event instanceof GroupMessageEvent groupMessageEvent) {
                         if (messageCallback.getReply())
-                            groupMessageEvent.getGroup().sendMessage(messageCallback.getResponse());
+                            groupMessageEvent.getGroup().sendMessage(feedback);
                     }
                     saveMessageCallbackLog(messageCallbackLog);
                 } else {

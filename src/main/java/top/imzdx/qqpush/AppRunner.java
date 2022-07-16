@@ -12,10 +12,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import top.imzdx.qqpush.model.po.QQInfo;
+import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.QQInfoDao;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Renxing
@@ -49,8 +51,20 @@ public class AppRunner implements ApplicationRunner {
          */
         Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         qqListener.start();
-
-        Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, BotInvitedJoinGroupRequestEvent::accept);
+        QQGroupWhitelistDao qqGroupWhitelistDao = (QQGroupWhitelistDao) appContext.getBean("QQGroupWhitelistDao");
+        Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, event -> {
+            if (!qqGroupWhitelistDao.findByNumber(event.getGroupId()).isEmpty()) {
+                String groupName = event.getGroupName();
+                qqGroupWhitelistDao.findByNumber(event.getGroupId()).forEach(item -> {
+                    item.setGroupName(groupName);
+                    qqGroupWhitelistDao.save(item);
+                });
+                event.accept();
+            } else {
+                event.ignore();
+                Objects.requireNonNull(event.getInvitor()).sendMessage("您好，请先在任性推控制台内申请添加白名单，通过后再次邀请。");
+            }
+        });
         qqGroupListener.start();
     }
 

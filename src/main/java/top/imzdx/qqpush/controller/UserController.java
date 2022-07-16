@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
+import top.imzdx.qqpush.model.po.MessageCallback;
+import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.UserDao;
 import top.imzdx.qqpush.service.SystemService;
 import top.imzdx.qqpush.service.UserService;
 import top.imzdx.qqpush.utils.AuthTools;
 import top.imzdx.qqpush.utils.DefinitionException;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 用户相关
@@ -49,7 +54,7 @@ public class UserController {
      */
     @PostMapping("/login")
     public Result<User> login(
-            @RequestBody @Valid User user) {
+            @Valid User user) {
         return new Result<>("登陆成功", userService.login(user.getName(), user.getPassword()));
     }
 
@@ -148,4 +153,67 @@ public class UserController {
         return new Result<>("ok", userService.selectToDayUserUseCount(user.getUid()));
     }
 
+    /**
+     * 添加QQ群白名单
+     *
+     * @param number 群号码
+     * @return
+     */
+    @PostMapping("qqGroupWhitelist")
+    @LoginRequired
+    public Result<QQGroupWhitelist> insertQQGroupWhitelist(@RequestParam @NotNull Long number) {
+        QQGroupWhitelist qqGroupWhitelist = new QQGroupWhitelist();
+        qqGroupWhitelist.setNumber(number);
+        qqGroupWhitelist.setUserId(AuthTools.getUser().getUid());
+        return new Result<>("ok", systemService.insertQQGroupWhitelist(qqGroupWhitelist));
+    }
+
+    /**
+     * 获取QQ群白名单列表
+     */
+    @GetMapping("qqGroupWhitelist")
+    @LoginRequired
+    public Result<List<QQGroupWhitelist>> getQQGroupWhitelist() {
+        return new Result<>("ok", systemService.getQQGroupWhitelist(AuthTools.getUser().getUid()));
+    }
+
+    /**
+     * 删除QQ群白名单
+     *
+     * @param id 白名单id
+     */
+    @DeleteMapping("qqGroupWhitelist/{id}")
+    @LoginRequired
+    public Result<Boolean> deleteQQGroupWhitelist(@PathVariable Long id) {
+        return new Result<>("ok", systemService.deleteQQGroupWhitelist(id));
+    }
+
+    /**
+     * 添加消息回调
+     */
+    @PostMapping("/messageCallback")
+    @LoginRequired
+    public Result<MessageCallback> insertMessageCallback(@RequestBody MessageCallback messageCallback) {
+        return new Result<>("ok", systemService.insertMessageCallback(messageCallback));
+    }
+
+    /**
+     * 获取消息回调列表
+     */
+    @GetMapping("/messageCallback")
+    @LoginRequired
+    public Result<List<MessageCallback>> getMessageCallback() {
+        return new Result<>("ok", systemService.getMessageCallback(AuthTools.getUser().getUid()));
+    }
+
+    /**
+     * 删除消息回调
+     *
+     * @param id 消息回调id
+     */
+    @DeleteMapping("/messageCallback/{id}")
+    @LoginRequired
+    public Result<Boolean> deleteMessageCallback(@PathVariable Long id) {
+        return new Result<>("ok", systemService.deleteMessageCallback(id));
+    }
 }

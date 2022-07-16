@@ -1,6 +1,7 @@
 package top.imzdx.qqpush.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import top.imzdx.qqpush.model.po.MessageCallback;
 import top.imzdx.qqpush.model.po.Note;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.QQInfo;
@@ -21,4 +22,14 @@ public interface SystemService {
     boolean checkCaptcha(HttpServletRequest request);
 
     QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist);
+
+    List<QQGroupWhitelist> getQQGroupWhitelist(Long uid);
+
+    boolean deleteQQGroupWhitelist(Long id);
+
+    List<MessageCallback> getMessageCallback(Long uid);
+
+    MessageCallback insertMessageCallback(MessageCallback messageCallback);
+
+    boolean deleteMessageCallback(Long id);
 }

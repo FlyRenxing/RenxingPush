@@ -13,4 +13,6 @@ import java.util.List;
 public interface QQGroupWhitelistDao extends JpaRepository<QQGroupWhitelist, Long> {
 
     List<QQGroupWhitelist> findByNumber(Long qqGroup);
+
+    List<QQGroupWhitelist> findByUserId(Long uid);
 }

@@ -6,9 +6,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.config.GeetestConfig;
-import top.imzdx.qqpush.model.po.Note;
-import top.imzdx.qqpush.model.po.QQGroupWhitelist;
-import top.imzdx.qqpush.model.po.QQInfo;
+import top.imzdx.qqpush.model.po.*;
+import top.imzdx.qqpush.repository.MessageCallbackDao;
 import top.imzdx.qqpush.repository.NoteDao;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.QQInfoDao;
@@ -28,15 +27,17 @@ import java.util.List;
 public class SystemServiceImpl implements SystemService {
     QQInfoDao qqInfoDao;
     QQGroupWhitelistDao qqGroupWhitelistDao;
+    MessageCallbackDao messageCallbackDao;
     NoteDao noteDao;
     GeetestConfig geetestConfig;
 
     AppConfig appConfig;
 
     @Autowired
-    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
+    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, MessageCallbackDao messageCallbackDao, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
         this.qqInfoDao = qqInfoDao;
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
+        this.messageCallbackDao = messageCallbackDao;
         this.noteDao = noteDao;
         this.geetestConfig = geetestConfig;
         this.appConfig = appConfig;
@@ -95,7 +96,8 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist) {
-        var isAdmin = AuthTools.getUser().getAdmin() != 0;
+        User user = AuthTools.getUser();
+        var isAdmin = user.getAdmin() != 0;
         if (!isAdmin && !appConfig.getSystem().isOpenQqgroupWhitelistApply()) {
             throw new DefinitionException("您没有权限进行此操作");
         }
@@ -103,6 +105,49 @@ public class SystemServiceImpl implements SystemService {
             throw new DefinitionException("您已有该群的权限");
         });
         return qqGroupWhitelistDao.save(qqGroupWhitelist);
+    }
+
+    @Override
+    public List<QQGroupWhitelist> getQQGroupWhitelist(Long uid) {
+        return qqGroupWhitelistDao.findByUserId(uid);
+    }
+
+    @Override
+    public boolean deleteQQGroupWhitelist(Long id) {
+        User user = AuthTools.getUser();
+        qqGroupWhitelistDao.findById(id).ifPresent(qqGroupWhitelist -> {
+            if (user.getAdmin() != 0 || qqGroupWhitelist.getUserId().equals(user.getUid())) {
+                qqGroupWhitelistDao.deleteById(id);
+            } else {
+                throw new DefinitionException("您没有权限进行此操作");
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public List<MessageCallback> getMessageCallback(Long uid) {
+        return messageCallbackDao.findByUid(uid);
+    }
+
+    @Override
+    public MessageCallback insertMessageCallback(MessageCallback messageCallback) {
+        User user = AuthTools.getUser();
+        messageCallback.setUid(user.getUid());
+        return messageCallbackDao.save(messageCallback);
+    }
+
+    @Override
+    public boolean deleteMessageCallback(Long id) {
+        User user = AuthTools.getUser();
+        messageCallbackDao.findById(id).ifPresent(messageCallback -> {
+            if (user.getAdmin() != 0 || messageCallback.getUid().equals(user.getUid())) {
+                messageCallbackDao.deleteById(id);
+            } else {
+                throw new DefinitionException("您没有权限进行此操作");
+            }
+        });
+        return true;
     }
 
     public HashMap<String, String> getCaptchaParams(HttpServletRequest request) {

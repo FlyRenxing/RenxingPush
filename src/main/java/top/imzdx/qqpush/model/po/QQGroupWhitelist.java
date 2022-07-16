@@ -20,6 +20,10 @@ public class QQGroupWhitelist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
     private Long id;
     /**
+     * 群名称
+     */
+    private String groupName;
+    /**
      * 群号码
      *
      * @mock 807374699
