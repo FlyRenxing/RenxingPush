@@ -3,6 +3,7 @@ package top.imzdx.qqpush.utils;
 
 import com.google.zxing.NotFoundException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
@@ -17,6 +18,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.UserDao;
+import top.imzdx.qqpush.service.UserService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,17 +33,19 @@ import static org.telegram.abilitybots.api.objects.Locality.USER;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
+@Component
 public class TelegramBot extends AbilityBot {
     AppConfig appConfig;
-    ApplicationContext appContext;
+
+    UserService userService;
 
     UserDao userDao;
 
     public TelegramBot(DefaultBotOptions options, AppConfig appConfig, ApplicationContext appContext) {
         super(appConfig.getTelegram().getBotToken(), appConfig.getTelegram().getBotName(), options);
         this.appConfig = appConfig;
-        this.appContext = appContext;
         this.userDao = appContext.getBean(UserDao.class);
+        this.userService = appContext.getBean(UserService.class);
     }
 
     @Override
@@ -71,7 +75,7 @@ public class TelegramBot extends AbilityBot {
             PhotoSize photo = photoSizeList.stream().max(Comparator.comparingInt(PhotoSize::getFileSize)).orElseThrow(() -> new DefinitionException("图片下载失败"));
             try (InputStream inputStream = downloadFileAsStream(getFilePath(photo))) {
                 String result = ImageTools.parseQRCodeByFile(inputStream);
-                User user = bindUser(getChatId(update), result);
+                User user = userService.bindTelegramUser(getChatId(update), result);
                 if (Objects.equals(user.getTelegramId(), getChatId(update))) {
                     silent.send("绑定成功！", getChatId(update));
                 }
@@ -87,16 +91,8 @@ public class TelegramBot extends AbilityBot {
         return Reply.of(action, Flag.PHOTO);
     }
 
-    public User bindUser(Long chatId, String cipher) {
-        if (userDao.findByTelegramId(chatId) != null) {
-            throw new DefinitionException("此telegram账户已与其他账户绑定，请前往官网进行解绑");
-        }
-        User user = userDao.findByCipher(cipher).orElseThrow(() -> new DefinitionException("Cipher不正确"));
-        user.setTelegramId(chatId);
-        return userDao.save(user);
-    }
 
-    public String getFilePath(PhotoSize photo) {
+    private String getFilePath(PhotoSize photo) {
         Objects.requireNonNull(photo);
 
         if (photo.getFilePath() != null) { // If the file_path is already present, we are done!

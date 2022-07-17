@@ -8,15 +8,14 @@ import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.BotJoinGroupEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import net.mamoe.mirai.utils.BotConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.QQInfoDao;
@@ -32,7 +31,12 @@ import java.util.Objects;
 @Component
 public class AppRunner implements ApplicationRunner {
     static ApplicationContext appContext = SpringUtil.getApplicationContext();
-    static AppConfig appConfig = appContext.getBean(AppConfig.class);
+    static TelegramBot telegramBot;
+
+    @Autowired
+    public AppRunner(TelegramBot telegramBot) {
+        AppRunner.telegramBot = telegramBot;
+    }
 
     public static void qqInit() {
 
@@ -54,10 +58,10 @@ public class AppRunner implements ApplicationRunner {
             }
             qqInfoDao.save(item);
         }
-        /**
-         * 修复当机器人账号设置为允许任何人添加好友时，
-         * mirai的联系人缓存机制会导致Bot.getFriends()抛出异常无法找到新添加的好友。
-         * 现使用好友监听功能，由机器人接管同意请求
+        /*
+          修复当机器人账号设置为允许任何人添加好友时，
+          mirai的联系人缓存机制会导致Bot.getFriends()抛出异常无法找到新添加的好友。
+          现使用好友监听功能，由机器人接管同意请求
          */
         Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         qqListener.start();
@@ -93,14 +97,7 @@ public class AppRunner implements ApplicationRunner {
     public static void telegramInit() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            DefaultBotOptions defaultBotOptions = new DefaultBotOptions();
-            //本地调试设置代理
-            if (appConfig.getSystem().isDebug()) {
-                defaultBotOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
-                defaultBotOptions.setProxyHost("localhost");
-                defaultBotOptions.setProxyPort(7890);
-            }
-            botsApi.registerBot(new TelegramBot(defaultBotOptions, appConfig, appContext));
+            botsApi.registerBot(telegramBot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

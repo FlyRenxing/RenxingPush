@@ -151,5 +151,13 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    public User bindTelegramUser(Long chatId, String cipher) {
+        if (userDao.findByTelegramId(chatId) != null) {
+            throw new DefinitionException("此telegram账户已与其他账户绑定，请前往官网进行解绑");
+        }
+        User user = userDao.findByCipher(cipher).orElseThrow(() -> new DefinitionException("Cipher不正确"));
+        user.setTelegramId(chatId);
+        return userDao.save(user);
+    }
 
 }

@@ -18,14 +18,15 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class MsgMeta implements Serializable {
     /**
-     * 消息类型，目前仅支持"qq"、"qq_group"
+     * 消息类型，目前仅支持"qq"、"qq_group、telegram"
      *
      * @mock qq
      */
-    @Pattern(regexp = "(^qq$|^qq_group$)", message = "type暂仅支持qq、qq_group")
+    @Pattern(regexp = "(^qq$|^qq_group$|^telegram$)", message = "type暂仅支持qq、qq_group、telegram")
     private String type;
     /**
-     * 消息元数据，与type对应，qq：QQ号，qq_group：QQ群号
+     * 消息元数据，与type对应。
+     * qq-QQ号，qq_group-QQ群号，telegram-空（需绑定机器人）
      *
      * @mock 1277489864
      */

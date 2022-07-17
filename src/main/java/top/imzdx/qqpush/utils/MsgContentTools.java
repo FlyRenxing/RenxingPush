@@ -103,6 +103,4 @@ public class MsgContentTools {
         }
         return chainBuilder.build();
     }
-
-
 }

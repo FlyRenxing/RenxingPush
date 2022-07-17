@@ -26,4 +26,6 @@ public interface UserService {
     int selectToDayUserUseCount(long uid);
 
     User qqLogin(HttpServletRequest request, HttpServletResponse response, String code);
+
+    User bindTelegramUser(Long chatId, String cipher);
 }

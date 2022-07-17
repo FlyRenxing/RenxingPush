@@ -1,7 +1,5 @@
 package top.imzdx.qqpush.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +17,19 @@ import top.imzdx.qqpush.utils.MsgContentTools;
  * @author Renxing
  */
 @Service("qq")
-public class QQMsgServiceImpl implements MsgService {
+public class QQMsgServiceImpl extends MsgService {
     MsgContentTools msgContentTools;
     MessageLogDao messageLogDao;
     UserDao userDao;
 
     @Autowired
     public QQMsgServiceImpl(MsgContentTools msgContentTools, MessageLogDao messageLogDao, UserDao userDao) {
+        super(messageLogDao);
         this.msgContentTools = msgContentTools;
         this.messageLogDao = messageLogDao;
         this.userDao = userDao;
     }
 
-    @Override
     public void sendMsg(User user, Msg msg) {
         MessageLog messageLog = saveMsgToDB(msg, user.getUid());
         riskControl(user, messageLog);
@@ -49,22 +47,6 @@ public class QQMsgServiceImpl implements MsgService {
         }
         throw messageLog.fail("该机器人离线或您没有添加指定机器人为好友，请先添加您目前绑定的机器人为好友");
 
-    }
-
-    @Override
-    public MessageLog saveMsgToDB(Msg msg, long uid) {
-        ObjectMapper mapper = new ObjectMapper();
-        MessageLog messageLog = null;
-        try {
-            messageLog = new MessageLog()
-                    .setContent(msg.getContent())
-                    .setMeta(mapper.writeValueAsString(msg.getMeta()))
-                    .setUid(uid)
-                    .setStatus(MessageLog.STATUS_SUCCESS);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        return messageLogDao.save(messageLog);
     }
 
     void riskControl(User user, MessageLog messageLog) {
