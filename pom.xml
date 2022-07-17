@@ -117,6 +117,21 @@
             <artifactId>jaxb-api</artifactId>
             <version>2.4.0-b180830.0359</version>
         </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-abilities</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -174,7 +189,7 @@
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <phase>compile</phase>
+                        <!--                        <phase>compile</phase>-->
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>

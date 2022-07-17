@@ -36,6 +36,10 @@ app:
     AppKey: 123
     back-url: 123
     redirect-uri: 123
+  telegram:
+    bot-token: 123
+    bot-name: telegram-bot
+    creator-id: 132
 server:
   port: 8000
 spring:

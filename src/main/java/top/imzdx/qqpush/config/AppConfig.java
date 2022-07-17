@@ -18,6 +18,7 @@ public class AppConfig {
     private System.Qq qq;
     private System.Aliyun aliyun;
     private System.Geetest geetest;
+    private System.Telegram telegram;
 
     @Data
     public static class System {
@@ -81,6 +82,13 @@ public class AppConfig {
             private String id;
             private String key;
             private boolean enabled;
+        }
+
+        @Data
+        public static class Telegram {
+            private String botToken;
+            private String botName;
+            private long creatorId;
         }
     }
 }

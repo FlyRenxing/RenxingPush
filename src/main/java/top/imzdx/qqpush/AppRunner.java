@@ -12,9 +12,15 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.repository.QQGroupWhitelistDao;
 import top.imzdx.qqpush.repository.QQInfoDao;
+import top.imzdx.qqpush.utils.TelegramBot;
 
 import java.io.File;
 import java.util.List;
@@ -25,9 +31,12 @@ import java.util.Objects;
  */
 @Component
 public class AppRunner implements ApplicationRunner {
+    static ApplicationContext appContext = SpringUtil.getApplicationContext();
+    static AppConfig appConfig = appContext.getBean(AppConfig.class);
+
     public static void qqInit() {
-        ApplicationContext appContext = SpringUtil.getApplicationContext();
-        QQInfoDao qqInfoDao = (QQInfoDao) appContext.getBean("QQInfoDao");
+
+        QQInfoDao qqInfoDao = appContext.getBean(QQInfoDao.class);
         //所有账号登陆
         List<QQInfo> QQInfoList = qqInfoDao.findAll();
         for (QQInfo item :
@@ -52,7 +61,7 @@ public class AppRunner implements ApplicationRunner {
          */
         Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         qqListener.start();
-        QQGroupWhitelistDao qqGroupWhitelistDao = (QQGroupWhitelistDao) appContext.getBean("QQGroupWhitelistDao");
+        QQGroupWhitelistDao qqGroupWhitelistDao = appContext.getBean(QQGroupWhitelistDao.class);
         //邀请加群监听
         Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, event -> {
             if (!qqGroupWhitelistDao.findByNumber(event.getGroupId()).isEmpty()) {
@@ -81,8 +90,26 @@ public class AppRunner implements ApplicationRunner {
         botJoinGroupEventListener.start();
     }
 
+    public static void telegramInit() {
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            DefaultBotOptions defaultBotOptions = new DefaultBotOptions();
+            //本地调试设置代理
+            if (appConfig.getSystem().isDebug()) {
+                defaultBotOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
+                defaultBotOptions.setProxyHost("localhost");
+                defaultBotOptions.setProxyPort(7890);
+            }
+            botsApi.registerBot(new TelegramBot(defaultBotOptions, appConfig, appContext));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         qqInit();
+        telegramInit();
     }
 }

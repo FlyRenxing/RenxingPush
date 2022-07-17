@@ -70,6 +70,14 @@ public class User implements Serializable {
     @JsonIgnore
     private String openid;
 
+    /**
+     * telegramID
+     *
+     * @mock 123
+     */
+    @JsonIgnore
+    private Long telegramId;
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor

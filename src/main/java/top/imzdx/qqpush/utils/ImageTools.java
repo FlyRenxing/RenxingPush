@@ -3,10 +3,13 @@ package top.imzdx.qqpush.utils;
 import cn.hutool.core.img.gif.GifDecoder;
 import cn.hutool.core.io.resource.BytesResource;
 import cn.hutool.core.io.resource.MultiResource;
+import cn.hutool.extra.qrcode.BufferedImageLuminanceSource;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.zxing.*;
+import com.google.zxing.common.HybridBinarizer;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -19,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 @Component
@@ -179,6 +183,41 @@ public class ImageTools {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * 根据本地二维码图片————————解析二维码内容
+     * （注：图片必须是二维码图片，但也可以是微信用户二维码名片，上面有名称、头像也是可以的）
+     *
+     * @param inputStream 二维码图标输入流
+     * @return
+     * @throws Exception
+     */
+    public static String parseQRCodeByFile(InputStream inputStream) throws IOException, NotFoundException {
+        String resultStr = null;
+
+        /**ImageIO 的 BufferedImage read(URL input) 方法用于读取网络图片文件转为内存缓冲图像
+         * 同理还有：read(File input)、read(InputStream input)、、read(ImageInputStream stream)
+         */
+        BufferedImage bufferedImage = ImageIO.read(inputStream);
+        /**
+         * com.google.zxing.client.j2se.BufferedImageLuminanceSource：缓冲图像亮度源
+         * 将 java.awt.image.BufferedImage 转为 zxing 的 缓冲图像亮度源
+         * 关键就是下面这几句：HybridBinarizer 用于读取二维码图像数据，BinaryBitmap 二进制位图
+         */
+        BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        Hashtable<DecodeHintType, String> hints = new Hashtable<>();
+        hints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
+        /**
+         * 如果图片不是二维码图片，则 decode 抛异常：com.google.zxing.NotFoundException
+         * MultiFormatWriter 的 encode 用于对内容进行编码成 2D 矩阵
+         * MultiFormatReader 的 decode 用于读取二进制位图数据
+         */
+        Result result = new MultiFormatReader().decode(bitmap, hints);
+        resultStr = result.getText();
+
+        return resultStr;
     }
 
     @Data

@@ -5,6 +5,8 @@ build/
 !**/src/main/**
 !**/src/test/**
 /src/main/resources/application.yml
+telegram-bot
+telegram-bot.wal.0
 
 ### STS ###
 .apt_generated

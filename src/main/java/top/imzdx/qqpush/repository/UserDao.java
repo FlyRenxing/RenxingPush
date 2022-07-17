@@ -24,4 +24,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     Optional<User> findByName(String userName);
 
     Optional<User> findByOpenid(String openid);
+
+    User findByTelegramId(Long telegramId);
 }
