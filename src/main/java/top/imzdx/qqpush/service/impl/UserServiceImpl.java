@@ -5,6 +5,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telegram.abilitybots.api.bot.BaseAbilityBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.model.po.User;
@@ -16,7 +20,11 @@ import top.imzdx.qqpush.utils.DefinitionException;
 import top.imzdx.qqpush.utils.QQConnection;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Optional;
+
+import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 
 /**
@@ -24,12 +32,14 @@ import java.util.Optional;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    public static final String TELEGRAM_LOGIN_PERFIXT = "RenxingPush-Login:";
     QQInfoDao qqInfoDao;
     UserDao userDao;
     QQConnection qqConnection;
     AuthTools authTools;
     AppConfig appConfig;
-    int digit;
+
+    HashMap<String, User> telegramLoginCodeMap = new HashMap<>();
 
     @Autowired
     public UserServiceImpl(QQInfoDao qqInfoDao, UserDao userDao, AuthTools authTools, QQConnection qqConnection,
@@ -151,13 +161,54 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public User bindTelegramUser(Long chatId, String cipher) {
-        if (userDao.findByTelegramId(chatId) != null) {
+    public User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher) {
+        Long chatId = update.getMessage().getChatId();
+        if (userDao.findByTelegramId(chatId).isPresent()) {
             throw new DefinitionException("此telegram账户已与其他账户绑定，请前往官网进行解绑");
         }
         User user = userDao.findByCipher(cipher).orElseThrow(() -> new DefinitionException("Cipher不正确"));
         user.setTelegramId(chatId);
-        return userDao.save(user);
+        user = userDao.save(user);
+        if (Objects.equals(user.getTelegramId(), getChatId(update))) {
+            try {
+                bot.execute(new SendMessage(chatId + "", "绑定成功"));
+            } catch (TelegramApiException e) {
+                throw new DefinitionException("绑定失败");
+            }
+        }
+        return user;
     }
+
+    @Override
+    public User putTelegramLoginCode(String code, Long chatId) {
+        User user = userDao.findByTelegramId(chatId).orElseThrow(() -> new DefinitionException("用户不存在"));
+        telegramLoginCodeMap.put(code, user);
+        return user;
+    }
+
+    @Override
+    public String getTelegramLoginCode() {
+        String code;
+        do {
+            code = AuthTools.generateRandomString(6);
+        } while (telegramLoginCodeMap.get(code) != null);
+        return code;
+    }
+
+    @Override
+    public boolean hasTelegramLogin(String code) {
+        return telegramLoginCodeMap.get(code) != null;
+    }
+
+    @Override
+    public User telegramQRCodeLogin(String code) {
+        User user = telegramLoginCodeMap.get(code);
+        if (user == null) {
+            throw new DefinitionException("二维码/代码已过期，请重新扫描");
+        }
+        AuthTools.login(user.getUid());
+        return user;
+    }
+
 
 }

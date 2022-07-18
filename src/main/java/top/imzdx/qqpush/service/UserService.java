@@ -3,6 +3,8 @@ package top.imzdx.qqpush.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.telegram.abilitybots.api.bot.BaseAbilityBot;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import top.imzdx.qqpush.model.po.User;
 
 /**
@@ -27,5 +29,13 @@ public interface UserService {
 
     User qqLogin(HttpServletRequest request, HttpServletResponse response, String code);
 
-    User bindTelegramUser(Long chatId, String cipher);
+    User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher);
+
+    User putTelegramLoginCode(String result, Long chatId);
+
+    String getTelegramLoginCode();
+
+    boolean hasTelegramLogin(String code);
+
+    User telegramQRCodeLogin(String code);
 }

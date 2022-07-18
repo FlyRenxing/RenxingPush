@@ -38,7 +38,7 @@ public class TelegramMsgServiceImpl extends MsgService {
         MessageLog messageLog = saveMsgToDB(msg, user.getUid());
 
         SendMessage message = new SendMessage();
-        message.setChatId(user.getTelegramId());
+        message.setChatId(msg.getMeta().getData());
         message.setText(msg.getContent());
         try {
             telegramBot.execute(message);

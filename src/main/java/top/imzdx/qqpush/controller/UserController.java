@@ -76,6 +76,14 @@ public class UserController {
     }
 
     /**
+     * telegram二维码登录
+     */
+    @PostMapping("/telegramQRCodeLogin")
+    public Result<User> telegramQRCodeLogin(@RequestParam("code") String code) {
+        return new Result<>("登录成功", userService.telegramQRCodeLogin(code));
+    }
+
+    /**
      * 注册
      *
      * @param name     用户名

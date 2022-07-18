@@ -8,6 +8,7 @@ import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
+import org.telegram.abilitybots.api.objects.MessageContext;
 import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
@@ -27,8 +28,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-import static org.telegram.abilitybots.api.objects.Flag.MESSAGE;
-import static org.telegram.abilitybots.api.objects.Flag.REPLY;
 import static org.telegram.abilitybots.api.objects.Locality.USER;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
@@ -53,32 +52,19 @@ public class TelegramBot extends AbilityBot {
         return appConfig.getTelegram().getCreatorId();
     }
 
-    public Ability bindUser() {
-        return Ability.builder().name("bind").info("绑定用户").privacy(PUBLIC).locality(USER).input(1).action(ctx -> silent.forceReply("123", ctx.chatId()))
-                // The signature of a reply is -> (Consumer<Update> action, Predicate<Update>... conditions)
-                // So, we  first declare the action that takes an update (NOT A MESSAGECONTEXT) like the action above
-                // The reason of that is that a reply can be so versatile depending on the message, context becomes an inefficient wrapping
-                .reply((bot, update) -> {
-                    // Prints to console
-                    System.out.println("I'm in a reply!");
-                    // Sends message
-                    silent.send("It's been nice playing with you!", update.getMessage().getChatId());
-                }, MESSAGE, REPLY)
-                // You can add more replies by calling .reply(...)
-                .build();
-    }
-
-    public Reply qrcodeBind() {
+    public Reply qrcodeLogin() {
         // getChatId is a public utility function in rg.telegram.abilitybots.api.util.AbilityUtils
         BiConsumer<BaseAbilityBot, Update> action = (bot, update) -> {
             List<PhotoSize> photoSizeList = update.getMessage().getPhoto();
             PhotoSize photo = photoSizeList.stream().max(Comparator.comparingInt(PhotoSize::getFileSize)).orElseThrow(() -> new DefinitionException("图片下载失败"));
             try (InputStream inputStream = downloadFileAsStream(getFilePath(photo))) {
                 String result = ImageTools.parseQRCodeByFile(inputStream);
-                User user = userService.bindTelegramUser(getChatId(update), result);
-                if (Objects.equals(user.getTelegramId(), getChatId(update))) {
-                    silent.send("绑定成功！", getChatId(update));
+                if (!result.contains("RenxingPush-Login:")) {
+                    silent.send("此二维码非登录二维码", getChatId(update));
                 }
+                var code = result.split(":")[1];
+                User user = userService.putTelegramLoginCode(code, getChatId(update));
+                silent.send("认证成功！欢迎您，" + user.getName(), getChatId(update));
             } catch (TelegramApiException | IOException e) {
                 silent.send("获取图片失败，请稍后重试", getChatId(update));
             } catch (NotFoundException e) {
@@ -114,4 +100,38 @@ public class TelegramBot extends AbilityBot {
         return null; // Just in case
     }
 
+    public Ability sayHelloWorld() {
+        return Ability
+                .builder()
+                .name("start")
+                .info("says hello world!")
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(ctx -> {
+                    if (ctx.arguments().length > 0) {
+                        loginForCode(ctx);
+                    } else {
+                        silent.send("欢迎关注任性推~您的TelegramID是：" + ctx.chatId(), ctx.chatId());
+                    }
+                })
+                .build();
+    }
+
+    public Ability codeLogin() {
+        return Ability
+                .builder()
+                .name("login")
+                .info("接收代码登录")
+                .input(1)
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(this::loginForCode)
+                .build();
+    }
+
+    private void loginForCode(MessageContext ctx) {
+        String code = ctx.arguments()[0];
+        User user = userService.putTelegramLoginCode(code, getChatId(ctx.update()));
+        silent.send("认证成功！欢迎您，" + user.getName(), ctx.chatId());
+    }
 }
