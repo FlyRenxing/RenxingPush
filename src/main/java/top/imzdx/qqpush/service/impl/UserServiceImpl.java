@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.imzdx.qqpush.config.AppConfig;
+import top.imzdx.qqpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.qqpush.model.po.QQInfo;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.QQInfoDao;
@@ -21,10 +20,7 @@ import top.imzdx.qqpush.utils.QQConnection;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Optional;
-
-import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 
 /**
@@ -63,34 +59,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String name, String password) {
-        if (userDao.findByName(name).isPresent()) {
-            throw new DefinitionException("该用户名已被注册，请更换后重试");
-        }
-        User user = new User()
-                .setName(name)
-                .setPassword(password)
-                .setCipher(authTools.generateCipher())
+    public User register(User user) {
+        user.setCipher(authTools.generateCipher())
                 .setDayMaxSendCount((long) appConfig.getUser().getDefaultSetting().getDayMaxSendCount())
                 .setConfig(new User.UserConfig(
                         qqInfoDao.findFirstBy().orElse(new QQInfo().setNumber(0L)).getNumber())
                 );
         return userDao.save(user);
-    }
-
-    @Override
-    public boolean register(String name, String password, String openid) {
-        User user = new User()
-                .setName(name)
-                .setPassword(password)
-                .setCipher(authTools.generateCipher())
-                .setDayMaxSendCount((long) appConfig.getUser().getDefaultSetting().getDayMaxSendCount())
-                .setOpenid(openid)
-                .setConfig(new User.UserConfig(
-                        qqInfoDao.findFirstBy().orElse(new QQInfo().setNumber(0L)).getNumber())
-                );
-        userDao.save(user);
-        return true;
     }
 
     @Override
@@ -110,6 +85,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(Long id) {
         return userDao.findById(id).orElseThrow(() -> new DefinitionException("用户不存在"));
+    }
+
+    @Override
+    public User findUserByTelegramId(Long id) {
+        return userDao.findByTelegramId(id).orElseThrow(() -> new DefinitionException("用户不存在"));
     }
 
     @Override
@@ -146,9 +126,14 @@ public class UserServiceImpl implements UserService {
             do {
                 userName = userName + "_" + randomString;
             } while (userDao.findByName(userName).isPresent());
-
-            if (register(userName, randomString, openid)) {
-                user = userDao.findByName(userName).orElseThrow(() -> new DefinitionException("注册异常"));
+            user = new User()
+                    .setName(userName)
+                    .setPassword(randomString)
+                    .setOpenid(openid);
+            try {
+                user = register(user);
+            } catch (DefinitionException e1) {
+                throw new DefinitionException("注册失败");
             }
         }
         assert user != null;
@@ -161,6 +146,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
     public User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher) {
         Long chatId = update.getMessage().getChatId();
         if (userDao.findByTelegramId(chatId).isPresent()) {
@@ -169,19 +155,12 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByCipher(cipher).orElseThrow(() -> new DefinitionException("Cipher不正确"));
         user.setTelegramId(chatId);
         user = userDao.save(user);
-        if (Objects.equals(user.getTelegramId(), getChatId(update))) {
-            try {
-                bot.execute(new SendMessage(chatId + "", "绑定成功"));
-            } catch (TelegramApiException e) {
-                throw new DefinitionException("绑定失败");
-            }
-        }
         return user;
     }
 
     @Override
-    public User putTelegramLoginCode(String code, Long chatId) {
-        User user = userDao.findByTelegramId(chatId).orElseThrow(() -> new DefinitionException("用户不存在"));
+    public User putTelegramLoginCode(String code, Long chatId) throws DefinitionException {
+        User user = userDao.findByTelegramId(chatId).orElseThrow(() -> new DefinitionException("用户不存在,请先在控制台绑定tg账户。若还未注册，请先注册"));
         telegramLoginCodeMap.put(code, user);
         return user;
     }
@@ -207,6 +186,31 @@ public class UserServiceImpl implements UserService {
             throw new DefinitionException("二维码/代码已过期，请重新扫描");
         }
         AuthTools.login(user.getUid());
+        return user;
+    }
+
+    @Override
+    public User telegramLogin(TelegramAuthenticationRequest telegramUser) {
+        User user;
+        try {
+            user = userDao.findByTelegramId(telegramUser.getId()).orElseThrow(() -> new DefinitionException("用户不存在"));
+        } catch (DefinitionException e) {
+            String userName = telegramUser.getFirst_name();
+            String randomString = AuthTools.generateRandomString(6);
+            do {
+                userName = userName + "_" + randomString;
+            } while (userDao.findByName(userName).isPresent());
+            user = new User()
+                    .setName(userName)
+                    .setPassword(randomString)
+                    .setTelegramId(telegramUser.getId());
+            try {
+                user = register(user);
+            } catch (DefinitionException e1) {
+                throw new DefinitionException("注册失败");
+            }
+            return user;
+        }
         return user;
     }
 

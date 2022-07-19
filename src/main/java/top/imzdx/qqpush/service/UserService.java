@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import top.imzdx.qqpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.qqpush.model.po.User;
 
 /**
@@ -13,15 +14,15 @@ import top.imzdx.qqpush.model.po.User;
 public interface UserService {
     User login(String username, String password);
 
-    User register(String username, String password);
-
-    boolean register(String username, String password, String openid);
+    User register(User user);
 
     String refreshCipher(String userName);
 
     User findUserByName(String name);
 
     User findUserById(Long id);
+
+    User findUserByTelegramId(Long id);
 
     boolean setQQBot(User user, long number);
 
@@ -38,4 +39,6 @@ public interface UserService {
     boolean hasTelegramLogin(String code);
 
     User telegramQRCodeLogin(String code);
+
+    User telegramLogin(TelegramAuthenticationRequest telegramUser);
 }

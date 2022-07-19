@@ -77,6 +77,64 @@ public class TelegramBot extends AbilityBot {
         return Reply.of(action, Flag.PHOTO);
     }
 
+    public Ability start() {
+        return Ability
+                .builder()
+                .name("start")
+                .info("says hello world!")
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(ctx -> {
+                    if (ctx.arguments().length > 0) {
+                        switch (ctx.arguments()[0].split("-")[0]) {
+                            case "login" -> loginForCode(ctx, ctx.arguments()[0].split("-")[1]);
+                            case "bind" -> bindUserForCipher(ctx, ctx.arguments()[0].split("-")[1]);
+                            default -> silent.send("欢迎关注任性推~您的TelegramID是：" + ctx.chatId(), ctx.chatId());
+                        }
+                    } else {
+                        silent.send("欢迎关注任性推~您的TelegramID是：" + ctx.chatId(), ctx.chatId());
+                    }
+                })
+                .build();
+    }
+
+    public Ability codeLogin() {
+        return Ability
+                .builder()
+                .name("login")
+                .info("接收代码登录")
+                .input(1)
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(ctx -> loginForCode(ctx, ctx.arguments()[0]))
+                .build();
+    }
+
+    public Ability bindUser() {
+        return Ability
+                .builder()
+                .name("bind")
+                .info("绑定用户")
+                .input(1)
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(ctx -> bindUserForCipher(ctx, ctx.arguments()[0]))
+                .build();
+    }
+
+    private void loginForCode(MessageContext ctx, String code) {
+        try {
+            User user = userService.putTelegramLoginCode(code, getChatId(ctx.update()));
+            silent.send("认证成功！欢迎您，" + user.getName(), ctx.chatId());
+        } catch (DefinitionException e) {
+            silent.send(e.getMessage(), ctx.chatId());
+        }
+    }
+
+    private void bindUserForCipher(MessageContext ctx, String cipher) {
+        User user = userService.bindTelegramUser(this, ctx.update(), cipher);
+        silent.send("绑定成功！欢迎您，" + user.getName(), ctx.chatId());
+    }
 
     private String getFilePath(PhotoSize photo) {
         Objects.requireNonNull(photo);
@@ -98,40 +156,5 @@ public class TelegramBot extends AbilityBot {
         }
 
         return null; // Just in case
-    }
-
-    public Ability sayHelloWorld() {
-        return Ability
-                .builder()
-                .name("start")
-                .info("says hello world!")
-                .locality(USER)
-                .privacy(PUBLIC)
-                .action(ctx -> {
-                    if (ctx.arguments().length > 0) {
-                        loginForCode(ctx);
-                    } else {
-                        silent.send("欢迎关注任性推~您的TelegramID是：" + ctx.chatId(), ctx.chatId());
-                    }
-                })
-                .build();
-    }
-
-    public Ability codeLogin() {
-        return Ability
-                .builder()
-                .name("login")
-                .info("接收代码登录")
-                .input(1)
-                .locality(USER)
-                .privacy(PUBLIC)
-                .action(this::loginForCode)
-                .build();
-    }
-
-    private void loginForCode(MessageContext ctx) {
-        String code = ctx.arguments()[0];
-        User user = userService.putTelegramLoginCode(code, getChatId(ctx.update()));
-        silent.send("认证成功！欢迎您，" + user.getName(), ctx.chatId());
     }
 }

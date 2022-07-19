@@ -1,18 +1,27 @@
 package top.imzdx.qqpush.utils;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.HexUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import top.imzdx.qqpush.config.AppConfig;
+import top.imzdx.qqpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.qqpush.model.po.User;
 import top.imzdx.qqpush.repository.UserDao;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author Renxing
@@ -20,13 +29,13 @@ import java.util.Random;
 @Component
 public class AuthTools {
     static UserDao userDao;
-    AppConfig appConfig;
+    static AppConfig appConfig;
 
 
     @Autowired
     public AuthTools(UserDao userDao, AppConfig appConfig) {
         AuthTools.userDao = userDao;
-        this.appConfig = appConfig;
+        AuthTools.appConfig = appConfig;
     }
 
     public static String generateRandomString(int digit) {
@@ -107,5 +116,44 @@ public class AuthTools {
             return generateCipher();
         }
         return sb.toString();
+    }
+
+    public static boolean verifyAuth(TelegramAuthenticationRequest user) {
+        Map<String, Object> request = BeanUtil.beanToMap(user);
+        String hash = (String) request.get("hash");
+        request.remove("hash");
+
+        // Prepare the string
+        String str = request.entrySet().stream()
+                .sorted((a, b) -> a.getKey().compareToIgnoreCase(b.getKey()))
+                .filter(entry -> entry.getValue() != null && !entry.getValue().equals(""))
+                .map(kvp -> kvp.getKey() + "=" + kvp.getValue())
+                .collect(Collectors.joining("\n"));
+
+        try {
+            SecretKeySpec sk = new SecretKeySpec(
+                    // Get SHA 256 from telegram token
+                    MessageDigest.getInstance("SHA-256").digest(appConfig.getTelegram().getBotToken().getBytes(StandardCharsets.UTF_8)
+                    ), "HmacSHA256");
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(sk);
+
+            byte[] result = mac.doFinal(str.getBytes(StandardCharsets.UTF_8));
+
+            // Convert the result to hex string
+            // Like https://stackoverflow.com/questions/9655181
+            String resultStr = HexUtil.encodeHexStr(result);
+
+            // Compare the result with the hash from body
+            if (hash.compareToIgnoreCase(resultStr) == 0) {
+                // Do other things like create a user and JWT token
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 }

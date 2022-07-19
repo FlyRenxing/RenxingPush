@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import top.imzdx.qqpush.config.AppConfig;
 import top.imzdx.qqpush.interceptor.LoginRequired;
 import top.imzdx.qqpush.model.dto.Result;
+import top.imzdx.qqpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.qqpush.model.po.MessageCallback;
 import top.imzdx.qqpush.model.po.QQGroupWhitelist;
 import top.imzdx.qqpush.model.po.User;
@@ -76,6 +77,23 @@ public class UserController {
     }
 
     /**
+     * telegram登录
+     *
+     * @param telegramUser telegram返回的user
+     * @return 用户信息
+     */
+    @PostMapping("/telegramLogin")
+    @CrossOrigin
+    public Result<User> telegramLogin(@RequestBody TelegramAuthenticationRequest telegramUser) {
+        if (!AuthTools.verifyAuth(telegramUser)) {
+            throw new DefinitionException("Telegram验签失败");
+        }
+        User user = userService.telegramLogin(telegramUser);
+        AuthTools.login(user.getUid());
+        return new Result<>("登陆成功", user);
+    }
+
+    /**
      * telegram二维码登录
      */
     @PostMapping("/telegramQRCodeLogin")
@@ -101,7 +119,7 @@ public class UserController {
                 throw new DefinitionException("验证码错误");
             }
         }
-        User user = userService.register(name, password);
+        User user = userService.register(new User().setName(name).setPassword(password));
         AuthTools.login(user.getUid());
         return new Result<>("注册成功", user);
     }
