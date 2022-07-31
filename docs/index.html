@@ -6,7 +6,7 @@
     <meta content="smart-doc" name="generator">
     <title>任性推-Docs</title>
     <link href="font.css" rel="stylesheet">
-    <link href="AllInOne.css?v=1657992644185" rel="stylesheet"/>
+    <link href="AllInOne.css?v=1659279680338" rel="stylesheet"/>
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/styles/vs2015.min.css" rel="stylesheet">
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #1E1E1E
@@ -42,11 +42,7 @@
                     </li>
 
                     <li><a
-                            href="#_1_2_3_生成Geetest极验验证码">2.3.生成Geetest极验验证码</a>
-                    </li>
-
-                    <li><a
-                            href="#_1_2_4_获取QQ登录URL">2.4.获取QQ登录URL</a>
+                            href="#_1_2_3_获取QQ登录URL">2.3.获取QQ登录URL</a>
                     </li>
                 </ul>
             </li>
@@ -57,47 +53,55 @@
                     </li>
 
                     <li><a
-                            href="#_1_3_2_注册">3.2.注册</a>
+                            href="#_1_3_2_telegram登录">3.2.telegram登录</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_3_重置个人密钥">3.3.重置个人密钥</a>
+                            href="#_1_3_3_telegram二维码登录">3.3.telegram二维码登录</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_4_获取个人资料">3.4.获取个人资料</a>
+                            href="#_1_3_4_注册">3.4.注册</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_5_换绑QQ机器人">3.5.换绑QQ机器人</a>
+                            href="#_1_3_5_重置个人密钥">3.5.重置个人密钥</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_6_获取当日用户使用次数">3.6.获取当日用户使用次数</a>
+                            href="#_1_3_6_获取个人资料">3.6.获取个人资料</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_7_添加QQ群白名单">3.7.添加QQ群白名单</a>
+                            href="#_1_3_7_换绑QQ机器人">3.7.换绑QQ机器人</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_8_获取QQ群白名单列表">3.8.获取QQ群白名单列表</a>
+                            href="#_1_3_8_获取当日用户使用次数">3.8.获取当日用户使用次数</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_9_删除QQ群白名单">3.9.删除QQ群白名单</a>
+                            href="#_1_3_9_添加QQ群白名单">3.9.添加QQ群白名单</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_10_添加消息回调">3.10.添加消息回调</a>
+                            href="#_1_3_10_获取QQ群白名单列表">3.10.获取QQ群白名单列表</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_11_获取消息回调列表">3.11.获取消息回调列表</a>
+                            href="#_1_3_11_删除QQ群白名单">3.11.删除QQ群白名单</a>
                     </li>
 
                     <li><a
-                            href="#_1_3_12_删除消息回调">3.12.删除消息回调</a>
+                            href="#_1_3_12_添加消息回调">3.12.添加消息回调</a>
+                    </li>
+
+                    <li><a
+                            href="#_1_3_13_获取消息回调列表">3.13.获取消息回调列表</a>
+                    </li>
+
+                    <li><a
+                            href="#_1_3_14_删除消息回调">3.14.删除消息回调</a>
                     </li>
                 </ul>
             </li>
@@ -126,11 +130,11 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-07-17 01:30:44</p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-07-17 01:30:44</p>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">v2022-07-31 23:01:20</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">2022-07-31 23:01:20</p>
                     </td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">auto</p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">@12774</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">@Renxing</p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Created by smart-doc</p></td>
                 </tr>
                 </tbody>
@@ -139,24 +143,24 @@
     </div>
 
     <div class="sect1"><h2 id="_消息处理"><a class="anchor" href="#_消息处理"></a><a class="link"
-                                                                             href="#_消息处理">1.消息处理</a>
+                                                                                     href="#_消息处理">1.消息处理</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2" id="0ab1e8ed5a7e235377406f0c2cc74d92"><h3 id="_1_1_1_推送消息"><a
+            <div class="sect2" id="a8e44d5c351537da0682bd3c49953016"><h3 id="_1_1_1_推送消息"><a
                     class="anchor" href="#_1_1_1_推送消息"></a><a class="link"
-                                                              href="#_1_1_1_推送消息">1.1.推送消息</a>
+                                                                  href="#_1_1_1_推送消息">1.1.推送消息</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/msg/send/{cipher}"
-                     id="0ab1e8ed5a7e235377406f0c2cc74d92-url"><p><strong>URL:</strong><a class="bare"
+                     id="a8e44d5c351537da0682bd3c49953016-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/msg/send/{cipher}">http://{{server}}/msg/send/{cipher}</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="0ab1e8ed5a7e235377406f0c2cc74d92-method"><p>
+                <div class="paragraph" data-method="POST" id="a8e44d5c351537da0682bd3c49953016-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/json; charset=utf-8"
-                     id="0ab1e8ed5a7e235377406f0c2cc74d92-content-type"><p>
+                     id="a8e44d5c351537da0682bd3c49953016-content-type"><p>
                     <strong>Content-Type:</strong>application/json; charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>推送消息</p></div>
                 <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
@@ -229,7 +233,7 @@
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─type</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            消息类型，目前仅支持&quot;qq&quot;、&quot;qq_group&quot;</p></td>
+                            消息类型，目前仅支持&quot;qq&quot;、&quot;qq_group、telegram&quot;</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -238,7 +242,7 @@
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─data</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            消息元数据，与type对应，qq：QQ号，qq_group：QQ群号</p></td>
+                            消息元数据，与type对应。&lt;br&gt;qq-QQ号，qq_group-QQ群号，telegram-空（需绑定机器人）</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -312,24 +316,24 @@
     </div>
 
     <div class="sect1"><h2 id="_系统类"><a class="anchor" href="#_系统类"></a><a class="link"
-                                                                           href="#_系统类">2.系统类</a>
+                                                                                 href="#_系统类">2.系统类</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2" id="53a5e5b5b87adcb6e2f43cfad75fc2fa"><h3 id="_1_2_1_获取机器人公开列表"><a
+            <div class="sect2" id="06e2a4baaa9fe1fa801d8bd3a08ed638"><h3 id="_1_2_1_获取机器人公开列表"><a
                     class="anchor" href="#_1_2_1_获取机器人公开列表"></a><a class="link"
-                                                                   href="#_1_2_1_获取机器人公开列表">2.1.获取机器人公开列表</a>
+                                                                            href="#_1_2_1_获取机器人公开列表">2.1.获取机器人公开列表</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/qqbotlist"
-                     id="53a5e5b5b87adcb6e2f43cfad75fc2fa-url"><p><strong>URL:</strong><a class="bare"
+                     id="06e2a4baaa9fe1fa801d8bd3a08ed638-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/sys/qqbotlist">http://{{server}}/sys/qqbotlist</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="53a5e5b5b87adcb6e2f43cfad75fc2fa-method"><p>
+                <div class="paragraph" data-method="GET" id="06e2a4baaa9fe1fa801d8bd3a08ed638-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="53a5e5b5b87adcb6e2f43cfad75fc2fa-content-type"><p>
+                     id="06e2a4baaa9fe1fa801d8bd3a08ed638-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取机器人公开列表</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -431,21 +435,21 @@
                 </div>
             </div>
 
-            <div class="sect2" id="35912a3f073224c914a1a9e969b7cf85"><h3 id="_1_2_2_获取所有公告"><a
+            <div class="sect2" id="f58e69098b840cc5cd5509b63c92a07d"><h3 id="_1_2_2_获取所有公告"><a
                     class="anchor" href="#_1_2_2_获取所有公告"></a><a class="link"
-                                                                href="#_1_2_2_获取所有公告">2.2.获取所有公告</a>
+                                                                      href="#_1_2_2_获取所有公告">2.2.获取所有公告</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/note"
-                     id="35912a3f073224c914a1a9e969b7cf85-url"><p><strong>URL:</strong><a class="bare"
+                     id="f58e69098b840cc5cd5509b63c92a07d-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/sys/note">http://{{server}}/sys/note</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="35912a3f073224c914a1a9e969b7cf85-method"><p>
+                <div class="paragraph" data-method="GET" id="f58e69098b840cc5cd5509b63c92a07d-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="35912a3f073224c914a1a9e969b7cf85-content-type"><p>
+                     id="f58e69098b840cc5cd5509b63c92a07d-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取所有公告</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -528,7 +532,7 @@
   "msg": "返回的消息",
   "data": [
     {
-      "id": 358,
+      "id": 373,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -538,98 +542,21 @@
                 </div>
             </div>
 
-            <div class="sect2" id="491ff5f93b40cdd3d8a1da3d817aad9e"><h3 id="_1_2_3_生成Geetest极验验证码"><a
-                    class="anchor" href="#_1_2_3_生成Geetest极验验证码"></a><a class="link"
-                                                                        href="#_1_2_3_生成Geetest极验验证码">2.3.生成Geetest极验验证码</a>
-            </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/geetest"
-                     id="491ff5f93b40cdd3d8a1da3d817aad9e-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="http://{{server}}/sys/geetest">http://{{server}}/sys/geetest</a>
-                </p>
-                </div>
-                <div class="paragraph" data-method="GET" id="491ff5f93b40cdd3d8a1da3d817aad9e-method"><p>
-                    <strong>Type:</strong>GET
-                </p></div>
-                <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
-                <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="491ff5f93b40cdd3d8a1da3d817aad9e-content-type"><p>
-                    <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>生成Geetest极验验证码</p></div>
-                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="bash">curl -X GET -i http://{{server}}/sys/geetest</code></pre>
-                    </div>
-                </div>
-                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
-                <table class="tableblock frame-all grid-all spread">
-                    <colgroup>
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="tableblock halign-left valign-top">Field</th>
-                        <th class="tableblock halign-left valign-top">Type</th>
-                        <th class="tableblock halign-left valign-top">Description</th>
-                        <th class="tableblock halign-left valign-top">Since</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">flag</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            结果标志，true为成功，false为失败</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            结果消息，一般反馈给用户</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            结果数据，一般反馈给前端进行处理</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="json">{
-  "flag": true,
-  "msg": "返回的消息",
-  "data": "sh67xt"
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sect2" id="9e15f7667e825b455b158feb2f7c57c7"><h3 id="_1_2_4_获取QQ登录URL"><a
-                    class="anchor" href="#_1_2_4_获取QQ登录URL"></a><a class="link"
-                                                                   href="#_1_2_4_获取QQ登录URL">2.4.获取QQ登录URL</a>
+            <div class="sect2" id="75e4f4d34f737eb73ce94d65c9800a71"><h3 id="_1_2_3_获取QQ登录URL"><a
+                    class="anchor" href="#_1_2_3_获取QQ登录URL"></a><a class="link"
+                                                                       href="#_1_2_3_获取QQ登录URL">2.3.获取QQ登录URL</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/sys/qqUrl"
-                     id="9e15f7667e825b455b158feb2f7c57c7-url"><p><strong>URL:</strong><a class="bare"
+                     id="75e4f4d34f737eb73ce94d65c9800a71-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/sys/qqUrl">http://{{server}}/sys/qqUrl</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="9e15f7667e825b455b158feb2f7c57c7-method"><p>
+                <div class="paragraph" data-method="GET" id="75e4f4d34f737eb73ce94d65c9800a71-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="9e15f7667e825b455b158feb2f7c57c7-content-type"><p>
+                     id="75e4f4d34f737eb73ce94d65c9800a71-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取QQ登录URL</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -686,7 +613,7 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "f74npx"
+  "data": "qbl12d"
 }</code></pre>
                     </div>
                 </div>
@@ -695,24 +622,24 @@
     </div>
 
     <div class="sect1"><h2 id="_用户相关"><a class="anchor" href="#_用户相关"></a><a class="link"
-                                                                             href="#_用户相关">3.用户相关</a>
+                                                                                     href="#_用户相关">3.用户相关</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2" id="2259f37638ffcba9bd4ebc6a2508c292"><h3 id="_1_3_1_用户管理"><a
+            <div class="sect2" id="d183ed397e46bf9a1b7541ff3edf0733"><h3 id="_1_3_1_用户管理"><a
                     class="anchor" href="#_1_3_1_用户管理"></a><a class="link"
-                                                              href="#_1_3_1_用户管理">3.1.用户管理</a>
+                                                                  href="#_1_3_1_用户管理">3.1.用户管理</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/login"
-                     id="2259f37638ffcba9bd4ebc6a2508c292-url"><p><strong>URL:</strong><a class="bare"
+                     id="d183ed397e46bf9a1b7541ff3edf0733-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/login">http://{{server}}/user/login</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="2259f37638ffcba9bd4ebc6a2508c292-method"><p>
+                <div class="paragraph" data-method="POST" id="d183ed397e46bf9a1b7541ff3edf0733-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="2259f37638ffcba9bd4ebc6a2508c292-content-type"><p>
+                     id="d183ed397e46bf9a1b7541ff3edf0733-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>用户管理</p></div>
                 <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
@@ -919,7 +846,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 363,
+    "uid": 598,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -933,25 +860,25 @@
                 </div>
             </div>
 
-            <div class="sect2" id="37f48c17ac7a0504b3fdb4a476277087"><h3 id="_1_3_2_注册"><a
-                    class="anchor" href="#_1_3_2_注册"></a><a class="link"
-                                                            href="#_1_3_2_注册">3.2.注册</a>
+            <div class="sect2" id="461f776e8513c07c7eeab831191a2195"><h3 id="_1_3_2_telegram登录"><a
+                    class="anchor" href="#_1_3_2_telegram登录"></a><a class="link"
+                                                                      href="#_1_3_2_telegram登录">3.2.telegram登录</a>
             </h3>
-                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/register"
-                     id="37f48c17ac7a0504b3fdb4a476277087-url"><p><strong>URL:</strong><a class="bare"
-                                                                                          href="http://{{server}}/user/register">http://{{server}}/user/register</a>
+                <div class="paragraph" data-download="false" data-page=""
+                     data-url="http://{{server}}/user/telegramLogin"
+                     id="461f776e8513c07c7eeab831191a2195-url"><p><strong>URL:</strong><a class="bare"
+                                                                                          href="http://{{server}}/user/telegramLogin">http://{{server}}/user/telegramLogin</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="37f48c17ac7a0504b3fdb4a476277087-method"><p>
+                <div class="paragraph" data-method="POST" id="461f776e8513c07c7eeab831191a2195-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
-                <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="37f48c17ac7a0504b3fdb4a476277087-content-type"><p>
-                    <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数
-                </p></div>
-                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <div class="paragraph" data-content-type="application/json; charset=utf-8"
+                     id="461f776e8513c07c7eeab831191a2195-content-type"><p>
+                    <strong>Content-Type:</strong>application/json; charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>telegram登录</p></div>
+                <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
                 <table class="tableblock frame-all grid-all spread">
                     <colgroup>
                         <col style="width: 20%;">
@@ -971,19 +898,64 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">auth_date</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            用户名</p></td>
+                            No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">first_name</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            密码</p></td>
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">last_name</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">photo_url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">hash</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -992,7 +964,15 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/register --data 'name=caleb.schumm&password=4wjhxc'</code></pre>
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/telegramLogin --data '{
+  "auth_date": 219,
+  "first_name": "emerson.mcdermott",
+  "id": 781,
+  "last_name": "emerson.mcdermott",
+  "photo_url": "www.nancy-veum.info",
+  "username": "emerson.mcdermott",
+  "hash": "81rdpr"
+}'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1101,7 +1081,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 847,
+    "uid": 949,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -1115,22 +1095,413 @@
                 </div>
             </div>
 
-            <div class="sect2" id="99074882b8f3b1d4baa5a0380ed31194"><h3 id="_1_3_3_重置个人密钥"><a
-                    class="anchor" href="#_1_3_3_重置个人密钥"></a><a class="link"
-                                                                href="#_1_3_3_重置个人密钥">3.3.重置个人密钥</a>
+            <div class="sect2" id="3566c5b01d6705192f617eace56f99d6"><h3 id="_1_3_3_telegram二维码登录"><a
+                    class="anchor" href="#_1_3_3_telegram二维码登录"></a><a class="link"
+                                                                            href="#_1_3_3_telegram二维码登录">3.3.telegram二维码登录</a>
+            </h3>
+                <div class="paragraph" data-download="false" data-page=""
+                     data-url="http://{{server}}/user/telegramQRCodeLogin"
+                     id="3566c5b01d6705192f617eace56f99d6-url"><p><strong>URL:</strong><a class="bare"
+                                                                                          href="http://{{server}}/user/telegramQRCodeLogin">http://{{server}}/user/telegramQRCodeLogin</a>
+                </p>
+                </div>
+                <div class="paragraph" data-method="POST" id="3566c5b01d6705192f617eace56f99d6-method"><p>
+                    <strong>Type:</strong>POST
+                </p></div>
+                <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
+                <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
+                     id="3566c5b01d6705192f617eace56f99d6-content-type"><p>
+                    <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>telegram二维码登录</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/telegramQRCodeLogin --data 'code=44049'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">flag</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果标志，true为成功，false为失败</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果消息，一般反馈给用户</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果数据，一般反馈给前端进行处理</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─uid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户ID</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─name</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─admin</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            是否为管理默认0否1是</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─cipher</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户密钥</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─dayMaxSendCount</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            每日最大发送次数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "flag": true,
+  "msg": "返回的消息",
+  "data": {
+    "uid": 132,
+    "name": "这是用户名",
+    "admin": 0,
+    "config": {
+      "qqBot": 2816669521
+    },
+    "cipher": "CH32p41OXu",
+    "dayMaxSendCount": 200
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2" id="5aff48a032232e37267aa46e4935979d"><h3 id="_1_3_4_注册"><a
+                    class="anchor" href="#_1_3_4_注册"></a><a class="link"
+                                                              href="#_1_3_4_注册">3.4.注册</a>
+            </h3>
+                <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/register"
+                     id="5aff48a032232e37267aa46e4935979d-url"><p><strong>URL:</strong><a class="bare"
+                                                                                          href="http://{{server}}/user/register">http://{{server}}/user/register</a>
+                </p>
+                </div>
+                <div class="paragraph" data-method="POST" id="5aff48a032232e37267aa46e4935979d-method"><p>
+                    <strong>Type:</strong>POST
+                </p></div>
+                <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
+                <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
+                     id="5aff48a032232e37267aa46e4935979d-content-type"><p>
+                    <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>当开启极验验证码时需附带lot_number、captcha_output、pass_token、gen_time参数
+                </p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            密码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">lot_number</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">captcha_output</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">pass_token</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">gen_time</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/register --data 'name=emerson.mcdermott&password=1cwu2m&lot_number=hf5ci8&captcha_output=bi15h1&pass_token=yui52z&gen_time=2022-07-31 23:01:21'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">flag</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果标志，true为成功，false为失败</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果消息，一般反馈给用户</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            结果数据，一般反馈给前端进行处理</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─uid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户ID</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─name</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─admin</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            是否为管理默认0否1是</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─config</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户配置</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─qqBot</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            绑定的机器人QQ号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─cipher</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            用户密钥</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─dayMaxSendCount</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            每日最大发送次数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "flag": true,
+  "msg": "返回的消息",
+  "data": {
+    "uid": 238,
+    "name": "这是用户名",
+    "admin": 0,
+    "config": {
+      "qqBot": 2816669521
+    },
+    "cipher": "CH32p41OXu",
+    "dayMaxSendCount": 200
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2" id="cdd72b10de53f71a33cb26599333354b"><h3 id="_1_3_5_重置个人密钥"><a
+                    class="anchor" href="#_1_3_5_重置个人密钥"></a><a class="link"
+                                                                      href="#_1_3_5_重置个人密钥">3.5.重置个人密钥</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/refreshCipher"
-                     id="99074882b8f3b1d4baa5a0380ed31194-url"><p><strong>URL:</strong><a class="bare"
+                     id="cdd72b10de53f71a33cb26599333354b-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/refreshCipher">http://{{server}}/user/refreshCipher</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="99074882b8f3b1d4baa5a0380ed31194-method"><p>
+                <div class="paragraph" data-method="GET" id="cdd72b10de53f71a33cb26599333354b-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="99074882b8f3b1d4baa5a0380ed31194-content-type"><p>
+                     id="cdd72b10de53f71a33cb26599333354b-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>重置个人密钥</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -1187,27 +1558,27 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": "eq1lsd"
+  "data": "45kf84"
 }</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2" id="0930563ce7d2f31229b0e75ff1c0c078"><h3 id="_1_3_4_获取个人资料"><a
-                    class="anchor" href="#_1_3_4_获取个人资料"></a><a class="link"
-                                                                href="#_1_3_4_获取个人资料">3.4.获取个人资料</a>
+            <div class="sect2" id="b61e81f366ced0fc300ad2b90defb1db"><h3 id="_1_3_6_获取个人资料"><a
+                    class="anchor" href="#_1_3_6_获取个人资料"></a><a class="link"
+                                                                      href="#_1_3_6_获取个人资料">3.6.获取个人资料</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/profile"
-                     id="0930563ce7d2f31229b0e75ff1c0c078-url"><p><strong>URL:</strong><a class="bare"
+                     id="b61e81f366ced0fc300ad2b90defb1db-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/profile">http://{{server}}/user/profile</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="0930563ce7d2f31229b0e75ff1c0c078-method"><p>
+                <div class="paragraph" data-method="GET" id="b61e81f366ced0fc300ad2b90defb1db-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="0930563ce7d2f31229b0e75ff1c0c078-content-type"><p>
+                     id="b61e81f366ced0fc300ad2b90defb1db-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取个人资料</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -1322,7 +1693,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 950,
+    "uid": 190,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -1336,21 +1707,21 @@
                 </div>
             </div>
 
-            <div class="sect2" id="f66c25828fc895be3e139284e76c7428"><h3 id="_1_3_5_换绑QQ机器人"><a
-                    class="anchor" href="#_1_3_5_换绑QQ机器人"></a><a class="link"
-                                                                 href="#_1_3_5_换绑QQ机器人">3.5.换绑QQ机器人</a>
+            <div class="sect2" id="a7b5453f2c7606624def71518a0a89e8"><h3 id="_1_3_7_换绑QQ机器人"><a
+                    class="anchor" href="#_1_3_7_换绑QQ机器人"></a><a class="link"
+                                                                      href="#_1_3_7_换绑QQ机器人">3.7.换绑QQ机器人</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page="" data-url="http://{{server}}/user/qq_bot"
-                     id="f66c25828fc895be3e139284e76c7428-url"><p><strong>URL:</strong><a class="bare"
+                     id="a7b5453f2c7606624def71518a0a89e8-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/qq_bot">http://{{server}}/user/qq_bot</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="f66c25828fc895be3e139284e76c7428-method"><p>
+                <div class="paragraph" data-method="POST" id="a7b5453f2c7606624def71518a0a89e8-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="f66c25828fc895be3e139284e76c7428-content-type"><p>
+                     id="a7b5453f2c7606624def71518a0a89e8-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>换绑QQ机器人</p></div>
                 <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
@@ -1385,7 +1756,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qq_bot --data 'number=159'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qq_bot --data 'number=983'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1494,7 +1865,7 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 180,
+    "uid": 958,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -1508,22 +1879,22 @@
                 </div>
             </div>
 
-            <div class="sect2" id="0bfe7d5a08256bf39cb2c391afa64151"><h3 id="_1_3_6_获取当日用户使用次数"><a
-                    class="anchor" href="#_1_3_6_获取当日用户使用次数"></a><a class="link"
-                                                                    href="#_1_3_6_获取当日用户使用次数">3.6.获取当日用户使用次数</a>
+            <div class="sect2" id="228e6d223b53ee821a6fe7b71540348b"><h3 id="_1_3_8_获取当日用户使用次数"><a
+                    class="anchor" href="#_1_3_8_获取当日用户使用次数"></a><a class="link"
+                                                                              href="#_1_3_8_获取当日用户使用次数">3.8.获取当日用户使用次数</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/ToDayUseCount"
-                     id="0bfe7d5a08256bf39cb2c391afa64151-url"><p><strong>URL:</strong><a class="bare"
+                     id="228e6d223b53ee821a6fe7b71540348b-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/ToDayUseCount">http://{{server}}/user/ToDayUseCount</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="0bfe7d5a08256bf39cb2c391afa64151-method"><p>
+                <div class="paragraph" data-method="GET" id="228e6d223b53ee821a6fe7b71540348b-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="0bfe7d5a08256bf39cb2c391afa64151-content-type"><p>
+                     id="228e6d223b53ee821a6fe7b71540348b-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取当日用户使用次数</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -1580,28 +1951,28 @@
                         <pre><code class="json">{
   "flag": true,
   "msg": "返回的消息",
-  "data": 171
+  "data": 594
 }</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2" id="fe3b11f242357e9114efee7d4a979312"><h3 id="_1_3_7_添加QQ群白名单"><a
-                    class="anchor" href="#_1_3_7_添加QQ群白名单"></a><a class="link"
-                                                                  href="#_1_3_7_添加QQ群白名单">3.7.添加QQ群白名单</a>
+            <div class="sect2" id="de6f41507611e1fe7957acce7db36619"><h3 id="_1_3_9_添加QQ群白名单"><a
+                    class="anchor" href="#_1_3_9_添加QQ群白名单"></a><a class="link"
+                                                                        href="#_1_3_9_添加QQ群白名单">3.9.添加QQ群白名单</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/qqGroupWhitelist"
-                     id="fe3b11f242357e9114efee7d4a979312-url"><p><strong>URL:</strong><a class="bare"
+                     id="de6f41507611e1fe7957acce7db36619-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/qqGroupWhitelist">http://{{server}}/user/qqGroupWhitelist</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="fe3b11f242357e9114efee7d4a979312-method"><p>
+                <div class="paragraph" data-method="POST" id="de6f41507611e1fe7957acce7db36619-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="fe3b11f242357e9114efee7d4a979312-content-type"><p>
+                     id="de6f41507611e1fe7957acce7db36619-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>添加QQ群白名单</p></div>
                 <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
@@ -1636,7 +2007,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=248'</code></pre>
+                        <pre><code class="bash">curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=282'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1720,32 +2091,32 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 423,
-    "groupName": "caleb.schumm",
+    "id": 308,
+    "groupName": "emerson.mcdermott",
     "number": 807374699,
-    "userId": 813
+    "userId": 112
   }
 }</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2" id="75c566a0ba5c2c975f0e4a96e3daf2e9"><h3 id="_1_3_8_获取QQ群白名单列表"><a
-                    class="anchor" href="#_1_3_8_获取QQ群白名单列表"></a><a class="link"
-                                                                    href="#_1_3_8_获取QQ群白名单列表">3.8.获取QQ群白名单列表</a>
+            <div class="sect2" id="b63a6f55c032ceccd646d7f42e33a3c6"><h3 id="_1_3_10_获取QQ群白名单列表"><a
+                    class="anchor" href="#_1_3_10_获取QQ群白名单列表"></a><a class="link"
+                                                                             href="#_1_3_10_获取QQ群白名单列表">3.10.获取QQ群白名单列表</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/qqGroupWhitelist"
-                     id="75c566a0ba5c2c975f0e4a96e3daf2e9-url"><p><strong>URL:</strong><a class="bare"
+                     id="b63a6f55c032ceccd646d7f42e33a3c6-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/qqGroupWhitelist">http://{{server}}/user/qqGroupWhitelist</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="75c566a0ba5c2c975f0e4a96e3daf2e9-method"><p>
+                <div class="paragraph" data-method="GET" id="b63a6f55c032ceccd646d7f42e33a3c6-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="75c566a0ba5c2c975f0e4a96e3daf2e9-content-type"><p>
+                     id="b63a6f55c032ceccd646d7f42e33a3c6-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取QQ群白名单列表</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -1836,10 +2207,10 @@
   "msg": "返回的消息",
   "data": [
     {
-      "id": 453,
-      "groupName": "caleb.schumm",
+      "id": 399,
+      "groupName": "emerson.mcdermott",
       "number": 807374699,
-      "userId": 689
+      "userId": 521
     }
   ]
 }</code></pre>
@@ -1847,21 +2218,21 @@
                 </div>
             </div>
 
-            <div class="sect2" id="b66a5316f7204a4cc91f3d0e5f21cbcd"><h3 id="_1_3_9_删除QQ群白名单"><a
-                    class="anchor" href="#_1_3_9_删除QQ群白名单"></a><a class="link"
-                                                                  href="#_1_3_9_删除QQ群白名单">3.9.删除QQ群白名单</a>
+            <div class="sect2" id="c6c68370fd4a8a373271dee6b09c8c32"><h3 id="_1_3_11_删除QQ群白名单"><a
+                    class="anchor" href="#_1_3_11_删除QQ群白名单"></a><a class="link"
+                                                                         href="#_1_3_11_删除QQ群白名单">3.11.删除QQ群白名单</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/qqGroupWhitelist/{id}"
-                     id="b66a5316f7204a4cc91f3d0e5f21cbcd-url"><p><strong>URL:</strong><a class="bare"
+                     id="c6c68370fd4a8a373271dee6b09c8c32-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/qqGroupWhitelist/{id}">http://{{server}}/user/qqGroupWhitelist/{id}</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="DELETE" id="b66a5316f7204a4cc91f3d0e5f21cbcd-method"><p><strong>Type:</strong>DELETE
+                <div class="paragraph" data-method="DELETE" id="c6c68370fd4a8a373271dee6b09c8c32-method"><p><strong>Type:</strong>DELETE
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="b66a5316f7204a4cc91f3d0e5f21cbcd-content-type"><p>
+                     id="c6c68370fd4a8a373271dee6b09c8c32-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>删除QQ群白名单</p></div>
                 <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
@@ -1897,7 +2268,7 @@
                 <div class="listingblock">
                     <div class="content">
                         <pre><code
-                                class="bash">curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/687</code></pre>
+                                class="bash">curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/991</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -1954,22 +2325,22 @@
                 </div>
             </div>
 
-            <div class="sect2" id="ce14ac898223c6a3c251e7b16690c975"><h3 id="_1_3_10_添加消息回调"><a
-                    class="anchor" href="#_1_3_10_添加消息回调"></a><a class="link"
-                                                                 href="#_1_3_10_添加消息回调">3.10.添加消息回调</a>
+            <div class="sect2" id="4a6f286f7ef5eb6a44a77c1826289e70"><h3 id="_1_3_12_添加消息回调"><a
+                    class="anchor" href="#_1_3_12_添加消息回调"></a><a class="link"
+                                                                       href="#_1_3_12_添加消息回调">3.12.添加消息回调</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/messageCallback"
-                     id="ce14ac898223c6a3c251e7b16690c975-url"><p><strong>URL:</strong><a class="bare"
+                     id="4a6f286f7ef5eb6a44a77c1826289e70-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/messageCallback">http://{{server}}/user/messageCallback</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="POST" id="ce14ac898223c6a3c251e7b16690c975-method"><p>
+                <div class="paragraph" data-method="POST" id="4a6f286f7ef5eb6a44a77c1826289e70-method"><p>
                     <strong>Type:</strong>POST
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/json; charset=utf-8"
-                     id="ce14ac898223c6a3c251e7b16690c975-content-type"><p>
+                     id="4a6f286f7ef5eb6a44a77c1826289e70-content-type"><p>
                     <strong>Content-Type:</strong>application/json; charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>添加消息回调</p></div>
                 <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
@@ -2077,8 +2448,8 @@
                 <div class="listingblock">
                     <div class="content">
                         <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/messageCallback --data '{
-  "id": 197,
-  "uid": 367,
+  "id": 426,
+  "uid": 209,
   "appType": "qq",
   "keyword": "keyword",
   "callbackURL": "https://www.baidu.com/callback",
@@ -2210,8 +2581,8 @@
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 470,
-    "uid": 945,
+    "id": 152,
+    "uid": 531,
     "appType": "qq",
     "keyword": "keyword",
     "callbackURL": "https://www.baidu.com/callback",
@@ -2225,22 +2596,22 @@
                 </div>
             </div>
 
-            <div class="sect2" id="c5813c9acee29037d5bc433cfe68631a"><h3 id="_1_3_11_获取消息回调列表"><a
-                    class="anchor" href="#_1_3_11_获取消息回调列表"></a><a class="link"
-                                                                   href="#_1_3_11_获取消息回调列表">3.11.获取消息回调列表</a>
+            <div class="sect2" id="216b8439715f56bb538c20ae25750316"><h3 id="_1_3_13_获取消息回调列表"><a
+                    class="anchor" href="#_1_3_13_获取消息回调列表"></a><a class="link"
+                                                                           href="#_1_3_13_获取消息回调列表">3.13.获取消息回调列表</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/messageCallback"
-                     id="c5813c9acee29037d5bc433cfe68631a-url"><p><strong>URL:</strong><a class="bare"
+                     id="216b8439715f56bb538c20ae25750316-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/messageCallback">http://{{server}}/user/messageCallback</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="GET" id="c5813c9acee29037d5bc433cfe68631a-method"><p>
+                <div class="paragraph" data-method="GET" id="216b8439715f56bb538c20ae25750316-method"><p>
                     <strong>Type:</strong>GET
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="c5813c9acee29037d5bc433cfe68631a-content-type"><p>
+                     id="216b8439715f56bb538c20ae25750316-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>获取消息回调列表</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
@@ -2371,8 +2742,8 @@
   "msg": "返回的消息",
   "data": [
     {
-      "id": 749,
-      "uid": 977,
+      "id": 847,
+      "uid": 880,
       "appType": "qq",
       "keyword": "keyword",
       "callbackURL": "https://www.baidu.com/callback",
@@ -2387,21 +2758,21 @@
                 </div>
             </div>
 
-            <div class="sect2" id="a56b95d8763884d3f35df1489ba27de3"><h3 id="_1_3_12_删除消息回调"><a
-                    class="anchor" href="#_1_3_12_删除消息回调"></a><a class="link"
-                                                                 href="#_1_3_12_删除消息回调">3.12.删除消息回调</a>
+            <div class="sect2" id="233058db73555b56b1f99b748851264b"><h3 id="_1_3_14_删除消息回调"><a
+                    class="anchor" href="#_1_3_14_删除消息回调"></a><a class="link"
+                                                                       href="#_1_3_14_删除消息回调">3.14.删除消息回调</a>
             </h3>
                 <div class="paragraph" data-download="false" data-page=""
                      data-url="http://{{server}}/user/messageCallback/{id}"
-                     id="a56b95d8763884d3f35df1489ba27de3-url"><p><strong>URL:</strong><a class="bare"
+                     id="233058db73555b56b1f99b748851264b-url"><p><strong>URL:</strong><a class="bare"
                                                                                           href="http://{{server}}/user/messageCallback/{id}">http://{{server}}/user/messageCallback/{id}</a>
                 </p>
                 </div>
-                <div class="paragraph" data-method="DELETE" id="a56b95d8763884d3f35df1489ba27de3-method"><p><strong>Type:</strong>DELETE
+                <div class="paragraph" data-method="DELETE" id="233058db73555b56b1f99b748851264b-method"><p><strong>Type:</strong>DELETE
                 </p></div>
                 <div class="paragraph"><p><strong>Author:</strong>Renxing</p></div>
                 <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8"
-                     id="a56b95d8763884d3f35df1489ba27de3-content-type"><p>
+                     id="233058db73555b56b1f99b748851264b-content-type"><p>
                     <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
                 <div class="paragraph"><p><strong>Description:</strong>删除消息回调</p></div>
                 <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
@@ -2437,7 +2808,7 @@
                 <div class="listingblock">
                     <div class="content">
                         <pre><code
-                                class="bash">curl -X DELETE -i http://{{server}}/user/messageCallback/155</code></pre>
+                                class="bash">curl -X DELETE -i http://{{server}}/user/messageCallback/232</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -2495,7 +2866,7 @@
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-07-17 01:30:44</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-07-31 23:01:20</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">Gitee</a>or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">Github</a></span>
@@ -2504,7 +2875,7 @@
                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABlUlEQVRIS+2UvUvDQBiH398Rly4udnARwUXs4qAIOigI4iL30dTZ2T9AcNPVvUsXF7uYttdScNDFRRAnB11cFFwKxcXBJTQnJ6lEbRI/CIiY9e6e5/e+9+ZAGX/ImE9/QKCU2jfGbGTQqq4xZgtSyisiKmQgIAAVCCFWAGxnIOhqrdd/xyUrpRZsP40xSwA6AI57vd5eq9W6T6s8tQIppSKi+gDQNREprfVNkiRRwDlfY4xZ+FAIuSOi8Qjw0nEc5XnebZwkViClXA2T5+xhY8xus9ncEUJMAziITN5FEARuXLsGCoQQywBs8uEovJ+Scz7FGDuMSM4cx3E9z+u8r+SDQEq5SEQ1IhoZBE+QnBKRq7V+iEreCDjn84wxCx9NgidITnK5nFutVh/7e14FSqnZIAhqAMY+A4+TADjyfb/Ubref7J4XQXhxNvnEV+AJlbTy+XypUqn4KBaLBZuciCa/A0+opN5oNFz7FpUBbP4EHicxxsyAcz7HGDvvz3nar5+2Ho5wOQwsU5+KNGDa+r8grUP0DBLjtRtNKEliAAAAAElFTkSuQmCC"><span
             id="upText">Top</span></div>
 </div>
-<script src="search.js?v=1657992644185"></script>
+<script src="search.js?v=1659279680338"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

@@ -107,17 +107,18 @@ public class UserController {
      * @param name     用户名
      * @param password 密码
      * @return
-     * @ignoreParams request
-     * @apiNote 当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数
+     * @apiNote 当开启极验验证码时需附带lot_number、captcha_output、pass_token、gen_time参数
      */
     @PostMapping("/register")
-    public Result<User> register(HttpServletRequest request,
-                                 @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
-                                 @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password) {
-        if (geetestOpen) {
-            if (!systemService.checkCaptcha(request)) {
-                throw new DefinitionException("验证码错误");
-            }
+    public Result<User> register(
+            @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
+            @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password,
+            @RequestParam String lot_number,
+            @RequestParam String captcha_output,
+            @RequestParam String pass_token,
+            @RequestParam String gen_time) {
+        if (geetestOpen && !systemService.checkCaptcha(lot_number, captcha_output, pass_token, gen_time)) {
+            throw new DefinitionException("验证码错误");
         }
         User user = userService.register(new User().setName(name).setPassword(password));
         AuthTools.login(user.getUid());

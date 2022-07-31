@@ -40,12 +40,6 @@ api[0].list[1].list.push({
 api[0].list[1].list.push({
     order: '3',
     deprecated: 'false',
-    url: 'http://{{server}}/sys/geetest',
-    desc: '生成Geetest极验验证码',
-});
-api[0].list[1].list.push({
-    order: '4',
-    deprecated: 'false',
     url: 'http://{{server}}/sys/qqUrl',
     desc: '获取QQ登录URL',
 });
@@ -65,65 +59,77 @@ api[0].list[2].list.push({
 api[0].list[2].list.push({
     order: '2',
     deprecated: 'false',
+    url: 'http://{{server}}/user/telegramLogin',
+    desc: 'telegram登录',
+});
+api[0].list[2].list.push({
+    order: '3',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/telegramQRCodeLogin',
+    desc: 'telegram二维码登录',
+});
+api[0].list[2].list.push({
+    order: '4',
+    deprecated: 'false',
     url: 'http://{{server}}/user/register',
     desc: '注册',
 });
 api[0].list[2].list.push({
-    order: '3',
+    order: '5',
     deprecated: 'false',
     url: 'http://{{server}}/user/refreshCipher',
     desc: '重置个人密钥',
 });
 api[0].list[2].list.push({
-    order: '4',
+    order: '6',
     deprecated: 'false',
     url: 'http://{{server}}/user/profile',
     desc: '获取个人资料',
 });
 api[0].list[2].list.push({
-    order: '5',
+    order: '7',
     deprecated: 'false',
     url: 'http://{{server}}/user/qq_bot',
     desc: '换绑QQ机器人',
 });
 api[0].list[2].list.push({
-    order: '6',
+    order: '8',
     deprecated: 'false',
     url: 'http://{{server}}/user/ToDayUseCount',
     desc: '获取当日用户使用次数',
 });
 api[0].list[2].list.push({
-    order: '7',
+    order: '9',
     deprecated: 'false',
     url: 'http://{{server}}/user/qqGroupWhitelist',
     desc: '添加QQ群白名单',
 });
 api[0].list[2].list.push({
-    order: '8',
+    order: '10',
     deprecated: 'false',
     url: 'http://{{server}}/user/qqGroupWhitelist',
     desc: '获取QQ群白名单列表',
 });
 api[0].list[2].list.push({
-    order: '9',
+    order: '11',
     deprecated: 'false',
     url: 'http://{{server}}/user/qqGroupWhitelist/{id}',
     desc: '删除QQ群白名单',
 });
 api[0].list[2].list.push({
-    order: '10',
+    order: '12',
     deprecated: 'false',
     url: 'http://{{server}}/user/messageCallback',
     desc: '添加消息回调',
 });
 api[0].list[2].list.push({
-    order: '11',
+    order: '13',
     deprecated: 'false',
     url: 'http://{{server}}/user/messageCallback',
     desc: '获取消息回调列表',
 });
 api[0].list[2].list.push({
-    order: '12',
+    order: '14',
     deprecated: 'false',
     url: 'http://{{server}}/user/messageCallback/{id}',
     desc: '删除消息回调',

@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "e63b3b36-16f3-4e77-a97d-93bda93f3d58",
+    "_postman_id": "1f40c5d0-49b2-43d5-b225-ed4a6bdac415",
     "name": "任性推-Docs"
   },
   "item": [
@@ -110,35 +110,6 @@
           "description": "获取所有公告"
         },
         {
-          "name": "生成Geetest极验验证码",
-          "request": {
-            "method": "GET",
-            "body": {
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://::server/sys/geetest",
-              "protocol": "http",
-              "path": [
-                "sys",
-                "geetest"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "description": "生成Geetest极验验证码",
-            "header": []
-          },
-          "description": "生成Geetest极验验证码"
-        },
-        {
           "name": "获取QQ登录URL",
           "request": {
             "method": "GET",
@@ -183,7 +154,7 @@
                   "key": "uid",
                   "type": "text",
                   "description": "用户ID",
-                  "value": "373"
+                  "value": "793"
                 },
                 {
                   "key": "name",
@@ -220,6 +191,12 @@
                   "type": "text",
                   "description": "qq登录接口的openid",
                   "value": "558B72975E9AB93FCEDE5C0500C9730F"
+                },
+                {
+                  "key": "telegramId",
+                  "type": "text",
+                  "description": "telegramID",
+                  "value": "123"
                 }
               ]
             },
@@ -242,6 +219,70 @@
           "description": "用户管理"
         },
         {
+          "name": "telegram登录",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"auth_date\": 681,\n  \"first_name\": \"emerson.mcdermott\",\n  \"id\": 212,\n  \"last_name\": \"emerson.mcdermott\",\n  \"photo_url\": \"www.nancy-veum.info\",\n  \"username\": \"emerson.mcdermott\",\n  \"hash\": \"4dmque\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/telegramLogin",
+              "protocol": "http",
+              "path": [
+                "user",
+                "telegramLogin"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "telegram登录",
+            "header": []
+          },
+          "description": "telegram登录"
+        },
+        {
+          "name": "telegram二维码登录",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "code",
+                  "type": "string",
+                  "description": "No comments found.",
+                  "value": "44049"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/user/telegramQRCodeLogin",
+              "protocol": "http",
+              "path": [
+                "user",
+                "telegramQRCodeLogin"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "telegram二维码登录",
+            "header": []
+          },
+          "description": "telegram二维码登录"
+        },
+        {
           "name": "注册",
           "request": {
             "method": "POST",
@@ -252,13 +293,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "caleb.schumm"
+                  "value": "emerson.mcdermott"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "8o69zv"
+                  "value": "kcd9av"
+                },
+                {
+                  "key": "lot_number",
+                  "type": "string",
+                  "description": "No comments found.",
+                  "value": "m4d6do"
+                },
+                {
+                  "key": "captcha_output",
+                  "type": "string",
+                  "description": "No comments found.",
+                  "value": "s4e9j3"
+                },
+                {
+                  "key": "pass_token",
+                  "type": "string",
+                  "description": "No comments found.",
+                  "value": "cwqzw1"
+                },
+                {
+                  "key": "gen_time",
+                  "type": "string",
+                  "description": "No comments found.",
+                  "value": "2022-07-31 23:01:21"
                 }
               ]
             },
@@ -278,7 +343,7 @@
             "description": "注册",
             "header": []
           },
-          "description": "当开启极验验证码时需附带geetest_challenge，geetest_validate，geetest_seccode参数"
+          "description": "当开启极验验证码时需附带lot_number、captcha_output、pass_token、gen_time参数"
         },
         {
           "name": "重置个人密钥",
@@ -349,7 +414,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "829"
+                  "value": "112"
                 }
               ]
             },
@@ -411,7 +476,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "645"
+                  "value": "354"
                 }
               ]
             },
@@ -474,7 +539,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/567",
+              "raw": "http://::server/user/qqGroupWhitelist/232",
               "protocol": "http",
               "path": [
                 "user",
@@ -488,7 +553,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "873",
+                  "value": "332",
                   "description": "白名单id"
                 }
               ]
@@ -504,7 +569,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 870,\n  \"uid\": 987,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 897,\n  \"uid\": 895,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -570,7 +635,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/464",
+              "raw": "http://::server/user/messageCallback/497",
               "protocol": "http",
               "path": [
                 "user",
@@ -584,7 +649,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "153",
+                  "value": "418",
                   "description": "消息回调id"
                 }
               ]

@@ -105,7 +105,7 @@
         <dependency>
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
-            <version>4.16.8</version>
+            <version>4.16.10</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -134,7 +134,7 @@
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
-            <version>3.3.3</version>
+            <version>3.5.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -193,7 +193,7 @@
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <!--                        <phase>compile</phase>-->
+                        <phase>compile</phase>
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>

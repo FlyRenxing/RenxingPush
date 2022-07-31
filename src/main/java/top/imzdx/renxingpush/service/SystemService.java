@@ -1,6 +1,5 @@
 package top.imzdx.renxingpush.service;
 
-import jakarta.servlet.http.HttpServletRequest;
 import top.imzdx.renxingpush.model.po.MessageCallback;
 import top.imzdx.renxingpush.model.po.Note;
 import top.imzdx.renxingpush.model.po.QQGroupWhitelist;
@@ -17,9 +16,7 @@ public interface SystemService {
 
     List<Note> getAllNote();
 
-    String generateCaptcha(HttpServletRequest request);
-
-    boolean checkCaptcha(HttpServletRequest request);
+    boolean checkCaptcha(String lotNumber, String captchaOutput, String passToken, String genTime);
 
     QQGroupWhitelist insertQQGroupWhitelist(QQGroupWhitelist qqGroupWhitelist);
 

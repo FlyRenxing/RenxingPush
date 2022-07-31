@@ -1,6 +1,5 @@
 package top.imzdx.renxingpush.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,7 @@ public class SystemController {
     /**
      * 获取机器人公开列表
      *
-     * @return
+     * @return 机器人公开列表
      */
     @GetMapping("qqbotlist")
     public Result<List<QQInfo>> getQQBotPublicList() {
@@ -47,28 +46,28 @@ public class SystemController {
     /**
      * 获取所有公告
      *
-     * @return
+     * @return 所有公告
      */
     @GetMapping("note")
     public Result<List<Note>> getAllNote() {
         return new Result<>("ok", systemService.getAllNote());
     }
 
-    /**
-     * 生成Geetest极验验证码
-     *
-     * @return
-     * @ignoreParams request
-     */
-    @GetMapping("geetest")
-    public Result<String> generateCaptcha(HttpServletRequest request) {
-        return new Result<>("ok", systemService.generateCaptcha(request));
-    }
+//    /**
+//     * 生成Geetest极验验证码
+//     *
+//     * @return
+//     * @ignoreParams request
+//     */
+//    @GetMapping("geetest")
+//    public Result<String> generateCaptcha(HttpServletRequest request) {
+//        return new Result<>("ok", systemService.generateCaptcha(request));
+//    }
 
     /**
      * 获取QQ登录URL
      *
-     * @return
+     * @return QQ登录URL
      */
     @GetMapping("qqUrl")
     public Result<String> getQQUrl() {
