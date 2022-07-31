@@ -24,6 +24,8 @@ public class AppConfig {
     public static class System {
         private boolean openQqgroupWhitelistApply;
         private boolean debug;
+        private boolean openQqMsg;
+        private boolean openTelegramMsg;
         private Check check;
 
         @Data

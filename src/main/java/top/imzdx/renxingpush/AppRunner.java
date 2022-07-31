@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import top.imzdx.renxingpush.config.AppConfig;
 import top.imzdx.renxingpush.model.po.QQInfo;
 import top.imzdx.renxingpush.repository.QQGroupWhitelistDao;
 import top.imzdx.renxingpush.repository.QQInfoDao;
@@ -106,7 +107,8 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        qqInit();
-        telegramInit();
+        AppConfig appConfig = appContext.getBean(AppConfig.class);
+        if (appConfig.getSystem().isOpenQqMsg()) qqInit();
+        if (appConfig.getSystem().isOpenTelegramMsg()) telegramInit();
     }
 }
