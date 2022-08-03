@@ -32,5 +32,10 @@ public class MsgMeta implements Serializable {
      */
     @NotNull(message = "消息元数据不能为空，一般填写收信人信息")
     private String data;
+    /**
+     * 指定QQ机器人号码
+     * @mock 1277489864
+     */
+    private Long qqBot;
 
 }

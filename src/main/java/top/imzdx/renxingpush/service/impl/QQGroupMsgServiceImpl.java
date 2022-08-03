@@ -34,9 +34,10 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
         MessageLog messageLog = saveMsgToDB(msg, user.getUid());
         riskControl(user, messageLog);
         testAuthority(user, Long.valueOf(msg.getMeta().getData()), messageLog);
+        long qqBot=msg.getMeta().getQqBot()!=null?msg.getMeta().getQqBot():user.getConfig().getQqBot();
         try {
             long qqGroup = Long.parseLong(msg.getMeta().getData());
-            Group group = Bot.findInstance(user.getConfig().getQqBot()).getGroup(qqGroup);
+            Group group = Bot.findInstance(qqBot).getGroup(qqGroup);
             if (group != null) {
                 group.sendMessage(msgContentTools.buildQQMessage(msg.getContent(), messageLog, group));
                 return;
@@ -44,9 +45,9 @@ public class QQGroupMsgServiceImpl extends QQMsgServiceImpl {
         } catch (NumberFormatException e) {
             throw messageLog.fail("收信群号码不正确");
         } catch (NullPointerException e) {
-            throw messageLog.fail("绑定的机器人已失效，请前往官网重新绑定机器人");
+            throw messageLog.fail("所选QQ机器人已失效，请前往官网重新设定默认机器人或附带qqBot参数指定机器人。当前所选机器人号码："+qqBot);
         }
-        throw messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。您当前的配置：" + user.getConfig());
+        throw messageLog.fail("该机器人离线或您没有将该机器人拉入目标qq群（先加好友然后拉群）。当前所选机器人号码："+qqBot);
     }
 
     private void testAuthority(User user, Long qqGroup, MessageLog messageLog) {
