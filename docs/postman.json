@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "1f40c5d0-49b2-43d5-b225-ed4a6bdac415",
+    "_postman_id": "bbcc788f-443f-417c-89e8-d7b7fc1f3576",
     "name": "任性推-Docs"
   },
   "item": [
@@ -14,7 +14,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"content\": \"这是一条消息\",\n  \"meta\": {\n    \"type\": \"qq\",\n    \"data\": \"1277489864\"\n  }\n}",
+              "raw": "{\n  \"content\": \"这是一条消息\",\n  \"meta\": {\n    \"type\": \"qq\",\n    \"data\": \"1277489864\",\n    \"qqBot\": 1277489864\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -154,7 +154,7 @@
                   "key": "uid",
                   "type": "text",
                   "description": "用户ID",
-                  "value": "793"
+                  "value": "238"
                 },
                 {
                   "key": "name",
@@ -224,7 +224,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 681,\n  \"first_name\": \"emerson.mcdermott\",\n  \"id\": 212,\n  \"last_name\": \"emerson.mcdermott\",\n  \"photo_url\": \"www.nancy-veum.info\",\n  \"username\": \"emerson.mcdermott\",\n  \"hash\": \"4dmque\"\n}",
+              "raw": "{\n  \"auth_date\": 919,\n  \"first_name\": \"stephanie.grady\",\n  \"id\": 699,\n  \"last_name\": \"stephanie.grady\",\n  \"photo_url\": \"www.belkis-nolan.net\",\n  \"username\": \"stephanie.grady\",\n  \"hash\": \"lvikq9\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -260,7 +260,7 @@
                   "key": "code",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "44049"
+                  "value": "2781"
                 }
               ]
             },
@@ -293,37 +293,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "emerson.mcdermott"
+                  "value": "stephanie.grady"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "kcd9av"
+                  "value": "4cdcj2"
                 },
                 {
                   "key": "lot_number",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "m4d6do"
+                  "value": "239wg2"
                 },
                 {
                   "key": "captcha_output",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "s4e9j3"
+                  "value": "cepzwl"
                 },
                 {
                   "key": "pass_token",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "cwqzw1"
+                  "value": "z1yihg"
                 },
                 {
                   "key": "gen_time",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2022-07-31 23:01:21"
+                  "value": "2022-08-03 17:16:53"
                 }
               ]
             },
@@ -414,7 +414,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "112"
+                  "value": "849"
                 }
               ]
             },
@@ -476,7 +476,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "354"
+                  "value": "20"
                 }
               ]
             },
@@ -539,7 +539,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/232",
+              "raw": "http://::server/user/qqGroupWhitelist/905",
               "protocol": "http",
               "path": [
                 "user",
@@ -553,7 +553,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "332",
+                  "value": "106",
                   "description": "白名单id"
                 }
               ]
@@ -569,7 +569,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 897,\n  \"uid\": 895,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 147,\n  \"uid\": 468,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -635,7 +635,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/497",
+              "raw": "http://::server/user/messageCallback/983",
               "protocol": "http",
               "path": [
                 "user",
@@ -649,7 +649,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "418",
+                  "value": "401",
                   "description": "消息回调id"
                 }
               ]
