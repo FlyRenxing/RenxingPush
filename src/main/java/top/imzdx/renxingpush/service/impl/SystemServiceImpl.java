@@ -62,6 +62,9 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public boolean checkCaptcha(String lotNumber, String captchaOutput, String passToken, String genTime) {
+        if (lotNumber==null||captchaOutput==null||passToken==null||genTime==null){
+            throw new DefinitionException("验证码信息缺失");
+        }
         // 1.初始化极验参数信息
         // 1.initialize geetest parameter
         String captchaId = geetestConfig.getGeetest_id();

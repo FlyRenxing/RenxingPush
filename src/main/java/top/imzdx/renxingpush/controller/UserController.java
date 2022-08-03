@@ -113,10 +113,10 @@ public class UserController {
     public Result<User> register(
             @RequestParam @Valid @Length(min = 3, max = 20, message = "用户名长度需大于3,小于20") String name,
             @RequestParam @Valid @NotEmpty(message = "密码不能为空") String password,
-            @RequestParam String lot_number,
-            @RequestParam String captcha_output,
-            @RequestParam String pass_token,
-            @RequestParam String gen_time) {
+            @RequestParam(required = false) String lot_number,
+            @RequestParam(required = false) String captcha_output,
+            @RequestParam(required = false) String pass_token,
+            @RequestParam(required = false) String gen_time) {
         if (geetestOpen && !systemService.checkCaptcha(lot_number, captcha_output, pass_token, gen_time)) {
             throw new DefinitionException("验证码错误");
         }
