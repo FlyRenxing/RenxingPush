@@ -3,6 +3,7 @@ package top.imzdx.renxingpush.model.po;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(indexes = {@Index(columnList = "keyword"), @Index(columnList = "sender")})
@@ -21,7 +22,7 @@ public class MessageCallback {
      */
     private Long uid;
     /**
-     * 应用类型
+     * 应用类型:qq/qq_group/telegram
      *
      * @mock qq
      */
@@ -40,6 +41,14 @@ public class MessageCallback {
     @SuppressWarnings("JavadocLinkAsPlainText")
     private String callbackURL;
     /**
+     * 回调反馈
+     *
+     * @mock feedbackOK
+     */
+    @Transient
+    @Length(max = 3000)
+    private String feedback;
+    /**
      * 发件人
      *
      * @mock 1277489864
@@ -53,6 +62,13 @@ public class MessageCallback {
     @Transient
     private String group;
     /**
+     * 原消息内容
+     *
+     * @mock 我是一条消息
+     */
+    @Transient
+    private String message;
+    /**
      * 是否回应
      */
     private Boolean reply;
@@ -63,5 +79,11 @@ public class MessageCallback {
      */
     private String response;
 
-
+    public void setFeedback(String feedback) {
+        if (feedback != null&&feedback.length() > 3000) {
+            this.feedback = feedback.substring(0, 3000);
+        } else {
+            this.feedback = feedback;
+        }
+    }
 }

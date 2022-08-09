@@ -64,10 +64,26 @@ public class MessageCallbackLog {
     @LastModifiedDate
     private LocalDateTime time;
 
+    public void success(){
+        this.status = STATUS_SUCCESS;
+        save();
+    }
+
     public void fail() {
         this.status = STATUS_FAIL;
+        save();
+    }
+
+    private void save(){
         MessageCallbackLogDao messageCallbackLogDao = SpringUtil.getBean(MessageCallbackLogDao.class);
         messageCallbackLogDao.save(this);
     }
 
+    public MessageCallbackLog setFeedback(String feedback) {
+        if (feedback!=null&& feedback.length()>3000){
+            feedback = feedback.substring(0,3000);
+        }
+        this.feedback = feedback;
+        return this;
+    }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class SystemServiceImpl implements SystemService {
     AppConfig appConfig;
 
     @Autowired
-    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, MessageCallbackDao messageCallbackDao, MsgCallbackService msgCallbackService, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
+    public SystemServiceImpl(QQInfoDao qqInfoDao, QQGroupWhitelistDao qqGroupWhitelistDao, MessageCallbackDao messageCallbackDao, @Qualifier("QQMsgCallbackServiceImpl")MsgCallbackService msgCallbackService, NoteDao noteDao, GeetestConfig geetestConfig, AppConfig appConfig) {
         this.qqInfoDao = qqInfoDao;
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
         this.messageCallbackDao = messageCallbackDao;

@@ -3,7 +3,6 @@ package top.imzdx.renxingpush.service;
 import org.springframework.data.domain.Example;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import top.imzdx.renxingpush.model.po.MessageCallback;
 import top.imzdx.renxingpush.model.po.MessageCallbackLog;
@@ -12,10 +11,16 @@ import top.imzdx.renxingpush.repository.MessageCallbackLogDao;
 
 import java.util.HashSet;
 
+import static top.imzdx.renxingpush.model.po.MessageCallbackLog.TYPE_QQ;
+
 public abstract class MsgCallbackService {
     private static final HashSet<String> senderSet = new HashSet<>();
     MessageCallbackDao messageCallbackDao;
     MessageCallbackLogDao messageCallbackLogDao;
+
+    public abstract boolean successCallback(MessageCallback messageCallback);
+
+    public abstract boolean failCallback(MessageCallback messageCallback);
 
     public MsgCallbackService(MessageCallbackDao messageCallbackDao, MessageCallbackLogDao messageCallbackLogDao) {
         this.messageCallbackDao = messageCallbackDao;
@@ -23,24 +28,37 @@ public abstract class MsgCallbackService {
         senderSet.addAll(messageCallbackDao.findDistinctSenderBy().stream().map(MessageCallback::getSender).toList());
     }
 
-    public MessageCallback findMessageCallback(MessageCallback messageCallback) {
+    public void haveNewMessage(MessageCallback messageCallback) {
         if (senderSet.contains(messageCallback.getSender())) {
-            String keyword = messageCallback.getKeyword();
-            messageCallback.setKeyword(null);
-            for (MessageCallback callback : messageCallbackDao.findAll(Example.of(messageCallback))) {
-                if (keyword.contains(callback.getKeyword())) {
-                    return callback;
+            for (MessageCallback _callback : messageCallbackDao.findAll(Example.of(messageCallback))) {
+                if (messageCallback.getMessage().contains(_callback.getKeyword())) {
+                    _callback.setMessage(messageCallback.getMessage());
+                    String feedback = callback(_callback);
+
+                    MessageCallbackLog messageCallbackLog = new MessageCallbackLog()
+                            .setAppType(TYPE_QQ)
+                            .setContent(_callback.getMessage())
+                            .setUid(_callback.getUid())
+                            .setFeedback(feedback);
+                    if (feedback != null) {
+                        _callback.setFeedback(feedback);
+                        _callback.setGroup(messageCallback.getGroup());
+                        if (this.successCallback(_callback)) {
+                            messageCallbackLog.success();
+                        } else {
+                            messageCallbackLog.fail();
+                        }
+                    } else {
+                        this.failCallback(_callback);
+                        messageCallbackLog.fail();
+                    }
+
                 }
             }
         }
-        return null;
     }
 
-    public MessageCallbackLog saveMessageCallbackLog(MessageCallbackLog messageCallbackLog) {
-        return messageCallbackLogDao.save(messageCallbackLog);
-    }
-
-    public String callback(MessageCallback messageCallback) {
+    private String callback(MessageCallback messageCallback) {
         int tryCount = 0;
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         //10s
@@ -55,7 +73,7 @@ public abstract class MsgCallbackService {
                 ResponseEntity<String> response = restTemplate.exchange(messageCallback.getCallbackURL(), HttpMethod.POST, httpEntity, String.class);
                 //解析返回的数据
                 return response.getBody();
-            } catch (RestClientException e) {
+            } catch (Exception e) {
                 tryCount++;
             }
         }
