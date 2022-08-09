@@ -24,6 +24,7 @@ public class MessageCallbackLog {
     public static final boolean STATUS_SUCCESS = true;
 
     public static final String TYPE_QQ = "qq";
+    public static final String TYPE_TELEGRAM = "telegram";
     public static final String FEEDBACK_OK = "ok";
 
     /**

@@ -10,6 +10,7 @@ import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.MessageContext;
 import org.telegram.abilitybots.api.objects.Reply;
+import org.telegram.abilitybots.api.util.AbilityUtils;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.File;
@@ -17,9 +18,11 @@ import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.imzdx.renxingpush.config.AppConfig;
+import top.imzdx.renxingpush.model.po.MessageCallback;
 import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.UserDao;
 import top.imzdx.renxingpush.service.UserService;
+import top.imzdx.renxingpush.service.impl.TelegramMsgCallbackServiceImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +34,7 @@ import java.util.function.BiConsumer;
 import static org.telegram.abilitybots.api.objects.Locality.USER;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
+import static top.imzdx.renxingpush.model.po.MessageCallbackLog.TYPE_TELEGRAM;
 
 @Component
 public class TelegramBot extends AbilityBot {
@@ -40,11 +44,14 @@ public class TelegramBot extends AbilityBot {
 
     UserDao userDao;
 
+    TelegramMsgCallbackServiceImpl telegramMsgCallbackService;
+
     public TelegramBot(DefaultBotOptions options, AppConfig appConfig, ApplicationContext appContext) {
         super(appConfig.getTelegram().getBotToken(), appConfig.getTelegram().getBotName(), options);
         this.appConfig = appConfig;
         this.userDao = appContext.getBean(UserDao.class);
         this.userService = appContext.getBean(UserService.class);
+        this.telegramMsgCallbackService = appContext.getBean(TelegramMsgCallbackServiceImpl.class);
     }
 
     @Override
@@ -75,6 +82,21 @@ public class TelegramBot extends AbilityBot {
         };
 
         return Reply.of(action, Flag.PHOTO);
+    }
+
+    public Reply callbackMessage() {
+        BiConsumer<BaseAbilityBot, Update> action = (bot, update) -> {
+            MessageCallback messageCallback = new MessageCallback()
+                    .setAppType(TYPE_TELEGRAM)
+                    .setSender(String.valueOf(AbilityUtils.getUser(update).getId()))
+                    .setMessage(update.getMessage().getText());
+            String type = update.getMessage().getChat().getType();
+            if (type.equals("group")||type.equals("supergroup")) {
+                messageCallback.setGroup(String.valueOf(getChatId(update)));
+            }
+            telegramMsgCallbackService.haveNewMessage(messageCallback);
+        };
+        return Reply.of(action, Flag.TEXT);
     }
 
     public Ability start() {

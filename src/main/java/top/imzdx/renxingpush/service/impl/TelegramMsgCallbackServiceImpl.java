@@ -2,30 +2,46 @@ package top.imzdx.renxingpush.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telegram.abilitybots.api.util.AbilityExtension;
 import top.imzdx.renxingpush.model.po.MessageCallback;
 import top.imzdx.renxingpush.repository.MessageCallbackDao;
 import top.imzdx.renxingpush.repository.MessageCallbackLogDao;
 import top.imzdx.renxingpush.service.MsgCallbackService;
-import top.imzdx.renxingpush.utils.TelegramBot;
+
+import static top.imzdx.renxingpush.AppRunner.getTelegramBot;
 
 @Service
-public class TelegramMsgCallbackServiceImpl extends MsgCallbackService  implements AbilityExtension {
-    TelegramBot telegramBot;
+public class TelegramMsgCallbackServiceImpl extends MsgCallbackService{
     @Autowired
-    public TelegramMsgCallbackServiceImpl(MessageCallbackDao messageCallbackDao, MessageCallbackLogDao messageCallbackLogDao, TelegramBot telegramBot) {
+    public TelegramMsgCallbackServiceImpl(MessageCallbackDao messageCallbackDao, MessageCallbackLogDao messageCallbackLogDao) {
         super(messageCallbackDao, messageCallbackLogDao);
-        this.telegramBot = telegramBot;
     }
 
 
     @Override
     public boolean successCallback(MessageCallback messageCallback) {
-        return false;
+        try {
+            if (messageCallback.getReply()){
+                if (messageCallback.getGroup() == null){
+                    getTelegramBot().silent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getSender()));
+                }else {
+                    getTelegramBot().silent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getGroup()));
+                }
+            }else {
+                if (messageCallback.getGroup() == null){
+                    getTelegramBot().silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
+                }else {
+                    getTelegramBot().silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getGroup()));
+                }
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean failCallback(MessageCallback messageCallback) {
+        getTelegramBot().silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
         return false;
     }
 }

@@ -111,4 +111,8 @@ public class AppRunner implements ApplicationRunner {
         if (appConfig.getSystem().isOpenQqMsg()) qqInit();
         if (appConfig.getSystem().isOpenTelegramMsg()) telegramInit();
     }
+
+    public static TelegramBot getTelegramBot() {
+        return telegramBot;
+    }
 }

@@ -11,8 +11,6 @@ import top.imzdx.renxingpush.repository.MessageCallbackLogDao;
 
 import java.util.HashSet;
 
-import static top.imzdx.renxingpush.model.po.MessageCallbackLog.TYPE_QQ;
-
 public abstract class MsgCallbackService {
     private static final HashSet<String> senderSet = new HashSet<>();
     MessageCallbackDao messageCallbackDao;
@@ -36,7 +34,7 @@ public abstract class MsgCallbackService {
                     String feedback = callback(_callback);
 
                     MessageCallbackLog messageCallbackLog = new MessageCallbackLog()
-                            .setAppType(TYPE_QQ)
+                            .setAppType(_callback.getAppType())
                             .setContent(_callback.getMessage())
                             .setUid(_callback.getUid())
                             .setFeedback(feedback);
