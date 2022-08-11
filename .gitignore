@@ -7,6 +7,7 @@ build/
 /src/main/resources/application.yml
 telegram-bot
 telegram-bot.wal.0
+device.json
 
 ### STS ###
 .apt_generated
