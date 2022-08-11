@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.imzdx.renxingpush.config.AppConfig;
 import top.imzdx.renxingpush.interceptor.LoginRequired;
+import top.imzdx.renxingpush.model.dto.LoginDTO;
 import top.imzdx.renxingpush.model.dto.Result;
 import top.imzdx.renxingpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.renxingpush.model.po.MessageCallback;
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     /**
-     * 用户管理
+     * 用户登录
      *
      * @param user 用户，包含用户名密码
      * @return
@@ -55,7 +56,7 @@ public class UserController {
      */
     @PostMapping("/login")
     public Result<User> login(
-            @Valid User user) {
+            @Valid LoginDTO user) {
         return new Result<>("登陆成功", userService.login(user.getName(), user.getPassword()));
     }
 

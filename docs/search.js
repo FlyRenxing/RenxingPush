@@ -54,7 +54,7 @@ api[0].list[2].list.push({
     order: '1',
     deprecated: 'false',
     url: 'http://{{server}}/user/login',
-    desc: '用户管理',
+    desc: '用户登录',
 });
 api[0].list[2].list.push({
     order: '2',
@@ -133,6 +133,12 @@ api[0].list[2].list.push({
     deprecated: 'false',
     url: 'http://{{server}}/user/messageCallback/{id}',
     desc: '删除消息回调',
+});
+api[0].list[2].list.push({
+    order: '15',
+    deprecated: 'false',
+    url: 'http://{{server}}/user/logout',
+    desc: '退出账号',
 });
 document.onkeydown = keyDownSearch;
 function keyDownSearch(e) {

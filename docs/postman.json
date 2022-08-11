@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "bbcc788f-443f-417c-89e8-d7b7fc1f3576",
+    "_postman_id": "63253c02-35a3-4c1b-93d6-21b7dd2c66b2",
     "name": "任性推-Docs"
   },
   "item": [
@@ -144,59 +144,21 @@
       "name": "用户相关",
       "item": [
         {
-          "name": "用户管理",
+          "name": "用户登录",
           "request": {
             "method": "POST",
             "body": {
               "mode": "formdata",
               "formdata": [
                 {
-                  "key": "uid",
-                  "type": "text",
-                  "description": "用户ID",
-                  "value": "238"
-                },
-                {
                   "key": "name",
                   "type": "text",
-                  "description": "用户名",
-                  "value": "这是用户名"
+                  "value": "lavona.macejkovic"
                 },
                 {
                   "key": "password",
                   "type": "text",
-                  "description": "用户密码",
-                  "value": "this_id_password"
-                },
-                {
-                  "key": "admin",
-                  "type": "text",
-                  "description": "是否为管理默认0否1是",
-                  "value": "0"
-                },
-                {
-                  "key": "cipher",
-                  "type": "text",
-                  "description": "用户密钥",
-                  "value": "CH32p41OXu"
-                },
-                {
-                  "key": "dayMaxSendCount",
-                  "type": "text",
-                  "description": "每日最大发送次数",
-                  "value": "200"
-                },
-                {
-                  "key": "openid",
-                  "type": "text",
-                  "description": "qq登录接口的openid",
-                  "value": "558B72975E9AB93FCEDE5C0500C9730F"
-                },
-                {
-                  "key": "telegramId",
-                  "type": "text",
-                  "description": "telegramID",
-                  "value": "123"
+                  "value": "szw54o"
                 }
               ]
             },
@@ -213,10 +175,10 @@
               "query": [],
               "variable": []
             },
-            "description": "用户管理",
+            "description": "用户登录",
             "header": []
           },
-          "description": "用户管理"
+          "description": "用户登录"
         },
         {
           "name": "telegram登录",
@@ -224,7 +186,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 919,\n  \"first_name\": \"stephanie.grady\",\n  \"id\": 699,\n  \"last_name\": \"stephanie.grady\",\n  \"photo_url\": \"www.belkis-nolan.net\",\n  \"username\": \"stephanie.grady\",\n  \"hash\": \"lvikq9\"\n}",
+              "raw": "{\n  \"auth_date\": 899,\n  \"first_name\": \"lavona.macejkovic\",\n  \"id\": 161,\n  \"last_name\": \"lavona.macejkovic\",\n  \"photo_url\": \"www.derick-gleason.info\",\n  \"username\": \"lavona.macejkovic\",\n  \"hash\": \"p8nzbc\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -260,7 +222,7 @@
                   "key": "code",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2781"
+                  "value": "90414"
                 }
               ]
             },
@@ -293,37 +255,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "stephanie.grady"
+                  "value": "lavona.macejkovic"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "4cdcj2"
+                  "value": "z7ajz5"
                 },
                 {
                   "key": "lot_number",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "239wg2"
+                  "value": "80zyve"
                 },
                 {
                   "key": "captcha_output",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "cepzwl"
+                  "value": "qs78ep"
                 },
                 {
                   "key": "pass_token",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "z1yihg"
+                  "value": "cvhvfx"
                 },
                 {
                   "key": "gen_time",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2022-08-03 17:16:53"
+                  "value": "2022-08-11 19:25:09"
                 }
               ]
             },
@@ -414,7 +376,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "849"
+                  "value": "132"
                 }
               ]
             },
@@ -476,7 +438,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "20"
+                  "value": "668"
                 }
               ]
             },
@@ -539,7 +501,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/905",
+              "raw": "http://::server/user/qqGroupWhitelist/22",
               "protocol": "http",
               "path": [
                 "user",
@@ -553,7 +515,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "106",
+                  "value": "498",
                   "description": "白名单id"
                 }
               ]
@@ -569,7 +531,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 147,\n  \"uid\": 468,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 235,\n  \"uid\": 36,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -635,7 +597,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/983",
+              "raw": "http://::server/user/messageCallback/739",
               "protocol": "http",
               "path": [
                 "user",
@@ -649,7 +611,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "401",
+                  "value": "910",
                   "description": "消息回调id"
                 }
               ]
@@ -658,6 +620,35 @@
             "header": []
           },
           "description": "删除消息回调"
+        },
+        {
+          "name": "退出账号",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/logout",
+              "protocol": "http",
+              "path": [
+                "user",
+                "logout"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "退出账号",
+            "header": []
+          },
+          "description": "退出账号"
         }
       ]
     }

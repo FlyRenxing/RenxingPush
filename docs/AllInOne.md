@@ -1,7 +1,7 @@
 # 任性推-Docs
 Version |  Update Time  | Status | Author |  Description
 ---|---|---|---|---
-v2022-08-03 17:16:52|2022-08-03 17:16:52|auto|@Renxing|Created by smart-doc
+v2022-08-11 19:25:08|2022-08-11 19:25:08|auto|@Renxing|Created by smart-doc
 
 
 
@@ -30,7 +30,7 @@ Parameter | Type|Description|Required|Since
 content|string|消息内容|true|-
 meta|object|消息元数据|false|-
 └─type|string|消息类型，目前仅支持"qq"、"qq_group、telegram"|false|-
-└─data|string|消息元数据，与type对应。<br>qq-QQ号，qq_group-QQ群号，telegram-空（需绑定机器人）|true|-
+└─data|string|消息元数据，与type对应。<br>qq-QQ号，qq_group-QQ群号，telegram-telegramID|true|-
 └─qqBot|int64|指定QQ机器人号码|false|-
 
 **Request-example:**
@@ -137,7 +137,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 504,
+      "id": 764,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -173,12 +173,13 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "hjcqrj"
+  "data": "pc3lkf"
 }
 ```
 
 ## 用户相关
-### 用户管理
+
+### 用户登录
 **URL:** http://{{server}}/user/login
 
 **Type:** POST
@@ -187,20 +188,14 @@ data|string|结果数据，一般反馈给前端进行处理|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 用户管理
+**Description:** 用户登录
 
 **Query-parameters:**
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-uid|int64|用户ID|false|-
-name|string|用户名|false|-
-password|string|用户密码|false|-
-admin|int32|是否为管理默认0否1是|false|-
-config|object|用户配置|false|-
-└─qqBot|int64|绑定的机器人QQ号|false|-
-cipher|string|用户密钥|false|-
-dayMaxSendCount|int64|每日最大发送次数|false|-
+name|string|No comments found.|false|-
+password|string|No comments found.|false|-
 
 **Request-example:**
 ```
@@ -227,7 +222,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 784,
+    "uid": 851,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -263,15 +258,16 @@ username|string|No comments found.|false|-
 hash|string|No comments found.|true|-
 
 **Request-example:**
+
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/telegramLogin --data '{
-  "auth_date": 536,
-  "first_name": "stephanie.grady",
-  "id": 713,
-  "last_name": "stephanie.grady",
-  "photo_url": "www.belkis-nolan.net",
-  "username": "stephanie.grady",
-  "hash": "qoibnq"
+  "auth_date": 717,
+  "first_name": "lavona.macejkovic",
+  "id": 579,
+  "last_name": "lavona.macejkovic",
+  "photo_url": "www.derick-gleason.info",
+  "username": "lavona.macejkovic",
+  "hash": "tu2xua"
 }'
 ```
 **Response-fields:**
@@ -295,7 +291,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 789,
+    "uid": 203,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -326,7 +322,7 @@ code|string|No comments found.|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/telegramQRCodeLogin --data 'code=2781'
+curl -X POST -i http://{{server}}/user/telegramQRCodeLogin --data 'code=90414'
 ```
 **Response-fields:**
 
@@ -349,7 +345,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 681,
+    "uid": 499,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -385,7 +381,7 @@ gen_time|string|No comments found.|false|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=stephanie.grady&password=ktv8tm&lot_number=q6bg0f&captcha_output=u22qp9&pass_token=au0n3c&gen_time=2022-08-03 17:16:53'
+curl -X POST -i http://{{server}}/user/register --data 'name=lavona.macejkovic&password=r1ik72&lot_number=q18vyj&captcha_output=certsp&pass_token=nbealj&gen_time=2022-08-11 19:25:09'
 ```
 **Response-fields:**
 
@@ -408,7 +404,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 470,
+    "uid": 896,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -448,7 +444,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "5m0cno"
+  "data": "a12ela"
 }
 ```
 
@@ -488,7 +484,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 290,
+    "uid": 761,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -519,7 +515,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=164'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=261'
 ```
 **Response-fields:**
 
@@ -542,7 +538,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 527,
+    "uid": 990,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -582,7 +578,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 15
+  "data": 395
 }
 ```
 
@@ -605,7 +601,7 @@ number|int64|群号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=705'
+curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=812'
 ```
 **Response-fields:**
 
@@ -620,15 +616,16 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─userId|int64|绑定站内用户ID|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 393,
-    "groupName": "stephanie.grady",
+    "id": 229,
+    "groupName": "lavona.macejkovic",
     "number": 807374699,
-    "userId": 320
+    "userId": 158
   }
 }
 ```
@@ -661,16 +658,17 @@ data|array|结果数据，一般反馈给前端进行处理|-
 └─userId|int64|绑定站内用户ID|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": [
     {
-      "id": 636,
-      "groupName": "stephanie.grady",
+      "id": 476,
+      "groupName": "lavona.macejkovic",
       "number": 807374699,
-      "userId": 29
+      "userId": 789
     }
   ]
 }
@@ -695,7 +693,7 @@ id|int64|白名单id|true|-
 
 **Request-example:**
 ```
-curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/668
+curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/298
 ```
 **Response-fields:**
 
@@ -731,24 +729,29 @@ Parameter | Type|Description|Required|Since
 ---|---|---|---|---
 id|int64|No comments found.|false|-
 uid|int64|消息回调所属用户ID|false|-
-appType|string|应用类型|false|-
+appType|string|应用类型:qq/qq_group/telegram|false|-
 keyword|string|关键词|false|-
 callbackURL|string|回调地址|false|-
+feedback|string|回调反馈|false|-
 sender|string|发件人|false|-
 group|string|所在群组|false|-
+message|string|原消息内容|false|-
 reply|boolean|是否回应|false|-
 response|string|回应语|false|-
 
 **Request-example:**
+
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/messageCallback --data '{
-  "id": 408,
-  "uid": 458,
+  "id": 174,
+  "uid": 638,
   "appType": "qq",
   "keyword": "keyword",
   "callbackURL": "https://www.baidu.com/callback",
+  "feedback": "feedbackOK",
   "sender": "1277489864",
   "group": "1277489864",
+  "message": "我是一条消息",
   "reply": true,
   "response": "回调成功了"
 }'
@@ -762,27 +765,32 @@ msg|string|结果消息，一般反馈给用户|-
 data|object|结果数据，一般反馈给前端进行处理|-
 └─id|int64|No comments found.|-
 └─uid|int64|消息回调所属用户ID|-
-└─appType|string|应用类型|-
+└─appType|string|应用类型:qq/qq_group/telegram|-
 └─keyword|string|关键词|-
 └─callbackURL|string|回调地址|-
+└─feedback|string|回调反馈|-
 └─sender|string|发件人|-
 └─group|string|所在群组|-
+└─message|string|原消息内容|-
 └─reply|boolean|是否回应|-
 └─response|string|回应语|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 996,
-    "uid": 657,
+    "id": 743,
+    "uid": 642,
     "appType": "qq",
     "keyword": "keyword",
     "callbackURL": "https://www.baidu.com/callback",
+    "feedback": "feedbackOK",
     "sender": "1277489864",
     "group": "1277489864",
+    "message": "我是一条消息",
     "reply": true,
     "response": "回调成功了"
   }
@@ -813,28 +821,33 @@ msg|string|结果消息，一般反馈给用户|-
 data|array|结果数据，一般反馈给前端进行处理|-
 └─id|int64|No comments found.|-
 └─uid|int64|消息回调所属用户ID|-
-└─appType|string|应用类型|-
+└─appType|string|应用类型:qq/qq_group/telegram|-
 └─keyword|string|关键词|-
 └─callbackURL|string|回调地址|-
+└─feedback|string|回调反馈|-
 └─sender|string|发件人|-
 └─group|string|所在群组|-
+└─message|string|原消息内容|-
 └─reply|boolean|是否回应|-
 └─response|string|回应语|-
 
 **Response-example:**
+
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": [
     {
-      "id": 653,
-      "uid": 327,
+      "id": 65,
+      "uid": 621,
       "appType": "qq",
       "keyword": "keyword",
       "callbackURL": "https://www.baidu.com/callback",
+      "feedback": "feedbackOK",
       "sender": "1277489864",
       "group": "1277489864",
+      "message": "我是一条消息",
       "reply": true,
       "response": "回调成功了"
     }
@@ -860,9 +873,47 @@ Parameter | Type|Description|Required|Since
 id|int64|消息回调id|true|-
 
 **Request-example:**
+
 ```
-curl -X DELETE -i http://{{server}}/user/messageCallback/889
+curl -X DELETE -i http://{{server}}/user/messageCallback/138
 ```
+
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+flag|boolean|结果标志，true为成功，false为失败|-
+msg|string|结果消息，一般反馈给用户|-
+data|boolean|结果数据，一般反馈给前端进行处理|-
+
+**Response-example:**
+
+```
+{
+  "flag": true,
+  "msg": "返回的消息",
+  "data": true
+}
+```
+
+### 退出账号
+
+**URL:** http://{{server}}/user/logout
+
+**Type:** GET
+
+**Author:** Renxing
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 退出账号
+
+**Request-example:**
+
+```
+curl -X GET -i http://{{server}}/user/logout
+```
+
 **Response-fields:**
 
 Field | Type|Description|Since
