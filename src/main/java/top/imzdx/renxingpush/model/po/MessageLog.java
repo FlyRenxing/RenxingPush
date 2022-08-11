@@ -35,6 +35,7 @@ public class MessageLog {
      *
      * @mock 这是消息内容
      */
+    @Column(length = 3000)
     private String content;
     /**
      * 消息元数据

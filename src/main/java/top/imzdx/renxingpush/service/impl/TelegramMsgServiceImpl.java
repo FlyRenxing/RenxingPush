@@ -27,7 +27,6 @@ public class TelegramMsgServiceImpl extends MsgService {
 
     @Autowired
     public TelegramMsgServiceImpl(MsgContentTools msgContentTools, MessageLogDao messageLogDao, UserDao userDao, TelegramBot telegramBot) {
-        super(messageLogDao);
         this.msgContentTools = msgContentTools;
         this.messageLogDao = messageLogDao;
         this.userDao = userDao;

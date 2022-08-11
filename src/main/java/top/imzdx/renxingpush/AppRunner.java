@@ -31,7 +31,7 @@ import java.util.Objects;
  */
 @Component
 public class AppRunner implements ApplicationRunner {
-    static ApplicationContext appContext = SpringUtil.getApplicationContext();
+    public static ApplicationContext appContext = SpringUtil.getApplicationContext();
     static TelegramBot telegramBot;
 
     @Autowired

@@ -1,28 +1,36 @@
 package top.imzdx.renxingpush.service.impl;
 
-import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.imzdx.renxingpush.model.dto.Msg;
+import top.imzdx.renxingpush.model.dto.MsgMeta;
 import top.imzdx.renxingpush.model.po.MessageCallback;
+import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.MessageCallbackDao;
 import top.imzdx.renxingpush.repository.MessageCallbackLogDao;
 import top.imzdx.renxingpush.repository.UserDao;
 import top.imzdx.renxingpush.service.MsgCallbackService;
+import top.imzdx.renxingpush.utils.QQBotTools;
 
 import static top.imzdx.renxingpush.model.po.MessageCallbackLog.TYPE_QQ;
 
 @Service
 public class QQMsgCallbackServiceImpl extends MsgCallbackService {
     UserDao userDao;
+    QQBotTools qqBotTools;
+
+    QQGroupMsgServiceImpl qqGroupMsgServiceImpl;
 
     @Autowired
-    public QQMsgCallbackServiceImpl(MessageCallbackDao messageCallbackDao, MessageCallbackLogDao messageCallbackLogDao, UserDao userDao) {
+    public QQMsgCallbackServiceImpl(MessageCallbackDao messageCallbackDao, MessageCallbackLogDao messageCallbackLogDao, UserDao userDao, QQBotTools qqBotTools, QQGroupMsgServiceImpl qqGroupMsgServiceImpl) {
         super(messageCallbackDao, messageCallbackLogDao);
         this.userDao = userDao;
+        this.qqBotTools = qqBotTools;
+        this.qqGroupMsgServiceImpl = qqGroupMsgServiceImpl;
         GlobalEventChannel.INSTANCE.subscribeAlways(MessageEvent.class, event -> {
             MessageChain chain = event.getMessage();
             MessageCallback messageCallback = new MessageCallback()
@@ -40,21 +48,13 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
     public boolean successCallback(MessageCallback messageCallback) {
         try {
             userDao.findById(messageCallback.getUid()).ifPresent(user -> {
-                Long qqBotNumber = user.getConfig().getQqBot();
-                Bot bot = Bot.findInstance(qqBotNumber);
-                if (messageCallback.getGroup() == null) {
-                    if (messageCallback.getReply()) {
-                        bot.getFriend(Long.parseLong(messageCallback.getSender())).sendMessage(messageCallback.getResponse());
-                    } else {
-                        bot.getFriend(Long.parseLong(messageCallback.getSender())).sendMessage(messageCallback.getFeedback());
-                    }
+                Msg msg = getMsg(user, messageCallback);
+                if (messageCallback.getReply()) {
+                    msg.setContent(messageCallback.getResponse());
                 } else {
-                    if (messageCallback.getReply()) {
-                        bot.getGroup(Long.parseLong(messageCallback.getGroup())).sendMessage(messageCallback.getResponse());
-                    } else {
-                        bot.getGroup(Long.parseLong(messageCallback.getGroup())).sendMessage(messageCallback.getFeedback());
-                    }
+                    msg.setContent(messageCallback.getFeedback());
                 }
+                qqGroupMsgServiceImpl.sendMsg(user, msg);
             });
         } catch (Exception e) {
             return false;
@@ -66,9 +66,9 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
     public boolean failCallback(MessageCallback messageCallback) {
         try {
             userDao.findById(messageCallback.getUid()).ifPresent(user -> {
-                Long qqBotNumber = user.getConfig().getQqBot();
-                Bot bot = Bot.findInstance(qqBotNumber);
-                bot.getFriend(Long.parseLong(messageCallback.getSender())).sendMessage("回调失败");
+                Msg msg = getMsg(user, messageCallback);
+                msg.setContent("回调失败");
+                qqBotTools.sendMsg(user, msg);
             });
         } catch (Exception e) {
             return false;
@@ -76,4 +76,14 @@ public class QQMsgCallbackServiceImpl extends MsgCallbackService {
         return true;
     }
 
+    private Msg getMsg(User user, MessageCallback messageCallback) {
+        Long qqBotNumber = user.getConfig().getQqBot();
+        return new Msg() {{
+            MsgMeta meta = new MsgMeta();
+            meta.setType(messageCallback.getGroup() == null ? MsgMeta.MSG_TYPE_QQ : MsgMeta.MSG_TYPE_QQ_GROUP);
+            meta.setData(messageCallback.getGroup() == null ? messageCallback.getSender() : messageCallback.getGroup());
+            meta.setQqBot(qqBotNumber);
+            setMeta(meta);
+        }};
+    }
 }

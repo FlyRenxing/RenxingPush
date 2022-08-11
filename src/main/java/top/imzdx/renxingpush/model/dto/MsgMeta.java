@@ -17,6 +17,9 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 public class MsgMeta implements Serializable {
+    public static final String MSG_TYPE_QQ = "qq";
+    public static final String MSG_TYPE_QQ_GROUP = "qq_group";
+    public static final String MSG_TYPE_TELEGRAM = "telegram";
     /**
      * 消息类型，目前仅支持"qq"、"qq_group、telegram"
      *
@@ -26,7 +29,7 @@ public class MsgMeta implements Serializable {
     private String type;
     /**
      * 消息元数据，与type对应。
-     * qq-QQ号，qq_group-QQ群号，telegram-空（需绑定机器人）
+     * qq-QQ号，qq_group-QQ群号，telegram-telegramID
      *
      * @mock 1277489864
      */

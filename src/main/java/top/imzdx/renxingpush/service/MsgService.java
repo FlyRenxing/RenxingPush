@@ -8,19 +8,21 @@ import top.imzdx.renxingpush.model.po.MessageLog;
 import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.MessageLogDao;
 
+import static top.imzdx.renxingpush.AppRunner.appContext;
+
 /**
  * @author Renxing
  */
 public abstract class MsgService {
-    MessageLogDao messageLogDao;
+    static MessageLogDao messageLogDao;
 
-    public MsgService(MessageLogDao messageLogDao) {
-        this.messageLogDao = messageLogDao;
+    public MsgService() {
+        messageLogDao = appContext.getBean(MessageLogDao.class);
     }
 
     public abstract void sendMsg(User user, Msg msg);
 
-    public MessageLog saveMsgToDB(Msg msg, long uid) {
+    public static MessageLog saveMsgToDB(Msg msg, long uid) {
         ObjectMapper mapper = new ObjectMapper();
         MessageLog messageLog = null;
         try {
