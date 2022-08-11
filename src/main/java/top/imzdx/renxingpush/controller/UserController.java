@@ -243,4 +243,14 @@ public class UserController {
     public Result<Boolean> deleteMessageCallback(@PathVariable Long id) {
         return new Result<>("ok", systemService.deleteMessageCallback(id));
     }
+
+    /**
+     * 退出账号
+     */
+    @GetMapping("/logout")
+    @LoginRequired
+    public Result<Boolean> logout() {
+        AuthTools.logout();
+        return new Result<>("ok", true);
+    }
 }

@@ -103,6 +103,10 @@ public class AuthTools {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
+    public static void logout() {
+        getHttpServletRequest().getSession().removeAttribute("uid");
+    }
+
     public String generateCipher() {
         int digit = appConfig.getUser().getDefaultSetting().getCipherDigit();
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
