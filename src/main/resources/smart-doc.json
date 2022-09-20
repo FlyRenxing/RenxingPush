@@ -2,6 +2,7 @@
   "serverUrl": "http://{{server}}",
   "outPath": "./docs",
   "allInOne": true,
+  "allInOneDocFileName": "index.html",
   "style": "vs2015",
   "createDebugPage": false,
   "md5EncryptedHtmlName": false,

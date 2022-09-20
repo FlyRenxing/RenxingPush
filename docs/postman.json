@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "63253c02-35a3-4c1b-93d6-21b7dd2c66b2",
+    "_postman_id": "ec702de8-7051-4074-bd69-4543779c26d5",
     "name": "任性推-Docs"
   },
   "item": [
@@ -153,12 +153,12 @@
                 {
                   "key": "name",
                   "type": "text",
-                  "value": "lavona.macejkovic"
+                  "value": "clarissa.grady"
                 },
                 {
                   "key": "password",
                   "type": "text",
-                  "value": "szw54o"
+                  "value": "6mzcrh"
                 }
               ]
             },
@@ -186,7 +186,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 899,\n  \"first_name\": \"lavona.macejkovic\",\n  \"id\": 161,\n  \"last_name\": \"lavona.macejkovic\",\n  \"photo_url\": \"www.derick-gleason.info\",\n  \"username\": \"lavona.macejkovic\",\n  \"hash\": \"p8nzbc\"\n}",
+              "raw": "{\n  \"auth_date\": 573,\n  \"first_name\": \"clarissa.grady\",\n  \"id\": 771,\n  \"last_name\": \"clarissa.grady\",\n  \"photo_url\": \"www.estela-rodriguez.info\",\n  \"username\": \"clarissa.grady\",\n  \"hash\": \"csn6vs\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -222,7 +222,7 @@
                   "key": "code",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "90414"
+                  "value": "65199"
                 }
               ]
             },
@@ -255,37 +255,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "lavona.macejkovic"
+                  "value": "clarissa.grady"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "z7ajz5"
+                  "value": "9n11sw"
                 },
                 {
                   "key": "lot_number",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "80zyve"
+                  "value": "k1iwl7"
                 },
                 {
                   "key": "captcha_output",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "qs78ep"
+                  "value": "ho2l6z"
                 },
                 {
                   "key": "pass_token",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "cvhvfx"
+                  "value": "9sonhu"
                 },
                 {
                   "key": "gen_time",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2022-08-11 19:25:09"
+                  "value": "2022-09-20 18:09:14"
                 }
               ]
             },
@@ -376,7 +376,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "132"
+                  "value": "309"
                 }
               ]
             },
@@ -438,7 +438,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "668"
+                  "value": "30"
                 }
               ]
             },
@@ -501,7 +501,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/22",
+              "raw": "http://::server/user/qqGroupWhitelist/68",
               "protocol": "http",
               "path": [
                 "user",
@@ -515,7 +515,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "498",
+                  "value": "5",
                   "description": "白名单id"
                 }
               ]
@@ -531,7 +531,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 235,\n  \"uid\": 36,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 11,\n  \"uid\": 126,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -597,7 +597,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/739",
+              "raw": "http://::server/user/messageCallback/473",
               "protocol": "http",
               "path": [
                 "user",
@@ -611,7 +611,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "910",
+                  "value": "507",
                   "description": "消息回调id"
                 }
               ]
