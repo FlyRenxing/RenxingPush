@@ -1,5 +1,7 @@
 package top.imzdx.renxingpush.utils;
 
+import cn.hutool.core.img.Img;
+import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.img.gif.GifDecoder;
 import cn.hutool.core.io.resource.BytesResource;
 import cn.hutool.core.io.resource.MultiResource;
@@ -105,6 +107,28 @@ public class ImageTools {
         return null;
     }
 
+    public ByteArrayResource compressImage(ByteArrayResource byteArrayResource, int longestLength) throws IOException {
+        BufferedImage image = ImgUtil.read(byteArrayResource.getInputStream());
+        int height = image.getHeight();
+        int width = image.getWidth();
+        if (height > width) {
+            if (height > longestLength) {
+                height = longestLength;
+                width = (int) (((double) width / image.getHeight()) * height);
+            }
+        } else {
+            if (width > longestLength) {
+                width = longestLength;
+                height = (int) (((double) height / image.getWidth()) * width);
+            }
+        }
+        Img img = Img.from(image);
+        Img scale = img.scale(width, height);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        scale.write(byteArrayOutputStream);
+        return new ByteArrayResource(byteArrayOutputStream.toByteArray());
+    }
+
     public void checkImageByPrivate(ByteArrayResource resource) throws DefinitionException {
         HttpRequest request = HttpRequest.post(imagePrivateCloudUrl)
                 .timeout(20000);
@@ -151,7 +175,16 @@ public class ImageTools {
         if (enableCheck) {
             switch (useType) {
                 case "aliyun" -> aliyunLib.checkImage(url);
-                case "private" -> checkImageByPrivate(resource);
+                case "private" -> {
+                    //图片大小限制否则压缩
+                    ByteArrayResource byteArrayResource = null;
+                    try {
+                        byteArrayResource = compressImage(resource, 600);
+                    } catch (IOException e) {
+                        throw new DefinitionException("图片压缩失败");
+                    }
+                    checkImageByPrivate(byteArrayResource);
+                }
             }
         }
         return resource;

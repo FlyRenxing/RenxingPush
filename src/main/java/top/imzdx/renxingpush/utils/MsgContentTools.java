@@ -84,8 +84,8 @@ public class MsgContentTools {
                     if (matcher.find(0)) {
                         try {
                             String imageUrl = matcher.group(1);
-                            ByteArrayResource resource = imageTools.getImage(imageUrl);
-                            chainBuilder.add(ExternalResource.uploadAsImage(resource.getInputStream(), contact));
+                            ByteArrayResource image = imageTools.getImage(imageUrl);
+                            chainBuilder.add(ExternalResource.uploadAsImage(image.getInputStream(), contact));
                         } catch (DefinitionException e) {
                             throw messageLog.fail(e.getMessage());
                         } catch (IllegalArgumentException e) {
