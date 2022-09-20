@@ -9,6 +9,7 @@ import top.imzdx.renxingpush.config.AppConfig;
 class QqPushApplicationTests {
     @Autowired
     private AppConfig appConfig;
+
     @Test
     void contextLoads() {
         System.out.println(appConfig);
