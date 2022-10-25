@@ -10,7 +10,6 @@ import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.MessageContext;
 import org.telegram.abilitybots.api.objects.Reply;
-import org.telegram.abilitybots.api.util.AbilityUtils;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.File;
@@ -80,23 +79,29 @@ public class TelegramBot extends AbilityBot {
                 silent.send(e.getMessage(), getChatId(update));
             }
         };
-
         return Reply.of(action, Flag.PHOTO);
     }
 
-    public Reply callbackMessage() {
-        BiConsumer<BaseAbilityBot, Update> action = (bot, update) -> {
-            MessageCallback messageCallback = new MessageCallback()
-                    .setAppType(TYPE_TELEGRAM)
-                    .setSender(String.valueOf(AbilityUtils.getUser(update).getId()))
-                    .setMessage(update.getMessage().getText());
-            String type = update.getMessage().getChat().getType();
-            if (type.equals("group")||type.equals("supergroup")) {
-                messageCallback.setGroup(String.valueOf(getChatId(update)));
-            }
-            telegramMsgCallbackService.haveNewMessage(messageCallback);
-        };
-        return Reply.of(action, Flag.TEXT);
+    public Ability callbackMessage() {
+        return Ability
+                .builder()
+                .name("callback")
+                .info("消息回调功能")
+                .input(1)
+                .locality(USER)
+                .privacy(PUBLIC)
+                .action(ctx -> {
+                    MessageCallback messageCallback = new MessageCallback()
+                            .setAppType(TYPE_TELEGRAM)
+                            .setSender(String.valueOf(ctx.user().getId()))
+                            .setMessage(ctx.update().getMessage().getText());
+                    String type = ctx.update().getMessage().getChat().getType();
+                    if (type.equals("group") || type.equals("supergroup")) {
+                        messageCallback.setGroup(String.valueOf(getChatId(ctx.update())));
+                    }
+                    telegramMsgCallbackService.haveNewMessage(messageCallback);
+                })
+                .build();
     }
 
     public Ability start() {
