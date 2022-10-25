@@ -1,6 +1,5 @@
 package top.imzdx.renxingpush;
 
-import cn.hutool.extra.spring.SpringUtil;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
@@ -31,17 +30,26 @@ import java.util.Objects;
  */
 @Component
 public class AppRunner implements ApplicationRunner {
-    public static ApplicationContext appContext = SpringUtil.getApplicationContext();
-    static TelegramBot telegramBot;
+    private final AppConfig appConfig;
+    private final QQInfoDao qqInfoDao;
+    private final QQGroupWhitelistDao qqGroupWhitelistDao;
+    TelegramBot telegramBot;
 
     @Autowired
-    public AppRunner(TelegramBot telegramBot) {
-        AppRunner.telegramBot = telegramBot;
+    public AppRunner(AppConfig appConfig,
+                     QQInfoDao qqInfoDao,
+                     QQGroupWhitelistDao qqGroupWhitelistDao,
+                     TelegramBot telegramBot,
+                     ApplicationContext context) {
+        this.telegramBot = telegramBot;
+        this.appConfig = appConfig;
+        this.qqInfoDao = qqInfoDao;
+        this.qqGroupWhitelistDao = qqGroupWhitelistDao;
+        System.out.println(context == null);
     }
 
-    public static void qqInit() {
+    public void qqInit() {
 
-        QQInfoDao qqInfoDao = appContext.getBean(QQInfoDao.class);
         //所有账号登陆
         List<QQInfo> QQInfoList = qqInfoDao.findAll();
         for (QQInfo item :
@@ -50,7 +58,7 @@ public class AppRunner implements ApplicationRunner {
                 BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
                         new BotConfiguration() {{
                             setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
-//                            setProtocol(MiraiProtocol.ANDROID_WATCH);
+                            setProtocol(MiraiProtocol.ANDROID_PAD);
                             fileBasedDeviceInfo();
                         }}).login();
                 item.setState(1);
@@ -66,7 +74,6 @@ public class AppRunner implements ApplicationRunner {
          */
         Listener<NewFriendRequestEvent> qqListener = GlobalEventChannel.INSTANCE.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
         qqListener.start();
-        QQGroupWhitelistDao qqGroupWhitelistDao = appContext.getBean(QQGroupWhitelistDao.class);
         //邀请加群监听
         Listener<BotInvitedJoinGroupRequestEvent> qqGroupListener = GlobalEventChannel.INSTANCE.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, event -> {
             if (!qqGroupWhitelistDao.findByNumber(event.getGroupId()).isEmpty()) {
@@ -95,7 +102,7 @@ public class AppRunner implements ApplicationRunner {
         botJoinGroupEventListener.start();
     }
 
-    public static void telegramInit() {
+    public void telegramInit() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(telegramBot);
@@ -107,12 +114,11 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        AppConfig appConfig = appContext.getBean(AppConfig.class);
         if (appConfig.getSystem().isOpenQqMsg()) qqInit();
         if (appConfig.getSystem().isOpenTelegramMsg()) telegramInit();
     }
 
-    public static TelegramBot getTelegramBot() {
-        return telegramBot;
-    }
+//    public static TelegramBot getTelegramBot() {
+//        return telegramBot;
+//    }
 }

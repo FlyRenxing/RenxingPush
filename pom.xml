@@ -5,24 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>top.imzdx</groupId>
     <artifactId>renxing-push</artifactId>
-    <version>0.9.2</version>
+    <version>0.9.4</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0-M4</version>
+        <version>3.0.0-RC1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.12.1</mirai-core-jvm.version>
-        <cn.hutool.version>5.8.6</cn.hutool.version>
+        <mirai-core-jvm.version>2.13.0-RC2</mirai-core-jvm.version>
+        <cn.hutool.version>5.8.8</cn.hutool.version>
         <mysql.jdbc.version>8.0.30</mysql.jdbc.version>
         <validator.version>7.0.4.Final</validator.version>
         <lombok.version>1.18.24</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
-        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.7.10</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
+        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.7.20</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
         <fastjson.version>2.0.1</fastjson.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
@@ -66,12 +66,12 @@
         <dependency>
             <groupId>com.vladmihalcea</groupId>
             <artifactId>hibernate-types-60</artifactId>
-            <version>2.17.1</version>
+            <version>2.20.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.11</version>
+            <version>1.2.13</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -204,7 +204,7 @@
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <phase>compile</phase>
+                        <!--                        <phase>compile</phase>-->
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>
@@ -222,7 +222,15 @@
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
             <snapshots>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>

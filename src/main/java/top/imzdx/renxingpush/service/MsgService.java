@@ -8,16 +8,14 @@ import top.imzdx.renxingpush.model.po.MessageLog;
 import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.MessageLogDao;
 
-import static top.imzdx.renxingpush.AppRunner.appContext;
-
 /**
  * @author Renxing
  */
 public abstract class MsgService {
     static MessageLogDao messageLogDao;
 
-    public MsgService() {
-        messageLogDao = appContext.getBean(MessageLogDao.class);
+    public MsgService(MessageLogDao messageLogDao) {
+        MsgService.messageLogDao = messageLogDao;
     }
 
     public abstract void sendMsg(User user, Msg msg);

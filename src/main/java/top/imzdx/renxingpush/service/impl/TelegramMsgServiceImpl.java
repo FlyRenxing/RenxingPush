@@ -20,15 +20,14 @@ import top.imzdx.renxingpush.utils.TelegramBot;
 @Service("telegram")
 public class TelegramMsgServiceImpl extends MsgService {
     MsgContentTools msgContentTools;
-    MessageLogDao messageLogDao;
     UserDao userDao;
 
     TelegramBot telegramBot;
 
     @Autowired
     public TelegramMsgServiceImpl(MsgContentTools msgContentTools, MessageLogDao messageLogDao, UserDao userDao, TelegramBot telegramBot) {
+        super(messageLogDao);
         this.msgContentTools = msgContentTools;
-        this.messageLogDao = messageLogDao;
         this.userDao = userDao;
         this.telegramBot = telegramBot;
     }
