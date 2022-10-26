@@ -150,12 +150,20 @@ public class UserServiceImpl implements UserService {
     public User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher) {
         Long chatId = update.getMessage().getChatId();
         if (userDao.findByTelegramId(chatId).isPresent()) {
+            bot.silent().send("此telegram账户已与其他账户绑定，请前往官网进行解绑", chatId);
             throw new DefinitionException("此telegram账户已与其他账户绑定，请前往官网进行解绑");
         }
-        User user = userDao.findByCipher(cipher).orElseThrow(() -> new DefinitionException("Cipher不正确"));
-        user.setTelegramId(chatId);
-        user = userDao.save(user);
-        return user;
+        Optional<User> optionalUser = userDao.findByCipher(cipher);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setTelegramId(chatId);
+            userDao.save(user);
+            bot.silent().send("绑定成功", chatId);
+            return user;
+        } else {
+            bot.silent().send("Cipher不正确", chatId);
+            throw new DefinitionException("Cipher不正确");
+        }
     }
 
     @Override
