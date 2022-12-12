@@ -16,7 +16,7 @@
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.13.1</mirai-core-jvm.version>
+        <mirai-core-jvm.version>2.13.2</mirai-core-jvm.version>
         <cn.hutool.version>5.8.10</cn.hutool.version>
         <mysql.jdbc.version>8.0.30</mysql.jdbc.version>
         <validator.version>7.0.4.Final</validator.version>
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-green</artifactId>
-            <version>3.6.5</version>
+            <version>3.6.6</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.aip</groupId>
@@ -230,32 +230,4 @@
             </plugin>
         </plugins>
     </build>
-    <!--    <repositories>-->
-    <!--        <repository>-->
-    <!--            <id>spring-milestones</id>-->
-    <!--            <name>Spring Milestones</name>-->
-    <!--            <url>https://repo.spring.io/milestone</url>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>true</enabled>-->
-    <!--            </snapshots>-->
-    <!--        </repository>-->
-    <!--        <repository>-->
-    <!--            <id>maven</id>-->
-    <!--            <name>Spring Milestones</name>-->
-    <!--            <url>https://repo.maven.apache.org/maven2/</url>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>true</enabled>-->
-    <!--            </snapshots>-->
-    <!--        </repository>-->
-    <!--    </repositories>-->
-    <!--    <pluginRepositories>-->
-    <!--        <pluginRepository>-->
-    <!--            <id>spring-milestones</id>-->
-    <!--            <name>Spring Milestones</name>-->
-    <!--            <url>https://repo.spring.io/milestone</url>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>false</enabled>-->
-    <!--            </snapshots>-->
-    <!--        </pluginRepository>-->
-    <!--    </pluginRepositories>-->
 </project>

@@ -2,9 +2,9 @@ package top.imzdx.renxingpush.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import net.mamoe.mirai.internal.deps.okhttp3.OkHttpClient;
+import net.mamoe.mirai.internal.deps.okhttp3.Request;
+import net.mamoe.mirai.internal.deps.okhttp3.Response;
 import org.springframework.stereotype.Component;
 import top.imzdx.renxingpush.config.AppConfig;
 
