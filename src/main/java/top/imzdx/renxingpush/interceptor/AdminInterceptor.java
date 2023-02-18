@@ -2,11 +2,11 @@ package top.imzdx.renxingpush.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.imzdx.renxingpush.model.po.User;
+import top.imzdx.renxingpush.utils.AuthTools;
 import top.imzdx.renxingpush.utils.DefinitionException;
 
 import java.lang.reflect.Method;
@@ -30,11 +30,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         // 有 @LoginRequired 注解，需要认证
         if (methodAnnotation != null) {
             // 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
-                throw new DefinitionException("当前未登录");
-            }
+            User user = AuthTools.getUser();
             long userType = user.getAdmin();
             if (userType == 1) {
                 return true;

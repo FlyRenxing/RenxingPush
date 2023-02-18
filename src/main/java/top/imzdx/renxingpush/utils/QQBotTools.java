@@ -1,20 +1,24 @@
 package top.imzdx.renxingpush.utils;
 
 import net.mamoe.mirai.Bot;
+import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.contact.Group;
+import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.imzdx.renxingpush.model.dto.Msg;
 import top.imzdx.renxingpush.model.po.MessageLog;
 import top.imzdx.renxingpush.model.po.QQGroupWhitelist;
+import top.imzdx.renxingpush.model.po.QQInfo;
 import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.QQGroupWhitelistDao;
 import top.imzdx.renxingpush.repository.QQInfoDao;
 import top.imzdx.renxingpush.repository.UserDao;
 
-import java.util.List;
+import java.io.File;
+import java.util.*;
 
 import static top.imzdx.renxingpush.model.po.MessageCallbackLog.TYPE_QQ;
 import static top.imzdx.renxingpush.service.MsgService.saveMsgToDB;
@@ -25,6 +29,8 @@ public class QQBotTools {
     QQGroupWhitelistDao qqGroupWhitelistDao;
     UserDao userDao;
     QQInfoDao qqInfoDao;
+
+    public Map<Long, ReLoginSolver> reLoginSolverMap = new HashMap<>();
 
     @Autowired
     public QQBotTools(MsgContentTools msgContentTools, QQGroupWhitelistDao qqGroupWhitelistDao, UserDao userDao, QQInfoDao qqInfoDao) {
@@ -102,6 +108,40 @@ public class QQBotTools {
         });
     }
 
+    public void remoteLoginRequest(Long qq) {
+        QQInfo qqInfo = qqInfoDao.findByNumber(qq).orElseThrow(() -> new DefinitionException("机器人不存在"));
+        ReLoginSolver solver = new ReLoginSolver();
+        reLoginSolverMap.put(qq, solver);
+        //创建一个用于执行任务的线程
+        Thread thread = new Thread(() -> {
+            BotFactory.INSTANCE.newBot(qqInfo.getNumber(), qqInfo.getPwd(),
+                    new BotConfiguration() {{
+                        setLoginSolver(solver);
+                        setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+                        setProtocol(MiraiProtocol.ANDROID_PAD);
+                        fileBasedDeviceInfo();
+                    }}).login();
+        });
+        thread.start();
+        //十分钟后自动关闭
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                thread.stop();
+            }
+        }, 10 * 60 * 1000);
+
+    }
+
+    public void setReLoginSolverCode(Long qq, String code) {
+        ReLoginSolver solver = reLoginSolverMap.get(qq);
+        if (solver != null) {
+            solver.getVerificationResult().complete(code);
+        } else {
+            throw new DefinitionException("机器人不存在");
+        }
+    }
+
     public static class NullQQBotException extends DefinitionException {
         public NullQQBotException(String msg) {
             super(msg);
@@ -119,4 +159,20 @@ public class QQBotTools {
             super(msg);
         }
     }
+//    class ReLoginSolver extends LoginSolver{
+//
+//        @Nullable
+//        @Override
+//        public Object onSolvePicCaptcha(@NotNull Bot bot, @NotNull byte[] bytes, @NotNull Continuation<? super String> continuation) {
+//            return null;
+//        }
+//
+//        @Nullable
+//        @Override
+//        public Object onSolveSliderCaptcha(@NotNull Bot bot, @NotNull String s, @NotNull Continuation<? super String> continuation) {
+//            System.out.println("url:"+s);
+//            continuation.resumeWith(Result.success("123"));
+//            return null;
+//        }
+//    }
 }
