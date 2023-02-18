@@ -1,12 +1,18 @@
 package top.imzdx.renxingpush;
 
+import kotlin.coroutines.Continuation;
+import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.BotJoinGroupEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
+import net.mamoe.mirai.network.UnsupportedSliderCaptchaException;
 import net.mamoe.mirai.utils.BotConfiguration;
+import net.mamoe.mirai.utils.LoginSolver;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -55,8 +61,10 @@ public class AppRunner implements ApplicationRunner {
         for (QQInfo item :
                 QQInfoList) {
             try {
+                MyAutoLoginSolver solver = new MyAutoLoginSolver();
                 BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
                         new BotConfiguration() {{
+                            setLoginSolver(solver);
                             setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
                             setProtocol(MiraiProtocol.ANDROID_PAD);
                             fileBasedDeviceInfo();
@@ -118,7 +126,28 @@ public class AppRunner implements ApplicationRunner {
         if (appConfig.getSystem().isOpenTelegramMsg()) telegramInit();
     }
 
-//    public static TelegramBot getTelegramBot() {
-//        return telegramBot;
-//    }
+    /**
+     * 若是自动登录时出现验证码则认为登录失败
+     */
+    class MyAutoLoginSolver extends LoginSolver {
+        @Nullable
+        @Override
+        public Object onSolveSliderCaptcha(@NotNull Bot bot, @NotNull String s, @NotNull Continuation<? super String> continuation) {
+            qqInfoDao.findByNumber(bot.getId()).ifPresent(qqInfo -> {
+                qqInfo.setState(0);
+                qqInfoDao.save(qqInfo);
+            });
+            throw new UnsupportedSliderCaptchaException("自动登陆失败：出现验证码");
+        }
+
+        @Nullable
+        @Override
+        public Object onSolvePicCaptcha(@NotNull Bot bot, @NotNull byte[] bytes, @NotNull Continuation<? super String> continuation) {
+            qqInfoDao.findByNumber(bot.getId()).ifPresent(qqInfo -> {
+                qqInfo.setState(0);
+                qqInfoDao.save(qqInfo);
+            });
+            throw new UnsupportedSliderCaptchaException("自动登陆失败：出现验证码");
+        }
+    }
 }

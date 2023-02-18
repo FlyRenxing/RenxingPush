@@ -11,6 +11,7 @@ import top.imzdx.renxingpush.model.po.MessageLog;
 import top.imzdx.renxingpush.model.po.QQGroupWhitelist;
 import top.imzdx.renxingpush.model.po.User;
 import top.imzdx.renxingpush.repository.QQGroupWhitelistDao;
+import top.imzdx.renxingpush.repository.QQInfoDao;
 import top.imzdx.renxingpush.repository.UserDao;
 
 import java.util.List;
@@ -23,12 +24,14 @@ public class QQBotTools {
     MsgContentTools msgContentTools;
     QQGroupWhitelistDao qqGroupWhitelistDao;
     UserDao userDao;
+    QQInfoDao qqInfoDao;
 
     @Autowired
-    public QQBotTools(MsgContentTools msgContentTools, QQGroupWhitelistDao qqGroupWhitelistDao, UserDao userDao) {
+    public QQBotTools(MsgContentTools msgContentTools, QQGroupWhitelistDao qqGroupWhitelistDao, UserDao userDao, QQInfoDao qqInfoDao) {
         this.msgContentTools = msgContentTools;
         this.qqGroupWhitelistDao = qqGroupWhitelistDao;
         this.userDao = userDao;
+        this.qqInfoDao = qqInfoDao;
     }
 
     public Friend findFriend(Long qqBotNumber, Long qqNumber) throws NullQQBotException, NullQQFriendException {
@@ -64,6 +67,10 @@ public class QQBotTools {
         } catch (NumberFormatException e) {
             throw messageLog.fail("收信群号码不正确");
         } catch (NullQQBotException e) {
+            qqInfoDao.findByNumber(qqBot).ifPresent(qqInfo -> {
+                qqInfo.setState(0);
+                qqInfoDao.save(qqInfo);
+            });
             throw messageLog.fail("所选QQ机器人已失效，请前往官网重新设定默认机器人或附带qqBot参数指定机器人。当前所选机器人号码：" + qqBot);
         } catch (NullQQGroupException e) {
             throw messageLog.fail("收信群号码不正确或所选机器人未进群聊");
