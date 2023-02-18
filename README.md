@@ -37,6 +37,11 @@
     3. 发送消息接口post `/msg/send/你的cipher`
 
 若登录出现问题请参阅 [mirai登录文档](https://docs.mirai.mamoe.net/Bots.html#_2-%E7%99%BB%E5%BD%95)
+及[API文档](https://flyrenxing.github.io/RenxingPush/index.html#_1_1_1_请求登录qq机器人)管理员相关的三个接口：
+
+1. 请求登录qq机器人
+2. 获取验证码url
+3. 提交qq机器人登录验证码ticket
 
 ### 发送消息
 
