@@ -64,7 +64,9 @@ public class AppRunner implements ApplicationRunner {
                 MyAutoLoginSolver solver = new MyAutoLoginSolver();
                 BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
                         new BotConfiguration() {{
-                            setLoginSolver(solver);
+                            if (!appConfig.getSystem().isDebug()) {
+                                setLoginSolver(solver);
+                            }
                             setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
                             setProtocol(MiraiProtocol.ANDROID_PAD);
                             fileBasedDeviceInfo();

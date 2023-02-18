@@ -1,10 +1,122 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "ec702de8-7051-4074-bd69-4543779c26d5",
+    "_postman_id": "6bb4a217-01d1-493e-8dc5-3d062f5520d6",
     "name": "任性推-Docs"
   },
   "item": [
+    {
+      "name": "管理员相关",
+      "item": [
+        {
+          "name": "请求登录qq机器人",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "qq",
+                  "type": "text",
+                  "description": "qq号",
+                  "value": "527"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/admin/remoteLoginQQBot",
+              "protocol": "http",
+              "path": [
+                "admin",
+                "remoteLoginQQBot"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "请求登录qq机器人",
+            "header": []
+          },
+          "description": "请求登录qq机器人"
+        },
+        {
+          "name": "获取验证码url",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/admin/getRemoteLoginQQBotUrl?qq=137",
+              "protocol": "http",
+              "path": [
+                "admin",
+                "getRemoteLoginQQBotUrl"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [
+                {
+                  "key": "qq",
+                  "value": "664",
+                  "description": "在{@link #remoteLoginQQBot(Long)}中请求的qq号"
+                }
+              ],
+              "variable": []
+            },
+            "description": "获取验证码url",
+            "header": []
+          },
+          "description": "获取验证码url"
+        },
+        {
+          "name": "提交qq机器人登录验证码ticket",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "qq",
+                  "type": "text",
+                  "description": "在{@link #remoteLoginQQBot(Long)}中请求的qq号",
+                  "value": "289"
+                },
+                {
+                  "key": "ticket",
+                  "type": "text",
+                  "description": "验证码ticket",
+                  "value": "nbusl5"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://::server/admin/submitTicket",
+              "protocol": "http",
+              "path": [
+                "admin",
+                "submitTicket"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "提交qq机器人登录验证码ticket",
+            "header": []
+          },
+          "description": "提交qq机器人登录验证码ticket"
+        }
+      ]
+    },
     {
       "name": "消息处理",
       "item": [
@@ -153,12 +265,12 @@
                 {
                   "key": "name",
                   "type": "text",
-                  "value": "clarissa.grady"
+                  "value": "dalton.mitchell"
                 },
                 {
                   "key": "password",
                   "type": "text",
-                  "value": "6mzcrh"
+                  "value": "xx5xtr"
                 }
               ]
             },
@@ -186,7 +298,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 573,\n  \"first_name\": \"clarissa.grady\",\n  \"id\": 771,\n  \"last_name\": \"clarissa.grady\",\n  \"photo_url\": \"www.estela-rodriguez.info\",\n  \"username\": \"clarissa.grady\",\n  \"hash\": \"csn6vs\"\n}",
+              "raw": "{\n  \"auth_date\": 192,\n  \"first_name\": \"dalton.mitchell\",\n  \"id\": 101,\n  \"last_name\": \"dalton.mitchell\",\n  \"photo_url\": \"www.alesia-batz.biz\",\n  \"username\": \"dalton.mitchell\",\n  \"hash\": \"owhlcv\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -222,7 +334,7 @@
                   "key": "code",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "65199"
+                  "value": "58692"
                 }
               ]
             },
@@ -255,37 +367,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "clarissa.grady"
+                  "value": "dalton.mitchell"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "9n11sw"
+                  "value": "l8yhy5"
                 },
                 {
                   "key": "lot_number",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "k1iwl7"
+                  "value": "oo3osb"
                 },
                 {
                   "key": "captcha_output",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "ho2l6z"
+                  "value": "26e49h"
                 },
                 {
                   "key": "pass_token",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "9sonhu"
+                  "value": "qs7a52"
                 },
                 {
                   "key": "gen_time",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2022-09-20 18:09:14"
+                  "value": "2023-02-18 15:23:04"
                 }
               ]
             },
@@ -376,7 +488,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "309"
+                  "value": "427"
                 }
               ]
             },
@@ -438,7 +550,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "30"
+                  "value": "540"
                 }
               ]
             },
@@ -501,7 +613,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/68",
+              "raw": "http://::server/user/qqGroupWhitelist/972",
               "protocol": "http",
               "path": [
                 "user",
@@ -515,7 +627,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "5",
+                  "value": "160",
                   "description": "白名单id"
                 }
               ]
@@ -531,7 +643,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 11,\n  \"uid\": 126,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 259,\n  \"uid\": 621,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -597,7 +709,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/473",
+              "raw": "http://::server/user/messageCallback/116",
               "protocol": "http",
               "path": [
                 "user",
@@ -611,7 +723,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "507",
+                  "value": "442",
                   "description": "消息回调id"
                 }
               ]
