@@ -22,6 +22,8 @@ public class AppConfig {
 
     @Data
     public static class System {
+        private String name;
+        private String domain;
         private boolean openQqgroupWhitelistApply;
         private boolean debug;
         private boolean openQqMsg;

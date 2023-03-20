@@ -73,5 +73,4 @@ public class SystemController {
     public Result<String> getQQUrl() {
         return new Result<>("ok", qqConnection.getUrl());
     }
-
 }

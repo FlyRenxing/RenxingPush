@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -66,7 +67,7 @@ public class User implements Serializable {
     /**
      * qq登录接口的openid
      *
-     * @mock 558B72975E9AB93FCEDE5C0500C9730F
+     * @mock 558B72975E9AB93FCEDE5C050569730F
      */
     @JsonIgnore
     private String openid;
@@ -78,6 +79,21 @@ public class User implements Serializable {
      */
     @JsonIgnore
     private Long telegramId;
+
+    /**
+     * webauthn的id
+     *
+     * @mock PbIUaLwJZRZXPXPvFsbMlp6gkPbTtnwPeLnmndoabJDoqFq0nJudfprub8DLUXcwr+xlUBWFDdSObQX2AGhO4A==
+     */
+    @JsonIgnore
+    private String webauthnHandle;
+
+    /**
+     * webauthn凭据
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<WebAuthNCredential> webAuthNCredentials;
 
     @Data
     @NoArgsConstructor

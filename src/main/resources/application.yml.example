@@ -1,5 +1,7 @@
 app:
   system:
+    name: 任性推
+    domain: renxing.cc
     debug: true
     open-qq-msg: true
     open-telegram-msg: true

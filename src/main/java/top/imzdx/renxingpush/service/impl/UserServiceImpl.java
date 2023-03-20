@@ -1,24 +1,34 @@
 package top.imzdx.renxingpush.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.yubico.webauthn.*;
+import com.yubico.webauthn.data.*;
+import com.yubico.webauthn.exception.AssertionFailedException;
+import com.yubico.webauthn.exception.RegistrationFailedException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import top.imzdx.renxingpush.config.AppConfig;
 import top.imzdx.renxingpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.renxingpush.model.po.QQInfo;
 import top.imzdx.renxingpush.model.po.User;
+import top.imzdx.renxingpush.model.po.WebAuthNCredential;
 import top.imzdx.renxingpush.repository.QQInfoDao;
 import top.imzdx.renxingpush.repository.UserDao;
 import top.imzdx.renxingpush.service.UserService;
 import top.imzdx.renxingpush.utils.AuthTools;
 import top.imzdx.renxingpush.utils.DefinitionException;
 import top.imzdx.renxingpush.utils.QQConnection;
+import top.imzdx.renxingpush.utils.WebAuthNRegistrationStorage;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -34,17 +44,29 @@ public class UserServiceImpl implements UserService {
     QQConnection qqConnection;
     AuthTools authTools;
     AppConfig appConfig;
-
+    private final SecureRandom random = new SecureRandom();
     HashMap<String, User> telegramLoginCodeMap = new HashMap<>();
+    WebAuthNRegistrationStorage webAuthNRegistrationStorage;
+    RelyingParty rp;
+
 
     @Autowired
     public UserServiceImpl(QQInfoDao qqInfoDao, UserDao userDao, AuthTools authTools, QQConnection qqConnection,
-                           AppConfig appConfig) {
+                           AppConfig appConfig, WebAuthNRegistrationStorage webAuthNRegistrationStorage) {
         this.qqInfoDao = qqInfoDao;
         this.userDao = userDao;
         this.authTools = authTools;
         this.qqConnection = qqConnection;
         this.appConfig = appConfig;
+        this.webAuthNRegistrationStorage = webAuthNRegistrationStorage;
+
+        rp = RelyingParty.builder()
+                .identity(RelyingPartyIdentity.builder()
+                        .id(appConfig.getSystem().getDomain())
+                        .name(appConfig.getSystem().getName())
+                        .build())
+                .credentialRepository(webAuthNRegistrationStorage)
+                .build();
     }
 
     @Override
@@ -222,5 +244,87 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public String regWebAuthNReq(String username, HttpSession session) throws JsonProcessingException {
+        PublicKeyCredentialCreationOptions request = rp.startRegistration(
+                StartRegistrationOptions.builder()
+                        .user(findExistingUser(username)
+                                .orElseThrow(() -> new DefinitionException("用户不存在")))
+                        .authenticatorSelection(AuthenticatorSelectionCriteria.builder()
+                                .residentKey(ResidentKeyRequirement.REQUIRED).build())
+                        .build());
+        session.setAttribute("regWebAuthNReq", request);
+        return request.toCredentialsCreateJson();
+    }
 
+    @Override
+    public boolean regWebAuthNResp(String publicKeyCredentialJson, HttpSession session) throws IOException {
+        PublicKeyCredentialCreationOptions request = (PublicKeyCredentialCreationOptions) session.getAttribute("regWebAuthNReq");
+        PublicKeyCredential<AuthenticatorAttestationResponse, ClientRegistrationExtensionOutputs> pkc =
+                PublicKeyCredential.parseRegistrationResponseJson(publicKeyCredentialJson);
+        try {
+            RegistrationResult result = rp.finishRegistration(FinishRegistrationOptions.builder()
+                    .request(request)
+                    .response(pkc)
+                    .build());
+            User user = AuthTools.getUser();
+            user.getWebAuthNCredentials().add(new WebAuthNCredential()
+                    .setUser(AuthTools.getUser())
+                    .setKeyId(result.getKeyId().getId().getBase64())
+                    .setPublicKeyCose(result.getPublicKeyCose().getBase64())
+                    .setDiscoverable(result.isDiscoverable().orElse(false))
+                    .setSignatureCount(result.getSignatureCount())
+                    .setAttestationObject(pkc.getResponse().getAttestationObject().getBase64())
+                    .setClientDataJSON(pkc.getResponse().getClientDataJSON().getBase64()));
+            userDao.save(user);
+        } catch (RegistrationFailedException e) {
+            throw new DefinitionException("令牌注册失败");
+        }
+        return true;
+    }
+
+    @Override
+    public String loginWebAuthNReq(HttpSession session) throws JsonProcessingException {
+        AssertionRequest request = rp.startAssertion(StartAssertionOptions.builder().build());
+        String credentialGetJson = request.toCredentialsGetJson();
+        session.setAttribute("loginWebAuthNReq", request);  // Store in server memory
+        return credentialGetJson;  // Send to client
+    }
+
+    @Override
+    public User loginWebAuthNResp(String publicKeyCredentialJson, HttpSession session) throws IOException {
+        AssertionRequest loginWebAuthNReq = (AssertionRequest) session.getAttribute("loginWebAuthNReq");
+        PublicKeyCredential<AuthenticatorAssertionResponse, ClientAssertionExtensionOutputs> pkc =
+                PublicKeyCredential.parseAssertionResponseJson(publicKeyCredentialJson);
+        try {
+            AssertionResult result = rp.finishAssertion(FinishAssertionOptions.builder()
+                    .request(loginWebAuthNReq)  // The PublicKeyCredentialRequestOptions from startAssertion above
+                    .response(pkc)
+                    .build());
+            if (result.isSuccess()) {
+                AuthTools.login(Long.parseLong(result.getUsername()));
+                return AuthTools.getUser();
+            }
+        } catch (AssertionFailedException e) {
+            throw new DefinitionException("令牌登录失败");
+        }
+        throw new DefinitionException("令牌登录失败");
+    }
+
+    private Optional<UserIdentity> findExistingUser(String username) {
+        byte[] userHandle = new byte[64];
+        random.nextBytes(userHandle);
+        return userDao.findByName(username)
+                .map(user -> {
+                    if (!StringUtils.hasText(user.getWebauthnHandle())) {
+                        user.setWebauthnHandle(new ByteArray(userHandle).getBase64());
+                        userDao.save(user);
+                    }
+                    return UserIdentity.builder()
+                            .name(user.getName())
+                            .displayName(user.getName())
+                            .id(ByteArray.fromBase64(user.getWebauthnHandle()))
+                            .build();
+                });
+    }
 }

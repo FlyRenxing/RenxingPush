@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "6bb4a217-01d1-493e-8dc5-3d062f5520d6",
+    "_postman_id": "f474b873-98b4-4bc2-b418-d833b4c4621d",
     "name": "任性推-Docs"
   },
   "item": [
@@ -19,7 +19,7 @@
                   "key": "qq",
                   "type": "text",
                   "description": "qq号",
-                  "value": "527"
+                  "value": "489"
                 }
               ]
             },
@@ -53,7 +53,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/admin/getRemoteLoginQQBotUrl?qq=137",
+              "raw": "http://::server/admin/getRemoteLoginQQBotUrl?qq=224",
               "protocol": "http",
               "path": [
                 "admin",
@@ -65,7 +65,7 @@
               "query": [
                 {
                   "key": "qq",
-                  "value": "664",
+                  "value": "353",
                   "description": "在{@link #remoteLoginQQBot(Long)}中请求的qq号"
                 }
               ],
@@ -86,14 +86,14 @@
                 {
                   "key": "qq",
                   "type": "text",
-                  "description": "在{@link #remoteLoginQQBot(Long)}中请求的qq号",
-                  "value": "289"
+                  "description": "    在{@link #remoteLoginQQBot(Long)}中请求的qq号",
+                  "value": "205"
                 },
                 {
                   "key": "ticket",
                   "type": "text",
                   "description": "验证码ticket",
-                  "value": "nbusl5"
+                  "value": "0lcb7r"
                 }
               ]
             },
@@ -256,6 +256,528 @@
       "name": "用户相关",
       "item": [
         {
+          "name": "用户webauthn令牌注册请求",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/webauthnRegReq?servletContext.contextPath=x5hjg1&servletContext.sessionCookieConfig.comment=dfapd6&servletContext.responseCharacterEncoding=pr4d4r&servletContext.servletContextName=georgiana.carroll&servletContext.sessionCookieConfig.name=georgiana.carroll&maxInactiveInterval=40&servletContext.effectiveMinorVersion=473&servletContext.sessionCookieConfig.httpOnly=true&servletContext.sessionCookieConfig.domain=feest.net&servletContext.effectiveMajorVersion=22&servletContext.requestCharacterEncoding=6dygna&servletContext.minorVersion=717&id=110&servletContext.sessionTimeout=18&servletContext.majorVersion=701&servletContext.sessionCookieConfig.secure=true&servletContext.sessionCookieConfig.maxAge=8&servletContext.virtualServerName=georgiana.carroll&creationTime=1679282895481&lastAccessedTime=1679282895481&new=true&servletContext.serverInfo=uwf0xc&servletContext.sessionCookieConfig.path=m8p7or",
+              "protocol": "http",
+              "path": [
+                "user",
+                "webauthnRegReq"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "110",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "creationTime",
+                  "value": "1679282895481",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "lastAccessedTime",
+                  "value": "1679282895481",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "servletContext",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─classLoader",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─majorVersion",
+                  "value": "202",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─minorVersion",
+                  "value": "114",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─serverInfo",
+                  "value": "41jfh1",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─contextPath",
+                  "value": "w9biem",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveSessionTrackingModes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─jspConfigDescriptor",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─responseCharacterEncoding",
+                  "value": "b3qo21",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─initParameterNames",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─filterRegistrations",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "└─servletContextName",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─servletRegistrations",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "└─defaultSessionTrackingModes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─virtualServerName",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveMajorVersion",
+                  "value": "544",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─sessionCookieConfig",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path",
+                  "value": "nar7tf",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment",
+                  "value": "ytk9wu",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain",
+                  "value": "feest.net",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge",
+                  "value": "8",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveMinorVersion",
+                  "value": "936",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─requestCharacterEncoding",
+                  "value": "cy188q",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─sessionTimeout",
+                  "value": "512",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─attributeNames",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "new",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "maxInactiveInterval",
+                  "value": "306",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "attributeNames",
+                  "value": "",
+                  "description": "No comments found."
+                }
+              ],
+              "variable": []
+            },
+            "description": "用户webauthn令牌注册请求",
+            "header": []
+          },
+          "description": "用户webauthn令牌注册请求"
+        },
+        {
+          "name": "用户webauthn令牌注册响应",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "qfh431",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/webauthnRegResp",
+              "protocol": "http",
+              "path": [
+                "user",
+                "webauthnRegResp"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "用户webauthn令牌注册响应",
+            "header": []
+          },
+          "description": "用户webauthn令牌注册响应"
+        },
+        {
+          "name": "用户webauthn令牌登录请求",
+          "request": {
+            "method": "GET",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/webauthnLoginReq?servletContext.sessionCookieConfig.domain=feest.net&servletContext.contextPath=phpd70&servletContext.virtualServerName=georgiana.carroll&servletContext.sessionCookieConfig.name=georgiana.carroll&servletContext.serverInfo=mrl2tp&servletContext.sessionTimeout=115&lastAccessedTime=1679282895481&creationTime=1679282895481&servletContext.sessionCookieConfig.httpOnly=true&servletContext.minorVersion=906&new=true&servletContext.sessionCookieConfig.path=nkpzs8&servletContext.servletContextName=georgiana.carroll&servletContext.majorVersion=579&servletContext.sessionCookieConfig.maxAge=8&servletContext.effectiveMajorVersion=166&servletContext.sessionCookieConfig.comment=6znpgw&servletContext.sessionCookieConfig.secure=true&servletContext.effectiveMinorVersion=17&id=110&servletContext.responseCharacterEncoding=js0lxj&maxInactiveInterval=946&servletContext.requestCharacterEncoding=wfxaep",
+              "protocol": "http",
+              "path": [
+                "user",
+                "webauthnLoginReq"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "110",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "creationTime",
+                  "value": "1679282895481",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "lastAccessedTime",
+                  "value": "1679282895481",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "servletContext",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─classLoader",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─majorVersion",
+                  "value": "266",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─minorVersion",
+                  "value": "753",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─serverInfo",
+                  "value": "qlj3vm",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─contextPath",
+                  "value": "3z5ztp",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveSessionTrackingModes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─jspConfigDescriptor",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─responseCharacterEncoding",
+                  "value": "zv01m8",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─initParameterNames",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─filterRegistrations",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "└─servletContextName",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─servletRegistrations",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "└─defaultSessionTrackingModes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─virtualServerName",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveMajorVersion",
+                  "value": "789",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─sessionCookieConfig",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name",
+                  "value": "georgiana.carroll",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path",
+                  "value": "ela0yr",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
+                  "value": "",
+                  "description": "any object."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment",
+                  "value": "o4g2ie",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain",
+                  "value": "feest.net",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge",
+                  "value": "8",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─effectiveMinorVersion",
+                  "value": "246",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─requestCharacterEncoding",
+                  "value": "fmzmjv",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─sessionTimeout",
+                  "value": "145",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "└─attributeNames",
+                  "value": "",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "new",
+                  "value": "true",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "maxInactiveInterval",
+                  "value": "855",
+                  "description": "No comments found."
+                },
+                {
+                  "key": "attributeNames",
+                  "value": "",
+                  "description": "No comments found."
+                }
+              ],
+              "variable": []
+            },
+            "description": "用户webauthn令牌登录请求",
+            "header": []
+          },
+          "description": "用户webauthn令牌登录请求"
+        },
+        {
+          "name": "用户webauthn令牌登录响应",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "gi1c67",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/user/webauthnLoginResp",
+              "protocol": "http",
+              "path": [
+                "user",
+                "webauthnLoginResp"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "description": "用户webauthn令牌登录响应",
+            "header": []
+          },
+          "description": "用户webauthn令牌登录响应"
+        },
+        {
           "name": "用户登录",
           "request": {
             "method": "POST",
@@ -265,12 +787,12 @@
                 {
                   "key": "name",
                   "type": "text",
-                  "value": "dalton.mitchell"
+                  "value": "georgiana.carroll"
                 },
                 {
                   "key": "password",
                   "type": "text",
-                  "value": "xx5xtr"
+                  "value": "ytvz9p"
                 }
               ]
             },
@@ -298,7 +820,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 192,\n  \"first_name\": \"dalton.mitchell\",\n  \"id\": 101,\n  \"last_name\": \"dalton.mitchell\",\n  \"photo_url\": \"www.alesia-batz.biz\",\n  \"username\": \"dalton.mitchell\",\n  \"hash\": \"owhlcv\"\n}",
+              "raw": "{\n  \"auth_date\": 923,\n  \"first_name\": \"georgiana.carroll\",\n  \"id\": 881,\n  \"last_name\": \"georgiana.carroll\",\n  \"photo_url\": \"www.erik-spinka.net\",\n  \"username\": \"georgiana.carroll\",\n  \"hash\": \"xfofbm\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -334,7 +856,7 @@
                   "key": "code",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "58692"
+                  "value": "89603"
                 }
               ]
             },
@@ -367,37 +889,37 @@
                   "key": "name",
                   "type": "string",
                   "description": "    用户名",
-                  "value": "dalton.mitchell"
+                  "value": "georgiana.carroll"
                 },
                 {
                   "key": "password",
                   "type": "string",
                   "description": "密码",
-                  "value": "l8yhy5"
+                  "value": "17m9nz"
                 },
                 {
                   "key": "lot_number",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "oo3osb"
+                  "value": "vlop3l"
                 },
                 {
                   "key": "captcha_output",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "26e49h"
+                  "value": "76nx5j"
                 },
                 {
                   "key": "pass_token",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "qs7a52"
+                  "value": "t5e5wt"
                 },
                 {
                   "key": "gen_time",
                   "type": "string",
                   "description": "No comments found.",
-                  "value": "2023-02-18 15:23:04"
+                  "value": "2023-03-20 11:28:15"
                 }
               ]
             },
@@ -488,7 +1010,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "机器人号码",
-                  "value": "427"
+                  "value": "603"
                 }
               ]
             },
@@ -550,7 +1072,7 @@
                   "key": "number",
                   "type": "int64",
                   "description": "群号码",
-                  "value": "540"
+                  "value": "2"
                 }
               ]
             },
@@ -613,7 +1135,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/972",
+              "raw": "http://::server/user/qqGroupWhitelist/168",
               "protocol": "http",
               "path": [
                 "user",
@@ -627,7 +1149,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "160",
+                  "value": "408",
                   "description": "白名单id"
                 }
               ]
@@ -643,7 +1165,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 259,\n  \"uid\": 621,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 422,\n  \"uid\": 455,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -709,7 +1231,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/116",
+              "raw": "http://::server/user/messageCallback/855",
               "protocol": "http",
               "path": [
                 "user",
@@ -723,7 +1245,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "442",
+                  "value": "164",
                   "description": "消息回调id"
                 }
               ]

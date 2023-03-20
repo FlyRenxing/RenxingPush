@@ -1,12 +1,16 @@
 package top.imzdx.renxingpush.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import top.imzdx.renxingpush.model.dto.TelegramAuthenticationRequest;
 import top.imzdx.renxingpush.model.po.User;
+
+import java.io.IOException;
 
 /**
  * @author Renxing
@@ -41,4 +45,12 @@ public interface UserService {
     User telegramQRCodeLogin(String code);
 
     User telegramLogin(TelegramAuthenticationRequest telegramUser);
+
+    String regWebAuthNReq(String username, HttpSession session) throws JsonProcessingException;
+
+    boolean regWebAuthNResp(String publicKeyCredentialJson, HttpSession session) throws IOException;
+
+    String loginWebAuthNReq(HttpSession session) throws JsonProcessingException;
+
+    User loginWebAuthNResp(String publicKeyCredentialJson, HttpSession session) throws IOException;
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import top.imzdx.renxingpush.model.po.User;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Renxing
@@ -26,4 +27,12 @@ public interface UserDao extends JpaRepository<User, Long> {
     Optional<User> findByOpenid(String openid);
 
     Optional<User> findByTelegramId(Long telegramId);
+
+    Optional<User> findByWebauthnHandle(String userHandle);
+
+    Set<User> findWithWebAuthNCredentialsByWebauthnHandle(String userHandle);
+
+    Optional<User> findWithWebAuthNCredentialsByWebAuthNCredentialsKeyId(String base64);
+
+    Optional<User> findWithWebAuthNCredentialsByName(String userName);
 }

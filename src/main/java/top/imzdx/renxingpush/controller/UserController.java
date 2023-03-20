@@ -1,7 +1,11 @@
 package top.imzdx.renxingpush.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +26,7 @@ import top.imzdx.renxingpush.service.UserService;
 import top.imzdx.renxingpush.utils.AuthTools;
 import top.imzdx.renxingpush.utils.DefinitionException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,6 +50,80 @@ public class UserController {
         this.userService = userService;
         this.systemService = systemService;
         this.geetestOpen = appConfig.getGeetest().isEnabled();
+    }
+
+    /**
+     * 用户webauthn令牌注册请求
+     *
+     * @return 包含用于验证器挑战的json
+     * @throws JsonProcessingException json格式化异常
+     */
+    @GetMapping("webauthnRegReq")
+    @LoginRequired
+    public Result<JsonNode> webauthnRegReq(HttpSession session) throws JsonProcessingException {
+        String json;
+        try {
+            json = userService.regWebAuthNReq(AuthTools.getUser().getName(), session);
+        } catch (JsonProcessingException e) {
+            throw new DefinitionException("json格式化异常");
+        }
+        //string to json
+        JsonNode jsonNode = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        jsonNode = objectMapper.readTree(json);
+
+        return new Result<>("ok", jsonNode);
+    }
+
+    /**
+     * 用户webauthn令牌注册响应
+     */
+    @PostMapping("webauthnRegResp")
+    @LoginRequired
+    public Result<Void> webauthnRegResp(@RequestBody String publicKeyCredentialJson, HttpSession session) throws IOException {
+        try {
+            userService.regWebAuthNResp(publicKeyCredentialJson, session);
+        } catch (IOException e) {
+            throw new DefinitionException("令牌注册失败");
+        }
+        return new Result<>("ok", null);
+    }
+
+    /**
+     * 用户webauthn令牌登录请求
+     *
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GetMapping("webauthnLoginReq")
+    public Result<JsonNode> webauthnLoginReq(HttpSession session) throws JsonProcessingException {
+        String json = userService.loginWebAuthNReq(session);
+
+        //string to json
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(json);
+
+        return new Result<>("ok", jsonNode);
+    }
+
+
+    /**
+     * 用户webauthn令牌登录响应
+     *
+     * @param publicKeyCredentialJson 前端传回的json字符串
+     * @param session                 HttpSession
+     * @return 用户信息
+     * @throws IOException 令牌登录失败
+     */
+    @PostMapping("webauthnLoginResp")
+    public Result<User> loginWebauthnLoginResp(@RequestBody String publicKeyCredentialJson, HttpSession session) throws IOException {
+        User user;
+        try {
+            user = userService.loginWebAuthNResp(publicKeyCredentialJson, session);
+        } catch (IOException e) {
+            throw new DefinitionException("令牌登录失败");
+        }
+        return new Result<>("ok", user);
     }
 
     /**
