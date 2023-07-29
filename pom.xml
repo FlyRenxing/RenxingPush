@@ -5,24 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>top.imzdx</groupId>
     <artifactId>renxing-push</artifactId>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.4</version>
+        <version>3.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.15.0-M1</mirai-core-jvm.version>
-        <cn.hutool.version>5.8.15</cn.hutool.version>
-        <mysql.jdbc.version>8.0.32</mysql.jdbc.version>
+        <mirai-core-jvm.version>2.15.0</mirai-core-jvm.version>
+        <cn.hutool.version>5.8.21</cn.hutool.version>
+        <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
+        <druid.version>1.2.18</druid.version>
         <validator.version>7.0.4.Final</validator.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
-        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.7.20</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
+        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.9.0</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
         <fastjson.version>2.0.1</fastjson.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
@@ -72,7 +73,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.16</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -106,7 +107,7 @@
         <dependency>
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
-            <version>4.16.14</version>
+            <version>4.16.16</version>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
@@ -116,7 +117,7 @@
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots-abilities</artifactId>
-            <version>6.5.0</version>
+            <version>6.7.0</version>
         </dependency>
         <dependency>
             <groupId>com.yubico</groupId>
@@ -232,7 +233,7 @@
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <!--                        <phase>compile</phase>-->
+                        <phase>compile</phase>
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>

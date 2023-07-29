@@ -3,6 +3,7 @@ package top.imzdx.renxingpush;
 import kotlin.coroutines.Continuation;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.auth.BotAuthorization;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
@@ -62,15 +63,27 @@ public class AppRunner implements ApplicationRunner {
                 QQInfoList) {
             try {
                 MyAutoLoginSolver solver = new MyAutoLoginSolver();
-                BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
-                        new BotConfiguration() {{
-                            if (!appConfig.getSystem().isDebug()) {
-                                setLoginSolver(solver);
-                            }
-                            setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
-                            setProtocol(MiraiProtocol.ANDROID_PAD);
-                            fileBasedDeviceInfo();
-                        }}).login();
+                if (item.getQrCodeLogin()) {
+                    BotFactory.INSTANCE.newBot(item.getNumber(), BotAuthorization.byQRCode(),
+                            new BotConfiguration() {{
+                                if (!appConfig.getSystem().isDebug()) {
+                                    setLoginSolver(solver);
+                                }
+                                setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+                                setProtocol(item.getProtocol());
+                                fileBasedDeviceInfo();
+                            }}).login();
+                } else {
+                    BotFactory.INSTANCE.newBot(item.getNumber(), item.getPwd(),
+                            new BotConfiguration() {{
+                                if (!appConfig.getSystem().isDebug()) {
+                                    setLoginSolver(solver);
+                                }
+                                setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+                                setProtocol(item.getProtocol());
+                                fileBasedDeviceInfo();
+                            }}).login();
+                }
                 item.setState(1);
             } catch (Exception e) {
                 item.setState(0);

@@ -2,6 +2,7 @@ package top.imzdx.renxingpush.utils;
 
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.auth.BotAuthorization;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.contact.Group;
@@ -114,13 +115,23 @@ public class QQBotTools {
         reLoginSolverMap.put(qq, solver);
         //创建一个用于执行任务的线程
         Thread thread = new Thread(() -> {
-            BotFactory.INSTANCE.newBot(qqInfo.getNumber(), qqInfo.getPwd(),
-                    new BotConfiguration() {{
-                        setLoginSolver(solver);
-                        setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
-                        setProtocol(MiraiProtocol.ANDROID_PAD);
-                        fileBasedDeviceInfo();
-                    }}).login();
+            if (qqInfo.getQrCodeLogin()) {
+                BotFactory.INSTANCE.newBot(qqInfo.getNumber(), BotAuthorization.byQRCode(),
+                        new BotConfiguration() {{
+                            setLoginSolver(solver);
+                            setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+                            setProtocol(qqInfo.getProtocol());
+                            fileBasedDeviceInfo();
+                        }}).login();
+            } else {
+                BotFactory.INSTANCE.newBot(qqInfo.getNumber(), qqInfo.getPwd(),
+                        new BotConfiguration() {{
+                            setLoginSolver(solver);
+                            setCacheDir(new File("cache")); // 最终为 workingDir 目录中的 cache 目录
+                            setProtocol(qqInfo.getProtocol());
+                            fileBasedDeviceInfo();
+                        }}).login();
+            }
         });
         thread.start();
         //十分钟后自动关闭
