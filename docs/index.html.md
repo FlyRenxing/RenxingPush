@@ -2,12 +2,10 @@
 
  Version              | Update Time         | Status | Author   | Description          
 ----------------------|---------------------|--------|----------|----------------------
- v2023-03-20 11:28:13 | 2023-03-20 11:28:13 | auto   | @Renxing | Created by smart-doc 
+ v2023-07-30 02:38:52 | 2023-07-30 02:38:52 | auto   | @renxing | Created by smart-doc 
 
 ## 管理员相关
-
 ### 请求登录qq机器人
-
 **URL:** http://{{server}}/admin/remoteLoginQQBot
 
 **Type:** POST
@@ -63,7 +61,7 @@ qq|int64|在{@link #remoteLoginQQBot(Long)}中请求的qq号|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://{{server}}/admin/getRemoteLoginQQBotUrl?qq=662
+curl -X GET -i http://{{server}}/admin/getRemoteLoginQQBotUrl?qq=250
 ```
 **Response-fields:**
 
@@ -78,7 +76,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "o0r4cw"
+  "data": "silx9a"
 }
 ```
 
@@ -120,61 +118,6 @@ data|object|结果数据，一般反馈给前端进行处理|-
 }
 ```
 
-## 消息处理
-### 推送消息
-**URL:** http://{{server}}/msg/send/{cipher}
-
-**Type:** POST
-
-**Author:** Renxing
-
-**Content-Type:** application/json; charset=utf-8
-
-**Description:** 推送消息
-
-**Path-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-cipher|string|个人密钥|true|-
-
-**Body-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-content|string|消息内容|true|-
-meta|object|消息元数据|false|-
-└─type|string|消息类型，目前仅支持"qq"、"qq_group、telegram"|false|-
-└─data|string|消息元数据，与type对应。<br>qq-QQ号，qq_group-QQ群号，telegram-telegramID|true|-
-└─qqBot|int64|指定QQ机器人号码|false|-
-
-**Request-example:**
-```
-curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/msg/send/CH32p41OXu --data '{
-  "content": "这是一条消息",
-  "meta": {
-    "type": "qq",
-    "data": "1277489864",
-    "qqBot": 1277489864
-  }
-}'
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|-
-data|object|结果数据，一般反馈给前端进行处理|-
-
-**Response-example:**
-```
-{
-  "flag": true,
-  "msg": "返回的消息"
-}
-```
-
 ## 系统类
 ### 获取机器人公开列表
 **URL:** http://{{server}}/sys/qqbotlist
@@ -193,15 +136,17 @@ curl -X GET -i http://{{server}}/sys/qqbotlist
 ```
 **Response-fields:**
 
-Field | Type|Description|Since
----|---|---|---
-flag|boolean|结果标志，true为成功，false为失败|-
-msg|string|结果消息，一般反馈给用户|-
-data|array|结果数据，一般反馈给前端进行处理|-
-└─number|int64|QQ号|-
-└─name|string|QQ昵称|-
-└─state|int32|在线状态|-
-└─remarks|string|备注|-
+ Field         | Type    | Description                                                                      | Since 
+---------------|---------|----------------------------------------------------------------------------------|-------
+ flag          | boolean | 结果标志，true为成功，false为失败                                                            | -     
+ msg           | string  | 结果消息，一般反馈给用户                                                                     | -     
+ data          | array   | 结果数据，一般反馈给前端进行处理                                                                 | -     
+ └─number      | int64   | QQ号                                                                              | -     
+ └─protocol    | enum    | 登陆协议<br>ANDROID_PHONE,0<br>ANDROID_PAD,1<br>ANDROID_WATCH,2<br>IPAD,3<br>MACOS,4 | -     
+ └─qrCodeLogin | boolean | 是否二维码登陆,目前仅支持macOS和AndroidPAD协议                                                  | -     
+ └─name        | string  | QQ昵称                                                                             | -     
+ └─state       | int32   | 在线状态                                                                             | -     
+ └─remarks     | string  | 备注                                                                               | -     
 
 **Response-example:**
 ```
@@ -211,6 +156,8 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "data": [
     {
       "number": 1277489864,
+      "protocol": 2,
+      "qrCodeLogin": true,
       "name": "会飞的任性",
       "state": 1,
       "remarks": "我是备注"
@@ -252,7 +199,7 @@ data|array|结果数据，一般反馈给前端进行处理|-
   "msg": "返回的消息",
   "data": [
     {
-      "id": 755,
+      "id": 640,
       "main": "这是公告内容",
       "color": "#ff0000"
     }
@@ -284,112 +231,19 @@ msg|string|结果消息，一般反馈给用户|-
 data|string|结果数据，一般反馈给前端进行处理|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "ikb62y"
+  "data": "0vdyg7"
 }
 ```
 
-## 用户相关
+## 消息处理
 
-### 用户webauthn令牌注册请求
+### 推送消息
 
-**URL:** http://{{server}}/user/webauthnRegReq
-
-**Type:** GET
-
-**Author:** Renxing
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 用户webauthn令牌注册请求
-
-**Query-parameters:**
-
- Parameter                                                                | Type    | Description        | Required | Since 
---------------------------------------------------------------------------|---------|--------------------|----------|-------
- id                                                                       | string  | No comments found. | false    | -     
- creationTime                                                             | int64   | No comments found. | false    | -     
- lastAccessedTime                                                         | int64   | No comments found. | false    | -     
- servletContext                                                           | object  | No comments found. | false    | -     
- └─classLoader                                                            | object  | No comments found. | false    | -     
- └─majorVersion                                                           | int32   | No comments found. | false    | -     
- └─minorVersion                                                           | int32   | No comments found. | false    | -     
- └─serverInfo                                                             | string  | No comments found. | false    | -     
- └─contextPath                                                            | string  | No comments found. | false    | -     
- └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
- └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
- └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
- └─initParameterNames                                                     | object  | No comments found. | false    | -     
- └─filterRegistrations                                                    | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─servletContextName                                                     | string  | No comments found. | false    | -     
- └─servletRegistrations                                                   | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
- └─virtualServerName                                                      | string  | No comments found. | false    | -     
- └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
- └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
- └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
- └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
- └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
- └─attributeNames                                                         | object  | No comments found. | false    | -     
- new                                                                      | boolean | No comments found. | false    | -     
- maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
- attributeNames                                                           | object  | No comments found. | false    | -     
-
-**Request-example:**
-
-```
-curl -X GET -i http://{{server}}/user/webauthnRegReq?servletContext.sessionCookieConfig.domain=feest.net&servletContext.servletContextName=georgiana.carroll&servletContext.sessionCookieConfig.comment=gxzbim&creationTime=1679282895481&servletContext.sessionCookieConfig.name=georgiana.carroll&maxInactiveInterval=935&id=110&servletContext.effectiveMajorVersion=156&servletContext.effectiveMinorVersion=876&servletContext.minorVersion=634&servletContext.virtualServerName=georgiana.carroll&servletContext.sessionCookieConfig.secure=true&servletContext.requestCharacterEncoding=nopdt4&servletContext.majorVersion=998&servletContext.sessionCookieConfig.path=qm0yh3&servletContext.responseCharacterEncoding=nkcx6r&servletContext.sessionTimeout=309&new=true&servletContext.contextPath=r1z1gp&lastAccessedTime=1679282895481&servletContext.sessionCookieConfig.httpOnly=true&servletContext.serverInfo=ijtpdj&servletContext.sessionCookieConfig.maxAge=8
-```
-
-**Response-fields:**
-
- Field           | Type    | Description           | Since 
------------------|---------|-----------------------|-------
- flag            | boolean | 结果标志，true为成功，false为失败 | -     
- msg             | string  | 结果消息，一般反馈给用户          | -     
- data            | object  | 结果数据，一般反馈给前端进行处理      | -     
- └─array         | boolean | No comments found.    | -     
- └─object        | boolean | No comments found.    | -     
- └─valueNode     | boolean | No comments found.    | -     
- └─containerNode | boolean | No comments found.    | -     
- └─missingNode   | boolean | No comments found.    | -     
-
-**Response-example:**
-
-```
-{
-  "flag": true,
-  "msg": "返回的消息",
-  "data": {
-    "array": true,
-    "object": true,
-    "valueNode": true,
-    "containerNode": true,
-    "missingNode": true
-  }
-}
-```
-
-### 用户webauthn令牌注册响应
-
-**URL:** http://{{server}}/user/webauthnRegResp
+**URL:** http://{{server}}/msg/send/{cipher}
 
 **Type:** POST
 
@@ -397,58 +251,35 @@ curl -X GET -i http://{{server}}/user/webauthnRegReq?servletContext.sessionCooki
 
 **Content-Type:** application/json; charset=utf-8
 
-**Description:** 用户webauthn令牌注册响应
+**Description:** 推送消息
+
+**Path-parameters:**
+
+ Parameter | Type   | Description | Required | Since 
+-----------|--------|-------------|----------|-------
+ cipher    | string | 个人密钥        | true     | -     
 
 **Body-parameters:**
 
- Parameter                                                                | Type    | Description        | Required | Since 
---------------------------------------------------------------------------|---------|--------------------|----------|-------
- publicKeyCredentialJson                                                  | string  | No comments found. | false    | -     
- id                                                                       | string  | No comments found. | false    | -     
- creationTime                                                             | int64   | No comments found. | false    | -     
- lastAccessedTime                                                         | int64   | No comments found. | false    | -     
- servletContext                                                           | object  | No comments found. | false    | -     
- └─classLoader                                                            | object  | No comments found. | false    | -     
- └─majorVersion                                                           | int32   | No comments found. | false    | -     
- └─minorVersion                                                           | int32   | No comments found. | false    | -     
- └─serverInfo                                                             | string  | No comments found. | false    | -     
- └─contextPath                                                            | string  | No comments found. | false    | -     
- └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
- └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
- └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
- └─initParameterNames                                                     | object  | No comments found. | false    | -     
- └─filterRegistrations                                                    | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─servletContextName                                                     | string  | No comments found. | false    | -     
- └─servletRegistrations                                                   | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
- └─virtualServerName                                                      | string  | No comments found. | false    | -     
- └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
- └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
- └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
- └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
- └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
- └─attributeNames                                                         | object  | No comments found. | false    | -     
- new                                                                      | boolean | No comments found. | false    | -     
- maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
- attributeNames                                                           | object  | No comments found. | false    | -     
+ Parameter | Type   | Description                                                | Required | Since 
+-----------|--------|------------------------------------------------------------|----------|-------
+ content   | string | 消息内容                                                       | true     | -     
+ meta      | object | 消息元数据                                                      | false    | -     
+ └─type    | string | 消息类型，目前仅支持"qq"、"qq_group、telegram"                         | false    | -     
+ └─data    | string | 消息元数据，与type对应。<br>qq-QQ号，qq_group-QQ群号，telegram-telegramID | true     | -     
+ └─qqBot   | int64  | 指定QQ机器人号码                                                  | false    | -     
 
 **Request-example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/webauthnRegResp --data 'ri21t2'
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/msg/send/CH32p41OXu --data '{
+  "content": "这是一条消息",
+  "meta": {
+    "type": "qq",
+    "data": "1277489864",
+    "qqBot": 1277489864
+  }
+}'
 ```
 
 **Response-fields:**
@@ -468,8 +299,173 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{serv
 }
 ```
 
-### 用户webauthn令牌登录请求
+## 用户相关
+### 用户webauthn令牌注册请求
+**URL:** http://{{server}}/user/webauthnRegReq
 
+**Type:** GET
+
+**Author:** Renxing
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 用户webauthn令牌注册请求
+
+**Query-parameters:**
+
+ Parameter                                                                | Type    | Description        | Required | Since 
+--------------------------------------------------------------------------|---------|--------------------|----------|-------
+ id                                                                       | string  | No comments found. | false    | -     
+ creationTime                                                             | int64   | No comments found. | false    | -     
+ lastAccessedTime                                                         | int64   | No comments found. | false    | -     
+ maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
+ servletContext                                                           | object  | No comments found. | false    | -     
+ └─classLoader                                                            | object  | No comments found. | false    | -     
+ └─majorVersion                                                           | int32   | No comments found. | false    | -     
+ └─minorVersion                                                           | int32   | No comments found. | false    | -     
+ └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
+ └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
+ └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
+ └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
+ └─servletRegistrations                                                   | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
+ └─filterRegistrations                                                    | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
+ └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
+ └─serverInfo                                                             | string  | No comments found. | false    | -     
+ └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
+ └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
+ └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─virtualServerName                                                      | string  | No comments found. | false    | -     
+ └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─contextPath                                                            | string  | No comments found. | false    | -     
+ └─initParameterNames                                                     | object  | No comments found. | false    | -     
+ └─attributeNames                                                         | object  | No comments found. | false    | -     
+ attributeNames                                                           | object  | No comments found. | false    | -     
+ new                                                                      | boolean | No comments found. | false    | -     
+
+**Request-example:**
+```
+curl -X GET -i http://{{server}}/user/webauthnRegReq?servletContext.minorVersion=667&creationTime=1690655933222&servletContext.effectiveMajorVersion=350&servletContext.effectiveMinorVersion=38&servletContext.sessionCookieConfig.httpOnly=true&servletContext.requestCharacterEncoding=wwplzm&new=true&servletContext.sessionCookieConfig.name=ruthie.hansen&servletContext.serverInfo=hp3qwk&servletContext.sessionCookieConfig.path=wtatvs&servletContext.sessionCookieConfig.comment=1xf7fw&servletContext.sessionCookieConfig.secure=true&maxInactiveInterval=877&lastAccessedTime=1690655933222&servletContext.majorVersion=72&servletContext.responseCharacterEncoding=u29ta1&servletContext.virtualServerName=ruthie.hansen&servletContext.servletContextName=ruthie.hansen&servletContext.sessionCookieConfig.domain=mayert.net&servletContext.contextPath=a0dhub&id=187&servletContext.sessionTimeout=88&servletContext.sessionCookieConfig.maxAge=15
+```
+**Response-fields:**
+
+ Field           | Type    | Description           | Since 
+-----------------|---------|-----------------------|-------
+ flag            | boolean | 结果标志，true为成功，false为失败 | -     
+ msg             | string  | 结果消息，一般反馈给用户          | -     
+ data            | object  | 结果数据，一般反馈给前端进行处理      | -     
+ └─array         | boolean | No comments found.    | -     
+ └─missingNode   | boolean | No comments found.    | -     
+ └─valueNode     | boolean | No comments found.    | -     
+ └─containerNode | boolean | No comments found.    | -     
+ └─object        | boolean | No comments found.    | -     
+
+**Response-example:**
+```
+{
+  "flag": true,
+  "msg": "返回的消息",
+  "data": {
+    "array": true,
+    "missingNode": true,
+    "valueNode": true,
+    "containerNode": true,
+    "object": true
+  }
+}
+```
+
+### 用户webauthn令牌注册响应
+**URL:** http://{{server}}/user/webauthnRegResp
+
+**Type:** POST
+
+**Author:** Renxing
+
+**Content-Type:** application/json; charset=utf-8
+
+**Description:** 用户webauthn令牌注册响应
+
+**Body-parameters:**
+
+ Parameter                                                                | Type    | Description        | Required | Since 
+--------------------------------------------------------------------------|---------|--------------------|----------|-------
+ publicKeyCredentialJson                                                  | string  | No comments found. | false    | -     
+ id                                                                       | string  | No comments found. | false    | -     
+ creationTime                                                             | int64   | No comments found. | false    | -     
+ lastAccessedTime                                                         | int64   | No comments found. | false    | -     
+ maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
+ servletContext                                                           | object  | No comments found. | false    | -     
+ └─classLoader                                                            | object  | No comments found. | false    | -     
+ └─majorVersion                                                           | int32   | No comments found. | false    | -     
+ └─minorVersion                                                           | int32   | No comments found. | false    | -     
+ └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
+ └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
+ └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
+ └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
+ └─servletRegistrations                                                   | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
+ └─filterRegistrations                                                    | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
+ └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
+ └─serverInfo                                                             | string  | No comments found. | false    | -     
+ └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
+ └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
+ └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─virtualServerName                                                      | string  | No comments found. | false    | -     
+ └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─contextPath                                                            | string  | No comments found. | false    | -     
+ └─initParameterNames                                                     | object  | No comments found. | false    | -     
+ └─attributeNames                                                         | object  | No comments found. | false    | -     
+ attributeNames                                                           | object  | No comments found. | false    | -     
+ new                                                                      | boolean | No comments found. | false    | -     
+
+**Request-example:**
+```
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/webauthnRegResp --data 'asn1ri'
+```
+**Response-fields:**
+
+ Field | Type    | Description           | Since 
+-------|---------|-----------------------|-------
+ flag  | boolean | 结果标志，true为成功，false为失败 | -     
+ msg   | string  | 结果消息，一般反馈给用户          | -     
+ data  | object  | 结果数据，一般反馈给前端进行处理      | -     
+
+**Response-example:**
+```
+{
+  "flag": true,
+  "msg": "返回的消息"
+}
+```
+
+### 用户webauthn令牌登录请求
 **URL:** http://{{server}}/user/webauthnLoginReq
 
 **Type:** GET
@@ -487,50 +483,48 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{serv
  id                                                                       | string  | No comments found. | false    | -     
  creationTime                                                             | int64   | No comments found. | false    | -     
  lastAccessedTime                                                         | int64   | No comments found. | false    | -     
+ maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
  servletContext                                                           | object  | No comments found. | false    | -     
  └─classLoader                                                            | object  | No comments found. | false    | -     
  └─majorVersion                                                           | int32   | No comments found. | false    | -     
  └─minorVersion                                                           | int32   | No comments found. | false    | -     
- └─serverInfo                                                             | string  | No comments found. | false    | -     
- └─contextPath                                                            | string  | No comments found. | false    | -     
- └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
- └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
  └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
- └─initParameterNames                                                     | object  | No comments found. | false    | -     
- └─filterRegistrations                                                    | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
+ └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
+ └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
  └─servletRegistrations                                                   | map     | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
- └─virtualServerName                                                      | string  | No comments found. | false    | -     
- └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─filterRegistrations                                                    | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
  └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
- └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
- └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─serverInfo                                                             | string  | No comments found. | false    | -     
+ └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
  └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
+ └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─virtualServerName                                                      | string  | No comments found. | false    | -     
+ └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─contextPath                                                            | string  | No comments found. | false    | -     
+ └─initParameterNames                                                     | object  | No comments found. | false    | -     
  └─attributeNames                                                         | object  | No comments found. | false    | -     
- new                                                                      | boolean | No comments found. | false    | -     
- maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
  attributeNames                                                           | object  | No comments found. | false    | -     
+ new                                                                      | boolean | No comments found. | false    | -     
 
 **Request-example:**
-
 ```
-curl -X GET -i http://{{server}}/user/webauthnLoginReq?servletContext.serverInfo=pky2qa&new=true&servletContext.effectiveMinorVersion=486&maxInactiveInterval=948&servletContext.sessionCookieConfig.httpOnly=true&id=110&servletContext.minorVersion=251&servletContext.responseCharacterEncoding=1o2glh&lastAccessedTime=1679282895481&creationTime=1679282895481&servletContext.servletContextName=georgiana.carroll&servletContext.sessionCookieConfig.secure=true&servletContext.sessionCookieConfig.path=w3luuz&servletContext.virtualServerName=georgiana.carroll&servletContext.contextPath=mfl8jm&servletContext.requestCharacterEncoding=rzirjt&servletContext.effectiveMajorVersion=71&servletContext.sessionCookieConfig.comment=xqkws9&servletContext.sessionTimeout=942&servletContext.majorVersion=461&servletContext.sessionCookieConfig.name=georgiana.carroll&servletContext.sessionCookieConfig.maxAge=8&servletContext.sessionCookieConfig.domain=feest.net
+curl -X GET -i http://{{server}}/user/webauthnLoginReq?maxInactiveInterval=863&servletContext.effectiveMinorVersion=283&servletContext.responseCharacterEncoding=3a8r6i&servletContext.sessionCookieConfig.path=msu7ug&lastAccessedTime=1690655933222&creationTime=1690655933222&servletContext.servletContextName=ruthie.hansen&servletContext.sessionCookieConfig.secure=true&servletContext.sessionCookieConfig.comment=l7r4au&servletContext.virtualServerName=ruthie.hansen&servletContext.sessionTimeout=661&id=187&servletContext.sessionCookieConfig.maxAge=15&servletContext.requestCharacterEncoding=kiq5tw&servletContext.minorVersion=957&servletContext.effectiveMajorVersion=75&servletContext.contextPath=fgc2s6&new=true&servletContext.sessionCookieConfig.domain=mayert.net&servletContext.serverInfo=6wft36&servletContext.sessionCookieConfig.httpOnly=true&servletContext.majorVersion=982&servletContext.sessionCookieConfig.name=ruthie.hansen
 ```
-
 **Response-fields:**
 
  Field           | Type    | Description           | Since 
@@ -539,29 +533,27 @@ curl -X GET -i http://{{server}}/user/webauthnLoginReq?servletContext.serverInfo
  msg             | string  | 结果消息，一般反馈给用户          | -     
  data            | object  | 结果数据，一般反馈给前端进行处理      | -     
  └─array         | boolean | No comments found.    | -     
- └─object        | boolean | No comments found.    | -     
+ └─missingNode   | boolean | No comments found.    | -     
  └─valueNode     | boolean | No comments found.    | -     
  └─containerNode | boolean | No comments found.    | -     
- └─missingNode   | boolean | No comments found.    | -     
+ └─object        | boolean | No comments found.    | -     
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
     "array": true,
-    "object": true,
+    "missingNode": true,
     "valueNode": true,
     "containerNode": true,
-    "missingNode": true
+    "object": true
   }
 }
 ```
 
 ### 用户webauthn令牌登录响应
-
 **URL:** http://{{server}}/user/webauthnLoginResp
 
 **Type:** POST
@@ -580,50 +572,48 @@ curl -X GET -i http://{{server}}/user/webauthnLoginReq?servletContext.serverInfo
  id                                                                       | string  | No comments found. | false    | -     
  creationTime                                                             | int64   | No comments found. | false    | -     
  lastAccessedTime                                                         | int64   | No comments found. | false    | -     
+ maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
  servletContext                                                           | object  | No comments found. | false    | -     
  └─classLoader                                                            | object  | No comments found. | false    | -     
  └─majorVersion                                                           | int32   | No comments found. | false    | -     
  └─minorVersion                                                           | int32   | No comments found. | false    | -     
- └─serverInfo                                                             | string  | No comments found. | false    | -     
- └─contextPath                                                            | string  | No comments found. | false    | -     
- └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
- └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
  └─responseCharacterEncoding                                              | string  | No comments found. | false    | -     
- └─initParameterNames                                                     | object  | No comments found. | false    | -     
- └─filterRegistrations                                                    | map     | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─effectiveSessionTrackingModes                                          | array   | No comments found. | false    | -     
+ └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
+ └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
  └─servletRegistrations                                                   | map     | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
- └─defaultSessionTrackingModes                                            | array   | No comments found. | false    | -     
- └─virtualServerName                                                      | string  | No comments found. | false    | -     
- └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─filterRegistrations                                                    | map     | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object                               | object  | any object.        | false    | -     
  └─sessionCookieConfig                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name                                     | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path                                     | string  | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes                               | map     | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object | object  | any object.        | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment                                  | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain                                   | string  | No comments found. | false    | -     
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly                                 | boolean | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure                                   | boolean | No comments found. | false    | -     
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge                                   | int32   | No comments found. | false    | -     
- └─effectiveMinorVersion                                                  | int32   | No comments found. | false    | -     
- └─requestCharacterEncoding                                               | string  | No comments found. | false    | -     
+ └─serverInfo                                                             | string  | No comments found. | false    | -     
+ └─jspConfigDescriptor                                                    | object  | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups                        | array   | No comments found. | false    | -     
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs                                  | array   | No comments found. | false    | -     
  └─sessionTimeout                                                         | int32   | No comments found. | false    | -     
+ └─servletContextName                                                     | string  | No comments found. | false    | -     
+ └─virtualServerName                                                      | string  | No comments found. | false    | -     
+ └─effectiveMajorVersion                                                  | int32   | No comments found. | false    | -     
+ └─contextPath                                                            | string  | No comments found. | false    | -     
+ └─initParameterNames                                                     | object  | No comments found. | false    | -     
  └─attributeNames                                                         | object  | No comments found. | false    | -     
- new                                                                      | boolean | No comments found. | false    | -     
- maxInactiveInterval                                                      | int32   | No comments found. | false    | -     
  attributeNames                                                           | object  | No comments found. | false    | -     
+ new                                                                      | boolean | No comments found. | false    | -     
 
 **Request-example:**
-
 ```
-curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/webauthnLoginResp --data 'bslkkx'
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/webauthnLoginResp --data 'nhhqre'
 ```
-
 **Response-fields:**
 
  Field                                 | Type    | Description           | Since 
@@ -640,13 +630,12 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{serv
  └─dayMaxSendCount                     | int64   | 每日最大发送次数              | -     
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 921,
+    "uid": 228,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -659,7 +648,6 @@ curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{serv
 ```
 
 ### 用户登录
-
 **URL:** http://{{server}}/user/login
 
 **Type:** POST
@@ -702,7 +690,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 992,
+    "uid": 633,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -738,16 +726,15 @@ username|string|No comments found.|false|-
 hash|string|No comments found.|true|-
 
 **Request-example:**
-
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/telegramLogin --data '{
-  "auth_date": 979,
-  "first_name": "georgiana.carroll",
-  "id": 734,
-  "last_name": "georgiana.carroll",
-  "photo_url": "www.erik-spinka.net",
-  "username": "georgiana.carroll",
-  "hash": "8b4vx7"
+  "auth_date": 350,
+  "first_name": "ruthie.hansen",
+  "id": 318,
+  "last_name": "ruthie.hansen",
+  "photo_url": "www.juan-bogan.us",
+  "username": "ruthie.hansen",
+  "hash": "r6yff3"
 }'
 ```
 **Response-fields:**
@@ -771,7 +758,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 52,
+    "uid": 764,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -802,7 +789,7 @@ code|string|No comments found.|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/telegramQRCodeLogin --data 'code=89603'
+curl -X POST -i http://{{server}}/user/telegramQRCodeLogin --data 'code=91184'
 ```
 **Response-fields:**
 
@@ -825,7 +812,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 340,
+    "uid": 366,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -861,7 +848,7 @@ gen_time|string|No comments found.|false|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/register --data 'name=georgiana.carroll&password=ulaemi&lot_number=5h4s6a&captcha_output=ds31qh&pass_token=v661tt&gen_time=2023-03-20 11:28:15'
+curl -X POST -i http://{{server}}/user/register --data 'name=ruthie.hansen&password=5rroj6&lot_number=40m4sx&captcha_output=zmoz5i&pass_token=j95rqz&gen_time=2023-07-30 02:38:53'
 ```
 **Response-fields:**
 
@@ -884,7 +871,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 700,
+    "uid": 904,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -924,7 +911,7 @@ data|string|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": "snw20g"
+  "data": "02jwtn"
 }
 ```
 
@@ -964,7 +951,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 947,
+    "uid": 182,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -995,7 +982,7 @@ number|int64|机器人号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qq_bot --data 'number=845'
+curl -X POST -i http://{{server}}/user/qq_bot --data 'number=123'
 ```
 **Response-fields:**
 
@@ -1018,7 +1005,7 @@ data|object|结果数据，一般反馈给前端进行处理|-
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "uid": 551,
+    "uid": 541,
     "name": "这是用户名",
     "admin": 0,
     "config": {
@@ -1058,7 +1045,7 @@ data|int32|结果数据，一般反馈给前端进行处理|-
 {
   "flag": true,
   "msg": "返回的消息",
-  "data": 874
+  "data": 137
 }
 ```
 
@@ -1081,7 +1068,7 @@ number|int64|群号码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=511'
+curl -X POST -i http://{{server}}/user/qqGroupWhitelist --data 'number=452'
 ```
 **Response-fields:**
 
@@ -1096,16 +1083,15 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─userId|int64|绑定站内用户ID|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 868,
-    "groupName": "georgiana.carroll",
+    "id": 39,
+    "groupName": "ruthie.hansen",
     "number": 807374699,
-    "userId": 326
+    "userId": 11
   }
 }
 ```
@@ -1138,17 +1124,16 @@ data|array|结果数据，一般反馈给前端进行处理|-
 └─userId|int64|绑定站内用户ID|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": [
     {
-      "id": 628,
-      "groupName": "georgiana.carroll",
+      "id": 311,
+      "groupName": "ruthie.hansen",
       "number": 807374699,
-      "userId": 845
+      "userId": 631
     }
   ]
 }
@@ -1173,7 +1158,7 @@ id|int64|白名单id|true|-
 
 **Request-example:**
 ```
-curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/270
+curl -X DELETE -i http://{{server}}/user/qqGroupWhitelist/333
 ```
 **Response-fields:**
 
@@ -1220,11 +1205,10 @@ reply|boolean|是否回应|false|-
 response|string|回应语|false|-
 
 **Request-example:**
-
 ```
 curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i http://{{server}}/user/messageCallback --data '{
-  "id": 3,
-  "uid": 983,
+  "id": 842,
+  "uid": 690,
   "appType": "qq",
   "keyword": "keyword",
   "callbackURL": "https://www.baidu.com/callback",
@@ -1256,14 +1240,13 @@ data|object|结果数据，一般反馈给前端进行处理|-
 └─response|string|回应语|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": {
-    "id": 645,
-    "uid": 982,
+    "id": 950,
+    "uid": 594,
     "appType": "qq",
     "keyword": "keyword",
     "callbackURL": "https://www.baidu.com/callback",
@@ -1312,15 +1295,14 @@ data|array|结果数据，一般反馈给前端进行处理|-
 └─response|string|回应语|-
 
 **Response-example:**
-
 ```
 {
   "flag": true,
   "msg": "返回的消息",
   "data": [
     {
-      "id": 503,
-      "uid": 789,
+      "id": 57,
+      "uid": 631,
       "appType": "qq",
       "keyword": "keyword",
       "callbackURL": "https://www.baidu.com/callback",
@@ -1354,7 +1336,7 @@ id|int64|消息回调id|true|-
 
 **Request-example:**
 ```
-curl -X DELETE -i http://{{server}}/user/messageCallback/508
+curl -X DELETE -i http://{{server}}/user/messageCallback/36
 ```
 **Response-fields:**
 

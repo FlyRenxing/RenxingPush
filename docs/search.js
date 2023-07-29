@@ -31,42 +31,42 @@ api[0].list[0].list.push({
     desc: '提交qq机器人登录验证码ticket',
 });
 api[0].list.push({
-    alias: 'MsgController',
+    alias: 'SystemController',
     order: '2',
-    link: '消息处理',
-    desc: '消息处理',
+    link: '系统类',
+    desc: '系统类',
     list: []
 })
 api[0].list[1].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://{{server}}/msg/send/{cipher}',
-    desc: '推送消息',
-});
-api[0].list.push({
-    alias: 'SystemController',
-    order: '3',
-    link: '系统类',
-    desc: '系统类',
-    list: []
-})
-api[0].list[2].list.push({
-    order: '1',
-    deprecated: 'false',
     url: 'http://{{server}}/sys/qqbotlist',
     desc: '获取机器人公开列表',
 });
-api[0].list[2].list.push({
+api[0].list[1].list.push({
     order: '2',
     deprecated: 'false',
     url: 'http://{{server}}/sys/note',
     desc: '获取所有公告',
 });
-api[0].list[2].list.push({
+api[0].list[1].list.push({
     order: '3',
     deprecated: 'false',
     url: 'http://{{server}}/sys/qqUrl',
     desc: '获取QQ登录URL',
+});
+api[0].list.push({
+    alias: 'MsgController',
+    order: '3',
+    link: '消息处理',
+    desc: '消息处理',
+    list: []
+})
+api[0].list[2].list.push({
+    order: '1',
+    deprecated: 'false',
+    url: 'http://{{server}}/msg/send/{cipher}',
+    desc: '推送消息',
 });
 api[0].list.push({
     alias: 'UserController',
