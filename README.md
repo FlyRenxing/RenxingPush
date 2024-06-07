@@ -1,5 +1,14 @@
 # 任性推 - 专属消息推送服务
 
+> [Warning]⚠️
+>
+> 由于tx的打击，任性推依赖的[mirai](https://github.com/mamoe/mirai/)社区已经几乎停滞。
+> 很遗憾任性推于2024.6.7宣布归档。
+> 
+> 与此同时，对于新的qqNT，社区似乎有新的方案，比如[chronocat](https://github.com/chrononeko/chronocat)，使用[chronocat](https://github.com/chrononeko/chronocat)可替代本项目的qq机器人功能。
+>
+> 下一步，作者预计会使用[koishi](https://github.com/koishijs/koishi)及[chronocat](https://github.com/chrononeko/chronocat)开发出任性推的替代解决方案。期待下次见面！
+
 欢迎使用任性推。
 
 ## 任性推是什么
