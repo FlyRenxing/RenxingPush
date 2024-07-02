@@ -1,122 +1,10 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "20f9f7f6-c817-45fe-820a-3ec06cbd143d",
+    "_postman_id": "c9e09534-b7f1-4a22-9bbd-fa11f266ed17",
     "name": "任性推-Docs"
   },
   "item": [
-    {
-      "name": "管理员相关",
-      "item": [
-        {
-          "name": "请求登录qq机器人",
-          "request": {
-            "method": "POST",
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "qq",
-                  "type": "text",
-                  "description": "qq号",
-                  "value": "561"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://::server/admin/remoteLoginQQBot",
-              "protocol": "http",
-              "path": [
-                "admin",
-                "remoteLoginQQBot"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "description": "请求登录qq机器人",
-            "header": []
-          },
-          "description": "请求登录qq机器人"
-        },
-        {
-          "name": "获取验证码url",
-          "request": {
-            "method": "GET",
-            "body": {
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://::server/admin/getRemoteLoginQQBotUrl?qq=496",
-              "protocol": "http",
-              "path": [
-                "admin",
-                "getRemoteLoginQQBotUrl"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [
-                {
-                  "key": "qq",
-                  "value": "891",
-                  "description": "在{@link #remoteLoginQQBot(Long)}中请求的qq号"
-                }
-              ],
-              "variable": []
-            },
-            "description": "获取验证码url",
-            "header": []
-          },
-          "description": "获取验证码url"
-        },
-        {
-          "name": "提交qq机器人登录验证码ticket",
-          "request": {
-            "method": "POST",
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "qq",
-                  "type": "text",
-                  "description": "    在{@link #remoteLoginQQBot(Long)}中请求的qq号",
-                  "value": "963"
-                },
-                {
-                  "key": "ticket",
-                  "type": "text",
-                  "description": "验证码ticket",
-                  "value": "wiyaa0"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://::server/admin/submitTicket",
-              "protocol": "http",
-              "path": [
-                "admin",
-                "submitTicket"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "description": "提交qq机器人登录验证码ticket",
-            "header": []
-          },
-          "description": "提交qq机器人登录验证码ticket"
-        }
-      ]
-    },
     {
       "name": "系统类",
       "item": [
@@ -210,49 +98,6 @@
       ]
     },
     {
-      "name": "消息处理",
-      "item": [
-        {
-          "name": "推送消息",
-          "request": {
-            "method": "POST",
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"content\": \"这是一条消息\",\n  \"meta\": {\n    \"type\": \"qq\",\n    \"data\": \"1277489864\",\n    \"qqBot\": 1277489864\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://::server/msg/send/CH32p41OXu",
-              "protocol": "http",
-              "path": [
-                "msg",
-                "send",
-                ":cipher"
-              ],
-              "host": [
-                "{{server}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "key": "cipher",
-                  "value": "CH32p41OXu",
-                  "description": "个人密钥"
-                }
-              ]
-            },
-            "description": "推送消息",
-            "header": []
-          },
-          "description": "推送消息"
-        }
-      ]
-    },
-    {
       "name": "用户相关",
       "item": [
         {
@@ -267,7 +112,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/webauthnRegReq?servletContext.sessionCookieConfig.name=ruthie.hansen&id=187&servletContext.sessionCookieConfig.httpOnly=true&servletContext.servletContextName=ruthie.hansen&new=true&servletContext.virtualServerName=ruthie.hansen&servletContext.serverInfo=qd466t&maxInactiveInterval=135&servletContext.sessionCookieConfig.maxAge=15&servletContext.responseCharacterEncoding=yn8a4v&servletContext.effectiveMinorVersion=195&servletContext.minorVersion=38&servletContext.sessionCookieConfig.secure=true&servletContext.sessionCookieConfig.path=x20wkt&servletContext.sessionTimeout=510&servletContext.sessionCookieConfig.domain=mayert.net&servletContext.sessionCookieConfig.comment=smeee9&servletContext.effectiveMajorVersion=640&servletContext.contextPath=lhmcg0&servletContext.majorVersion=598&creationTime=1690655933222&lastAccessedTime=1690655933222&servletContext.requestCharacterEncoding=do5vb9",
+              "raw": "http://::server/user/webauthnRegReq",
               "protocol": "http",
               "path": [
                 "user",
@@ -276,208 +121,7 @@
               "host": [
                 "{{server}}"
               ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": "187",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "creationTime",
-                  "value": "1690655933222",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "lastAccessedTime",
-                  "value": "1690655933222",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "maxInactiveInterval",
-                  "value": "459",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "servletContext",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─classLoader",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─majorVersion",
-                  "value": "259",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─minorVersion",
-                  "value": "940",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─responseCharacterEncoding",
-                  "value": "le0q4n",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveSessionTrackingModes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─defaultSessionTrackingModes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─requestCharacterEncoding",
-                  "value": "hu0sde",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveMinorVersion",
-                  "value": "612",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─servletRegistrations",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "└─filterRegistrations",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "└─sessionCookieConfig",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain",
-                  "value": "mayert.net",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path",
-                  "value": "x42gii",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment",
-                  "value": "6rn53g",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly",
-                  "value": "true",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure",
-                  "value": "true",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge",
-                  "value": "15",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─serverInfo",
-                  "value": "96dqax",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─jspConfigDescriptor",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─sessionTimeout",
-                  "value": "814",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─servletContextName",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─virtualServerName",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveMajorVersion",
-                  "value": "153",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─contextPath",
-                  "value": "atwvv8",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─initParameterNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─attributeNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "attributeNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "new",
-                  "value": "true",
-                  "description": "No comments found."
-                }
-              ],
+              "query": [],
               "variable": []
             },
             "description": "用户webauthn令牌注册请求",
@@ -491,7 +135,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "od51m4",
+              "raw": "",
               "options": {
                 "raw": {
                   "language": "json"
@@ -528,7 +172,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/webauthnLoginReq?servletContext.sessionTimeout=933&servletContext.sessionCookieConfig.httpOnly=true&servletContext.effectiveMajorVersion=145&maxInactiveInterval=670&lastAccessedTime=1690655933222&servletContext.sessionCookieConfig.domain=mayert.net&servletContext.sessionCookieConfig.name=ruthie.hansen&servletContext.minorVersion=847&servletContext.sessionCookieConfig.secure=true&servletContext.responseCharacterEncoding=vkqsul&servletContext.servletContextName=ruthie.hansen&servletContext.majorVersion=42&servletContext.contextPath=f68a9b&creationTime=1690655933222&id=187&servletContext.requestCharacterEncoding=t8p238&servletContext.serverInfo=losm28&servletContext.sessionCookieConfig.maxAge=15&new=true&servletContext.sessionCookieConfig.comment=azuh2d&servletContext.virtualServerName=ruthie.hansen&servletContext.sessionCookieConfig.path=0i3aou&servletContext.effectiveMinorVersion=382",
+              "raw": "http://::server/user/webauthnLoginReq",
               "protocol": "http",
               "path": [
                 "user",
@@ -537,208 +181,7 @@
               "host": [
                 "{{server}}"
               ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": "187",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "creationTime",
-                  "value": "1690655933222",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "lastAccessedTime",
-                  "value": "1690655933222",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "maxInactiveInterval",
-                  "value": "613",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "servletContext",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─classLoader",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─majorVersion",
-                  "value": "318",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─minorVersion",
-                  "value": "13",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─responseCharacterEncoding",
-                  "value": "c1v8aj",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveSessionTrackingModes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─defaultSessionTrackingModes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─requestCharacterEncoding",
-                  "value": "xu78ok",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveMinorVersion",
-                  "value": "435",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─servletRegistrations",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "└─filterRegistrations",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "└─sessionCookieConfig",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─domain",
-                  "value": "mayert.net",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─name",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─path",
-                  "value": "neyv6y",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─attributes",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─any object",
-                  "value": "",
-                  "description": "any object."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─comment",
-                  "value": "ieewcd",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─httpOnly",
-                  "value": "true",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─secure",
-                  "value": "true",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maxAge",
-                  "value": "15",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─serverInfo",
-                  "value": "74do2k",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─jspConfigDescriptor",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─jspPropertyGroups",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─taglibs",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─sessionTimeout",
-                  "value": "805",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─servletContextName",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─virtualServerName",
-                  "value": "ruthie.hansen",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─effectiveMajorVersion",
-                  "value": "864",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─contextPath",
-                  "value": "u50e9v",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─initParameterNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "└─attributeNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "attributeNames",
-                  "value": "",
-                  "description": "No comments found."
-                },
-                {
-                  "key": "new",
-                  "value": "true",
-                  "description": "No comments found."
-                }
-              ],
+              "query": [],
               "variable": []
             },
             "description": "用户webauthn令牌登录请求",
@@ -752,7 +195,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "wayer4",
+              "raw": "",
               "options": {
                 "raw": {
                   "language": "json"
@@ -782,17 +225,21 @@
           "request": {
             "method": "POST",
             "body": {
-              "mode": "formdata",
+              "mode": "x-www-form-urlencoded",
               "formdata": [
                 {
                   "key": "name",
                   "type": "text",
-                  "value": "ruthie.hansen"
+                  "description": "No comments found.",
+                  "value": "\"\"",
+                  "hasItems": false
                 },
                 {
                   "key": "password",
                   "type": "text",
-                  "value": "lfpxug"
+                  "description": "No comments found.",
+                  "value": "\"\"",
+                  "hasItems": false
                 }
               ]
             },
@@ -820,7 +267,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"auth_date\": 177,\n  \"first_name\": \"ruthie.hansen\",\n  \"id\": 627,\n  \"last_name\": \"ruthie.hansen\",\n  \"photo_url\": \"www.juan-bogan.us\",\n  \"username\": \"ruthie.hansen\",\n  \"hash\": \"apq9r1\"\n}",
+              "raw": "{\n  \"auth_date\": 0,\n  \"first_name\": \"\",\n  \"id\": 0,\n  \"last_name\": \"\",\n  \"photo_url\": \"\",\n  \"username\": \"\",\n  \"hash\": \"\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -850,15 +297,8 @@
           "request": {
             "method": "POST",
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "code",
-                  "type": "string",
-                  "description": "No comments found.",
-                  "value": "91184"
-                }
-              ]
+              "mode": "x-www-form-urlencoded",
+              "formdata": []
             },
             "url": {
               "raw": "http://::server/user/telegramQRCodeLogin",
@@ -883,45 +323,8 @@
           "request": {
             "method": "POST",
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "name",
-                  "type": "string",
-                  "description": "    用户名",
-                  "value": "ruthie.hansen"
-                },
-                {
-                  "key": "password",
-                  "type": "string",
-                  "description": "密码",
-                  "value": "xlaikh"
-                },
-                {
-                  "key": "lot_number",
-                  "type": "string",
-                  "description": "No comments found.",
-                  "value": "tlolt9"
-                },
-                {
-                  "key": "captcha_output",
-                  "type": "string",
-                  "description": "No comments found.",
-                  "value": "0xvh59"
-                },
-                {
-                  "key": "pass_token",
-                  "type": "string",
-                  "description": "No comments found.",
-                  "value": "6qjejg"
-                },
-                {
-                  "key": "gen_time",
-                  "type": "string",
-                  "description": "No comments found.",
-                  "value": "2023-07-30 02:38:53"
-                }
-              ]
+              "mode": "x-www-form-urlencoded",
+              "formdata": []
             },
             "url": {
               "raw": "http://::server/user/register",
@@ -1004,15 +407,8 @@
           "request": {
             "method": "POST",
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "number",
-                  "type": "int64",
-                  "description": "机器人号码",
-                  "value": "872"
-                }
-              ]
+              "mode": "x-www-form-urlencoded",
+              "formdata": []
             },
             "url": {
               "raw": "http://::server/user/qq_bot",
@@ -1066,15 +462,8 @@
           "request": {
             "method": "POST",
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "number",
-                  "type": "int64",
-                  "description": "群号码",
-                  "value": "157"
-                }
-              ]
+              "mode": "x-www-form-urlencoded",
+              "formdata": []
             },
             "url": {
               "raw": "http://::server/user/qqGroupWhitelist",
@@ -1135,7 +524,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/qqGroupWhitelist/960",
+              "raw": "http://::server/user/qqGroupWhitelist/:id",
               "protocol": "http",
               "path": [
                 "user",
@@ -1149,7 +538,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "757",
+                  "value": "0",
                   "description": "白名单id"
                 }
               ]
@@ -1165,7 +554,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 396,\n  \"uid\": 246,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
+              "raw": "{\n  \"id\": 0,\n  \"uid\": 0,\n  \"appType\": \"qq\",\n  \"keyword\": \"keyword\",\n  \"callbackURL\": \"https://www.baidu.com/callback\",\n  \"feedback\": \"feedbackOK\",\n  \"sender\": \"1277489864\",\n  \"group\": \"1277489864\",\n  \"message\": \"我是一条消息\",\n  \"reply\": true,\n  \"response\": \"回调成功了\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1231,7 +620,7 @@
               }
             },
             "url": {
-              "raw": "http://::server/user/messageCallback/638",
+              "raw": "http://::server/user/messageCallback/:id",
               "protocol": "http",
               "path": [
                 "user",
@@ -1245,7 +634,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "122",
+                  "value": "0",
                   "description": "消息回调id"
                 }
               ]
@@ -1283,6 +672,49 @@
             "header": []
           },
           "description": "退出账号"
+        }
+      ]
+    },
+    {
+      "name": "消息处理",
+      "item": [
+        {
+          "name": "推送消息",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"这是一条消息\",\n  \"meta\": {\n    \"type\": \"qq\",\n    \"data\": \"1277489864\",\n    \"qqBot\": 1277489864\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://::server/msg/send/:cipher",
+              "protocol": "http",
+              "path": [
+                "msg",
+                "send",
+                ":cipher"
+              ],
+              "host": [
+                "{{server}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "cipher",
+                  "value": "CH32p41OXu",
+                  "description": "个人密钥"
+                }
+              ]
+            },
+            "description": "推送消息",
+            "header": []
+          },
+          "description": "推送消息"
         }
       ]
     }

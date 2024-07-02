@@ -3,27 +3,28 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>top.imzdx</groupId>
+    <groupId>cc.renxing</groupId>
     <artifactId>renxing-push</artifactId>
-    <version>0.9.8</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
+        <version>3.3.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <properties>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mirai-core-jvm.version>2.16.0</mirai-core-jvm.version>
-        <cn.hutool.version>5.8.21</cn.hutool.version>
+        <mikuac-shiro.version>2.2.8</mikuac-shiro.version>
+        <cn.hutool.version>5.8.28</cn.hutool.version>
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
-        <druid.version>1.2.18</druid.version>
+        <druid.version>1.2.23</druid.version>
         <validator.version>7.0.4.Final</validator.version>
-        <lombok.version>1.18.28</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
-        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.9.0</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>
+        <!--        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.9.0</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>-->
         <fastjson.version>2.0.1</fastjson.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
@@ -80,16 +81,26 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.jdbc.version}</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>net.mamoe</groupId>-->
+        <!--            <artifactId>mirai-core-jvm</artifactId>-->
+        <!--            <version>${mirai-core-jvm.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
-            <groupId>net.mamoe</groupId>
-            <artifactId>mirai-core-jvm</artifactId>
-            <version>${mirai-core-jvm.version}</version>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${org.jetbrains.kotlin.kotlin-stdlib-jdk8.version}</version>
+            <groupId>com.mikuac</groupId>
+            <artifactId>shiro</artifactId>
+            <version>${mikuac-shiro.version}</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.jetbrains.kotlin</groupId>-->
+        <!--            <artifactId>kotlin-stdlib-jdk8</artifactId>-->
+        <!--            <version>${org.jetbrains.kotlin.kotlin-stdlib-jdk8.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -97,7 +108,7 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
-            <version>4.6.3</version>
+            <version>4.6.4</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -107,7 +118,7 @@
         <dependency>
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
-            <version>4.16.16</version>
+            <version>4.16.19</version>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
@@ -138,7 +149,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!-- 你的主类全路径 -->
-                    <mainClass>top.imzdx.renxingpush.QqPushApplication</mainClass>
+                    <mainClass>cc.renxing.push.QqPushApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -219,21 +230,21 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.github.shalousun</groupId>
+                <groupId>com.ly.smart-doc</groupId>
                 <artifactId>smart-doc-maven-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.0.5</version>
                 <configuration>
                     <configFile>./src/main/resources/smart-doc.json</configFile>
-                    <excludes>
-                        <exclude>cn.hutool:hutool-all</exclude>
-                        <exclude>net.bytebuddy:byte-buddy</exclude>
-                        <exclude>org.springframework.boot:spring-boot-starter-data-jpa</exclude>
-                    </excludes>
+                    <!--                    <excludes>-->
+                    <!--                        <exclude>cn.hutool:hutool-all</exclude>-->
+                    <!--                        <exclude>net.bytebuddy:byte-buddy</exclude>-->
+                    <!--                        <exclude>org.springframework.boot:spring-boot-starter-data-jpa</exclude>-->
+                    <!--                    </excludes>-->
                 </configuration>
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <!--                        <phase>compile</phase>-->
+                        <!--                                                <phase>compile</phase>-->
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>

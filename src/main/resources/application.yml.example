@@ -44,6 +44,8 @@ app:
     bot-token: 123
     bot-name: telegram-bot
     creator-id: 132
+    proxy-host: localhost
+    proxy-port: 7890
 server:
   port: 8000
 spring:
@@ -60,3 +62,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+#onebot11配置
+shiro:
+  ws:
+    client:
+      enable: true
+      url: "ws://123.123.123.123:50001"
+    access-token: 123
