@@ -49,7 +49,9 @@ public class QQBotTools {
         ShiroUtils.rawToArrayMsg(msg.getContent()).stream().filter(msg1 -> msg1.getType() == MsgTypeEnum.text).forEach(msg1 -> {
             textContent.append(msg1.getData().get("text"));
         });
-        msgContentTools.checkText(textContent.toString(), messageLog);
+        if (!textContent.isEmpty()) {
+            msgContentTools.checkText(textContent.toString(), messageLog);
+        }
         cqcodeFilter(msg.getContent(), messageLog, user);
         boolean isFriend = msg.getMeta().getType().equals(TYPE_QQ);
         if (!isFriend) testGroupAuthority(user, Long.valueOf(msg.getMeta().getData()), messageLog);
