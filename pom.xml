@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mirai-core-jvm.version>2.16.0</mirai-core-jvm.version>
         <mikuac-shiro.version>2.3.5</mikuac-shiro.version>
-        <cn.hutool.version>5.8.28</cn.hutool.version>
+        <cn.hutool.version>5.8.34</cn.hutool.version>
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
         <druid.version>1.2.23</druid.version>
         <validator.version>7.0.4.Final</validator.version>
