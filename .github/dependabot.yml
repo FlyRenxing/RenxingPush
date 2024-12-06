@@ -5,7 +5,9 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "maven" # 指定 Maven 作为依赖管理工具
+    directory: "/"            # 指定 `pom.xml` 文件所在的目录，项目根目录用 "/"
     schedule:
-      interval: "weekly"
+      interval: "weekly"       # 更新检查频率，可选 daily, weekly, monthly
+    # open-pull-requests-limit: 5 # 同时打开的 PR 限制
+    # ignore: 
