@@ -20,7 +20,7 @@
         <mikuac-shiro.version>2.3.5</mikuac-shiro.version>
         <cn.hutool.version>5.8.34</cn.hutool.version>
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
-        <druid.version>1.2.23</druid.version>
+        <druid.version>1.2.24</druid.version>
         <validator.version>7.0.4.Final</validator.version>
         <lombok.version>1.18.36</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
