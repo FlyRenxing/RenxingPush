@@ -1,0 +1,13 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "maven" # 指定 Maven 作为依赖管理工具
+    directory: "/"            # 指定 `pom.xml` 文件所在的目录，项目根目录用 "/"
+    schedule:
+      interval: "weekly"       # 更新检查频率，可选 daily, weekly, monthly
+    # open-pull-requests-limit: 5 # 同时打开的 PR 限制
+    # ignore: 
