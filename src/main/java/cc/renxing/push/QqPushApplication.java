@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableSpringUtil
 public class QqPushApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
+
         SpringApplication.run(QqPushApplication.class, args);
     }
 

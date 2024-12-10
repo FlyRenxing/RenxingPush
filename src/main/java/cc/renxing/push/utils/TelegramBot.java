@@ -8,8 +8,6 @@ import cc.renxing.push.repository.UserDao;
 import cc.renxing.push.service.UserService;
 import cc.renxing.push.service.impl.TelegramMsgCallbackServiceImpl;
 import com.google.zxing.NotFoundException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
@@ -35,7 +33,7 @@ import static org.telegram.abilitybots.api.objects.Locality.USER;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
-@Component
+//@Component
 public class TelegramBot extends AbilityBot {
     AppConfig appConfig;
 
@@ -45,12 +43,12 @@ public class TelegramBot extends AbilityBot {
 
     TelegramMsgCallbackServiceImpl telegramMsgCallbackService;
 
-    public TelegramBot(DefaultBotOptions options, AppConfig appConfig, ApplicationContext appContext) {
+    public TelegramBot(DefaultBotOptions options, AppConfig appConfig, UserDao userDao, UserService userService, TelegramMsgCallbackServiceImpl telegramMsgCallbackService) {
         super(appConfig.getTelegram().getBotToken(), appConfig.getTelegram().getBotName(), options);
         this.appConfig = appConfig;
-        this.userDao = appContext.getBean(UserDao.class);
-        this.userService = appContext.getBean(UserService.class);
-        this.telegramMsgCallbackService = appContext.getBean(TelegramMsgCallbackServiceImpl.class);
+        this.userDao = userDao;
+        this.userService = userService;
+        this.telegramMsgCallbackService = telegramMsgCallbackService;
     }
 
     @Override
