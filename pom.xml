@@ -135,12 +135,6 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
