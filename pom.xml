@@ -15,17 +15,15 @@
     </parent>
     <properties>
         <skipTests>true</skipTests>
+        <hibernate.version>6.4.2.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mirai-core-jvm.version>2.16.0</mirai-core-jvm.version>
-        <mikuac-shiro.version>2.3.5</mikuac-shiro.version>
-        <cn.hutool.version>5.8.34</cn.hutool.version>
+        <mikuac-shiro.version>2.3.3</mikuac-shiro.version>
+        <cn.hutool.version>5.8.28</cn.hutool.version>
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
-        <druid.version>1.2.24</druid.version>
+        <druid.version>1.2.23</druid.version>
         <validator.version>7.0.4.Final</validator.version>
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
-        <!--        <org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>1.9.0</org.jetbrains.kotlin.kotlin-stdlib-jdk8.version>-->
-        <fastjson.version>2.0.1</fastjson.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
         <webauthn4j.version>0.21.0.RELEASE</webauthn4j.version>
@@ -67,25 +65,10 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.vladmihalcea</groupId>
-            <artifactId>hibernate-types-60</artifactId>
-            <version>2.21.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.jdbc.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>net.mamoe</groupId>-->
-        <!--            <artifactId>mirai-core-jvm</artifactId>-->
-        <!--            <version>${mirai-core-jvm.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
@@ -96,11 +79,6 @@
             <artifactId>shiro</artifactId>
             <version>${mikuac-shiro.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.jetbrains.kotlin</groupId>-->
-        <!--            <artifactId>kotlin-stdlib-jdk8</artifactId>-->
-        <!--            <version>${org.jetbrains.kotlin.kotlin-stdlib-jdk8.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -119,11 +97,17 @@
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
             <version>4.16.19</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
-            <version>6.5.0</version>
+            <version>6.9.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
@@ -145,50 +129,33 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
                 <configuration>
-                    <!-- 你的主类全路径 -->
-                    <mainClass>cc.renxing.push.QqPushApplication</mainClass>
+                    <source>21</source>
+                    <target>21</target>
+                    <encoding>UTF-8</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.36</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
-                            </sourceDirs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
-                            </sourceDirs>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <!--                    <buildArgs>-->
+                    <!--                        <buildArg>-H:ConfigurationFileDirectories=src/main/resources/META-INF/native-image</buildArg>-->
+                    <!--                    </buildArgs>-->
+                    <agent>
+                        <enabled>true</enabled>
+                    </agent>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -198,41 +165,18 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
-                <executions>
-                    <!-- 替换会被 maven 特别处理的 default-compile -->
-                    <execution>
-                        <id>default-compile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <!-- 替换会被 maven 特别处理的 default-testCompile -->
-                    <execution>
-                        <id>default-testCompile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <execution>
-                        <id>java-compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>java-test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipTests}</skip>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>com.ly.smart-doc</groupId>
                 <artifactId>smart-doc-maven-plugin</artifactId>
-                <version>3.0.9</version>
+                <version>3.0.5</version>
                 <configuration>
                     <configFile>./src/main/resources/smart-doc.json</configFile>
                     <!--                    <excludes>-->
@@ -244,7 +188,7 @@
                 <executions>
                     <execution>
                         <!--如果不需要在执行编译时启动smart-docs，则将phase注释掉-->
-                        <!--                                                <phase>compile</phase>-->
+                        <!-- <phase>compile</phase> -->
                         <goals>
                             <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
                             <goal>html</goal>

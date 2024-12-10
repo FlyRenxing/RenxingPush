@@ -1,14 +1,13 @@
 package cc.renxing.push.model.po;
 
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.vladmihalcea.hibernate.type.json.JsonType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -49,8 +48,8 @@ public class User implements Serializable {
     /**
      * 用户配置
      */
-    @Type(JsonType.class)
-    @Column(columnDefinition = "json")
+    @Convert(converter = UserConfigConverter.class) // 使用自定义转换器
+    @Column(columnDefinition = "JSON") // 指定 MySQL 的 JSON 类型
     private UserConfig config;
     /**
      * 用户密钥
@@ -110,4 +109,28 @@ public class User implements Serializable {
         private Long qqBot;
     }
 
+}
+
+@Converter(autoApply = false)
+class UserConfigConverter implements AttributeConverter<User.UserConfig, String> {
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public String convertToDatabaseColumn(User.UserConfig userConfig) {
+        try {
+            return userConfig == null ? null : objectMapper.writeValueAsString(userConfig);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error converting UserConfig to JSON", e);
+        }
+    }
+
+    @Override
+    public User.UserConfig convertToEntityAttribute(String json) {
+        try {
+            return json == null ? null : objectMapper.readValue(json, User.UserConfig.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error converting JSON to UserConfig", e);
+        }
+    }
 }

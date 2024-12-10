@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app")
 @Component
 public class AppConfig {
-    private System system;
-    private System.User user;
-    private System.Baidu baidu;
-    private System.Qq qq;
-    private System.Aliyun aliyun;
-    private System.Geetest geetest;
-    private System.Telegram telegram;
+    private AppConfig.System system;
+    private AppConfig.User user;
+    private AppConfig.Baidu baidu;
+    private AppConfig.Qq qq;
+    private AppConfig.Aliyun aliyun;
+    private AppConfig.Geetest geetest;
+    private AppConfig.Telegram telegram;
 
     @Data
     public static class System {
@@ -48,55 +48,55 @@ public class AppConfig {
                 private String privateCloudUrl;
             }
         }
+    }
+
+    @Data
+    public static class User {
+        private Default defaultSetting;
 
         @Data
-        public static class User {
-            private Default defaultSetting;
-
-            @Data
-            public static class Default {
-                private int cipherDigit;
-                private int dayMaxSendCount;
-            }
+        public static class Default {
+            private int cipherDigit;
+            private int dayMaxSendCount;
         }
+    }
 
-        @Data
-        public static class Baidu {
-            private String appID;
-            private String aPIKey;
-            private String secretKey;
-        }
+    @Data
+    public static class Baidu {
+        private String appID;
+        private String aPIKey;
+        private String secretKey;
+    }
 
-        @Data
-        public static class Qq {
-            private String appID;
-            private String appKey;
-            private String backUrl;
-            private String redirectUri;
-        }
+    @Data
+    public static class Qq {
+        private String appID;
+        private String appKey;
+        private String backUrl;
+        private String redirectUri;
+    }
 
-        @Data
-        public static class Aliyun {
-            private String accessKeyId;
-            private String accessKeySecret;
-        }
+    @Data
+    public static class Aliyun {
+        private String accessKeyId;
+        private String accessKeySecret;
+    }
 
-        @Data
-        public static class Geetest {
-            private String id;
-            private String key;
-            private boolean enabled;
-        }
+    @Data
+    public static class Geetest {
+        private String id;
+        private String key;
+        private boolean enabled;
+    }
 
-        @Data
-        public static class Telegram {
-            private String botToken;
-            private String botName;
-            private long creatorId;
+    @Data
+    public static class Telegram {
+        private String botToken;
+        private String botName;
+        private long creatorId;
 
-            private String proxyHost;
-            private int proxyPort;
+        private String proxyHost;
+        private int proxyPort;
 
-        }
     }
 }
