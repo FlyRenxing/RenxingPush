@@ -22,7 +22,7 @@
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
         <druid.version>1.2.23</druid.version>
         <validator.version>7.0.4.Final</validator.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
