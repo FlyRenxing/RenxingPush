@@ -10,19 +10,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <properties>
         <skipTests>true</skipTests>
         <hibernate.version>6.4.2.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mikuac-shiro.version>2.3.3</mikuac-shiro.version>
-        <cn.hutool.version>5.8.28</cn.hutool.version>
+        <mikuac-shiro.version>2.3.5</mikuac-shiro.version>
+        <cn.hutool.version>5.8.35</cn.hutool.version>
         <mysql.jdbc.version>8.0.33</mysql.jdbc.version>
         <druid.version>1.2.23</druid.version>
         <validator.version>7.0.4.Final</validator.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <knife4j.springboot.starter.version>3.0.3</knife4j.springboot.starter.version>
         <mybatis.version>2.2.2</mybatis.version>
         <jakarta.validation.version>3.0.1</jakarta.validation.version>
@@ -127,7 +127,7 @@
         <dependency>
             <groupId>com.yubico</groupId>
             <artifactId>webauthn-server-core</artifactId>
-            <version>2.4.0</version>
+            <version>2.5.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
