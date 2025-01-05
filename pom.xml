@@ -112,7 +112,7 @@
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots-abilities</artifactId>
-            <version>6.7.0</version>
+            <version>8.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.yubico</groupId>
