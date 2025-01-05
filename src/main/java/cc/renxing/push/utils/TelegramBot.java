@@ -4,17 +4,18 @@ package cc.renxing.push.utils;
 import cc.renxing.push.config.AppConfig;
 import cc.renxing.push.model.po.MessageCallback;
 import cc.renxing.push.model.po.User;
-import cc.renxing.push.repository.UserDao;
 import cc.renxing.push.service.UserService;
 import cc.renxing.push.service.impl.TelegramMsgCallbackServiceImpl;
 import com.google.zxing.NotFoundException;
-import org.telegram.abilitybots.api.bot.AbilityBot;
-import org.telegram.abilitybots.api.bot.BaseAbilityBot;
-import org.telegram.abilitybots.api.objects.Ability;
-import org.telegram.abilitybots.api.objects.Flag;
-import org.telegram.abilitybots.api.objects.MessageContext;
-import org.telegram.abilitybots.api.objects.Reply;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.abilitybots.api.bot.AbilityBot;
+import org.telegram.telegrambots.abilitybots.api.bot.BaseAbilityBot;
+import org.telegram.telegrambots.abilitybots.api.objects.Ability;
+import org.telegram.telegrambots.abilitybots.api.objects.Flag;
+import org.telegram.telegrambots.abilitybots.api.objects.MessageContext;
+import org.telegram.telegrambots.abilitybots.api.objects.Reply;
+import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
+import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
@@ -29,24 +30,30 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 
 import static cc.renxing.push.model.po.MessageCallbackLog.TYPE_TELEGRAM;
-import static org.telegram.abilitybots.api.objects.Locality.USER;
-import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
-import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
+import static org.telegram.telegrambots.abilitybots.api.objects.Locality.USER;
+import static org.telegram.telegrambots.abilitybots.api.objects.Privacy.PUBLIC;
+import static org.telegram.telegrambots.abilitybots.api.util.AbilityUtils.getChatId;
 
-//@Component
+@Component
 public class TelegramBot extends AbilityBot {
     AppConfig appConfig;
 
     UserService userService;
 
-    UserDao userDao;
-
     TelegramMsgCallbackServiceImpl telegramMsgCallbackService;
 
-    public TelegramBot(DefaultBotOptions options, AppConfig appConfig, UserDao userDao, UserService userService, TelegramMsgCallbackServiceImpl telegramMsgCallbackService) {
-        super(appConfig.getTelegram().getBotToken(), appConfig.getTelegram().getBotName(), options);
+    public TelegramBot(AppConfig appConfig, UserService userService, TelegramMsgCallbackServiceImpl telegramMsgCallbackService) {
+//        super(appConfig.getTelegram().getBotToken(), appConfig.getTelegram().getBotName(), options);
+        super(new OkHttpTelegramClient(appConfig.getTelegram().getBotToken()), appConfig.getTelegram().getBotName());
+        if (appConfig.getSystem().isOpenTelegramMsg()) return;
+        try {
+            TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication();
+            this.onRegister();
+            botsApplication.registerBot(appConfig.getTelegram().getBotToken(), this);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
         this.appConfig = appConfig;
-        this.userDao = userDao;
         this.userService = userService;
         this.telegramMsgCallbackService = telegramMsgCallbackService;
     }
@@ -61,7 +68,8 @@ public class TelegramBot extends AbilityBot {
         BiConsumer<BaseAbilityBot, Update> action = (bot, update) -> {
             List<PhotoSize> photoSizeList = update.getMessage().getPhoto();
             PhotoSize photo = photoSizeList.stream().max(Comparator.comparingInt(PhotoSize::getFileSize)).orElseThrow(() -> new DefinitionException("图片下载失败"));
-            try (InputStream inputStream = downloadFileAsStream(getFilePath(photo))) {
+
+            try (InputStream inputStream = bot.getTelegramClient().downloadFileAsStream(getFilePath(photo))) {
                 String result = ImageTools.parseQRCodeByFile(inputStream);
                 if (!result.contains("RenxingPush-Login:")) {
                     silent.send("此二维码非登录二维码", getChatId(update));
@@ -168,11 +176,10 @@ public class TelegramBot extends AbilityBot {
             return photo.getFilePath();
         } else { // If not, let find it
             // We create a GetFile method and set the file_id from the photo
-            GetFile getFileMethod = new GetFile();
-            getFileMethod.setFileId(photo.getFileId());
+            GetFile getFileMethod = new GetFile(photo.getFileId());
             try {
                 // We execute the method using AbsSender::execute method.
-                File file = execute(getFileMethod);
+                File file = telegramClient.execute(getFileMethod);
                 // We now have the file_path
                 return file.getFilePath();
             } catch (TelegramApiException e) {

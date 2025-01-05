@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cc.renxing</groupId>
     <artifactId>renxing-push</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -106,13 +106,23 @@
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>6.9.7.1</version>
+            <artifactId>telegrambots-longpolling</artifactId>
+            <version>8.2.0</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.telegram</groupId>-->
+        <!--            <artifactId>telegrambots-meta</artifactId>-->
+        <!--            <version>8.2.0</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-client</artifactId>
+            <version>8.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots-abilities</artifactId>
-            <version>8.0.0</version>
+            <version>8.2.0</version>
         </dependency>
         <dependency>
             <groupId>com.yubico</groupId>
@@ -136,6 +146,10 @@
                     <target>17</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.ly.smart-doc</groupId>

@@ -53,8 +53,6 @@ spring:
     name: renxing-push
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    name: defaultDataSource
     url: jdbc:mysql://localhost:3306/renxing_push?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: renxing
     password: renxing
@@ -65,7 +63,10 @@ spring:
 #onebot11配置
 shiro:
   ws:
+    access-token: 123
     client:
       enable: true
       url: "ws://123.123.123.123:50001"
-    access-token: 123
+    server:
+      enable: true
+      url: "/ws/shiro"

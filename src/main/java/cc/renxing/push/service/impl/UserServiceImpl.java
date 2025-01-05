@@ -8,10 +8,7 @@ import cc.renxing.push.model.po.WebAuthNCredential;
 import cc.renxing.push.repository.QQInfoDao;
 import cc.renxing.push.repository.UserDao;
 import cc.renxing.push.service.UserService;
-import cc.renxing.push.utils.AuthTools;
-import cc.renxing.push.utils.DefinitionException;
-import cc.renxing.push.utils.QQConnection;
-import cc.renxing.push.utils.WebAuthNRegistrationStorage;
+import cc.renxing.push.utils.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.yubico.webauthn.*;
@@ -24,7 +21,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
@@ -169,10 +165,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher) {
+    public User bindTelegramUser(TelegramBot bot, Update update, String cipher) {
         Long chatId = update.getMessage().getChatId();
         if (userDao.findByTelegramId(chatId).isPresent()) {
-            bot.silent().send("此telegram账户已与其他账户绑定，请前往官网进行解绑", chatId);
+            bot.getSilent().send("此telegram账户已与其他账户绑定，请前往官网进行解绑", chatId);
             throw new DefinitionException("此telegram账户已与其他账户绑定，请前往官网进行解绑");
         }
         Optional<User> optionalUser = userDao.findByCipher(cipher);
@@ -180,10 +176,10 @@ public class UserServiceImpl implements UserService {
             User user = optionalUser.get();
             user.setTelegramId(chatId);
             userDao.save(user);
-            bot.silent().send("绑定成功", chatId);
+            bot.getSilent().send("绑定成功", chatId);
             return user;
         } else {
-            bot.silent().send("Cipher不正确", chatId);
+            bot.getSilent().send("Cipher不正确", chatId);
             throw new DefinitionException("Cipher不正确");
         }
     }

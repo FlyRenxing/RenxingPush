@@ -27,15 +27,15 @@ public class TelegramMsgCallbackServiceImpl extends MsgCallbackService {
         try {
             if (messageCallback.getReply()) {
                 if (messageCallback.getGroup() == null) {
-                    telegramBot.silent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getSender()));
+                    telegramBot.getSilent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getSender()));
                 } else {
-                    telegramBot.silent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getGroup()));
+                    telegramBot.getSilent().send(messageCallback.getResponse(), Long.parseLong(messageCallback.getGroup()));
                 }
             } else {
                 if (messageCallback.getGroup() == null) {
-                    telegramBot.silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
+                    telegramBot.getSilent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
                 } else {
-                    telegramBot.silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getGroup()));
+                    telegramBot.getSilent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getGroup()));
                 }
             }
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class TelegramMsgCallbackServiceImpl extends MsgCallbackService {
 
     @Override
     public boolean failCallback(MessageCallback messageCallback) {
-        telegramBot.silent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
+        telegramBot.getSilent().send(messageCallback.getFeedback(), Long.parseLong(messageCallback.getSender()));
         return false;
     }
 

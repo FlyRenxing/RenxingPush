@@ -35,11 +35,10 @@ public class TelegramMsgServiceImpl extends MsgService {
     public void sendMsg(User user, Msg msg) {
         MessageLog messageLog = saveMsgToDB(msg, user.getUid());
 
-        SendMessage message = new SendMessage();
-        message.setChatId(msg.getMeta().getData());
-        message.setText(msg.getContent());
+        SendMessage message = new SendMessage(msg.getMeta().getData(), msg.getContent());
+
         try {
-            telegramBot.execute(message);
+            telegramBot.getTelegramClient().execute(message);
         } catch (TelegramApiException e) {
             throw messageLog.fail("发送失败");
         }

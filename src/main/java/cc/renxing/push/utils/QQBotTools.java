@@ -46,13 +46,11 @@ public class QQBotTools {
         MessageLog messageLog = MsgService.saveMsgToDB(msg, user.getUid());
         riskControl(user, messageLog);
         StringBuilder textContent = new StringBuilder();
-        ShiroUtils.rawToArrayMsg(msg.getContent()).stream().filter(msg1 -> msg1.getType() == MsgTypeEnum.text).forEach(msg1 -> {
-            textContent.append(msg1.getData().get("text"));
-        });
+        ShiroUtils.rawToArrayMsg(msg.getContent()).stream().filter(msg1 -> msg1.getType() == MsgTypeEnum.text).forEach(msg1 -> textContent.append(msg1.getData().get("text")));
         if (!textContent.isEmpty()) {
             msgContentTools.checkText(textContent.toString(), messageLog);
         }
-        cqcodeFilter(msg.getContent(), messageLog, user);
+        cqcodeFilter(msg.getContent(), messageLog);
         boolean isFriend = msg.getMeta().getType().equals(TYPE_QQ);
         if (!isFriend) testGroupAuthority(user, Long.valueOf(msg.getMeta().getData()), messageLog);
 
@@ -80,9 +78,8 @@ public class QQBotTools {
 
     }
 
-    private void cqcodeFilter(String content, MessageLog messageLog, User user) {
+    private void cqcodeFilter(String content, MessageLog messageLog) {
 //        if(user.getAdmin()==null||user.getAdmin()!=1){
-        //不允许record video xml json cardimage
         if (content.contains("[CQ:record") || content.contains("[CQ:video") || content.contains("[CQ:xml") || content.contains("[CQ:json") || content.contains("[CQ:cardimage")) {
             throw messageLog.fail("不允许发送该CQ类型消息");
         }

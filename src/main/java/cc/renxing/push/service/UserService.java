@@ -3,11 +3,11 @@ package cc.renxing.push.service;
 
 import cc.renxing.push.model.dto.TelegramAuthenticationRequest;
 import cc.renxing.push.model.po.User;
+import cc.renxing.push.utils.TelegramBot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public interface UserService {
 
     User qqLogin(HttpServletRequest request, HttpServletResponse response, String code);
 
-    User bindTelegramUser(BaseAbilityBot bot, Update update, String cipher);
+    User bindTelegramUser(TelegramBot bot, Update update, String cipher);
 
     User putTelegramLoginCode(String result, Long chatId);
 

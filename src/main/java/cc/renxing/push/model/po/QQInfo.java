@@ -1,7 +1,6 @@
 package cc.renxing.push.model.po;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -24,30 +23,7 @@ public class QQInfo {
      */
     @Id
     private Long number;
-    /**
-     * qq密码
-     *
-     * @mock this_is_password
-     */
-    @JsonIgnore
-    private String pwd;
-    /**
-     * 登陆协议
-     * ANDROID_PHONE,0
-     * ANDROID_PAD,1
-     * ANDROID_WATCH,2
-     * IPAD,3
-     * MACOS,4
-     *
-     * @mock 2
-     */
-//    private BotConfiguration.MiraiProtocol protocol;
-    /**
-     * 是否二维码登陆,目前仅支持macOS和AndroidPAD协议
-     *
-     * @mock true
-     */
-    private Boolean qrCodeLogin;
+
     /**
      * QQ昵称
      *
