@@ -95,7 +95,7 @@ public class QQBotTools {
 
     private void riskControl(User user, MessageLog messageLog) {
         long dayMaxSendCount = user.getDayMaxSendCount();
-        if (userDao.getTodayUseCount(user.getUid()) >= dayMaxSendCount) {
+        if (dayMaxSendCount != -1 && userDao.getTodayUseCount(user.getUid()) >= dayMaxSendCount) {
             throw messageLog.fail("您当日消息已达到" + dayMaxSendCount + "条，请明日再试。");
         }
 //        System.out.println(userDao.getLastThreeSecondUseCount(user.getUid()));
