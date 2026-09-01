@@ -1,3 +1,5 @@
+
+
 # 任性推 - 专属消息推送服务
 
 > [!NOTE]
@@ -105,7 +107,7 @@ Body：
   "id": "触发关键词ID",
   "uid": "站内所属用户ID",
   "appType": "app类型，如：qq",
-  "keyword": "包含关键词的完整消息",
+  "keyword": "关键词",
   "callbackURL": "回调URL",
   "sender": "发送人号码",
   "group": "触发消息如在群内则为群号码，否则为空",
@@ -161,4 +163,3 @@ QQ 服务底层支持。
 
 特别感谢 [mirai](https://github.com/mamoe/mirai/)，在本项目 v1.0.0 之前，由 [mirai](https://github.com/mamoe/mirai/) 提供
 QQ 服务底层支持。
-
